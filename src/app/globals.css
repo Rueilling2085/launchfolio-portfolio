@@ -1,26 +1,147 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --paper: #f3f5f6;
+  --paper-alt: #fafafa;
+  --ink: #0a0d12;
+  --ink-soft: #222222;
+  --muted: #666666;
+  --muted-2: #999999;
+  --line: #e0e0e0;
+  --accent: #d7f56f;
+  --accent-strong: #21b30b;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-paper: var(--paper);
+  --color-paper-alt: var(--paper-alt);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-muted: var(--muted);
+  --color-muted-2: var(--muted-2);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-fragment-mono);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-inter), Arial, Helvetica, sans-serif;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.9);
+    opacity: 0.6;
+  }
+  70% {
+    transform: scale(1.8);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1.8);
+    opacity: 0;
+  }
+}
+
+/* Pure-CSS org-chart / tree connector layout, used by the WorkflowOptimization
+   diagram. Each <li> draws its own connector lines via ::before/::after so
+   branching works for any number of children without JS layout math. */
+.org-tree,
+.org-tree ul {
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.org-tree {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.org-tree ul {
+  padding: 24px 0 0;
+  margin: 0;
+  list-style: none;
+}
+
+.org-tree li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  padding: 24px 14px 0;
+}
+
+.org-tree li::before,
+.org-tree li::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 50%;
+  width: 50%;
+  height: 24px;
+  border-top: 1.5px solid var(--color-line);
+}
+
+.org-tree li::after {
+  right: auto;
+  left: 50%;
+  border-left: 1.5px solid var(--color-line);
+}
+
+.org-tree li:only-child::before,
+.org-tree li:only-child::after {
+  display: none;
+}
+
+.org-tree li:only-child {
+  padding-top: 0;
+}
+
+.org-tree li:first-child::before {
+  border: none;
+}
+
+.org-tree li:last-child::after {
+  border: none;
+}
+
+.org-tree li:first-child::after {
+  border-radius: 6px 0 0 0;
+}
+
+.org-tree li:last-child::before {
+  border-right: 1.5px solid var(--color-line);
+  border-radius: 0 6px 0 0;
+}
+
+.org-tree > li {
+  padding-top: 0;
+}
+
+.org-tree > li::before,
+.org-tree > li::after {
+  display: none;
+}
+
+.org-tree ul::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 0;
+  height: 24px;
+  border-left: 1.5px solid var(--color-line);
 }

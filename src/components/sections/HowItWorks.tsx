@@ -69,8 +69,10 @@ export function HowItWorks({
                 key={step.title}
                 type="button"
                 onClick={() => setActiveIndex(i)}
-                className={`flex-1 overflow-hidden rounded-2xl border text-left transition-colors ${
-                  isActive ? "border-[#0B2559]" : "border-line hover:border-muted-2"
+                className={`flex-1 overflow-hidden rounded-2xl border text-left transition-all ${
+                  isActive
+                    ? "border-[#0B2559] shadow-[0_12px_28px_-10px_rgba(11,37,89,0.4)]"
+                    : "border-line hover:border-muted-2"
                 }`}
               >
                 <div className="bg-white px-5 py-5">
@@ -86,24 +88,24 @@ export function HowItWorks({
                     {step.description}
                   </p>
                 </div>
-                <div className="h-1 w-full bg-line">
-                  {isActive &&
-                    (stepIsVideo ? (
-                      <motion.div
-                        className="h-full bg-[#0B2559]"
-                        style={{ width: videoProgress }}
-                      />
-                    ) : (
-                      <motion.div
-                        key={activeIndex}
-                        className="h-full bg-[#0B2559]"
-                        initial={{ width: "0%" }}
-                        animate={{ width: "100%" }}
-                        transition={{ duration: STEP_DURATION, ease: "linear" }}
-                        onAnimationComplete={advance}
-                      />
-                    ))}
-                </div>
+                {isActive &&
+                  (stepIsVideo ? (
+                    <motion.div
+                      aria-hidden
+                      className="h-0 w-full opacity-0"
+                      style={{ width: videoProgress }}
+                    />
+                  ) : (
+                    <motion.div
+                      key={activeIndex}
+                      aria-hidden
+                      className="h-0 w-full opacity-0"
+                      initial={{ width: "0%" }}
+                      animate={{ width: "100%" }}
+                      transition={{ duration: STEP_DURATION, ease: "linear" }}
+                      onAnimationComplete={advance}
+                    />
+                  ))}
               </button>
             );
           })}

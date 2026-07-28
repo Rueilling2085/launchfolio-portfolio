@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { AnimatePresence, motion, useMotionValue } from "framer-motion";
-import { RefreshCw } from "lucide-react";
 import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
 import { PulseDot } from "@/components/ui/PulseBadge";
 import type { HowItWorks as HowItWorksData } from "@/lib/data";
@@ -34,21 +33,30 @@ export function HowItWorks({
   }, [activeIndex, videoProgress]);
 
   return (
-    <div className="mt-16 md:mt-24">
+    <div className="mt-6 md:mt-8">
+      <div className="rounded-2xl border border-line bg-paper-alt px-6 py-14 md:px-10 md:py-16">
       <RevealOnScroll className="flex flex-col items-center text-center">
         <span className="inline-flex items-center gap-2 rounded-full border border-line bg-white px-4 py-1.5 text-xs font-medium text-ink-soft">
-          <PulseDot color="#0B2559" size={7} />
+          <PulseDot color="#006AB7" size={7} />
           {data.eyebrow}
         </span>
-        <h2 className="mt-6 max-w-2xl text-3xl font-semibold tracking-tight text-ink md:text-5xl">
-          {data.title}
-        </h2>
-        <p className="mt-4 max-w-xl text-sm text-muted md:text-base">{data.subtitle}</p>
+        {data.title && (
+          <h2 className="mt-6 max-w-2xl text-3xl font-semibold tracking-tight text-ink md:text-5xl">
+            {data.title}
+          </h2>
+        )}
+        <p
+          className={`max-w-none whitespace-nowrap text-2xl font-semibold tracking-tight text-ink md:text-3xl ${
+            data.title ? "mt-4" : "mt-6"
+          }`}
+        >
+          {data.subtitle}
+        </p>
       </RevealOnScroll>
 
       <RevealOnScroll delay={0.1} className="mt-10">
-        <div className="flex items-start gap-4 rounded-2xl border border-line bg-[#0B2559]/[0.04] px-6 py-6 md:px-8 md:py-7">
-          <span className="relative flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-full bg-[#0B2559]/10">
+        <div className="flex items-start gap-4 rounded-2xl border border-line bg-white px-6 py-6 md:px-8 md:py-7">
+          <span className="relative flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-full bg-[#D8EEFD]">
             {avatar && (
               <Image src={avatar} alt="Persona" fill sizes="36px" className="object-cover" />
             )}
@@ -71,17 +79,17 @@ export function HowItWorks({
                 onClick={() => setActiveIndex(i)}
                 className={`flex-1 overflow-hidden rounded-2xl border text-left transition-all ${
                   isActive
-                    ? "border-[#0B2559] shadow-[0_12px_28px_-10px_rgba(11,37,89,0.4)]"
+                    ? "border-[#006AB7] shadow-[0_12px_28px_-10px_rgba(0,106,183,0.4)]"
                     : "border-line hover:border-muted-2"
                 }`}
               >
                 <div className="bg-white px-5 py-5">
                   <span
                     className={`inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-[10px] font-semibold ${
-                      isActive ? "bg-[#0B2559] text-white" : "bg-paper-alt text-muted"
+                      isActive ? "bg-[#006AB7] text-white" : "bg-paper-alt text-muted"
                     }`}
                   >
-                    {i + 1} <span className="opacity-70">STEP</span>
+                    {i + 1} <span className="opacity-70">步驟</span>
                   </span>
                   <p className="mt-3 text-sm font-semibold text-ink">{step.title}</p>
                   <p className="mt-1.5 text-xs leading-relaxed text-muted">
@@ -165,13 +173,7 @@ export function HowItWorks({
           </div>
         </div>
       </RevealOnScroll>
-
-      <RevealOnScroll delay={0.25} className="mt-6">
-        <div className="flex items-center justify-center gap-2 rounded-full border border-line bg-paper-alt px-5 py-3 text-center text-xs text-muted">
-          <RefreshCw size={14} className="shrink-0 text-[#0B2559]" />
-          {data.feedbackLoop}
-        </div>
-      </RevealOnScroll>
+      </div>
     </div>
   );
 }

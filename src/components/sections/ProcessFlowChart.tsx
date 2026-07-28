@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
+import { NextStepDecision } from "@/components/ui/NextStepDecision";
 import type { ProcessFlow } from "@/lib/data";
 
 const SOLUTION_ICONS: Record<string, LucideIcon> = {
@@ -121,11 +122,11 @@ function TravelingDot({ samples }: { samples: Point[] }) {
 
   return (
     <motion.span
-      className="absolute h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#0B2559]"
+      className="absolute h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#006AB7]"
       style={{
         left: useTransform(left, (v) => `${v}%`),
         top: useTransform(top, (v) => `${v}%`),
-        boxShadow: "0 0 10px 2px rgba(11,37,89,0.55)",
+        boxShadow: "0 0 10px 2px rgba(0,106,183,0.55)",
       }}
     />
   );
@@ -151,10 +152,23 @@ export function ProcessFlowChart({
   const areaPath = `${emphasisPath} L ${emphasisEnd.x} 100 L ${emphasisStart.x} 100 Z`;
 
   return (
-    <div className="mt-16 md:mt-24">
-      <RevealOnScroll>
-        <div className="rounded-2xl border border-line bg-white p-6 md:p-10">
-          <div className="mb-10 flex items-center gap-3">
+    <RevealOnScroll>
+      <div>
+          <div className="mx-auto max-w-2xl text-center">
+            <NextStepDecision>
+              確定驗證場域後，進一步訪談
+              <span className="font-semibold text-ink">最了解工廠職安合規的角色「職環安人員」</span>
+            </NextStepDecision>
+
+            <h3 className="mt-3 text-2xl font-semibold tracking-tight text-ink md:text-3xl">
+              分析職環安人員工作流程，找出產品導入節點
+            </h3>
+            <p className="mt-3 text-sm leading-relaxed text-muted md:text-base">
+              盤點職環安人員現有工作流程中的痛點，思考產品功能可以如何精準回應需求。
+            </p>
+          </div>
+
+          <div className="mt-10 mb-10 flex items-center gap-3">
             {avatar && (
               <span className="relative h-10 w-10 shrink-0 overflow-hidden rounded-full">
                 <Image src={avatar} alt="Persona" fill sizes="40px" className="object-cover" />
@@ -168,6 +182,16 @@ export function ProcessFlowChart({
                 </span>
               ))}
             </div>
+          </div>
+
+          <div className="relative mb-10 aspect-[16/9] w-full overflow-hidden rounded-2xl">
+            <Image
+              src="/images/projects/vision-detect/ehs-persona-scenario.png"
+              alt="職環安人員於現場使用 VisionDetect AI 監控儀表板"
+              fill
+              sizes="(min-width: 768px) 800px, 100vw"
+              className="object-cover"
+            />
           </div>
 
           <div className="relative h-[210px] w-full md:h-[240px]">
@@ -187,7 +211,7 @@ export function ProcessFlowChart({
               <motion.path
                 d={emphasisPath}
                 fill="none"
-                stroke="#0B2559"
+                stroke="#0B7DC9"
                 strokeWidth={2}
                 vectorEffect="non-scaling-stroke"
                 initial={{ opacity: 0 }}
@@ -215,7 +239,7 @@ export function ProcessFlowChart({
                   {MoodIcon && (
                     <>
                       <motion.span
-                        className="absolute -translate-x-1/2 rounded-lg bg-[#0B2559] p-1 text-white shadow-sm"
+                        className="absolute -translate-x-1/2 rounded-lg border border-[#0B7DC9]/40 bg-[#D8EEFD] p-1 text-[#0B7DC9] shadow-sm"
                         style={{ left: `${point.x}%`, top: `calc(${point.y}% - 40px)` }}
                         initial={{ opacity: 0, scale: 0.4 }}
                         whileInView={{ opacity: 1, scale: 1 }}
@@ -245,7 +269,7 @@ export function ProcessFlowChart({
                   >
                     {emphasis && (
                       <motion.span
-                        className="absolute inset-0 rounded-full bg-[#0B2559] blur-[3px]"
+                        className="absolute inset-0 rounded-full bg-[#0B7DC9] blur-[3px]"
                         animate={{ scale: [1, 1.3, 1], opacity: [0.25, 0.6, 0.25] }}
                         transition={{
                           duration: 2.8,
@@ -258,7 +282,7 @@ export function ProcessFlowChart({
                     <span
                       className={`relative block h-full w-full rounded-full ${
                         emphasis
-                          ? "bg-[#0B2559]"
+                          ? "border-2 border-[#0B7DC9] bg-[#D8EEFD]"
                           : "border-2 border-muted-2 bg-white"
                       }`}
                     />
@@ -270,7 +294,7 @@ export function ProcessFlowChart({
                   >
                     <p
                       className={`text-[9px] font-semibold uppercase tracking-wide ${
-                        emphasis ? "text-[#0B2559]" : "text-muted-2"
+                        emphasis ? "text-[#006AB7]" : "text-muted-2"
                       }`}
                     >
                       Step {i + 1}
@@ -310,17 +334,17 @@ export function ProcessFlowChart({
             {data.painPoints.map((pp) => {
               const SolutionIcon = SOLUTION_ICONS[pp.solution.icon];
               return (
-                <div key={pp.step} className="rounded-xl bg-[#0B2559] px-4 py-4">
-                  <span className="inline-flex items-center rounded-full bg-white/15 px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-white">
+                <div key={pp.step} className="rounded-xl border border-[#0B7DC9]/30 bg-white px-4 py-4">
+                  <span className="inline-flex items-center rounded-full bg-[#D8EEFD] px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-[#0B7DC9]">
                     Solution
                   </span>
                   <div className="mt-2 flex items-start gap-2">
                     {SolutionIcon && (
-                      <SolutionIcon size={16} className="mt-0.5 shrink-0 text-white" />
+                      <SolutionIcon size={16} className="mt-0.5 shrink-0 text-[#0B7DC9]" />
                     )}
                     <div>
-                      <p className="text-xs font-semibold text-white">{pp.solution.title}</p>
-                      <p className="mt-1 text-xs leading-relaxed text-white/70">
+                      <p className="text-xs font-semibold text-ink">{pp.solution.title}</p>
+                      <p className="mt-1 text-xs leading-relaxed text-ink-soft/80">
                         {pp.solution.description}
                       </p>
                     </div>
@@ -329,8 +353,7 @@ export function ProcessFlowChart({
               );
             })}
           </div>
-        </div>
-      </RevealOnScroll>
-    </div>
+      </div>
+    </RevealOnScroll>
   );
 }

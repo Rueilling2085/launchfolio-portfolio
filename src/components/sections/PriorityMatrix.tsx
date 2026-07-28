@@ -11,13 +11,14 @@ import type {
 } from "@/lib/data";
 
 const TIER_COLOR: Record<1 | 2, string> = {
-  1: "#0B2559",
+  1: "#006AB7",
   2: "#5C7DA6",
 };
 
 const PLOT_HEIGHT = "h-[300px] sm:h-[360px] lg:h-[440px]";
 
 function Bubble({ bubble }: { bubble: MatrixBubble }) {
+  const isPrimary = bubble.tier === 1;
   const color = TIER_COLOR[bubble.tier];
   return (
     <div
@@ -33,10 +34,18 @@ function Bubble({ bubble }: { bubble: MatrixBubble }) {
         />
       )}
       <div
-        className="relative flex h-full w-full items-center justify-center rounded-full px-2.5 text-center text-[11px] font-medium leading-tight text-white shadow-md"
-        style={{ backgroundColor: color }}
+        className={`relative flex h-full w-full items-center justify-center rounded-full border px-2.5 text-center text-[11px] leading-tight shadow-md ${
+          isPrimary
+            ? "border-[#0B7DC9]/50 font-semibold text-[#006AB7]"
+            : "border-[#B7BCC4] font-medium text-ink-soft"
+        }`}
+        style={{ backgroundColor: isPrimary ? "#D8EEFD" : "rgba(148,153,161,0.18)" }}
       >
-        {bubble.label}
+        {bubble.label.split("\n").map((line, i) => (
+          <span key={i} className="block whitespace-nowrap">
+            {line}
+          </span>
+        ))}
       </div>
     </div>
   );
@@ -138,36 +147,40 @@ export function PriorityMatrix({ data }: { data: PriorityMatrixData }) {
       </div>
 
       <div className="flex flex-col gap-10 lg:flex-row lg:items-start lg:gap-8">
-        <div className="flex-1 overflow-x-auto">
-          <div className="min-w-[480px] pl-9">
-            <div className="relative">
-              <span className="absolute -top-6 left-0 text-[11px] text-muted">{data.axis.top}</span>
-              <span className="absolute top-1/2 left-[-2rem] -translate-y-1/2 -rotate-90 whitespace-nowrap text-[11px] text-muted">
-                {data.axis.yLabel} ↑
-              </span>
-
-              <div className={`relative w-full border-b border-l border-line ${PLOT_HEIGHT}`}>
-                <span className="absolute inset-x-0 top-1/2 border-t border-dashed border-line" />
-                <span className="absolute inset-y-0 left-1/2 border-l border-dashed border-line" />
-
-                {data.excluded.map((item) => (
-                  <Excluded key={item.label} item={item} />
-                ))}
-                {data.dots.map((dot) => (
-                  <Dot key={dot.label} dot={dot} />
-                ))}
-                {data.bubbles.map((bubble) => (
-                  <Bubble key={bubble.label} bubble={bubble} />
-                ))}
+        <div className="flex-1">
+            <div className="flex items-stretch gap-2.5">
+              <div className={`flex w-8 shrink-0 flex-col items-center justify-between text-[11px] text-ink ${PLOT_HEIGHT}`}>
+                <span className="text-center leading-tight">{data.axis.top}</span>
+                <span className="flex flex-1 items-center justify-center">
+                  <span className="-rotate-90 whitespace-nowrap font-medium">
+                    {data.axis.yLabel} →
+                  </span>
+                </span>
+                <span className="text-center leading-tight">{data.axis.bottom}</span>
               </div>
 
-              <div className="mt-2 flex items-center justify-between text-[11px] text-muted">
-                <span>{data.axis.bottom}</span>
-                <span>{data.axis.right}</span>
+              <div className="relative min-w-0 flex-1">
+                <div className={`relative w-full border-b border-l border-line ${PLOT_HEIGHT}`}>
+                  <span className="absolute inset-x-0 top-1/2 border-t border-dashed border-[#B7BCC4]" />
+                  <span className="absolute inset-y-0 left-1/2 border-l border-dashed border-[#B7BCC4]" />
+
+                  {data.excluded.map((item) => (
+                    <Excluded key={item.label} item={item} />
+                  ))}
+                  {data.dots.map((dot) => (
+                    <Dot key={dot.label} dot={dot} />
+                  ))}
+                  {data.bubbles.map((bubble) => (
+                    <Bubble key={bubble.label} bubble={bubble} />
+                  ))}
+                </div>
+
+                <div className="mt-2 flex items-center justify-end text-[11px] text-muted">
+                  <span>{data.axis.right}</span>
+                </div>
+                <p className="mt-1 text-center text-[11px] font-medium text-ink">{data.axis.xLabel} →</p>
               </div>
-              <p className="mt-1 text-center text-[11px] text-muted">{data.axis.xLabel} →</p>
             </div>
-          </div>
         </div>
 
         <div className={`relative hidden w-[300px] shrink-0 lg:block ${PLOT_HEIGHT}`}>

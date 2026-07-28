@@ -14,7 +14,7 @@ export function ProjectBackground({ items }: { items: ProjectBackgroundItem[] })
     <div className="mt-16 md:mt-24">
       <RevealOnScroll className="flex justify-center">
         <span className="inline-flex items-center gap-2 rounded-full border border-line bg-white px-4 py-1.5 text-xs font-medium text-ink-soft">
-          <PulseDot color="#0B2559" size={7} />
+          <PulseDot color="#006AB7" size={7} />
           Project Background
         </span>
       </RevealOnScroll>
@@ -25,7 +25,7 @@ export function ProjectBackground({ items }: { items: ProjectBackgroundItem[] })
           return (
             <RevealOnScroll key={item.title} delay={i * 0.08}>
               <div className="flex h-full flex-col gap-4 rounded-2xl border border-line bg-white px-6 py-6">
-                <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#0B2559]/10 text-[#0B2559]">
+                <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#D8EEFD] text-[#0B7DC9]">
                   {Icon ? <Icon size={20} /> : null}
                 </span>
                 <div>

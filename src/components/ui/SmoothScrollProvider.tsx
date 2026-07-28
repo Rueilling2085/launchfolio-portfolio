@@ -20,7 +20,15 @@ export function SmoothScrollProvider({ children }: { children: ReactNode }) {
     }
     rafId = requestAnimationFrame(raf);
 
+    function onHashChange() {
+      if (window.location.hash) {
+        lenis.scrollTo(window.location.hash);
+      }
+    }
+    window.addEventListener("hashchange", onHashChange);
+
     return () => {
+      window.removeEventListener("hashchange", onHashChange);
       cancelAnimationFrame(rafId);
       lenis.destroy();
       lenisRef.current = null;

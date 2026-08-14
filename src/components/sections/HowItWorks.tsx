@@ -55,15 +55,25 @@ export function HowItWorks({
       </RevealOnScroll>
 
       <RevealOnScroll delay={0.1} className="mt-10">
-        <div className="flex items-start gap-4 rounded-2xl border border-line bg-white px-6 py-6 md:px-8 md:py-7">
-          <span className="relative flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-full bg-[#D8EEFD]">
+        <div className="relative aspect-[16/9] w-full overflow-hidden rounded-2xl border border-line">
+          <Image
+            src="/images/projects/vision-detect/ehs-persona-scenario.png"
+            alt="職環安人員於現場使用 VisionDetect AI 監控儀表板"
+            fill
+            sizes="(min-width: 768px) 800px, 100vw"
+            className="object-cover"
+          />
+          <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/80 via-black/35 to-transparent" />
+          <div className="absolute inset-x-0 bottom-0 flex items-start gap-3 p-6 md:p-8">
             {avatar && (
-              <Image src={avatar} alt="Persona" fill sizes="36px" className="object-cover" />
+              <span className="relative h-9 w-9 shrink-0 overflow-hidden rounded-full ring-2 ring-white/50">
+                <Image src={avatar} alt="Persona" fill sizes="36px" className="object-cover" />
+              </span>
             )}
-          </span>
-          <p className="text-sm italic leading-relaxed text-ink-soft md:text-base">
-            &ldquo;{data.query}&rdquo;
-          </p>
+            <p className="text-sm italic leading-relaxed text-white md:text-base">
+              &ldquo;{data.query}&rdquo;
+            </p>
+          </div>
         </div>
       </RevealOnScroll>
 
@@ -91,7 +101,7 @@ export function HowItWorks({
                   >
                     {i + 1} <span className="opacity-70">步驟</span>
                   </span>
-                  <p className="mt-3 text-sm font-semibold text-ink">{step.title}</p>
+                  <p className="mt-3 text-sm text-ink">{step.title}</p>
                   <p className="mt-1.5 text-xs leading-relaxed text-muted">
                     {step.description}
                   </p>

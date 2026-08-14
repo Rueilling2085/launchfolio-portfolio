@@ -1,58 +1,108 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
-import { projects } from "@/lib/data";
+import { motion, AnimatePresence } from "framer-motion";
+import { ChevronRight } from "lucide-react";
 
-const layout = [
-  { rotate: -14, x: -92, y: 10, scale: 0.82, z: 1, dim: true },
-  { rotate: -6, x: -34, y: -4, scale: 0.92, z: 2, dim: true },
-  { rotate: 4, x: 30, y: 0, scale: 1, z: 3, dim: false },
-  { rotate: 13, x: 96, y: 14, scale: 0.82, z: 1, dim: true },
+const photos = [
+  {
+    src: "/images/profile-headshot.jpg",
+    alt: "Jui-Ling Lin",
+    caption: "嗨，這是我！",
+  },
+  {
+    src: "/images/hero/ida-award.jpg",
+    alt: "19th IDA Design Awards",
+    caption: "19th IDA Design Awards",
+  },
+  {
+    src: "/images/hero/presentation.jpg",
+    alt: "研究成果發表",
+    caption: "成果發表會",
+  },
+  {
+    src: "/images/hero/presentation-landscape.jpg",
+    alt: "研究發表",
+    caption: "研究發表",
+  },
 ];
 
 export function HeroProjectStack() {
+  const [index, setIndex] = useState(0);
+  const photo = photos[index];
+
   return (
-    <div className="relative mx-auto h-[280px] w-full max-w-[420px] sm:h-[340px] md:mx-0 md:h-[400px]">
-      {projects.slice(0, layout.length).map((project, i) => {
-        const c = layout[i];
-        return (
-          <motion.div
-            key={project.id}
-            className="absolute left-1/2 top-1/2 aspect-[4/3] w-[220px] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-2xl border border-black/10 shadow-[0_25px_25px_-3.75px_rgba(0,0,0,0.15),0_0_0_1px_rgba(0,0,0,0.06)] sm:w-[260px] md:w-[280px]"
-            style={{ zIndex: c.z }}
-            initial={{ opacity: 0, rotate: 0, x: 0, y: 40, scale: 0.9 }}
-            animate={{
-              opacity: 1,
-              rotate: c.rotate,
-              x: c.x,
-              y: c.y,
-              scale: c.scale,
-            }}
-            transition={{
-              duration: 0.8,
-              delay: 0.15 + i * 0.08,
-              ease: [0.22, 1, 0.36, 1],
-            }}
-            whileHover={{
-              scale: c.scale * 1.05,
-              rotate: 0,
-              zIndex: 10,
-              transition: { duration: 0.3 },
-            }}
-          >
-            <Image
-              src={project.image}
-              alt={project.name}
-              fill
-              sizes="280px"
-              className={`object-cover transition-[filter] duration-300 ${
-                c.dim ? "brightness-[0.65]" : ""
-              }`}
-            />
-          </motion.div>
-        );
-      })}
+    <div className="relative mx-auto flex w-full max-w-[360px] flex-col items-center md:mx-0 md:items-start">
+      <motion.div
+        className="relative w-full overflow-hidden rounded-2xl bg-white/40 p-1.5 shadow-[0_20px_30px_-8px_rgba(0,0,0,0.22),0_0_0_1px_rgba(255,255,255,0.35)] backdrop-blur-md"
+        initial={{ opacity: 0, y: 24, scale: 0.96 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+      >
+        <div className="relative aspect-[4/5] w-full overflow-hidden rounded-xl">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={photo.src}
+              className="absolute inset-0"
+              initial={{ opacity: 0, x: 28 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -28 }}
+              transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <Image
+                src={photo.src}
+                alt={photo.alt}
+                fill
+                sizes="360px"
+                className="object-cover"
+                priority={index === 0}
+              />
+            </motion.div>
+          </AnimatePresence>
+        </div>
+      </motion.div>
+
+      <motion.div
+        className="mt-4 flex w-full items-center justify-between"
+        initial={{ opacity: 0, y: 8 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.5 }}
+      >
+        <div>
+          <AnimatePresence mode="wait">
+            <motion.p
+              key={photo.caption}
+              className="text-sm text-muted-2"
+              initial={{ opacity: 0, y: 4 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -4 }}
+              transition={{ duration: 0.3 }}
+            >
+              {photo.caption}
+            </motion.p>
+          </AnimatePresence>
+          <div className="mt-2 flex gap-1.5">
+            {photos.map((p, i) => (
+              <span
+                key={p.src}
+                className={`h-1.5 rounded-full transition-all duration-300 ${
+                  i === index ? "w-4 bg-ink" : "w-1.5 bg-line"
+                }`}
+              />
+            ))}
+          </div>
+        </div>
+
+        <button
+          type="button"
+          aria-label="Next photo"
+          onClick={() => setIndex((i) => (i + 1) % photos.length)}
+          className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-ink text-white transition-transform hover:scale-105 active:scale-95"
+        >
+          <ChevronRight size={20} />
+        </button>
+      </motion.div>
     </div>
   );
 }

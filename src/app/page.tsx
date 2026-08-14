@@ -1,6 +1,7 @@
 import { Nav } from "@/components/layout/Nav";
 import { Footer } from "@/components/layout/Footer";
 import { Hero } from "@/components/sections/Hero";
+import { Philosophy } from "@/components/sections/Philosophy";
 import { LatestProjects } from "@/components/sections/LatestProjects";
 import { BigQuote } from "@/components/sections/BigQuote";
 import { Services } from "@/components/sections/Services";
@@ -18,6 +19,7 @@ export default function Home() {
         <Nav />
         <Hero />
         <LatestProjects />
+        <Philosophy />
         <BigQuote />
         <Services />
         <AboutMe />

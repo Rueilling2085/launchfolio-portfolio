@@ -1,58 +1,47 @@
-import Image from "next/image";
-import Link from "next/link";
 import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
+import { ScrollFillHeading } from "@/components/ui/ScrollFillHeading";
 import { SectionContainer } from "@/components/ui/SectionContainer";
+import { TornDivider } from "@/components/ui/TornDivider";
+import { DottedBackdrop } from "@/components/ui/DottedBackdrop";
+import { ProjectCard } from "@/components/sections/ProjectCard";
 import { projects } from "@/lib/data";
 
 export function LatestProjects() {
   return (
-    <SectionContainer id="work" className="py-20 md:py-28">
-      <RevealOnScroll className="flex items-end justify-between gap-4">
-        <h2 className="text-3xl font-semibold tracking-tight text-ink md:text-5xl">
-          Latest Projects
-        </h2>
-      </RevealOnScroll>
-
-      <div className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-2">
-        {projects.map((project, i) => (
-          <RevealOnScroll key={project.id} delay={i * 0.08}>
-            <Link
-              href={`/work/${project.slug}`}
-              className="group block overflow-hidden rounded-2xl border border-line bg-white"
-            >
-              <div className="relative aspect-[4/3] overflow-hidden">
-                <Image
-                  src={project.image}
-                  alt={project.name}
-                  fill
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-                <span className="absolute right-4 top-4 translate-y-1 rounded-full bg-white px-4 py-2 text-xs font-medium text-ink opacity-0 shadow-sm transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
-                  View Project
-                </span>
-              </div>
-              <div className="flex items-center justify-between px-5 py-4">
-                <div>
-                  <p className="text-sm font-medium text-ink">{project.name}</p>
-                  <p className="text-xs text-muted">{project.type}</p>
-                </div>
-                <span className="text-xs text-muted-2">{project.client}</span>
-              </div>
-            </Link>
-          </RevealOnScroll>
-        ))}
+    <div>
+      {/* dotted paper keeps running behind the tear, so the torn sheet reads as
+          a separate layer lying on top of it */}
+      <div className="relative">
+        <DottedBackdrop className="absolute inset-0" />
+        <TornDivider className="relative" color="var(--paper-alt)" />
       </div>
 
-      <RevealOnScroll className="mt-10 flex justify-center">
-        <a
-          href="#"
-          className="group inline-flex items-center gap-2 text-sm font-medium text-ink"
-        >
-          View all projects
-          <span className="h-px w-6 bg-ink transition-all duration-300 group-hover:w-10" />
-        </a>
-      </RevealOnScroll>
-    </SectionContainer>
+      <SectionContainer id="work" className="bg-paper-alt pt-4 pb-20 md:pt-6 md:pb-28">
+        <ScrollFillHeading text="Selected Work" className="text-5xl md:text-7xl" />
+
+        <div className="mt-14 flex flex-col gap-8 md:gap-10">
+          {projects.map((project, i) => (
+            <RevealOnScroll key={project.id} delay={i * 0.08}>
+              <ProjectCard project={project} />
+            </RevealOnScroll>
+          ))}
+        </div>
+
+        <RevealOnScroll className="mt-10 flex justify-center">
+          <a
+            href="#"
+            className="group inline-flex items-center gap-2 text-sm font-medium text-ink"
+          >
+            View all projects
+            <span className="h-px w-6 bg-ink transition-all duration-300 group-hover:w-10" />
+          </a>
+        </RevealOnScroll>
+      </SectionContainer>
+
+      <div className="relative">
+        <DottedBackdrop className="absolute inset-0" />
+        <TornDivider className="relative" color="var(--paper-alt)" flip />
+      </div>
+    </div>
   );
 }

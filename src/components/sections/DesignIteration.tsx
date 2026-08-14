@@ -10,7 +10,15 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
-import type { DesignIteration as DesignIterationData } from "@/lib/data";
+import type {
+  DesignIteration as DesignIterationData,
+  DesignIterationImpact,
+} from "@/lib/data";
+
+const IMPACT_ICONS: Record<string, LucideIcon> = {
+  layers: Layers,
+  zap: Zap,
+};
 
 function BeforeAfterSlider({
   title,
@@ -97,40 +105,62 @@ function AnnotatedBeforeAfter({
   title,
   beforeImage,
   afterImage,
+  painPoint,
+  solution,
+  impact,
 }: {
   title: string;
   beforeImage: string;
   afterImage: string;
+  painPoint?: string;
+  solution?: string;
+  impact?: DesignIterationImpact[];
 }) {
   return (
     <div className="relative left-1/2 mt-6 w-screen -translate-x-1/2 px-5 md:px-14">
       <div className="flex justify-center overflow-x-auto">
-        <div className="flex min-w-max items-start gap-10">
-          <div className="w-[620px] shrink-0">
-            <span className="mb-3 inline-flex items-center rounded-full bg-black/70 px-3 py-1 text-xs font-medium text-white">
+        <div className="flex min-w-max items-start gap-6 md:gap-10">
+          <div className="w-[280px] shrink-0 sm:w-[340px]">
+            <span className="inline-flex items-center rounded-full bg-red-50 px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-red-600">
               Before
             </span>
-            <div className="relative flex h-[345px] items-center justify-center">
-              <img
-                src={beforeImage}
-                alt={`${title} — Before`}
-                className="h-full w-full rounded-xl object-contain shadow-[0_20px_40px_-16px_rgba(0,0,0,0.35)]"
-              />
-            </div>
+            {painPoint && (
+              <p className="mt-2 mb-3 text-xs leading-relaxed text-muted">{painPoint}</p>
+            )}
+            <img
+              src={beforeImage}
+              alt={`${title} — Before`}
+              className="w-full rounded-xl shadow-[0_20px_40px_-16px_rgba(0,0,0,0.35)]"
+            />
           </div>
 
-          <div className="w-[620px] shrink-0">
-            <span className="mb-3 inline-flex items-center rounded-full bg-[#006AB7] px-3 py-1 text-xs font-medium text-white">
+          <div className="w-[280px] shrink-0 pt-10 sm:w-[340px] sm:pt-16">
+            <span className="inline-flex items-center rounded-full bg-[#D8EEFD] px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-[#0B7DC9]">
               After
             </span>
-            <div className="relative flex h-[345px] items-center justify-center">
-              <img
-                src={afterImage}
-                alt={`${title} — After`}
-                className="h-full w-full rounded-xl object-contain shadow-[0_20px_40px_-16px_rgba(0,0,0,0.35)]"
-              />
-            </div>
+            {solution && (
+              <p className="mt-2 mb-3 text-xs leading-relaxed text-muted">{solution}</p>
+            )}
+            <img
+              src={afterImage}
+              alt={`${title} — After`}
+              className="w-full rounded-xl shadow-[0_20px_40px_-16px_rgba(0,0,0,0.35)]"
+            />
           </div>
+
+          {impact && impact.length > 0 && (
+            <div className="flex w-[220px] shrink-0 flex-col gap-4 pt-10 sm:pt-16">
+              {impact.map((item) => (
+                <ImpactCard
+                  key={item.label}
+                  icon={IMPACT_ICONS[item.icon]}
+                  label={item.label}
+                  valueHighlight={item.valueHighlight}
+                  valueRest={item.valueRest}
+                />
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </div>
@@ -245,13 +275,10 @@ function WorkflowRow({
     <div>
       <div className="mb-5 flex items-center gap-2.5">
         <span
-          className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-semibold capitalize text-ink shadow-[inset_0_1px_0_rgba(255,255,255,0.6),0_1px_3px_rgba(0,0,0,0.05)] backdrop-blur-md ${
-            isAfter
-              ? "border-emerald-200/70 bg-emerald-50/60"
-              : "border-red-200/70 bg-red-50/60"
+          className={`inline-flex items-center rounded-full px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wide ${
+            isAfter ? "bg-[#D8EEFD] text-[#0B7DC9]" : "bg-red-50 text-red-600"
           }`}
         >
-          <span className={`h-1.5 w-1.5 rounded-full ${isAfter ? "bg-emerald-500" : "bg-red-500"}`} />
           {mode}
         </span>
         <span className="text-xs text-ink">{labelSub}</span>
@@ -281,7 +308,7 @@ function ImpactCard({
         <Icon size={16} />
       </span>
       <p className="mt-3 text-xs font-medium text-muted">{label}</p>
-      <p className="mt-1 text-[32px] font-bold text-[#006AB7]">{valueHighlight}</p>
+      <p className="mt-1 text-[32px] font-bold text-ink">{valueHighlight}</p>
       <p className="mt-0.5 text-sm font-semibold text-ink">{valueRest}</p>
     </div>
   );
@@ -292,14 +319,14 @@ function WorkflowOptimization() {
 
   return (
     <>
-      <div className="relative left-1/2 mt-6 w-screen -translate-x-1/2 px-5 md:px-14">
+      <div className="relative left-1/2 mt-6 w-screen -translate-x-1/2 bg-[#F0F2F5] px-5 py-10 md:px-14 md:py-14">
         <div className="flex justify-center">
           <div className="inline-flex flex-col">
             <p className="mb-6 text-base font-semibold text-ink md:text-lg">
               影像設定流程優化
             </p>
 
-            <div className="flex flex-col gap-10">
+            <div className="flex flex-col gap-10 rounded-2xl border border-line bg-[#D6D7D8] p-6 shadow-[0_12px_32px_-12px_rgba(15,23,42,0.18)] md:p-8">
               <WorkflowRow
                 mode="before"
                 labelSub="3 支攝影機，3 次重複設定"
@@ -331,7 +358,7 @@ function WorkflowOptimization() {
 
               <WorkflowRow
                 mode="after"
-                labelSub="1 個測試區，套用到所有場域"
+                labelSub="1 個測試區，套用到 N 個場域"
               >
                 <StepCard
                   step="1"
@@ -353,24 +380,6 @@ function WorkflowOptimization() {
               </WorkflowRow>
             </div>
           </div>
-        </div>
-      </div>
-
-      <div className="mt-10 max-w-[900px]">
-        <p className="mb-5 text-base font-semibold text-ink md:text-lg">成效</p>
-        <div className="grid grid-cols-2 gap-4">
-          <ImpactCard
-            icon={Layers}
-            label="擴展性"
-            valueHighlight="1-to-N"
-            valueRest="部署模式"
-          />
-          <ImpactCard
-            icon={Zap}
-            label="效率"
-            valueHighlight="80%"
-            valueRest="設定時間減少"
-          />
         </div>
       </div>
     </>
@@ -405,110 +414,60 @@ function SpecialistCard({
   );
 }
 
-function PromptOptimization() {
+function PromptOptimization({
+  painPoint,
+  solution,
+}: {
+  painPoint?: string;
+  solution?: string;
+}) {
   const base = "/images/projects/vision-detect";
 
   return (
-    <div className="relative left-1/2 mt-6 w-screen -translate-x-1/2 px-5 md:px-14">
-      <p className="mb-6 text-base font-semibold text-ink md:ml-[max(0px,calc((100vw-1080px)/2))] md:text-lg">
-        Prompt 輸入介面優化
-      </p>
-
+    <div className="mt-6 px-6 py-10 md:px-10 md:py-14">
       <div className="flex justify-center">
-      <div className="inline-flex flex-col gap-8">
+      <div className="flex w-full flex-col items-center gap-8">
         {/* Before */}
-        <div>
-          <div className="mb-4 flex items-center gap-2.5">
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-red-200/70 bg-red-50/60 px-3 py-1 text-xs font-semibold capitalize text-ink shadow-[inset_0_1px_0_rgba(255,255,255,0.6),0_1px_3px_rgba(0,0,0,0.05)] backdrop-blur-md">
-              <span className="h-1.5 w-1.5 rounded-full bg-red-500" />
-              Before
-            </span>
-            <span className="text-xs text-ink">3 位人員，3 句自由輸入的 Prompt</span>
-          </div>
-
-          <div className="flex flex-col gap-6 rounded-2xl border border-line bg-[#EAEBED] p-6 opacity-95 md:flex-row md:items-center md:gap-6 md:p-8">
+        <div className="w-full">
+          <div className="relative mx-auto w-full overflow-hidden rounded-2xl">
             <img
-              src={`${base}/key2-scene-before.webp`}
-              alt="Free-form prompt input screen"
-              className="w-full shrink-0 md:w-[500px]"
+              src={`${base}/01prompt-web.png`}
+              alt="Free-form prompt input screen with specialist quotes"
+              className="w-full"
             />
-            <div className="flex w-full shrink-0 flex-col gap-2.5 md:w-[300px]">
-              <SpecialistCard
-                avatar={`${base}/avatar-ehs1.jpg`}
-                name="職安人員 1"
-                quote={
-                  <>
-                    偵測<QuoteHighlight>現場人員</QuoteHighlight>是否配戴
-                    <QuoteHighlight>安全帽</QuoteHighlight>。
-                  </>
-                }
-              />
-              <SpecialistCard
-                avatar={`${base}/avatar-manager.jpg`}
-                name="工地經理"
-                quote={
-                  <>
-                    確認<QuoteHighlight>工地人員</QuoteHighlight>是否正確配戴
-                    <QuoteHighlight>安全帽</QuoteHighlight>。
-                  </>
-                }
-              />
-              <SpecialistCard
-                avatar={`${base}/avatar-ehs2.jpg`}
-                name="職安人員 2"
-                quote={
-                  <>
-                    找出現場未配戴<QuoteHighlight>安全帽</QuoteHighlight>的
-                    <QuoteHighlight>人員</QuoteHighlight>。
-                  </>
-                }
-              />
-            </div>
+            {painPoint && (
+              <>
+                <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/70 via-black/25 to-transparent" />
+                <div className="absolute bottom-4 left-4 flex items-center gap-2 md:bottom-6 md:left-6">
+                  <span className="shrink-0 inline-flex items-center rounded-full bg-red-50 px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-red-600">
+                    Before
+                  </span>
+                  <p className="text-[13px] font-normal text-white">{painPoint}</p>
+                </div>
+              </>
+            )}
           </div>
         </div>
 
         {/* After */}
-        <div>
-          <div className="mb-4 flex items-center gap-2.5">
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-200/70 bg-emerald-50/60 px-3 py-1 text-xs font-semibold capitalize text-ink shadow-[inset_0_1px_0_rgba(255,255,255,0.6),0_1px_3px_rgba(0,0,0,0.05)] backdrop-blur-md">
-              <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-              After
-            </span>
-            <span className="text-xs text-ink">1 個共用範本，變數可替換</span>
-          </div>
-
-          <div className="flex flex-col gap-6 rounded-2xl border border-line bg-[#EAEBED] p-6 md:flex-row md:items-center md:gap-6 md:p-8">
+        <div className="w-full">
+          <div className="relative mx-auto w-full overflow-hidden rounded-2xl">
             <img
-              src={`${base}/key2-scene-after.webp`}
-              alt="Structured prompt template input screen"
-              className="w-full shrink-0 md:w-[500px]"
+              src={`${base}/02prompt-web.png`}
+              alt="Structured prompt template input screen with specialist quotes"
+              className="w-full"
             />
-            <div className="flex w-full shrink-0 flex-col gap-4 md:w-[300px]">
-              <div className="flex items-center -space-x-2">
-                <img src={`${base}/avatar-ehs1.jpg`} alt="EHS Specialist 1" className="h-9 w-9 rounded-full border-2 border-white object-cover" />
-                <img src={`${base}/avatar-manager.jpg`} alt="Site Manager" className="h-9 w-9 rounded-full border-2 border-white object-cover" />
-                <img src={`${base}/avatar-ehs2.jpg`} alt="EHS Specialist 2" className="h-9 w-9 rounded-full border-2 border-white object-cover" />
-                <span className="pl-4 text-[11.5px] text-muted">職安人員 1．工地經理．職安人員 2</span>
-              </div>
-              <div className="rounded-xl border border-line bg-white p-4">
-                <p className="text-[11px] font-medium text-muted">偵測 Prompt 範本</p>
-                <p className="mt-1 text-[13px] font-semibold text-ink">
-                  裝備偵測 — 是否配戴指定裝備
-                </p>
-                <p className="mt-3 text-[11px] font-medium text-muted">Prompt</p>
-                <p className="mt-1 text-[12.5px] leading-relaxed text-ink-soft">
-                  請確認{" "}
-                  <span className="rounded-full border border-[#0B7DC9]/30 bg-[#D8EEFD] px-2 py-0.5 text-[#0B7DC9]">
-                    該名人員
-                  </span>{" "}
-                  是否依照安全規範，正確配戴指定的{" "}
-                  <span className="rounded-full border border-[#0B7DC9]/30 bg-[#D8EEFD] px-2 py-0.5 text-[#0B7DC9]">
-                    安全帽
+            {solution && (
+              <>
+                <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/70 via-black/25 to-transparent" />
+                <div className="absolute bottom-4 left-4 flex items-center gap-2 md:bottom-6 md:left-6">
+                  <span className="shrink-0 inline-flex items-center rounded-full bg-[#D8EEFD] px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-[#0B7DC9]">
+                    After
                   </span>
-                  。
-                </p>
-              </div>
-            </div>
+                  <p className="text-[13px] font-normal text-white">{solution}</p>
+                </div>
+              </>
+            )}
           </div>
         </div>
       </div>
@@ -539,46 +498,48 @@ export function DesignIteration({ data }: { data: DesignIterationData }) {
   return (
     <div className="mt-16 md:mt-24">
       {data.items && data.items.length > 0 && (
-        <div className="mt-8 flex flex-col gap-12">
+        <div className="mt-8 flex flex-col gap-24">
           {data.items.map((item, i) => (
             <RevealOnScroll key={item.title} delay={i * 0.08}>
-              <div id={`opt-${i + 1}`} className="mb-5 scroll-mt-24">
-                <div className="flex items-center gap-2.5">
+              <div id={`opt-${i + 1}`} className="mb-2 scroll-mt-24">
+                <div className="flex items-center justify-center gap-2.5 text-center">
                   {item.tag && (
                     <span className="inline-flex items-center rounded-full bg-ink-soft/10 px-2.5 py-1 text-[10px] font-semibold text-ink-soft">
                       {item.tag}
                     </span>
                   )}
-                  <p className="text-base font-semibold text-ink md:text-lg">{item.title}</p>
+                  <p className="text-2xl font-semibold tracking-tight text-ink md:text-3xl">{item.title}</p>
                 </div>
 
-                <div className="mt-3 flex w-full items-start justify-between gap-4">
-                  <div className="shrink-0">
-                    <span className="inline-flex items-center rounded-full bg-red-50 px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-red-600">
-                      Before
-                    </span>
-                    <p className="mt-2 whitespace-nowrap text-sm leading-relaxed text-muted">{item.painPoint}</p>
-                  </div>
+                {!item.stackedBeforeAfter && !item.promptOptimization && (
+                  <div className="mt-3 flex w-full items-start justify-between gap-4">
+                    <div className="shrink-0">
+                      <span className="inline-flex items-center rounded-full bg-red-50 px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-red-600">
+                        Before
+                      </span>
+                      <p className="mt-2 whitespace-nowrap text-sm leading-relaxed text-muted">{item.painPoint}</p>
+                    </div>
 
-                  <div className="flex flex-1 items-center justify-center pt-2">
-                    <svg viewBox="0 0 40 16" className="h-4 w-10 text-[#C7CBD1]">
-                      <path d="M0 8h32" stroke="currentColor" strokeWidth="1.5" fill="none" />
-                      <path
-                        d="M26 3l6 5-6 5"
-                        stroke="currentColor"
-                        strokeWidth="1.5"
-                        fill="none"
-                      />
-                    </svg>
-                  </div>
+                    <div className="flex flex-1 items-center justify-center pt-2">
+                      <svg viewBox="0 0 40 16" className="h-4 w-10 text-[#C7CBD1]">
+                        <path d="M0 8h32" stroke="currentColor" strokeWidth="1.5" fill="none" />
+                        <path
+                          d="M26 3l6 5-6 5"
+                          stroke="currentColor"
+                          strokeWidth="1.5"
+                          fill="none"
+                        />
+                      </svg>
+                    </div>
 
-                  <div className="max-w-[320px]">
-                    <span className="inline-flex items-center rounded-full bg-[#D8EEFD] px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-[#0B7DC9]">
-                      After
-                    </span>
-                    <p className="mt-2 text-sm leading-relaxed text-muted">{item.solution}</p>
+                    <div className="max-w-[320px]">
+                      <span className="inline-flex items-center rounded-full bg-[#D8EEFD] px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-[#0B7DC9]">
+                        After
+                      </span>
+                      <p className="mt-2 text-sm leading-relaxed text-muted">{item.solution}</p>
+                    </div>
                   </div>
-                </div>
+                )}
               </div>
               {item.beforeImage && item.afterImage && (
                 item.stackedBeforeAfter ? (
@@ -586,6 +547,9 @@ export function DesignIteration({ data }: { data: DesignIterationData }) {
                     title={item.title}
                     beforeImage={item.beforeImage}
                     afterImage={item.afterImage}
+                    painPoint={item.painPoint}
+                    solution={item.solution}
+                    impact={item.impact}
                   />
                 ) : (
                   <BeforeAfterSlider
@@ -596,7 +560,9 @@ export function DesignIteration({ data }: { data: DesignIterationData }) {
                 )
               )}
               {item.workflowBefore && item.workflowAfter && <WorkflowOptimization />}
-              {item.promptOptimization && <PromptOptimization />}
+              {item.promptOptimization && (
+                <PromptOptimization painPoint={item.painPoint} solution={item.solution} />
+              )}
               {item.secondaryImage && item.secondaryImageCaption && (
                 <SecondaryImagePanel
                   image={item.secondaryImage}

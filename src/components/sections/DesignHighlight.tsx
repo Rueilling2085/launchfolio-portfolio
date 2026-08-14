@@ -1,4 +1,4 @@
-import { ArrowRight } from "lucide-react";
+import { ArrowDown } from "lucide-react";
 import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
 import { PulseDot } from "@/components/ui/PulseBadge";
 import type { DesignHighlight as DesignHighlightData } from "@/lib/data";
@@ -22,12 +22,12 @@ function BranchCard({
         aria-label="查看詳細內容"
         className="absolute top-4 right-4 flex h-6 w-6 items-center justify-center rounded-full border border-line text-ink-soft transition-colors hover:border-[#0B7DC9]/40 hover:bg-[#D8EEFD]/40 hover:text-[#0B7DC9]"
       >
-        <ArrowRight size={12} />
+        <ArrowDown size={12} />
       </a>
       <span className="inline-flex items-center rounded-full bg-ink-soft/10 px-2.5 py-1 text-[10px] font-semibold text-ink-soft">
         {label}
       </span>
-      <p className="mt-3 pr-6 text-sm font-semibold text-ink md:text-base">{title}</p>
+      <p className="mt-3 pr-6 text-sm text-ink md:text-base">{title}</p>
       <p className="mt-1.5 text-xs leading-relaxed text-muted">{description}</p>
     </div>
   );
@@ -49,7 +49,7 @@ export function DesignHighlight({ data }: { data: DesignHighlightData }) {
             <span className="inline-flex items-center gap-1 rounded-full bg-[#006AB7] px-2.5 py-1 text-[10px] font-semibold text-white">
               {data.stepLabel}
             </span>
-            <p className="mt-3 text-sm font-semibold text-ink">{data.stepTitle}</p>
+            <p className="mt-3 text-sm text-ink">{data.stepTitle}</p>
             <p className="mt-1.5 text-xs leading-relaxed text-muted">{data.stepDescription}</p>
           </div>
 

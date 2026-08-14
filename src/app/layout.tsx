@@ -1,17 +1,30 @@
 import type { Metadata } from "next";
-import { Inter, Fragment_Mono } from "next/font/google";
+import localFont from "next/font/local";
+import { Fragment_Mono, Instrument_Serif } from "next/font/google";
 import "./globals.css";
 import { SmoothScrollProvider } from "@/components/ui/SmoothScrollProvider";
 
-const inter = Inter({
+const generalSans = localFont({
   variable: "--font-inter",
-  subsets: ["latin"],
+  src: [
+    { path: "../../public/fonts/general-sans/GeneralSans-Regular.woff2", weight: "400", style: "normal" },
+    { path: "../../public/fonts/general-sans/GeneralSans-Medium.woff2", weight: "500", style: "normal" },
+    { path: "../../public/fonts/general-sans/GeneralSans-SemiBold.woff2", weight: "600", style: "normal" },
+    { path: "../../public/fonts/general-sans/GeneralSans-Bold.woff2", weight: "700", style: "normal" },
+  ],
 });
 
 const fragmentMono = Fragment_Mono({
   variable: "--font-fragment-mono",
   subsets: ["latin"],
   weight: "400",
+});
+
+const instrumentSerif = Instrument_Serif({
+  variable: "--font-instrument-serif",
+  subsets: ["latin"],
+  weight: "400",
+  style: ["normal", "italic"],
 });
 
 export const metadata: Metadata = {
@@ -27,7 +40,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${fragmentMono.variable} h-full scroll-smooth antialiased`}
+      className={`${generalSans.variable} ${fragmentMono.variable} ${instrumentSerif.variable} h-full scroll-smooth antialiased`}
     >
       <body className="min-h-full flex flex-col bg-paper text-ink">
         <SmoothScrollProvider>{children}</SmoothScrollProvider>

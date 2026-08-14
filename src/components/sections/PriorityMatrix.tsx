@@ -12,7 +12,7 @@ import type {
 
 const TIER_COLOR: Record<1 | 2, string> = {
   1: "#006AB7",
-  2: "#5C7DA6",
+  2: "#B7BCC4",
 };
 
 const PLOT_HEIGHT = "h-[300px] sm:h-[360px] lg:h-[440px]";
@@ -37,7 +37,7 @@ function Bubble({ bubble }: { bubble: MatrixBubble }) {
         className={`relative flex h-full w-full items-center justify-center rounded-full border px-2.5 text-center text-[11px] leading-tight shadow-md ${
           isPrimary
             ? "border-[#0B7DC9]/50 font-semibold text-[#006AB7]"
-            : "border-[#B7BCC4] font-medium text-ink-soft"
+            : "border-[#B7BCC4] font-medium text-muted"
         }`}
         style={{ backgroundColor: isPrimary ? "#D8EEFD" : "rgba(148,153,161,0.18)" }}
       >
@@ -54,7 +54,7 @@ function Bubble({ bubble }: { bubble: MatrixBubble }) {
 function Dot({ dot }: { dot: MatrixDot }) {
   return (
     <div
-      className="absolute flex -translate-y-1/2 items-center gap-1.5 whitespace-nowrap text-[11px] text-ink-soft"
+      className="absolute flex -translate-y-1/2 items-center gap-1.5 whitespace-nowrap text-[11px] text-muted"
       style={{ top: `${dot.top}%`, left: `${dot.left}%` }}
     >
       <span
@@ -74,6 +74,21 @@ function Excluded({ item }: { item: MatrixExcluded }) {
     >
       {item.label}
     </div>
+  );
+}
+
+function AxisPill({ label, direction }: { label: string; direction: "up" | "down" | "right" }) {
+  const glyph = direction === "up" ? "▲" : direction === "down" ? "▼" : "▶";
+  const isLow = direction === "down";
+  return (
+    <span
+      className={`inline-flex items-center gap-1 whitespace-nowrap rounded-full px-2.5 py-1 text-[10px] font-semibold ${
+        isLow ? "bg-ink-soft/10 text-ink-soft" : "bg-[#0B7DC9]/15 text-[#006AB7]"
+      }`}
+    >
+      {label}
+      <span className="text-[7px]">{glyph}</span>
+    </span>
   );
 }
 
@@ -149,18 +164,20 @@ export function PriorityMatrix({ data }: { data: PriorityMatrixData }) {
       <div className="flex flex-col gap-10 lg:flex-row lg:items-start lg:gap-8">
         <div className="flex-1">
             <div className="flex items-stretch gap-2.5">
-              <div className={`flex w-8 shrink-0 flex-col items-center justify-between text-[11px] text-ink ${PLOT_HEIGHT}`}>
-                <span className="text-center leading-tight">{data.axis.top}</span>
+              <div className={`flex w-16 shrink-0 flex-col items-center justify-between text-[11px] text-ink ${PLOT_HEIGHT}`}>
+                <AxisPill label={data.axis.top} direction="up" />
                 <span className="flex flex-1 items-center justify-center">
                   <span className="-rotate-90 whitespace-nowrap font-medium">
                     {data.axis.yLabel} →
                   </span>
                 </span>
-                <span className="text-center leading-tight">{data.axis.bottom}</span>
+                <AxisPill label={data.axis.bottom} direction="down" />
               </div>
 
               <div className="relative min-w-0 flex-1">
-                <div className={`relative w-full border-b border-l border-line ${PLOT_HEIGHT}`}>
+                <div className={`relative w-full overflow-hidden border-b border-l border-line ${PLOT_HEIGHT}`}>
+                  <span className="absolute right-0 top-0 h-1/2 w-1/2 bg-[#EAF6FE]" />
+                  <span className="absolute bottom-0 left-0 h-1/2 w-1/2 bg-[#F0F2F5]" />
                   <span className="absolute inset-x-0 top-1/2 border-t border-dashed border-[#B7BCC4]" />
                   <span className="absolute inset-y-0 left-1/2 border-l border-dashed border-[#B7BCC4]" />
 
@@ -175,8 +192,8 @@ export function PriorityMatrix({ data }: { data: PriorityMatrixData }) {
                   ))}
                 </div>
 
-                <div className="mt-2 flex items-center justify-end text-[11px] text-muted">
-                  <span>{data.axis.right}</span>
+                <div className="mt-2 flex items-center justify-end">
+                  <AxisPill label={data.axis.right} direction="right" />
                 </div>
                 <p className="mt-1 text-center text-[11px] font-medium text-ink">{data.axis.xLabel} →</p>
               </div>

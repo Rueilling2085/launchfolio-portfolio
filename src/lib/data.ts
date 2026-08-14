@@ -1807,9 +1807,9 @@ export const projects: Project[] = [
     cardDescription:
       "透過使用者研究、軟硬體整合與產品設計，將音樂轉化為觸覺回饋，打破傳統輔具冰冷的既有印象，並結合 App 延伸情感分享與音樂互動體驗。",
     color: "#5532FA",
-    cardImage: "/images/projects/touchtune/card-collage-v2.png",
-    cardImageWidth: 1664,
-    cardImageHeight: 1150,
+    cardImage: "/images/projects/touchtune/card-collage-v3.png",
+    cardImageWidth: 1351,
+    cardImageHeight: 1260,
     theme: "dark",
     description:
       "TouchTune 是一款專為聽障人士設計的穿戴式裝置。它透過將聲音轉化為多頻率的振動，提供多感官的音樂體驗。",

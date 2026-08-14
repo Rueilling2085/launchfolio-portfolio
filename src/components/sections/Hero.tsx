@@ -18,7 +18,7 @@ export function Hero() {
             <HeroMetaChips />
           </EnterOnLoad>
 
-          <h1 className="mx-auto mt-10 max-w-[840px] font-bold tracking-tight">
+          <h1 className="mx-auto mt-10 w-full max-w-[840px] font-bold tracking-tight">
             <EnterOnLoad delay={0.3}>
               <FitText>
                 <span

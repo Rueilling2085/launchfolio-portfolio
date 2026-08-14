@@ -2245,143 +2245,43 @@ export const projects: Project[] = [
   },
 ];
 
-export const services = [
-  { name: "Framer Dev" },
-  { name: "Brand Design" },
-  { name: "Web Apps" },
-  { name: "Landing Pages" },
-  { name: "Motion Graphics" },
-  { name: "3D Design" },
-  { name: "UI UX Consultation" },
-];
-
-export const techStack = [
-  "Figma",
-  "Framer",
-  "Webflow",
-  "Notion",
-  "Slack",
-  "Jira",
-  "Photoshop",
-  "Illustrator",
-];
-
-export const workHistory = [
+export const bringItems = [
   {
-    role: "Senior Product Designer",
-    company: "Nimbus Labs",
-    dates: "2022 — Present",
+    icon: "search",
+    title: "研究驅動的產品決策",
     description:
-      "Leading brand and product design for a fintech platform used by 50,000+ customers, from design system to shipped features.",
+      "從 13 場深度訪談到 199 份問卷分析，我習慣用真實使用者行為驗證假設，把模糊需求收斂成明確的產品方向。",
   },
   {
-    role: "Product Designer",
-    company: "Solace",
-    dates: "2020 — 2022",
+    icon: "layers",
+    title: "跨領域整合能力",
     description:
-      "Designed the core booking flow and marketing site, improving conversion by 34% through iterative testing.",
+      "橫跨醫療、旅遊、AI 與物聯網領域的產品經驗，讓我能快速理解陌生產業、串接工程與商業限制，把想法落地。",
   },
   {
-    role: "Freelance Designer",
-    company: "Self-employed",
-    dates: "2018 — 2020",
+    icon: "cpu",
+    title: "技術與設計的橋樑",
     description:
-      "Worked with early-stage startups on brand identity, landing pages, and product design sprints.",
+      "熟悉生成式 AI 與電腦視覺技術，也會寫 Python 處理資料，讓設計提案更貼近工程可行性，減少來回溝通成本。",
   },
 ];
 
-export const testimonials = [
-  {
-    quote:
-      "Working with Joseph was the best design decision we made this year. Our conversion rate doubled within two months of launch.",
-    name: "Amara Cole",
-    role: "Founder, Nimbus Finance",
-    avatar: avatarUrls[0],
-  },
-  {
-    quote:
-      "Incredibly fast, thoughtful, and detail-oriented. The new site finally feels like our brand.",
-    name: "Daniel Osei",
-    role: "CEO, Solace Wellness",
-    avatar: avatarUrls[1],
-  },
-  {
-    quote:
-      "He doesn't just make things pretty — every decision was backed by a reason tied to our goals.",
-    name: "Priya Nair",
-    role: "Marketing Lead, Fieldnote",
-    avatar: avatarUrls[2],
-  },
-  {
-    quote:
-      "Communication was seamless from kickoff to launch. Would work with him again in a heartbeat.",
-    name: "Marcus Lin",
-    role: "Founder, Orbit Analytics",
-    avatar: avatarUrls[3],
-  },
-  {
-    quote:
-      "The subscription model let us ship design updates weekly instead of waiting on quarterly sprints.",
-    name: "Elena Brandt",
-    role: "COO, Layerhouse",
-    avatar: avatarUrls[4],
-  },
-  {
-    quote:
-      "Sharp eye for detail and genuinely invested in our outcomes, not just deliverables.",
-    name: "Tomas Reyes",
-    role: "Founder, Vantage Studio",
-    avatar: avatarUrls[5],
-  },
-];
-
-export const faqs = [
-  {
-    question: "What's included in the design subscription?",
-    answer:
-      "Unlimited design requests, revisions, and a dedicated Trello board to track progress — pause or cancel anytime.",
-  },
-  {
-    question: "How fast do you turn around requests?",
-    answer:
-      "Most requests are completed within 2-3 business days, with priority requests turned around in 24-48 hours.",
-  },
-  {
-    question: "Do you work with startups on a budget?",
-    answer:
-      "Yes — the single project rate is designed for teams that need one-off work without a monthly commitment.",
-  },
-  {
-    question: "What tools do you design in?",
-    answer:
-      "Figma for product and brand work, Framer and Webflow for development, with After Effects for motion.",
-  },
-  {
-    question: "How do we get started?",
-    answer:
-      "Book a free discovery call, and I'll follow up with a proposal and timeline within 24 hours.",
-  },
-];
-
-export const articles = [
-  {
-    title: "How I structure a design sprint for early-stage startups",
-    date: "Jun 12, 2025",
-    description:
-      "A breakdown of the exact process I use to go from brief to shipped design in under two weeks.",
-    image: "/images/blog/blog-featured.jpeg",
-    featured: true,
-  },
-  {
-    title: "Why most landing pages fail to convert",
-    date: "May 3, 2025",
-    description: "Five patterns I see repeatedly across underperforming pages.",
-    image: "/images/blog/blog-2.jpeg",
-  },
-  {
-    title: "Design subscriptions vs. project work",
-    date: "Apr 18, 2025",
-    description: "How to decide which pricing model fits your team's pace.",
-    image: "/images/blog/blog-3.jpeg",
-  },
-];
+export const aboutContent = {
+  bio: [
+    "我是林瑞苓（Lina），國立臺北科技大學創新設計研究所在讀，主修人機互動與生成式 AI 應用。作品橫跨醫療、旅遊與物聯網產業，擅長把使用者研究轉化為可落地的產品策略。",
+    "「TouchTune」榮獲 2025 IDA 設計獎佳作與 2025 A' Design Award 金獎；目前擔任台灣感性學會執行秘書，也持續在 HCI 與生成式 AI 領域深耕研究。",
+  ],
+  education: [
+    {
+      dates: "SEP 2022 – JUL 2026",
+      title: "M.Des in Innovation and Design",
+      org: "National Taipei University of Technology (NTUT), Taipei · GPA 4.0/4.3",
+    },
+  ],
+  photos: [
+    "/images/profile-headshot.jpg",
+    "/images/hero/ida-award.jpg",
+    "/images/hero/presentation.jpg",
+    "/images/hero/vr-testing.jpg",
+  ],
+};

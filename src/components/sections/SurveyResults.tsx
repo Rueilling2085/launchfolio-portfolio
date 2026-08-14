@@ -124,7 +124,8 @@ function BarCrossChart({ chart }: { chart: SurveyResultsHabitTab["crossAnalysis"
       <p className="text-base font-semibold text-ink">{chart.title}</p>
       <p className="mt-1 text-xs text-muted">{chart.subtitle}</p>
 
-      <div className="mt-6 flex items-start gap-3">
+      <div className="mt-6 overflow-x-auto">
+        <div className="flex min-w-[480px] items-start gap-3">
         <div
           className="flex flex-col justify-between text-right text-[10px] text-muted-2"
           style={{ height: CHART_HEIGHT }}
@@ -176,6 +177,7 @@ function BarCrossChart({ chart }: { chart: SurveyResultsHabitTab["crossAnalysis"
               <span className="h-2.5 w-2.5 rounded-sm bg-[#D9DEE7]" />無
             </span>
           </div>
+        </div>
         </div>
       </div>
     </div>

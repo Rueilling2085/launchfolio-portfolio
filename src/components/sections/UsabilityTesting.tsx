@@ -214,7 +214,7 @@ function AnnotatedImage({ finding }: { finding: UsabilityTestingData["findings"]
       />
 
       {marker && callout && (
-        <>
+        <div className="hidden sm:contents">
           <svg
             viewBox={`0 0 100 ${vbHeight}`}
             className="pointer-events-none absolute inset-0 h-full w-full overflow-visible"
@@ -245,7 +245,7 @@ function AnnotatedImage({ finding }: { finding: UsabilityTestingData["findings"]
               {finding.calloutLabel}
             </span>
           )}
-        </>
+        </div>
       )}
     </div>
   );

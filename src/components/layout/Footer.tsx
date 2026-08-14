@@ -63,10 +63,10 @@ export function Footer() {
             hello@josephalexander.design
           </a>
           <a
-            href="#contact"
+            href="mailto:2018gsb.linrl@gmail.com"
             className="inline-flex items-center justify-center rounded-full bg-accent px-6 py-3.5 text-sm font-medium text-ink transition-transform hover:scale-[1.02]"
           >
-            Book a call
+            Email me
           </a>
         </div>
 

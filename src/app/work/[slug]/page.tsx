@@ -55,24 +55,42 @@ export default async function ProjectCaseStudyPage({
   const dotGrid =
     "bg-[radial-gradient(circle,rgba(255,255,255,0.07)_1px,transparent_1px)] [background-size:22px_22px]";
 
-  const sideNavSections: SideNavSection[] = [
-    project.overview ? { id: "overview", label: "專案總覽" } : null,
-    project.researchBackground ? { id: "research-background", label: "研究背景" } : null,
-    project.problemFraming ? { id: "problem-framing", label: "功能盤點與對齊依據" } : null,
-    project.usabilityTesting ? { id: "usability-testing", label: "易用性測試" } : null,
-    project.surveyResearch ? { id: "survey-research", label: "問卷調查" } : null,
-    project.interfaceOptimization ? { id: "interface-optimization", label: "介面優化" } : null,
-    project.optimizationResults ? { id: "optimization-results", label: "介面優化結果" } : null,
-    project.problemSolution ? { id: "problem-solution", label: "問題與解決方案" } : null,
-    project.designSketches ? { id: "design-sketches", label: "設計草圖" } : null,
-    project.prototyping ? { id: "prototyping", label: "原型製作" } : null,
-    project.productFeatures ? { id: "product-features", label: "產品功能" } : null,
+  const rawSideNavSections: (SideNavSection | null)[] = [
+    project.overview ? { id: "overview", label: { zh: "專案總覽", en: "Overview" } } : null,
+    project.researchBackground
+      ? { id: "research-background", label: { zh: "研究背景", en: "Research Background" } }
+      : null,
+    project.problemFraming
+      ? { id: "problem-framing", label: { zh: "功能盤點與對齊依據", en: "Feature Scoping & Alignment" } }
+      : null,
+    project.usabilityTesting
+      ? { id: "usability-testing", label: { zh: "易用性測試", en: "Usability Testing" } }
+      : null,
+    project.surveyResearch
+      ? { id: "survey-research", label: { zh: "問卷調查", en: "Survey Research" } }
+      : null,
+    project.interfaceOptimization
+      ? { id: "interface-optimization", label: { zh: "介面優化", en: "Interface Optimization" } }
+      : null,
+    project.optimizationResults
+      ? { id: "optimization-results", label: { zh: "介面優化結果", en: "Optimization Results" } }
+      : null,
+    project.problemSolution
+      ? { id: "problem-solution", label: { zh: "問題與解決方案", en: "Problem & Solution" } }
+      : null,
+    project.designSketches
+      ? { id: "design-sketches", label: { zh: "設計草圖", en: "Design Sketches" } }
+      : null,
+    project.prototyping ? { id: "prototyping", label: { zh: "原型製作", en: "Prototyping" } } : null,
+    project.productFeatures
+      ? { id: "product-features", label: { zh: "產品功能", en: "Product Features" } }
+      : null,
     project.interfaceDesign
       ? {
           id: "interface-design",
-          label: "介面設計",
+          label: { zh: "介面設計", en: "Interface Design" },
           children: [
-            { id: "information-architecture", label: "資訊架構圖" },
+            { id: "information-architecture", label: { zh: "資訊架構圖", en: "Information Architecture" } },
             ...(project.interfaceDesign.deviceConnection?.title
               ? [
                   {
@@ -84,16 +102,23 @@ export default async function ProjectCaseStudyPage({
           ],
         }
       : null,
-    project.reflection ? { id: "reflection", label: project.reflection.eyebrow ?? "反思與展望" } : null,
+    project.reflection
+      ? { id: "reflection", label: project.reflection.eyebrow ?? { zh: "反思與展望", en: "Reflection" } }
+      : null,
     project.summary
-      ? { id: "user-research", label: project.summary.eyebrow ?? "使用者研究" }
+      ? { id: "user-research", label: project.summary.eyebrow ?? { zh: "使用者研究", en: "User Research" } }
       : null,
-    project.howItWorks ? { id: "how-it-works", label: "定義" } : null,
+    project.howItWorks ? { id: "how-it-works", label: { zh: "定義", en: "Definition" } } : null,
     project.designHighlight || project.designIteration
-      ? { id: "design-iteration", label: "設計迭代" }
+      ? { id: "design-iteration", label: { zh: "設計迭代", en: "Design Iteration" } }
       : null,
-    project.competitorAnalysis ? { id: "competitor-analysis", label: "競品分析" } : null,
-  ].filter((s): s is SideNavSection => s !== null);
+    project.competitorAnalysis
+      ? { id: "competitor-analysis", label: { zh: "競品分析", en: "Competitor Analysis" } }
+      : null,
+  ];
+  const sideNavSections: SideNavSection[] = rawSideNavSections.filter(
+    (s): s is SideNavSection => s !== null
+  );
 
   return (
     <>

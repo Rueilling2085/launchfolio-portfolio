@@ -189,10 +189,10 @@ export type HowItWorks = {
 };
 
 export type ProjectChallengeItem = {
-  title: string;
-  challenge: string;
-  action: string;
-  result: string;
+  title: Localized;
+  challenge: Localized;
+  action: Localized;
+  result: Localized;
 };
 
 export type AppIntroVisual = {
@@ -205,10 +205,10 @@ export type AppIntroVisual = {
 };
 
 export type ProjectOverview = {
-  niche?: string;
+  niche?: Localized;
   projectIntro: string;
   challenges: ProjectChallengeItem[];
-  awards?: { name: string; result: string }[];
+  awards?: { name: string; result: Localized }[];
 };
 
 export type CompetitorTool = {
@@ -752,35 +752,57 @@ export const projects: Project[] = [
       "Cross-team stakeholder workshops",
     ],
     overview: {
-      niche: "B2B SaaS・電腦視覺(VLM)・工業安全(EHS)",
+      niche: { zh: "B2B SaaS・電腦視覺(VLM)・工業安全(EHS)", en: "B2B SaaS · Computer Vision (VLM) · Industrial Safety (EHS)" },
       projectIntro:
         "為研華打造的跨場域 AI 監控系統，結合 VLM 視覺偵測與 LLM 對話技術，補足醫療、零售、製造業在非巡檢時段的監控盲區。系統即時偵測現場隱形風險，並透過 Chatbot 快速釐清事件脈絡，自動生成符合 ISO 標準的稽核報告，實現全時段智慧化管理。",
       challenges: [
         {
-          title: "1. 從 0 到 1 的硬體驅動產品規劃 (0 to 1 Product Definition)",
-          challenge: "需在專案前期快速釐清市場需求與 AI 導入切入點。",
-          action:
-            "主導訪談系統整合商（SI）與中小企業職環安人員（EHS），成功盤點實際業務痛點，確立 AI 輔助功能與關鍵導入節點。",
-          result:
-            "訪談 1 位 SI、2 位 EHS 人員，成功收斂出完整的產品流程與功能規劃，作為後續設計的基礎依據。",
+          title: {
+            zh: "1. 從 0 到 1 的硬體驅動產品規劃 (0 to 1 Product Definition)",
+            en: "1. 0-to-1 Product Definition, Driven by the Hardware",
+          },
+          challenge: {
+            zh: "需在專案前期快速釐清市場需求與 AI 導入切入點。",
+            en: "Early on, we needed to quickly pin down market demand and where AI could realistically enter the workflow.",
+          },
+          action: {
+            zh: "主導訪談系統整合商（SI）與中小企業職環安人員（EHS），成功盤點實際業務痛點，確立 AI 輔助功能與關鍵導入節點。",
+            en: "Led interviews with a systems integrator (SI) and SME EHS staff, mapping real operational pain points and pinning down which AI-assisted features and entry points actually mattered.",
+          },
+          result: {
+            zh: "訪談 1 位 SI、2 位 EHS 人員，成功收斂出完整的產品流程與功能規劃，作為後續設計的基礎依據。",
+            en: "Interviewed 1 SI and 2 EHS staff, converging on a complete product flow and feature plan that became the foundation for everything designed afterward.",
+          },
         },
         {
-          title: "2. 跨場域的可行性驗證 (PoC Selection)",
-          challenge:
-            "產品可應用場域廣泛，需在「技術可行性」與「商業需求」間取得平衡。",
-          action:
-            "透過訪談結果分析可行性/需求矩陣，收斂並提取出首次的 PoC 驗證場域。",
-          result:
-            "從 10 個候選場域中收斂至 2 個，最終聚焦於工廠安全（工安）場域，作為首期 PoC 驗證重點。",
+          title: { zh: "2. 跨場域的可行性驗證 (PoC Selection)", en: "2. Cross-Domain Feasibility Validation (PoC Selection)" },
+          challenge: {
+            zh: "產品可應用場域廣泛，需在「技術可行性」與「商業需求」間取得平衡。",
+            en: "The product could apply to a wide range of settings — we needed to balance technical feasibility against actual business demand.",
+          },
+          action: {
+            zh: "透過訪談結果分析可行性/需求矩陣，收斂並提取出首次的 PoC 驗證場域。",
+            en: "Analyzed interview findings through a feasibility/demand matrix to converge on the first setting to validate as a proof of concept.",
+          },
+          result: {
+            zh: "從 10 個候選場域中收斂至 2 個，最終聚焦於工廠安全（工安）場域，作為首期 PoC 驗證重點。",
+            en: "Narrowed 10 candidate settings down to 2, ultimately focusing the first PoC on factory safety (EHS).",
+          },
         },
         {
-          title: "3. 多領域知識的「模組化 UX 設計」(Modular UX Design)",
-          challenge:
-            "需突破傳統 AI 限於單一場域訓練的瓶頸，並降低非工程背景使用者的操作門檻。",
-          action:
-            "設計核心功能「情境式 VLM Template」，將醫療、零售與工安等跨領域知識轉化為結構化模組，打造易上手、直覺化的操作介面。",
-          result:
-            "Template 機制上線後，透過產品操作影片向 SI 展示，獲得正面認可，驗證了模組化設計降低操作門檻的方向可行。",
+          title: { zh: "3. 多領域知識的「模組化 UX 設計」(Modular UX Design)", en: "3. Modular UX Design for Cross-Domain Knowledge" },
+          challenge: {
+            zh: "需突破傳統 AI 限於單一場域訓練的瓶頸，並降低非工程背景使用者的操作門檻。",
+            en: "Needed to break past AI's usual single-domain training limitation, and lower the barrier for non-technical users.",
+          },
+          action: {
+            zh: "設計核心功能「情境式 VLM Template」，將醫療、零售與工安等跨領域知識轉化為結構化模組，打造易上手、直覺化的操作介面。",
+            en: "Designed the core \"contextual VLM Template\" feature, turning cross-domain knowledge (healthcare, retail, EHS) into structured modules for an interface that's intuitive and easy to pick up.",
+          },
+          result: {
+            zh: "Template 機制上線後，透過產品操作影片向 SI 展示，獲得正面認可，驗證了模組化設計降低操作門檻的方向可行。",
+            en: "After launch, a product demo video shown to the SI got a positive response, validating that the modular approach did lower the barrier to use.",
+          },
         },
       ],
     },
@@ -1173,34 +1195,63 @@ export const projects: Project[] = [
       "Design System 維護",
     ],
     overview: {
-      niche: "B2C 運動科技（SportTech）・跑步社群平台・健康管理",
+      niche: {
+        zh: "B2C 運動科技（SportTech）・跑步社群平台・健康管理",
+        en: "B2C SportTech · Running Community Platform · Health Management",
+      },
       projectIntro:
         "Sports Note 是台灣最大的跑步社群平台，提供馬拉松賽事資訊、跑步紀錄、線上報名與運動內容等服務。本次專案正值 App Alpha 階段，團隊希望透過使用者研究重新檢視產品定位，了解不同跑者的需求，並找出最優先改善的體驗問題。在這個專案中，我主要負責規劃研究流程、執行易用性測試、訪談與問卷調查，將研究結果轉化為產品策略與介面優化方向，以建立後續產品迭代的重要依據。",
       challenges: [
         {
-          title: "1. 透過易用性測試，找出產品優化方向",
-          challenge:
-            "Alpha 版本已完成主要功能，但缺乏使用者驗證，無法確認資訊架構與操作流程是否符合跑者需求。",
-          action:
-            "建立 Function Map 與 User Flow，規劃易用性測試，邀請 13 位不同程度跑者完成情境任務並進行訪談，分析任務完成率、操作時間與錯誤率。",
-          result:
-            "完成 13 場易用性測試與訪談；找出 4 項高優先度介面問題，作為後續優化依據。",
+          title: {
+            zh: "1. 透過易用性測試，找出產品優化方向",
+            en: "1. Usability Testing to Find the Optimization Direction",
+          },
+          challenge: {
+            zh: "Alpha 版本已完成主要功能，但缺乏使用者驗證，無法確認資訊架構與操作流程是否符合跑者需求。",
+            en: "The Alpha build had its core features done but no user validation — we couldn't confirm the information architecture and flow actually matched what runners needed.",
+          },
+          action: {
+            zh: "建立 Function Map 與 User Flow，規劃易用性測試，邀請 13 位不同程度跑者完成情境任務並進行訪談，分析任務完成率、操作時間與錯誤率。",
+            en: "Built a function map and user flow, designed usability tests, and invited 13 runners of varying experience levels to complete scenario tasks and interviews, analyzing task completion rate, time on task, and error rate.",
+          },
+          result: {
+            zh: "完成 13 場易用性測試與訪談；找出 4 項高優先度介面問題，作為後續優化依據。",
+            en: "Completed 13 usability tests and interviews, surfacing 4 high-priority interface issues that guided the next round of fixes.",
+          },
         },
         {
-          title: "2. 透過使用者研究，探索具商業價值的功能",
-          challenge:
-            "開發團隊希望重新盤點產品定位，了解不同跑者真正需要的功能並找出潛在功能開發需求。",
-          action:
-            "設計並發放問卷，一週內收集 199 份有效樣本，結合 3 位專業跑者訪談，整合量化與質化研究結果。",
-          result:
-            "收集 199 份有效問卷；完成 3 位專家訪談；將 10+ 項需求收斂為 4 個核心功能方向；建立產品 Roadmap 的優先順序。",
+          title: {
+            zh: "2. 透過使用者研究，探索具商業價值的功能",
+            en: "2. User Research to Explore Commercially Valuable Features",
+          },
+          challenge: {
+            zh: "開發團隊希望重新盤點產品定位，了解不同跑者真正需要的功能並找出潛在功能開發需求。",
+            en: "The dev team wanted to re-examine the product's positioning, understand what different runners actually needed, and identify candidate features worth building.",
+          },
+          action: {
+            zh: "設計並發放問卷，一週內收集 118 份有效樣本，結合 3 位專業跑者訪談，整合量化與質化研究結果。",
+            en: "Designed and distributed a survey, collecting 118 valid responses within a week, combined with interviews with 3 experienced runners to merge quantitative and qualitative findings.",
+          },
+          result: {
+            zh: "收集 118 份有效問卷；完成 3 位專家訪談；將 10+ 項需求收斂為 4 個核心功能方向；建立產品 Roadmap 的優先順序。",
+            en: "Collected 118 valid survey responses, completed 3 expert interviews, narrowed 10+ requirements down to 4 core feature directions, and set the priority order for the product roadmap.",
+          },
         },
         {
-          title: "3. 將研究洞察轉化為產品設計",
-          challenge: "如何將上述研究結果，轉化為真正的產品決策。",
-          action: "根據研究洞察提出 7 項介面優化方案，完成 UI 設計、Design System 更新與工程交付。",
-          result:
-            "提出 7 項產品優化方案；維護並更新 Design System；設計方案獲團隊採納，作為後續版本開發依據。",
+          title: { zh: "3. 將研究洞察轉化為產品設計", en: "3. Turning Research Insight into Product Design" },
+          challenge: {
+            zh: "如何將上述研究結果，轉化為真正的產品決策。",
+            en: "The challenge was turning all of the above research into real product decisions.",
+          },
+          action: {
+            zh: "根據研究洞察提出 7 項介面優化方案，完成 UI 設計、Design System 更新與工程交付。",
+            en: "Proposed 7 interface improvements based on the research insight, delivering the UI design, a Design System update, and engineering handoff.",
+          },
+          result: {
+            zh: "提出 7 項產品優化方案；維護並更新 Design System；設計方案獲團隊採納，作為後續版本開發依據。",
+            en: "Delivered 7 product optimization proposals; maintained and updated the Design System; the team adopted the designs as the basis for the next release.",
+          },
         },
       ],
     },
@@ -1939,27 +1990,39 @@ export const projects: Project[] = [
         "TouchTune 是一款專為聽障人士設計的穿戴式裝置。它透過將聲音轉化為多頻率的振動，提供多感官的音樂體驗。這不僅能幫助使用者感受音樂的節奏與音高，還能提升他們在社交活動中的參與度，帶來更豐富的感官體驗與更深層的情感連結。",
       challenges: [
         {
-          title: "1. 用戶研究與需求洞察",
-          challenge:
-            "專案初期缺乏與目標使用者（聽障人士）直接接觸的管道，難以確立真實需求。",
-          action:
-            "負責文獻研究，整理大量二手資料，深入分析聽障者的「感官代償」機制與體驗缺口。",
-          result:
-            "收斂出以「振動感官」為核心的產品定位，為後續設計方向提供明確依據。",
+          title: { zh: "1. 用戶研究與需求洞察", en: "1. User Research & Needs Discovery" },
+          challenge: {
+            zh: "專案初期缺乏與目標使用者（聽障人士）直接接觸的管道，難以確立真實需求。",
+            en: "Early on there was no direct channel to the target users (the d/Deaf and hard-of-hearing community), making it hard to pin down real needs.",
+          },
+          action: {
+            zh: "負責文獻研究，整理大量二手資料，深入分析聽障者的「感官代償」機制與體驗缺口。",
+            en: "Ran a literature review across a large body of secondary sources, digging into the \"sensory substitution\" mechanism and where the experience gaps were.",
+          },
+          result: {
+            zh: "收斂出以「振動感官」為核心的產品定位，為後續設計方向提供明確依據。",
+            en: "Converged on a product position centered on vibration-based sensing, giving every design decision afterward a clear anchor.",
+          },
         },
         {
-          title: "2. 軟硬體整合與共融設計",
-          challenge:
-            "需在軟硬體整合的限制下佈局震動元件，確保用戶能清楚感知音樂；同時外觀須打破傳統醫療輔具的冰冷刻板印象，實現共融設計，讓非聽障者也樂於配戴。",
-          action:
-            "與團隊歷經 5 次原型迭代，同步優化外觀造型與震動元件的機構配置，兼顧功能與美感。",
-          result:
-            "最終設計成功兼顧功能性與親和力，榮獲 IDA Design Awards、unDesign Award 兩項國際設計獎肯定。",
+          title: { zh: "2. 軟硬體整合與共融設計", en: "2. Hardware/Software Integration & Inclusive Design" },
+          challenge: {
+            zh: "需在軟硬體整合的限制下佈局震動元件，確保用戶能清楚感知音樂；同時外觀須打破傳統醫療輔具的冰冷刻板印象，實現共融設計，讓非聽障者也樂於配戴。",
+            en: "Had to lay out the vibration modules within hardware/software constraints while keeping the music clearly perceptible — and the form had to break away from the cold, clinical look of typical assistive devices, so even non-Deaf people would want to wear it.",
+          },
+          action: {
+            zh: "與團隊歷經 5 次原型迭代，同步優化外觀造型與震動元件的機構配置，兼顧功能與美感。",
+            en: "Went through 5 prototype iterations with the team, refining the form and the vibration-module layout together, balancing function and aesthetics.",
+          },
+          result: {
+            zh: "最終設計成功兼顧功能性與親和力，榮獲 IDA Design Awards、unDesign Award 兩項國際設計獎肯定。",
+            en: "The final design landed both functionality and approachability, earning recognition from the IDA Design Awards and the unDesign Award.",
+          },
         },
       ],
       awards: [
-        { name: "IDA Design Awards", result: "Honorable Mention" },
-        { name: "unDesign Award", result: "Gold" },
+        { name: "IDA Design Awards", result: { zh: "Honorable Mention", en: "Honorable Mention" } },
+        { name: "unDesign Award", result: { zh: "Gold", en: "Gold" } },
       ],
     },
     researchBackground: {

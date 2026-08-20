@@ -2,11 +2,13 @@
 
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
+import type { Localized } from "@/lib/i18n/resolve";
 
 export type SideNavSection = {
   id: string;
-  label: string;
-  children?: { id: string; label: string }[];
+  label: string | Localized;
+  children?: { id: string; label: string | Localized }[];
 };
 
 export function CaseStudySideNav({
@@ -107,6 +109,9 @@ export function CaseStudySideNav({
     return () => observer.disconnect();
   }, [measure]);
 
+  const { lang } = useLanguage();
+  const resolve = (label: string | Localized) => (typeof label === "string" ? label : label[lang]);
+
   if (sections.length < 2) return null;
 
   const itemClass = (isActive: boolean, isChild: boolean) => {
@@ -150,7 +155,7 @@ export function CaseStudySideNav({
                 false
               )}`}
             >
-              {s.label}
+              {resolve(s.label)}
             </a>
 
             {s.children && s.children.length > 0 && (
@@ -176,7 +181,7 @@ export function CaseStudySideNav({
                             true
                           )}`}
                         >
-                          {c.label}
+                          {resolve(c.label)}
                         </a>
                       ))}
                     </div>

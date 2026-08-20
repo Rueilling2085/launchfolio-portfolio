@@ -1,12 +1,17 @@
+"use client";
+
 import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
 import { TornDivider } from "@/components/ui/TornDivider";
 import { SectionContainer } from "@/components/ui/SectionContainer";
 import { workExperience } from "@/lib/data";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 // full-width and light-themed, split out from the About column so a résumé
 // (scanned entry by entry) isn't competing for attention with the bio prose
 // (read as continuous narrative) inside the same narrow column.
 export function WorkExperience() {
+  const { lang } = useLanguage();
+
   return (
     <div>
       <TornDivider color="var(--ink)" backdropColor="var(--paper)" />
@@ -33,8 +38,8 @@ export function WorkExperience() {
                     <p className="text-base text-white/60">{job.company}</p>
                     <div className="mt-3 flex flex-col gap-2">
                       {job.points.map((point) => (
-                        <p key={point} className="text-base leading-relaxed text-white/75">
-                          {point}
+                        <p key={point.zh} className="text-base leading-relaxed text-white/75">
+                          {point[lang]}
                         </p>
                       ))}
                     </div>

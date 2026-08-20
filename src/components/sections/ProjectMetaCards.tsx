@@ -1,5 +1,16 @@
+"use client";
+
 import { Compass, Calendar, Users, Briefcase, Award, type LucideIcon } from "lucide-react";
 import type { Project } from "@/lib/data";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
+
+const COPY = {
+  niche: { zh: "產業定位", en: "Industry" },
+  duration: { zh: "專案時長", en: "Duration" },
+  team: { zh: "團隊組成", en: "Team" },
+  role: { zh: "我的角色", en: "My Role" },
+  awards: { zh: "得獎紀錄", en: "Awards" },
+} as const;
 
 function TeamMember({ member, dark }: { member: string; dark?: boolean }) {
   const meSuffix = " - Me";
@@ -55,25 +66,26 @@ function MetaCard({
 }
 
 export function ProjectMetaCards({ project, dark }: { project: Project; dark?: boolean }) {
+  const { lang } = useLanguage();
   const niche = project.overview?.niche;
   const awards = project.overview?.awards;
 
   return (
     <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
       {niche && (
-        <MetaCard icon={Compass} label="產業定位" dark={dark}>
+        <MetaCard icon={Compass} label={COPY.niche[lang]} dark={dark}>
           {niche}
         </MetaCard>
       )}
-      <MetaCard icon={Calendar} label="專案時長" dark={dark}>
+      <MetaCard icon={Calendar} label={COPY.duration[lang]} dark={dark}>
         {project.duration}
       </MetaCard>
-      <MetaCard icon={Users} label="團隊組成" dark={dark}>
+      <MetaCard icon={Users} label={COPY.team[lang]} dark={dark}>
         {project.team.map((member) => (
           <TeamMember key={member} member={member} dark={dark} />
         ))}
       </MetaCard>
-      <MetaCard icon={Briefcase} label="我的角色" dark={dark}>
+      <MetaCard icon={Briefcase} label={COPY.role[lang]} dark={dark}>
         {project.role.map((item) => (
           <span key={item} className="block">
             {item}
@@ -81,7 +93,7 @@ export function ProjectMetaCards({ project, dark }: { project: Project; dark?: b
         ))}
       </MetaCard>
       {awards && awards.length > 0 && (
-        <MetaCard icon={Award} label="得獎紀錄" dark={dark}>
+        <MetaCard icon={Award} label={COPY.awards[lang]} dark={dark}>
           {awards.map((award) => (
             <span key={award.name} className="block">
               {award.name} — {award.result}

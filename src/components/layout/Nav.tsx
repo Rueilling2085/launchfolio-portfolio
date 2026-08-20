@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { FileText } from "lucide-react";
 import { useEffect, useState } from "react";
 import { navLinks } from "@/lib/data";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 // lucide dropped brand marks, so the LinkedIn glyph is inlined here
 function LinkedinIcon({ size = 16 }: { size?: number }) {
@@ -21,6 +22,7 @@ export function Nav() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [onDark, setOnDark] = useState(false);
   const [activeHref, setActiveHref] = useState<string | null>(null);
+  const { lang, toggle: toggleLang } = useLanguage();
 
   useEffect(() => {
     // the band the floating nav occupies
@@ -126,6 +128,14 @@ export function Nav() {
             >
               <FileText size={17} />
             </a>
+            <button
+              type="button"
+              aria-label="Toggle language"
+              onClick={toggleLang}
+              className={`hidden md:flex ${iconButton}`}
+            >
+              <span className="text-xs font-semibold">{lang === "zh" ? "EN" : "中"}</span>
+            </button>
 
             <button
               type="button"
@@ -173,6 +183,19 @@ export function Nav() {
                 </motion.a>
               );
             })}
+            <motion.button
+              type="button"
+              onClick={() => {
+                toggleLang();
+                setMobileOpen(false);
+              }}
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: navLinks.length * 0.05 }}
+              className="text-3xl font-medium"
+            >
+              {lang === "zh" ? "English" : "中文"}
+            </motion.button>
           </motion.div>
         )}
       </AnimatePresence>

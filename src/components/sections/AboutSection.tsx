@@ -1,10 +1,15 @@
+"use client";
+
 import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
 import { TornDivider } from "@/components/ui/TornDivider";
 import { SectionContainer } from "@/components/ui/SectionContainer";
 import { AboutPhotoStack } from "@/components/ui/AboutPhotoStack";
 import { aboutContent } from "@/lib/data";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 export function AboutSection() {
+  const { lang } = useLanguage();
+
   return (
     <div>
       <TornDivider color="var(--paper)" backdropColor="var(--ink)" />
@@ -25,12 +30,12 @@ export function AboutSection() {
                 <div className="mt-6 flex flex-col gap-4 text-base leading-relaxed text-muted md:text-lg">
                   {aboutContent.bio.map((paragraph, i) =>
                     i === 0 ? (
-                      <p key={paragraph} className="whitespace-pre-line font-semibold text-ink">
-                        {paragraph}
+                      <p key={paragraph.zh} className="whitespace-pre-line font-semibold text-ink">
+                        {paragraph[lang]}
                       </p>
                     ) : (
-                      <p key={paragraph} className="whitespace-pre-line">
-                        {paragraph}
+                      <p key={paragraph.zh} className="whitespace-pre-line">
+                        {paragraph[lang]}
                       </p>
                     )
                   )}

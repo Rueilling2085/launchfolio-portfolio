@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import { Fragment_Mono, Instrument_Serif } from "next/font/google";
 import "./globals.css";
 import { SmoothScrollProvider } from "@/components/ui/SmoothScrollProvider";
+import { LanguageProvider } from "@/lib/i18n/LanguageProvider";
 
 const generalSans = localFont({
   variable: "--font-inter",
@@ -43,7 +44,9 @@ export default function RootLayout({
       className={`${generalSans.variable} ${fragmentMono.variable} ${instrumentSerif.variable} h-full scroll-smooth antialiased`}
     >
       <body className="min-h-full flex flex-col bg-paper text-ink">
-        <SmoothScrollProvider>{children}</SmoothScrollProvider>
+        <LanguageProvider>
+          <SmoothScrollProvider>{children}</SmoothScrollProvider>
+        </LanguageProvider>
       </body>
     </html>
   );

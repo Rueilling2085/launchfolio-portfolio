@@ -1,3 +1,5 @@
+import type { Localized } from "@/lib/i18n/resolve";
+
 export const navLinks = [
   { label: "Work", href: "#work" },
   { label: "About", href: "#about" },
@@ -620,7 +622,7 @@ export type Project = {
   image: string;
   deviceMockup: boolean;
   heroAspect?: string;
-  description: string;
+  description: Localized;
   duration: string;
   team: string[];
   role: string[];
@@ -650,8 +652,8 @@ export type Project = {
   competitorAnalysis?: CompetitorAnalysis;
   personaAvatar?: string;
   cardTags?: string[];
-  cardHeadline?: string;
-  cardDescription?: string;
+  cardHeadline?: Localized;
+  cardDescription?: Localized;
   color?: string;
   /** Transparent mockup shown on the homepage poster card, if it should differ
    *  from the case-study hero `image`. Rendered uncropped, without a frame.
@@ -719,12 +721,19 @@ export const projects: Project[] = [
     type: "AI B2B SaaS Platform",
     image: "/images/projects/vision-detect/hero.png",
     deviceMockup: false,
-    description:
-      "一套 AI 智慧監控平台，透過電腦視覺與生成式 AI 技術，補足職安巡檢間的監控盲區，提升工廠安全管理效率。\n針對研華智慧製造場域需求，設計跨產業 AI 影像分析系統，結合 VLM 視覺偵測與 LLM 對話技術，並透過結構化 Prompt 設計降低 AI 使用門檻，打造直覺化、易操作的監控介面。協助職安人員快速建立偵測條件，即時辨識現場安全風險、追蹤事件脈絡，並自動生成符合 ISO 45001 規範的稽核報告，將傳統被動式監控轉化為主動式智慧安全管理。",
+    description: {
+      zh: "一套 AI 智慧監控平台，透過電腦視覺與生成式 AI 技術，補足職安巡檢間的監控盲區，提升工廠安全管理效率。\n針對研華智慧製造場域需求，設計跨產業 AI 影像分析系統，結合 VLM 視覺偵測與 LLM 對話技術，並透過結構化 Prompt 設計降低 AI 使用門檻，打造直覺化、易操作的監控介面。協助職安人員快速建立偵測條件，即時辨識現場安全風險、追蹤事件脈絡，並自動生成符合 ISO 45001 規範的稽核報告，將傳統被動式監控轉化為主動式智慧安全管理。",
+      en: "An AI monitoring platform that uses computer vision and generative AI to close the surveillance gap between manual safety patrols, raising factory safety-management efficiency.\nBuilt for Advantech's smart-manufacturing use case: a cross-industry AI image-analysis system combining VLM visual detection with LLM conversation, using structured prompt design to lower the barrier to using AI and produce an intuitive, easy-to-operate monitoring interface. It helps EHS staff quickly set up detection conditions, spot on-site safety risks in real time, trace incident context, and auto-generate ISO 45001-compliant audit reports — turning reactive monitoring into proactive, intelligent safety management.",
+    },
     cardTags: ["0→1 Product", "B2B AI SaaS"],
-    cardHeadline: "建立 AI 工安監控平台，補足人工巡檢的監控空窗",
-    cardDescription:
-      "傳統工廠仰賴人工巡檢，難以及時掌握巡檢間的安全風險。我訪談職環安人員與系統整合商定義範圍，並設計「Prompt Template」互動機制——把模糊的自然語言輸入收斂成固定句型、可替換變數的操作介面，解決 VLM 判讀不穩定的問題，協助企業從被動巡檢轉向主動風險管理。",
+    cardHeadline: {
+      zh: "建立 AI 工安監控平台，補足人工巡檢的監控空窗",
+      en: "Built an AI safety-monitoring platform to close the gap between manual inspections",
+    },
+    cardDescription: {
+      zh: "傳統工廠仰賴人工巡檢，難以及時掌握巡檢間的安全風險。我訪談職環安人員與系統整合商定義範圍，並設計「Prompt Template」互動機制——把模糊的自然語言輸入收斂成固定句型、可替換變數的操作介面，解決 VLM 判讀不穩定的問題，協助企業從被動巡檢轉向主動風險管理。",
+      en: "Traditional factories rely on manual patrols and can't catch risks between rounds. I interviewed EHS staff and a systems integrator to define scope, then designed a \"Prompt Template\" interaction — turning ambiguous natural-language input into a fixed-sentence, swappable-variable interface that fixed the VLM's unstable readings, helping the business move from reactive patrols to proactive risk management.",
+    },
     color: "#1D4ED8",
     cardAccent: "#1FD9A6",
     cardImage: "/images/projects/vision-detect/card-laptop-photo.png",
@@ -1134,12 +1143,19 @@ export const projects: Project[] = [
     image: "/images/projects/h2u/hero.png",
     heroAspect: "2000/1310",
     deviceMockup: false,
-    description:
-      "Sports Note 是台灣跑步領域的媒體與社群平台，整合賽事資訊、跑步紀錄、線上報名與運動內容等服務。針對 Alpha 版本缺乏實際使用者驗證的問題，我執行 13 位跑者的易用性測試與訪談，並蒐集 118 份問卷，分析不同跑者的需求與使用行為，重新收斂產品功能優先順序，將研究洞察轉化為介面優化與產品迭代方向。",
+    description: {
+      zh: "Sports Note 是台灣跑步領域的媒體與社群平台，整合賽事資訊、跑步紀錄、線上報名與運動內容等服務。針對 Alpha 版本缺乏實際使用者驗證的問題，我執行 13 位跑者的易用性測試與訪談，並蒐集 118 份問卷，分析不同跑者的需求與使用行為，重新收斂產品功能優先順序，將研究洞察轉化為介面優化與產品迭代方向。",
+      en: "Sports Note is a Taiwanese running media and community platform bringing together race info, run tracking, online registration, and running content. To address the Alpha version's lack of real user validation, I ran usability tests and interviews with 13 runners and collected 118 survey responses, analyzing different runners' needs and behavior to re-prioritize the feature set and turn research insight into interface fixes and a product-iteration roadmap.",
+    },
     cardTags: ["UX Research", "Design System"],
-    cardHeadline: "以使用者研究驅動跑步 App 的產品優化",
-    cardDescription:
-      "Sports Note 是台灣最大的跑步社群平台。本專案於產品 Alpha 階段，透過易用性測試、跑者訪談與 118 份問卷調查，找出資訊架構與操作流程的核心痛點，重新梳理畫面配置（例如將地圖與數據分頁顯示、把滑動停止改成點擊按鈕），協助團隊制定後續產品迭代方向。",
+    cardHeadline: {
+      zh: "以使用者研究驅動跑步 App 的產品優化",
+      en: "Drove a running app's product optimization with user research",
+    },
+    cardDescription: {
+      zh: "Sports Note 是台灣最大的跑步社群平台。本專案於產品 Alpha 階段，透過易用性測試、跑者訪談與 118 份問卷調查，找出資訊架構與操作流程的核心痛點，重新梳理畫面配置（例如將地圖與數據分頁顯示、把滑動停止改成點擊按鈕），協助團隊制定後續產品迭代方向。",
+      en: "Sports Note is Taiwan's largest running community platform. During the product's Alpha stage, I used usability testing, runner interviews, and a 118-response survey to find the core pain points in information architecture and flow, then reworked the screen layout (e.g. splitting map and data into separate tabs, replacing swipe-to-stop with a tap button) to guide the team's next iteration.",
+    },
     color: "#045CC4",
     cardImage: "/images/projects/h2u/card-cover.png",
     cardImageFit: "contain",
@@ -1846,9 +1862,14 @@ export const projects: Project[] = [
     image: "/images/projects/museum-ai-guide/hero.png",
     deviceMockup: false,
     cardTags: ["Generative AI", "RAG System"],
-    cardHeadline: "讓觀眾看見文物「當年被使用」的樣子",
-    cardDescription:
-      "我設計並開發多模態 RAG 導覽系統，結合知識檢索與生成式影像，讓觀眾提問後同時獲得可信的解說與文物情境重現圖，經 30 人對照實驗證實知識建構與參與度皆顯著提升。",
+    cardHeadline: {
+      zh: "讓觀眾看見文物「當年被使用」的樣子",
+      en: "Letting visitors see an artifact the way it was actually used",
+    },
+    cardDescription: {
+      zh: "我設計並開發多模態 RAG 導覽系統，結合知識檢索與生成式影像，讓觀眾提問後同時獲得可信的解說與文物情境重現圖，經 30 人對照實驗證實知識建構與參與度皆顯著提升。",
+      en: "I designed and built a multimodal RAG guide system that pairs knowledge retrieval with generative imagery, so a visitor's question returns both a trustworthy explanation and a generated scene showing the artifact in use — validated in a 30-person controlled study to significantly improve knowledge-building and engagement.",
+    },
     color: "#2A1D12",
     cardAccent: "#C4956A",
     cardImage: "/images/projects/museum-ai-guide/card-hand-photo.jpg",
@@ -1858,9 +1879,11 @@ export const projects: Project[] = [
     cardImageBackdrop: "#7A7871",
     cardImageScale: 1.55,
     presentationEmbedUrl: "https://www.canva.com/design/DAHSO25n1g8/xUAAeCPKUccPVuHoQqeRbg/view?embed",
-    description:
-      "以多模態 RAG 技術打造的博物館 AI 導覽系統，結合知識檢索與生成式影像，將靜態的文物說明牌轉化為可對話、可視覺化的知識探索體驗。研究成果獲 IEEE ICASI 2026 口頭發表。",
-    duration: "2025 – 2026（碩士論文研究）",
+    description: {
+      zh: "以多模態 RAG 技術打造的博物館 AI 導覽系統，結合知識檢索與生成式影像，將靜態的文物說明牌轉化為可對話、可視覺化的知識探索體驗。研究成果獲 IEEE ICASI 2026 口頭發表。",
+      en: "A museum AI guide system built on multimodal RAG technology, pairing knowledge retrieval with generative imagery to turn a static artifact placard into a conversational, visual knowledge-exploration experience. The research was presented orally at IEEE ICASI 2026.",
+    },
+    duration: "2025 – 2026 (Master's Thesis Research)",
     team: ["Researcher, Designer & Developer ×1 - Me", "Advisor ×1"],
     role: [
       "Field Research",
@@ -1880,9 +1903,14 @@ export const projects: Project[] = [
     image: "/images/projects/touchtune/touchtune-hero-v7.jpg",
     deviceMockup: false,
     cardTags: ["Product Design", "Wearable Device"],
-    cardHeadline: "打造讓聽障者感受音樂的穿戴式裝置",
-    cardDescription:
-      "透過使用者研究、軟硬體整合與產品設計，將音樂轉化為觸覺回饋，打破傳統輔具冰冷的既有印象。歷經 5 次原型迭代，同步優化外觀造型與震動機構配置，並結合 App 延伸情感分享與音樂互動體驗。",
+    cardHeadline: {
+      zh: "打造讓聽障者感受音樂的穿戴式裝置",
+      en: "Built a wearable that lets d/Deaf and hard-of-hearing people feel music",
+    },
+    cardDescription: {
+      zh: "透過使用者研究、軟硬體整合與產品設計，將音樂轉化為觸覺回饋，打破傳統輔具冰冷的既有印象。歷經 5 次原型迭代，同步優化外觀造型與震動機構配置，並結合 App 延伸情感分享與音樂互動體驗。",
+      en: "Through user research, hardware/software integration, and product design, I turned music into haptic feedback, breaking away from the cold, clinical feel of typical assistive devices. Five prototype iterations refined the form and vibration-module layout in parallel, paired with an app that extends the experience into emotional sharing and music-driven interaction.",
+    },
     color: "#5532FA",
     cardImage: "/images/projects/touchtune/card-cover.jpg",
     cardImageWidth: 2000,
@@ -1893,8 +1921,10 @@ export const projects: Project[] = [
     cardHoverImageWidth: 1351,
     cardHoverImageHeight: 1260,
     theme: "dark",
-    description:
-      "TouchTune 是一款專為聽障人士設計的穿戴式裝置。它透過將聲音轉化為多頻率的振動，提供多感官的音樂體驗。",
+    description: {
+      zh: "TouchTune 是一款專為聽障人士設計的穿戴式裝置。它透過將聲音轉化為多頻率的振動，提供多感官的音樂體驗。",
+      en: "TouchTune is a wearable device designed for the d/Deaf and hard-of-hearing community. It translates sound into multi-frequency vibration, delivering a multisensory music experience.",
+    },
     duration: "September 2025 (5 months)",
     team: ["Industrial Designer ×2", "PM, UI/UX Designer ×1 - Me"],
     role: [
@@ -2334,30 +2364,49 @@ export const bringItems = [
     icon: "search",
     title: "Research-driven Designer",
     titleZh: "研究驅動的設計者",
-    description:
-      "在設計之前，我習慣先釐清問題，透過使用者研究、數據分析與情境探索驗證假設，確保設計真正回應使用者需求。",
+    description: {
+      zh: "在設計之前，我習慣先釐清問題，透過使用者研究、數據分析與情境探索驗證假設，確保設計真正回應使用者需求。",
+      en: "Before I design anything, I clarify the problem first — validating assumptions through user research, data analysis, and contextual inquiry so the design actually answers a real need.",
+    },
   },
   {
     icon: "layout-dashboard",
     title: "Complexity Translator",
     titleZh: "複雜問題的轉譯者",
-    description: "我擅長將複雜的科技與資訊，轉化為人容易理解、操作與感受的體驗。",
+    description: {
+      zh: "我擅長將複雜的科技與資訊，轉化為人容易理解、操作與感受的體驗。",
+      en: "I turn complex technology and information into experiences people can understand, operate, and feel at ease with.",
+    },
   },
   {
     icon: "bot",
     title: "Technical Collaborator",
     titleZh: "能動手實作的設計夥伴",
-    description:
-      "我持續探索 AI 技術在產品開發中的應用，並透過實際專案累積經驗，能從使用者需求與技術可行性雙向思考產品機會，將 AI 技術轉化為具體的產品價值。",
+    description: {
+      zh: "我持續探索 AI 技術在產品開發中的應用，並透過實際專案累積經驗，能從使用者需求與技術可行性雙向思考產品機會，將 AI 技術轉化為具體的產品價值。",
+      en: "I keep exploring how AI fits into real product development, weighing user needs against technical feasibility to turn AI capability into concrete product value.",
+    },
   },
 ];
 
 export const aboutContent = {
   bio: [
-    "具備 HCI 背景與 B2B AI、健康產品的跨領域設計經驗\n專長於複雜系統與 AI 產品的介面及使用者體驗設計",
-    "我擅長處理複雜且牽涉多方需求的問題。",
-    "當需求尚未明確、牽涉多方角色，或技術與使用者需求彼此交織時，\n我習慣先停下來釐清真正要解決的問題。透過使用者研究，\n我能快速掌握人在特定情境下的真實行為與需求，並從使用情境與系統脈絡重新梳理，找出當下最需要解決的核心。",
-    "我相信好的設計，不只是把介面做得簡單，而是在使用者需求、商業目標與技術限制之間找到合理的平衡。我擅長以系統思維拆解問題，結合 AI 與技術可行性，將複雜需求轉化為清晰、可用且具產品價值的體驗。",
+    {
+      zh: "具備 HCI 背景與 B2B AI、健康產品的跨領域設計經驗\n專長於複雜系統與 AI 產品的介面及使用者體驗設計",
+      en: "HCI background with cross-disciplinary design experience in B2B AI and health products\nSpecializing in interface and UX design for complex systems and AI products",
+    },
+    {
+      zh: "我擅長處理複雜且牽涉多方需求的問題。",
+      en: "I'm good at untangling complex problems that involve multiple stakeholders' needs.",
+    },
+    {
+      zh: "當需求尚未明確、牽涉多方角色，或技術與使用者需求彼此交織時，\n我習慣先停下來釐清真正要解決的問題。透過使用者研究，\n我能快速掌握人在特定情境下的真實行為與需求，並從使用情境與系統脈絡重新梳理，找出當下最需要解決的核心。",
+      en: "When requirements are still unclear, span multiple roles, or technical and user needs are tangled together,\nI stop and clarify the real problem first. Through user research,\nI quickly grasp what people actually do and need in a given context, then re-map that against the usage scenario and system landscape to find the core problem worth solving right now.",
+    },
+    {
+      zh: "我相信好的設計，不只是把介面做得簡單，而是在使用者需求、商業目標與技術限制之間找到合理的平衡。我擅長以系統思維拆解問題，結合 AI 與技術可行性，將複雜需求轉化為清晰、可用且具產品價值的體驗。",
+      en: "I believe good design isn't just a simple interface — it's finding the right balance between user needs, business goals, and technical constraints. I use systems thinking to break down problems and combine that with AI and technical feasibility to turn complex requirements into experiences that are clear, usable, and genuinely valuable.",
+    },
   ],
   education: [
     {
@@ -2418,9 +2467,18 @@ export const workExperience = [
     initial: "A",
     color: "#045CC4",
     points: [
-      "主導 3 場訪談（系統整合商與兩家 EHS 人員），釐清使用情境痛點與需求，協助 PM 定義專案範圍與使用者需求。",
-      "主導跨部門工作坊（PM／RD／UIUX），運用 Storyboard 將抽象需求轉化為可驗證的使用情境，促進團隊需求共識，並推動 Prototype 製作與概念落地。",
-      "設計直覺的 VLM（視覺語言模型）提示詞輸入方式，改善自然語言輸入造成的模型不穩定與輸出品質問題。",
+      {
+        zh: "主導 3 場訪談（系統整合商與兩家 EHS 人員），釐清使用情境痛點與需求，協助 PM 定義專案範圍與使用者需求。",
+        en: "Led 3 interviews (a systems integrator and two EHS teams) to clarify usage pain points and requirements, helping the PM define project scope and user needs.",
+      },
+      {
+        zh: "主導跨部門工作坊（PM／RD／UIUX），運用 Storyboard 將抽象需求轉化為可驗證的使用情境，促進團隊需求共識，並推動 Prototype 製作與概念落地。",
+        en: "Led cross-functional workshops (PM/RD/UIUX), using storyboards to turn abstract requirements into testable usage scenarios, building team alignment and driving prototyping through to a working concept.",
+      },
+      {
+        zh: "設計直覺的 VLM（視覺語言模型）提示詞輸入方式，改善自然語言輸入造成的模型不穩定與輸出品質問題。",
+        en: "Designed an intuitive prompt-input pattern for a VLM (vision-language model), fixing the instability and inconsistent output quality caused by free-form natural-language input.",
+      },
     ],
   },
   {
@@ -2430,8 +2488,14 @@ export const workExperience = [
     initial: "E",
     color: "#21B30B",
     points: [
-      "分析競品電商的會員點數系統資訊架構、營運模式與流程，找出高效益的設計模式並優化介面，協助產品成功上線。",
-      "使用 Python 清洗與篩選客服資料，資料量減少 74%、處理速度提升 3.8 倍，並設計自動回覆流程提升營運效率與準確度。",
+      {
+        zh: "分析競品電商的會員點數系統資訊架構、營運模式與流程，找出高效益的設計模式並優化介面，協助產品成功上線。",
+        en: "Analyzed competitors' e-commerce loyalty-points systems — information architecture, operating model, and flow — to identify high-impact design patterns, optimized the interface, and helped ship the product successfully.",
+      },
+      {
+        zh: "使用 Python 清洗與篩選客服資料，資料量減少 74%、處理速度提升 3.8 倍，並設計自動回覆流程提升營運效率與準確度。",
+        en: "Used Python to clean and filter customer-service data, cutting data volume by 74% and speeding up processing 3.8x, and designed an auto-reply flow that improved operational efficiency and accuracy.",
+      },
     ],
   },
   {
@@ -2441,8 +2505,14 @@ export const workExperience = [
     initial: "H",
     color: "#8B5CF6",
     points: [
-      "主導 13 場半結構式訪談與易用性測試，評估賽事列表與跑步功能，依任務完成時間與錯誤率排定介面優化優先序。",
-      "蒐集 118 份問卷，分析跑者運動行為與習慣，將 10 項功能需求收斂為 4 項核心功能，重新定義產品差異化方向。",
+      {
+        zh: "主導 13 場半結構式訪談與易用性測試，評估賽事列表與跑步功能，依任務完成時間與錯誤率排定介面優化優先序。",
+        en: "Led 13 semi-structured interviews and usability tests evaluating the race-list and running features, prioritizing interface fixes by task completion time and error rate.",
+      },
+      {
+        zh: "蒐集 118 份問卷，分析跑者運動行為與習慣，將 10 項功能需求收斂為 4 項核心功能，重新定義產品差異化方向。",
+        en: "Collected 118 survey responses analyzing runners' behavior and habits, narrowing 10 candidate features down to 4 core ones and redefining the product's point of differentiation.",
+      },
     ],
   },
 ];

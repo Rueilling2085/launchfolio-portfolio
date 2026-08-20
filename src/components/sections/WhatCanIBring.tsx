@@ -1,7 +1,10 @@
+"use client";
+
 import { Search, LayoutDashboard, Bot, type LucideIcon } from "lucide-react";
 import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
 import { SectionContainer } from "@/components/ui/SectionContainer";
 import { bringItems } from "@/lib/data";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 const ICONS: Record<string, LucideIcon> = {
   search: Search,
@@ -20,6 +23,8 @@ const LOOP_ANIMATION: Record<string, string> = {
 };
 
 export function WhatCanIBring() {
+  const { lang } = useLanguage();
+
   return (
     <div>
       {/* LatestProjects already renders the torn transition into this section
@@ -59,7 +64,7 @@ export function WhatCanIBring() {
                     </div>
 
                     <p className="text-base leading-relaxed text-white/75 md:text-lg">
-                      {item.description}
+                      {item.description[lang]}
                     </p>
                   </div>
                 </RevealOnScroll>

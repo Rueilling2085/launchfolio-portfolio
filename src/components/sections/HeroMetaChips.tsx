@@ -1,14 +1,18 @@
 import Image from "next/image";
 import { MapPin } from "lucide-react";
 import { ReactNode } from "react";
+import { Localized } from "@/lib/i18n/Localized";
+import { widestString } from "@/lib/i18n/resolve";
 
 const ACCENT = "#D97757";
 
-function Face({ label, value }: { label: string; value: string }) {
+function Face({ label, value }: { label: string; value: string | { zh: string; en: string } }) {
   return (
     <span className="text-left leading-tight">
       <span className="block text-[11px] whitespace-nowrap text-muted-2">{label}</span>
-      <span className="block text-base font-semibold whitespace-nowrap text-ink">{value}</span>
+      <span className="block text-base font-semibold whitespace-nowrap text-ink">
+        {typeof value === "string" ? value : <Localized value={value} />}
+      </span>
     </span>
   );
 }
@@ -25,8 +29,8 @@ function FlipChip({
 }: {
   media: ReactNode;
   mediaSide?: "left" | "right";
-  front: { label: string; value: string };
-  back: { label: string; value: string };
+  front: { label: string; value: string | { zh: string; en: string } };
+  back: { label: string; value: string | { zh: string; en: string } };
 }) {
   return (
     <div
@@ -40,11 +44,16 @@ function FlipChip({
         className="relative block"
         style={{ perspective: "600px" }}
       >
-        {/* invisible spacer keeps the chip from resizing mid-flip */}
+        {/* invisible spacer keeps the chip from resizing mid-flip — sized off
+            the English string, the longer form in every case here */}
         <span className="invisible block">
           <Face
             label={front.label.length >= back.label.length ? front.label : back.label}
-            value={front.value.length >= back.value.length ? front.value : back.value}
+            value={
+              widestString(front.value).length >= widestString(back.value).length
+                ? front.value
+                : back.value
+            }
           />
         </span>
 
@@ -96,8 +105,11 @@ export function HeroMetaChips() {
             <MapPin size={18} color={ACCENT} />
           </span>
         }
-        front={{ label: "Currently based in", value: "新北市" }}
-        back={{ label: "Hometown", value: "新竹縣" }}
+        front={{
+          label: "Currently based in",
+          value: { zh: "新北市", en: "New Taipei City" },
+        }}
+        back={{ label: "Hometown", value: { zh: "新竹縣", en: "Hsinchu County" } }}
       />
     </div>
   );

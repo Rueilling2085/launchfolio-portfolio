@@ -6,8 +6,10 @@ import { useEffect, useRef, useState } from "react";
 import { ArrowUpRight } from "lucide-react";
 import { NOISE_URL, surfaceGlow, surfaceGradient, surfaceNebula } from "@/lib/surface";
 import type { Project } from "@/lib/data";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 const DEFAULT_COLOR = "#1F2937";
+const COPY = { viewCase: { zh: "查看案例", en: "View case study" } } as const;
 
 /** Perceived brightness, so light card colours can flip to dark type. */
 function isLightColor(hex: string) {
@@ -92,6 +94,7 @@ function useHoverVideo(hasVideo: boolean) {
 }
 
 export function ProjectCard({ project }: { project: Project }) {
+  const { lang } = useLanguage();
   const color = project.color ?? DEFAULT_COLOR;
   const light = isLightColor(color);
 
@@ -136,11 +139,11 @@ export function ProjectCard({ project }: { project: Project }) {
             )}
 
             <h3 className="mt-3 text-2xl leading-snug font-bold text-ink md:text-3xl">
-              {project.cardHeadline}
+              {project.cardHeadline?.[lang]}
             </h3>
 
             {project.cardDescription && (
-              <p className="mt-4 text-sm leading-relaxed text-muted">{project.cardDescription}</p>
+              <p className="mt-4 text-sm leading-relaxed text-muted">{project.cardDescription[lang]}</p>
             )}
 
             <span
@@ -149,7 +152,7 @@ export function ProjectCard({ project }: { project: Project }) {
               }`}
               style={{ backgroundColor: color }}
             >
-              查看案例
+              {COPY.viewCase[lang]}
               <ArrowUpRight size={16} />
             </span>
           </div>

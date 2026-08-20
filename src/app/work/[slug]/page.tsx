@@ -32,6 +32,7 @@ import { CompetitorAnalysis } from "@/components/sections/CompetitorAnalysis";
 import { CaseStudySideNav, type SideNavSection } from "@/components/sections/CaseStudySideNav";
 import { NextStepDecision } from "@/components/ui/NextStepDecision";
 import { projects } from "@/lib/data";
+import { Localized } from "@/lib/i18n/Localized";
 
 export function generateStaticParams() {
   return projects.map((project) => ({ slug: project.slug }));
@@ -133,7 +134,7 @@ export default async function ProjectCaseStudyPage({
                   dark ? "text-white/80" : "text-ink-soft"
                 }`}
               >
-                {project.cardHeadline}
+                <Localized value={project.cardHeadline} />
               </p>
             )}
             <p
@@ -141,7 +142,7 @@ export default async function ProjectCaseStudyPage({
                 dark ? "text-white/60" : "text-muted"
               }`}
             >
-              {project.description}
+              <Localized value={project.description} />
             </p>
 
             {!project.presentationEmbedUrl && (

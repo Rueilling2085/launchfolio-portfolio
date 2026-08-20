@@ -14,11 +14,34 @@ import type {
   DesignIteration as DesignIterationData,
   DesignIterationImpact,
 } from "@/lib/data";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 const IMPACT_ICONS: Record<string, LucideIcon> = {
   layers: Layers,
   zap: Zap,
 };
+
+const WORKFLOW_COPY = {
+  heading: { zh: "影像設定流程優化", en: "Camera Setup Flow, Optimized" },
+  beforeLabel: { zh: "3 支攝影機，3 次重複設定", en: "3 cameras, 3 repeated setups" },
+  afterLabel: { zh: "1 個測試區，套用到 N 個場域", en: "1 Test Zone, applied to N settings" },
+  cam1Title: { zh: "攝影機 1．測試與設定", en: "Camera 1 · Test & Setup" },
+  cam1Desc: { zh: "從零撰寫並測試偵測 Prompt。", en: "Write and test the detection prompt from scratch." },
+  cam2Title: { zh: "攝影機 2．測試與設定", en: "Camera 2 · Test & Setup" },
+  cam2Desc: { zh: "同樣的 Prompt，重新輸入並再次測試。", en: "The same prompt, re-entered and tested again." },
+  cam3Title: { zh: "攝影機 3．測試與設定", en: "Camera 3 · Test & Setup" },
+  cam3Desc: {
+    zh: "……再重複一次，時間隨攝影機數量線性增加。",
+    en: "…and repeat again — time scales linearly with camera count.",
+  },
+  zoneTitle: { zh: "影像來源 1．測試區", en: "Source 1 · Test Zone" },
+  zoneDesc: { zh: "在這裡微調一次偵測 Prompt 即可。", en: "Tune the detection prompt here, just once." },
+  applyTitle: { zh: "套用到營運區", en: "Applied to Operational Zone" },
+  applyDesc: {
+    zh: "一鍵將同一範本套用到其他所有攝影機。",
+    en: "One click applies the same template to every other camera.",
+  },
+} as const;
 
 function BeforeAfterSlider({
   title,
@@ -152,7 +175,7 @@ function AnnotatedBeforeAfter({
             <div className="flex w-[220px] shrink-0 flex-col gap-4 pt-10 sm:pt-16">
               {impact.map((item) => (
                 <ImpactCard
-                  key={item.label}
+                  key={item.label.zh}
                   icon={IMPACT_ICONS[item.icon]}
                   label={item.label}
                   valueHighlight={item.valueHighlight}
@@ -298,24 +321,26 @@ function ImpactCard({
   valueRest,
 }: {
   icon: LucideIcon;
-  label: string;
+  label: { zh: string; en: string };
   valueHighlight: string;
-  valueRest: string;
+  valueRest: { zh: string; en: string };
 }) {
+  const { lang } = useLanguage();
   return (
     <div className="rounded-xl border border-line bg-white p-5">
       <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-[#D8EEFD] text-[#0B7DC9]">
         <Icon size={16} />
       </span>
-      <p className="mt-3 text-xs font-medium text-muted">{label}</p>
+      <p className="mt-3 text-xs font-medium text-muted">{label[lang]}</p>
       <p className="mt-1 text-[32px] font-bold text-ink">{valueHighlight}</p>
-      <p className="mt-0.5 text-sm font-semibold text-ink">{valueRest}</p>
+      <p className="mt-0.5 text-sm font-semibold text-ink">{valueRest[lang]}</p>
     </div>
   );
 }
 
 function WorkflowOptimization() {
   const base = "/images/projects/vision-detect";
+  const { lang } = useLanguage();
 
   return (
     <>
@@ -323,34 +348,34 @@ function WorkflowOptimization() {
         <div className="flex justify-center">
           <div className="inline-flex flex-col">
             <p className="mb-6 text-base font-semibold text-ink md:text-lg">
-              影像設定流程優化
+              {WORKFLOW_COPY.heading[lang]}
             </p>
 
             <div className="flex flex-col gap-10 rounded-2xl border border-line bg-[#D6D7D8] p-6 shadow-[0_12px_32px_-12px_rgba(15,23,42,0.18)] md:p-8">
               <WorkflowRow
                 mode="before"
-                labelSub="3 支攝影機，3 次重複設定"
+                labelSub={WORKFLOW_COPY.beforeLabel[lang]}
               >
                 <StepCard
                   step="1"
-                  title="攝影機 1．測試與設定"
-                  desc="從零撰寫並測試偵測 Prompt。"
+                  title={WORKFLOW_COPY.cam1Title[lang]}
+                  desc={WORKFLOW_COPY.cam1Desc[lang]}
                   image={`${base}/flow1-cam1-v2.jpg`}
                   imageAlt="Camera 1 setup screen"
                 />
                 <LiquidConnector />
                 <StepCard
                   step="2"
-                  title="攝影機 2．測試與設定"
-                  desc="同樣的 Prompt，重新輸入並再次測試。"
+                  title={WORKFLOW_COPY.cam2Title[lang]}
+                  desc={WORKFLOW_COPY.cam2Desc[lang]}
                   image={`${base}/flow1-cam2-v2.jpg`}
                   imageAlt="Camera 2 setup screen"
                 />
                 <LiquidConnector />
                 <StepCard
                   step="3"
-                  title="攝影機 3．測試與設定"
-                  desc="……再重複一次，時間隨攝影機數量線性增加。"
+                  title={WORKFLOW_COPY.cam3Title[lang]}
+                  desc={WORKFLOW_COPY.cam3Desc[lang]}
                   image={`${base}/flow1-cam3-v2.jpg`}
                   imageAlt="Camera 3 setup screen"
                 />
@@ -358,12 +383,12 @@ function WorkflowOptimization() {
 
               <WorkflowRow
                 mode="after"
-                labelSub="1 個測試區，套用到 N 個場域"
+                labelSub={WORKFLOW_COPY.afterLabel[lang]}
               >
                 <StepCard
                   step="1"
-                  title="影像來源 1．測試區"
-                  desc="在這裡微調一次偵測 Prompt 即可。"
+                  title={WORKFLOW_COPY.zoneTitle[lang]}
+                  desc={WORKFLOW_COPY.zoneDesc[lang]}
                   image={`${base}/flow2-testzone-v2.jpg`}
                   imageAlt="Test Zone screen"
                   width={405}
@@ -371,8 +396,8 @@ function WorkflowOptimization() {
                 <LiquidConnector />
                 <StepCard
                   step="N"
-                  title="套用到營運區"
-                  desc="一鍵將同一範本套用到其他所有攝影機。"
+                  title={WORKFLOW_COPY.applyTitle[lang]}
+                  desc={WORKFLOW_COPY.applyDesc[lang]}
                   image={`${base}/flow2-operational-v2.jpg`}
                   imageAlt="Operational Zone screen with 6 auto-applied cameras"
                   width={510}
@@ -495,20 +520,21 @@ function SecondaryImagePanel({
 }
 
 export function DesignIteration({ data }: { data: DesignIterationData }) {
+  const { lang } = useLanguage();
   return (
     <div className="mt-16 md:mt-24">
       {data.items && data.items.length > 0 && (
         <div className="mt-8 flex flex-col gap-24">
           {data.items.map((item, i) => (
-            <RevealOnScroll key={item.title} delay={i * 0.08}>
+            <RevealOnScroll key={item.title.zh} delay={i * 0.08}>
               <div id={`opt-${i + 1}`} className="mb-2 scroll-mt-24">
                 <div className="flex items-center justify-center gap-2.5 text-center">
                   {item.tag && (
                     <span className="inline-flex items-center rounded-full bg-ink-soft/10 px-2.5 py-1 text-[10px] font-semibold text-ink-soft">
-                      {item.tag}
+                      {item.tag[lang]}
                     </span>
                   )}
-                  <p className="text-2xl font-semibold tracking-tight text-ink md:text-3xl">{item.title}</p>
+                  <p className="text-2xl font-semibold tracking-tight text-ink md:text-3xl">{item.title[lang]}</p>
                 </div>
 
                 {!item.stackedBeforeAfter && !item.promptOptimization && (
@@ -517,7 +543,7 @@ export function DesignIteration({ data }: { data: DesignIterationData }) {
                       <span className="inline-flex items-center rounded-full bg-red-50 px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-red-600">
                         Before
                       </span>
-                      <p className="mt-2 whitespace-nowrap text-sm leading-relaxed text-muted">{item.painPoint}</p>
+                      <p className="mt-2 whitespace-nowrap text-sm leading-relaxed text-muted">{item.painPoint[lang]}</p>
                     </div>
 
                     <div className="flex flex-1 items-center justify-center pt-2">
@@ -536,7 +562,7 @@ export function DesignIteration({ data }: { data: DesignIterationData }) {
                       <span className="inline-flex items-center rounded-full bg-[#D8EEFD] px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-[#0B7DC9]">
                         After
                       </span>
-                      <p className="mt-2 text-sm leading-relaxed text-muted">{item.solution}</p>
+                      <p className="mt-2 text-sm leading-relaxed text-muted">{item.solution[lang]}</p>
                     </div>
                   </div>
                 )}
@@ -544,16 +570,16 @@ export function DesignIteration({ data }: { data: DesignIterationData }) {
               {item.beforeImage && item.afterImage && (
                 item.stackedBeforeAfter ? (
                   <AnnotatedBeforeAfter
-                    title={item.title}
+                    title={item.title[lang]}
                     beforeImage={item.beforeImage}
                     afterImage={item.afterImage}
-                    painPoint={item.painPoint}
-                    solution={item.solution}
+                    painPoint={item.painPoint[lang]}
+                    solution={item.solution[lang]}
                     impact={item.impact}
                   />
                 ) : (
                   <BeforeAfterSlider
-                    title={item.title}
+                    title={item.title[lang]}
                     beforeImage={item.beforeImage}
                     afterImage={item.afterImage}
                   />
@@ -561,7 +587,7 @@ export function DesignIteration({ data }: { data: DesignIterationData }) {
               )}
               {item.workflowBefore && item.workflowAfter && <WorkflowOptimization />}
               {item.promptOptimization && (
-                <PromptOptimization painPoint={item.painPoint} solution={item.solution} />
+                <PromptOptimization painPoint={item.painPoint[lang]} solution={item.solution[lang]} />
               )}
               {item.secondaryImage && item.secondaryImageCaption && (
                 <SecondaryImagePanel

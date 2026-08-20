@@ -1,7 +1,16 @@
+"use client";
+
 import { ArrowDown } from "lucide-react";
 import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
 import { PulseDot } from "@/components/ui/PulseBadge";
 import type { DesignHighlight as DesignHighlightData } from "@/lib/data";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
+
+const COPY = {
+  viewDetail: { zh: "查看詳細內容", en: "View details" },
+  opt1: { zh: "優化一", en: "Fix 1" },
+  opt2: { zh: "優化二", en: "Fix 2" },
+} as const;
 
 function BranchCard({
   label,
@@ -14,12 +23,13 @@ function BranchCard({
   description: string;
   targetId: string;
 }) {
+  const { lang } = useLanguage();
   return (
     <div className="relative rounded-2xl border border-line bg-white px-5 py-5 text-left">
       <a
         href={`#${targetId}`}
-        title="查看詳細內容"
-        aria-label="查看詳細內容"
+        title={COPY.viewDetail[lang]}
+        aria-label={COPY.viewDetail[lang]}
         className="absolute top-4 right-4 flex h-6 w-6 items-center justify-center rounded-full border border-line text-ink-soft transition-colors hover:border-[#0B7DC9]/40 hover:bg-[#D8EEFD]/40 hover:text-[#0B7DC9]"
       >
         <ArrowDown size={12} />
@@ -34,12 +44,13 @@ function BranchCard({
 }
 
 export function DesignHighlight({ data }: { data: DesignHighlightData }) {
+  const { lang } = useLanguage();
   return (
     <div className="mt-16 md:mt-24">
       <RevealOnScroll className="flex justify-center">
         <span className="inline-flex items-center gap-2 rounded-full border border-line bg-white px-4 py-1.5 text-xs font-medium text-ink-soft">
           <PulseDot color="#006AB7" size={7} />
-          {data.eyebrow}
+          {data.eyebrow[lang]}
         </span>
       </RevealOnScroll>
 
@@ -47,10 +58,10 @@ export function DesignHighlight({ data }: { data: DesignHighlightData }) {
         <div className="mx-auto w-full max-w-[560px]">
           <div className="mx-auto w-full max-w-[520px] rounded-2xl bg-white px-5 py-5 text-center">
             <span className="inline-flex items-center gap-1 rounded-full bg-[#006AB7] px-2.5 py-1 text-[10px] font-semibold text-white">
-              {data.stepLabel}
+              {data.stepLabel[lang]}
             </span>
-            <p className="mt-3 text-sm text-ink">{data.stepTitle}</p>
-            <p className="mt-1.5 text-xs leading-relaxed text-muted">{data.stepDescription}</p>
+            <p className="mt-3 text-sm text-ink">{data.stepTitle[lang]}</p>
+            <p className="mt-1.5 text-xs leading-relaxed text-muted">{data.stepDescription[lang]}</p>
           </div>
 
           <div className="relative mx-auto mt-2 max-w-[520px]">
@@ -70,15 +81,15 @@ export function DesignHighlight({ data }: { data: DesignHighlightData }) {
 
             <div className="grid grid-cols-2 gap-6 pt-7">
               <BranchCard
-                label="優化一"
-                title={data.branches[0].title}
-                description={data.branches[0].description}
+                label={COPY.opt1[lang]}
+                title={data.branches[0].title[lang]}
+                description={data.branches[0].description[lang]}
                 targetId="opt-1"
               />
               <BranchCard
-                label="優化二"
-                title={data.branches[1].title}
-                description={data.branches[1].description}
+                label={COPY.opt2[lang]}
+                title={data.branches[1].title[lang]}
+                description={data.branches[1].description[lang]}
                 targetId="opt-2"
               />
             </div>

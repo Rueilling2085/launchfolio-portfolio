@@ -6,8 +6,10 @@ import { AnimatePresence, motion, useMotionValue } from "framer-motion";
 import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
 import { PulseDot } from "@/components/ui/PulseBadge";
 import type { HowItWorks as HowItWorksData } from "@/lib/data";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 const STEP_DURATION = 5;
+const COPY = { step: { zh: "步驟", en: "Step" } } as const;
 
 function isVideo(src: string) {
   return /\.(mp4|webm|mov)$/i.test(src);
@@ -20,6 +22,7 @@ export function HowItWorks({
   data: HowItWorksData;
   avatar?: string;
 }) {
+  const { lang } = useLanguage();
   const [activeIndex, setActiveIndex] = useState(0);
   const activeStep = data.steps[activeIndex];
   const activeIsVideo = Boolean(activeStep.image && isVideo(activeStep.image));
@@ -38,11 +41,11 @@ export function HowItWorks({
       <RevealOnScroll className="flex flex-col items-center text-center">
         <span className="inline-flex items-center gap-2 rounded-full border border-line bg-white px-4 py-1.5 text-xs font-medium text-ink-soft">
           <PulseDot color="#006AB7" size={7} />
-          {data.eyebrow}
+          {data.eyebrow[lang]}
         </span>
         {data.title && (
           <h2 className="mt-6 max-w-2xl text-3xl font-semibold tracking-tight text-ink md:text-5xl">
-            {data.title}
+            {data.title[lang]}
           </h2>
         )}
         <p
@@ -50,7 +53,7 @@ export function HowItWorks({
             data.title ? "mt-4" : "mt-6"
           }`}
         >
-          {data.subtitle}
+          {data.subtitle[lang]}
         </p>
       </RevealOnScroll>
 
@@ -71,7 +74,7 @@ export function HowItWorks({
               </span>
             )}
             <p className="text-sm italic leading-relaxed text-white md:text-base">
-              &ldquo;{data.query}&rdquo;
+              &ldquo;{data.query[lang]}&rdquo;
             </p>
           </div>
         </div>
@@ -84,7 +87,7 @@ export function HowItWorks({
             const stepIsVideo = Boolean(step.image && isVideo(step.image));
             return (
               <button
-                key={step.title}
+                key={step.title.zh}
                 type="button"
                 onClick={() => setActiveIndex(i)}
                 className={`flex-1 overflow-hidden rounded-2xl border text-left transition-all ${
@@ -99,11 +102,11 @@ export function HowItWorks({
                       isActive ? "bg-[#006AB7] text-white" : "bg-paper-alt text-muted"
                     }`}
                   >
-                    {i + 1} <span className="opacity-70">步驟</span>
+                    {i + 1} <span className="opacity-70">{COPY.step[lang]}</span>
                   </span>
-                  <p className="mt-3 text-sm text-ink">{step.title}</p>
+                  <p className="mt-3 text-sm text-ink">{step.title[lang]}</p>
                   <p className="mt-1.5 text-xs leading-relaxed text-muted">
-                    {step.description}
+                    {step.description[lang]}
                   </p>
                 </div>
                 {isActive &&
@@ -159,7 +162,7 @@ export function HowItWorks({
                   <motion.img
                     key={activeStep.image}
                     src={activeStep.image}
-                    alt={activeStep.title}
+                    alt={activeStep.title[lang]}
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}

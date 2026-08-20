@@ -1,6 +1,10 @@
+"use client";
+
 import { ReactNode } from "react";
 import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
 import { PulseDot } from "@/components/ui/PulseBadge";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
+import type { Localized } from "@/lib/i18n/resolve";
 
 export function ProjectSummary({
   eyebrow,
@@ -8,11 +12,12 @@ export function ProjectSummary({
   description,
   children,
 }: {
-  eyebrow?: string;
-  title: string;
-  description: string;
+  eyebrow?: Localized;
+  title: Localized;
+  description: Localized;
   children?: ReactNode;
 }) {
+  const { lang } = useLanguage();
   return (
     <div className="mt-16 md:mt-24">
       <RevealOnScroll>
@@ -22,15 +27,15 @@ export function ProjectSummary({
               <div className="mb-5">
                 <span className="inline-flex items-center gap-2 rounded-full border border-line bg-white px-4 py-1.5 text-xs font-medium text-ink-soft">
                   <PulseDot color="#006AB7" size={7} />
-                  {eyebrow}
+                  {eyebrow[lang]}
                 </span>
               </div>
             )}
             <h3 className="text-2xl font-semibold tracking-tight text-ink md:text-3xl">
-              {title}
+              {title[lang]}
             </h3>
             <p className="mx-auto mt-4 max-w-xl whitespace-pre-line text-sm text-muted md:text-base">
-              {description}
+              {description[lang]}
             </p>
           </div>
 

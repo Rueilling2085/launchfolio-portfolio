@@ -87,38 +87,38 @@ export type ProcessFlow = {
 };
 
 export type HowItWorksStep = {
-  title: string;
-  description: string;
+  title: Localized;
+  description: Localized;
   image?: string;
   fit?: "cover" | "contain";
 };
 
-export type DesignHighlightBranch = { title: string; description: string };
+export type DesignHighlightBranch = { title: Localized; description: Localized };
 
 export type DesignHighlight = {
-  eyebrow: string;
-  stepLabel: string;
-  stepTitle: string;
-  stepDescription: string;
+  eyebrow: Localized;
+  stepLabel: Localized;
+  stepTitle: Localized;
+  stepDescription: Localized;
   branches: [DesignHighlightBranch, DesignHighlightBranch];
 };
 
 export type DesignIterationImpact = {
   icon: string;
-  label: string;
+  label: Localized;
   valueHighlight: string;
-  valueRest: string;
+  valueRest: Localized;
 };
 
 export type DesignIterationItem = {
-  tag?: string;
-  title: string;
-  painPoint: string;
-  solution: string;
+  tag?: Localized;
+  title: Localized;
+  painPoint: Localized;
+  solution: Localized;
   beforeImage?: string;
   afterImage?: string;
-  workflowBefore?: string;
-  workflowAfter?: string;
+  workflowBefore?: Localized;
+  workflowAfter?: Localized;
   secondaryImage?: string;
   secondaryImageCaption?: string;
   stackedBeforeAfter?: boolean;
@@ -127,7 +127,7 @@ export type DesignIterationItem = {
 };
 
 export type DesignIteration = {
-  eyebrow: string;
+  eyebrow: Localized;
   items?: DesignIterationItem[];
 };
 
@@ -180,12 +180,12 @@ export type OptimizationResults = {
 };
 
 export type HowItWorks = {
-  eyebrow: string;
-  title?: string;
-  subtitle: string;
-  query: string;
+  eyebrow: Localized;
+  title?: Localized;
+  subtitle: Localized;
+  query: Localized;
   steps: HowItWorksStep[];
-  feedbackLoop: string;
+  feedbackLoop: Localized;
 };
 
 export type ProjectChallengeItem = {
@@ -643,7 +643,7 @@ export type Project = {
   interfaceDesign?: InterfaceDesign;
   reflection?: Reflection;
   theme?: "dark";
-  summary?: { eyebrow?: string; title: string; description: string };
+  summary?: { eyebrow?: Localized; title: Localized; description: Localized };
   priorityMatrix?: PriorityMatrix;
   processFlow?: ProcessFlow;
   howItWorks?: HowItWorks;
@@ -827,10 +827,12 @@ export const projects: Project[] = [
       },
     ],
     summary: {
-      eyebrow: "使用者研究",
-      title: "找出本次專案可驗證的 PoC 場域",
-      description:
-        "透過盤點系統整合商與職環安人員的實際需求，依優先度與技術可行性\n建立評估矩陣，收斂出兩個場域，作為本次優先導入的 PoC",
+      eyebrow: { zh: "使用者研究", en: "User Research" },
+      title: { zh: "找出本次專案可驗證的 PoC 場域", en: "Finding a Testable PoC Setting for This Project" },
+      description: {
+        zh: "透過盤點系統整合商與職環安人員的實際需求，依優先度與技術可行性\n建立評估矩陣，收斂出兩個場域，作為本次優先導入的 PoC",
+        en: "By mapping the real needs of the systems integrator and EHS staff, I built a priority/feasibility evaluation matrix\nand converged on two settings to prioritize as the first PoC.",
+      },
     },
     priorityMatrix: {
       legend: [
@@ -941,86 +943,126 @@ export const projects: Project[] = [
       ],
     },
     howItWorks: {
-      eyebrow: "定義",
-      subtitle:
-        "以承攬商是否佩戴安全帽？情境為作為本產品流程示意：",
-      query:
-        "我需要確認承包商是否遵循 ISO 45001 規範（配戴安全帽）。若有違規，我需要知道人數並看到對應的影像證據，作為稽核報告文件。",
+      eyebrow: { zh: "定義", en: "Definition" },
+      subtitle: {
+        zh: "以承攬商是否佩戴安全帽？情境為作為本產品流程示意：",
+        en: "Illustrated with a \"is the contractor wearing a hard hat?\" scenario:",
+      },
+      query: {
+        zh: "我需要確認承包商是否遵循 ISO 45001 規範（配戴安全帽）。若有違規，我需要知道人數並看到對應的影像證據，作為稽核報告文件。",
+        en: "I need to confirm the contractor is following ISO 45001 (wearing a hard hat). If there's a violation, I need the headcount and the corresponding video evidence for the audit report.",
+      },
       steps: [
         {
-          title: "綁定串流或上傳影片",
-          description: "連接即時攝影機串流或既有影片。",
+          title: { zh: "綁定串流或上傳影片", en: "Bind a Stream or Upload Video" },
+          description: { zh: "連接即時攝影機串流或既有影片。", en: "Connect a live camera stream or an existing video." },
           image: "/images/projects/vision-detect/step1.gif",
         },
         {
-          title: "VLM 主動分析",
-          description:
-            "設定如「是否有配戴安全帽？」的範本，進行全天候持續偵測。",
+          title: { zh: "VLM 主動分析", en: "Proactive VLM Analysis" },
+          description: {
+            zh: "設定如「是否有配戴安全帽？」的範本，進行全天候持續偵測。",
+            en: "Set a template like \"is a hard hat being worn?\" and get round-the-clock detection.",
+          },
           image: "/images/projects/vision-detect/step2.mp4",
         },
         {
-          title: "LLM 資訊查詢",
-          description:
-            "以自然語言詢問違規次數、時間戳記與對應影片。",
+          title: { zh: "LLM 資訊查詢", en: "LLM Information Lookup" },
+          description: {
+            zh: "以自然語言詢問違規次數、時間戳記與對應影片。",
+            en: "Ask in natural language for violation counts, timestamps, and the matching video.",
+          },
           image: "/images/projects/vision-detect/step3.mp4",
           fit: "cover",
         },
         {
-          title: "取得報告與關鍵畫面",
-          description:
-            "生成附帶影像佐證的 ISO 45001 稽核報告。",
+          title: { zh: "取得報告與關鍵畫面", en: "Get the Report & Key Frames" },
+          description: {
+            zh: "生成附帶影像佐證的 ISO 45001 稽核報告。",
+            en: "Generate an ISO 45001 audit report backed by the video evidence.",
+          },
           image: "/images/projects/vision-detect/step4.gif",
           fit: "cover",
         },
       ],
-      feedbackLoop:
-        "LLM 將設定建議回饋給 VLM，形成持續優化偵測準確度的回饋迴路。",
+      feedbackLoop: {
+        zh: "LLM 將設定建議回饋給 VLM，形成持續優化偵測準確度的回饋迴路。",
+        en: "The LLM feeds configuration suggestions back to the VLM, forming a loop that keeps improving detection accuracy.",
+      },
     },
     designHighlight: {
-      eyebrow: "設計迭代",
-      stepLabel: "2 步驟",
-      stepTitle: "VLM 主動分析",
-      stepDescription:
-        "設定如「是否有配戴安全帽？」的範本，進行全天候持續偵測。",
+      eyebrow: { zh: "設計迭代", en: "Design Iteration" },
+      stepLabel: { zh: "2 步驟", en: "Step 2" },
+      stepTitle: { zh: "VLM 主動分析", en: "Proactive VLM Analysis" },
+      stepDescription: {
+        zh: "設定如「是否有配戴安全帽？」的範本，進行全天候持續偵測。",
+        en: "Set a template like \"is a hard hat being worn?\" and get round-the-clock detection.",
+      },
       branches: [
         {
-          title: "優化影像設定流程",
-          description: "統一設定流程，一次驗證、全域套用。",
+          title: { zh: "優化影像設定流程", en: "Streamlined the Setup Flow" },
+          description: { zh: "統一設定流程，一次驗證、全域套用。", en: "Unified the setup flow — verify once, apply everywhere." },
         },
         {
-          title: "優化 Prompt 輸入介面",
-          description: "固定句型結構，讓 VLM 判讀更精準。",
+          title: { zh: "優化 Prompt 輸入介面", en: "Refined the Prompt Interface" },
+          description: {
+            zh: "固定句型結構，讓 VLM 判讀更精準。",
+            en: "A fixed sentence structure that makes the VLM's readings more precise.",
+          },
         },
       ],
     },
     designIteration: {
-      eyebrow: "設計迭代",
+      eyebrow: { zh: "設計迭代", en: "Design Iteration" },
       items: [
         {
-          tag: "優化一",
-          title: "設計影像設定流程，解決擴展性瓶頸",
-          painPoint: "每支攝影機都需手動設定，部署時間隨規模線性增加。",
-          solution:
-            "在 Test Zone 微調 1 支影像來源，一鍵套用到 10 個 Operational Zone，減少 80% 人工作業。",
+          tag: { zh: "優化一", en: "Fix 1" },
+          title: { zh: "設計影像設定流程，解決擴展性瓶頸", en: "Designed the Setup Flow to Fix the Scalability Bottleneck" },
+          painPoint: {
+            zh: "每支攝影機都需手動設定，部署時間隨規模線性增加。",
+            en: "Every camera needed manual setup, so deployment time scaled linearly with the number of cameras.",
+          },
+          solution: {
+            zh: "在 Test Zone 微調 1 支影像來源，一鍵套用到 10 個 Operational Zone，減少 80% 人工作業。",
+            en: "Tune one video source in a Test Zone, then apply it to 10 Operational Zones with one click — cutting manual work by 80%.",
+          },
           beforeImage: "/images/projects/vision-detect/ui-before.png",
           afterImage: "/images/projects/vision-detect/ui-after.png",
           stackedBeforeAfter: true,
           impact: [
-            { icon: "layers", label: "擴展性", valueHighlight: "1-to-N", valueRest: "部署模式" },
-            { icon: "zap", label: "效率", valueHighlight: "80%", valueRest: "設定時間減少" },
+            {
+              icon: "layers",
+              label: { zh: "擴展性", en: "Scalability" },
+              valueHighlight: "1-to-N",
+              valueRest: { zh: "部署模式", en: "deployment model" },
+            },
+            {
+              icon: "zap",
+              label: { zh: "效率", en: "Efficiency" },
+              valueHighlight: "80%",
+              valueRest: { zh: "設定時間減少", en: "less setup time" },
+            },
           ],
-          workflowBefore:
-            "每增加一支攝影機就需重複測試一次，設定時間隨鏡頭數倍增。",
-          workflowAfter:
-            "完成單一驗證後一鍵套用全場，節省 80% 重複操作時間。",
+          workflowBefore: {
+            zh: "每增加一支攝影機就需重複測試一次，設定時間隨鏡頭數倍增。",
+            en: "Every added camera meant repeating the test — setup time multiplied with camera count.",
+          },
+          workflowAfter: {
+            zh: "完成單一驗證後一鍵套用全場，節省 80% 重複操作時間。",
+            en: "Verify once, then apply site-wide with one click — saving 80% of the repeated work.",
+          },
         },
         {
-          tag: "優化二",
-          title: "設計 Prompt Template，提升模型判讀精準度",
-          painPoint:
-            "自然語言 Prompt，語意邊界模糊、任務意圖不明確，導致 VLM 輸出結果不穩定，這在工業安全場域中是不可接受的風險。",
-          solution:
-            "Prompt Template，採用固定句型結構，僅替換人員、物件、地點等變數，有效提升 VLM 判讀的準確度與穩定性。",
+          tag: { zh: "優化二", en: "Fix 2" },
+          title: { zh: "設計 Prompt Template，提升模型判讀精準度", en: "Designed a Prompt Template to Improve Model Accuracy" },
+          painPoint: {
+            zh: "自然語言 Prompt，語意邊界模糊、任務意圖不明確，導致 VLM 輸出結果不穩定，這在工業安全場域中是不可接受的風險。",
+            en: "Free-form natural-language prompts had ambiguous boundaries and unclear intent, making the VLM's output unstable — an unacceptable risk in an industrial safety setting.",
+          },
+          solution: {
+            zh: "Prompt Template，採用固定句型結構，僅替換人員、物件、地點等變數，有效提升 VLM 判讀的準確度與穩定性。",
+            en: "A Prompt Template with a fixed sentence structure where only variables (person, object, location) change — meaningfully improving the VLM's accuracy and stability.",
+          },
           promptOptimization: true,
         },
       ],

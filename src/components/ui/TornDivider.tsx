@@ -50,15 +50,25 @@ const TORN_PATH = buildTornPath();
 
 export function TornDivider({
   color = "var(--paper-alt)",
+  // the area above the tear (below it when `flip`) is transparent, so
+  // whatever's actually behind this element in the DOM shows through —
+  // normally that falls back to the page's own bg-paper. `backdropColor`
+  // pins it to the true adjacent section's colour instead, so a section that
+  // overrides to ink or paper-alt doesn't leave a mismatched sliver at the seam.
+  backdropColor,
   flip = false,
   className = "",
 }: {
   color?: string;
+  backdropColor?: string;
   flip?: boolean;
   className?: string;
 }) {
   return (
     <div className={`pointer-events-none relative w-full ${className}`} aria-hidden>
+      {backdropColor && (
+        <div className="absolute inset-0" style={{ backgroundColor: backdropColor }} />
+      )}
       <svg
         viewBox={`0 0 ${WIDTH} ${HEIGHT}`}
         preserveAspectRatio="none"

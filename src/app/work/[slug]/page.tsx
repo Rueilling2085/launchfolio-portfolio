@@ -8,6 +8,7 @@ import { LaptopMockup } from "@/components/ui/LaptopMockup";
 import { ProjectBackground } from "@/components/sections/ProjectBackground";
 import { ProjectOverview } from "@/components/sections/ProjectOverview";
 import { ProjectMetaCards } from "@/components/sections/ProjectMetaCards";
+import { PresentationEmbed } from "@/components/sections/PresentationEmbed";
 import { ResearchBackground } from "@/components/sections/ResearchBackground";
 import { ProblemFraming } from "@/components/sections/ProblemFraming";
 import { AppIntroVisual } from "@/components/sections/AppIntroVisual";
@@ -143,13 +144,15 @@ export default async function ProjectCaseStudyPage({
               {project.description}
             </p>
 
-            <div className="w-full">
-              <ProjectMetaCards project={project} dark={dark} />
-            </div>
+            {!project.presentationEmbedUrl && (
+              <div className="w-full">
+                <ProjectMetaCards project={project} dark={dark} />
+              </div>
+            )}
           </div>
         </SectionContainer>
 
-        {project.deviceMockup ? (
+        {project.presentationEmbedUrl ? null : project.deviceMockup ? (
           <div className="mt-14 bg-paper-alt px-6 py-10 md:mt-16 md:py-14">
             <LaptopMockup src={project.image} alt={project.name} />
           </div>
@@ -208,30 +211,35 @@ export default async function ProjectCaseStudyPage({
               <ProjectOverview overview={project.overview} dark={dark} />
             ) : (
               <>
-                <div className="mx-auto mt-14 grid max-w-3xl grid-cols-1 gap-4 sm:grid-cols-3 md:mt-16">
-                  <div className="rounded-2xl border border-line bg-white px-5 py-4">
-                    <p className="text-xs font-medium text-muted-2">Duration</p>
-                    <p className="mt-1 text-sm text-ink-soft">{project.duration}</p>
+                {!project.presentationEmbedUrl && (
+                  <div className="mx-auto mt-14 grid max-w-3xl grid-cols-1 gap-4 sm:grid-cols-3 md:mt-16">
+                    <div className="rounded-2xl border border-line bg-white px-5 py-4">
+                      <p className="text-xs font-medium text-muted-2">Duration</p>
+                      <p className="mt-1 text-sm text-ink-soft">{project.duration}</p>
+                    </div>
+                    <div className="rounded-2xl border border-line bg-white px-5 py-4">
+                      <p className="text-xs font-medium text-muted-2">Team</p>
+                      <ul className="mt-1 space-y-0.5 text-sm text-ink-soft">
+                        {project.team.map((member) => (
+                          <li key={member}>{member}</li>
+                        ))}
+                      </ul>
+                    </div>
+                    <div className="rounded-2xl border border-line bg-white px-5 py-4">
+                      <p className="text-xs font-medium text-muted-2">Role</p>
+                      <ul className="mt-1 space-y-0.5 text-sm text-ink-soft">
+                        {project.role.map((item) => (
+                          <li key={item}>{item}</li>
+                        ))}
+                      </ul>
+                    </div>
                   </div>
-                  <div className="rounded-2xl border border-line bg-white px-5 py-4">
-                    <p className="text-xs font-medium text-muted-2">Team</p>
-                    <ul className="mt-1 space-y-0.5 text-sm text-ink-soft">
-                      {project.team.map((member) => (
-                        <li key={member}>{member}</li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div className="rounded-2xl border border-line bg-white px-5 py-4">
-                    <p className="text-xs font-medium text-muted-2">Role</p>
-                    <ul className="mt-1 space-y-0.5 text-sm text-ink-soft">
-                      {project.role.map((item) => (
-                        <li key={item}>{item}</li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
+                )}
 
                 {project.background && <ProjectBackground items={project.background} />}
+                {project.presentationEmbedUrl && (
+                  <PresentationEmbed url={project.presentationEmbedUrl} />
+                )}
               </>
             )}
           </div>

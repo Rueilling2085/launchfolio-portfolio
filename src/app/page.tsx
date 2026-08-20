@@ -4,20 +4,20 @@ import { Hero } from "@/components/sections/Hero";
 import { LatestProjects } from "@/components/sections/LatestProjects";
 import { WhatCanIBring } from "@/components/sections/WhatCanIBring";
 import { AboutSection } from "@/components/sections/AboutSection";
-import { Philosophy } from "@/components/sections/Philosophy";
-import { BigQuote } from "@/components/sections/BigQuote";
+import { WorkExperience } from "@/components/sections/WorkExperience";
+import { BeyondPixels } from "@/components/sections/BeyondPixels";
 
 export default function Home() {
   return (
     <>
-      <main className="flex flex-1 flex-col">
+      <main className="flex flex-1 flex-col overflow-x-hidden">
         <Nav />
         <Hero />
         <LatestProjects />
         <WhatCanIBring />
         <AboutSection />
-        <Philosophy />
-        <BigQuote />
+        <WorkExperience />
+        <BeyondPixels />
       </main>
       <Footer />
     </>

@@ -8,11 +8,6 @@ export const navLinks = [
   },
 ];
 
-export const avatarUrls = Array.from(
-  { length: 10 },
-  (_, i) => `/images/avatars/avatar-${i + 1}.jpg`
-);
-
 export const socialLinks = [
   { label: "LinkedIn", href: "#" },
   { label: "Behance", href: "#" },
@@ -669,9 +664,50 @@ export type Project = {
    *  cropped subject (e.g. an arm) reads as continuing off-card rather than
    *  floating in the middle. */
   cardImageAnchor?: "bottom";
+  /** Set to bleed the poster edge-to-edge across the whole panel, past its
+   *  usual padding — for a photo that carries its own background rather
+   *  than a transparent mockup. "cover" crops to fill every edge; "contain"
+   *  shows the whole photo with a small margin, backed by `cardImageBackdrop`.
+   *  Leave unset for the default transparent-mockup-on-a-coloured-panel
+   *  treatment. */
+  cardImageFit?: "contain" | "cover";
+  /** Backdrop colour shown around a `cardImageFit: "contain"` poster, so its
+   *  margin reads as continuous with the photo instead of an empty gap. */
+  cardImageBackdrop?: string;
+  /** Extra zoom applied to a `cardImageFit: "contain"` poster, on top of the
+   *  default 1.25x. Use when the subject reads too small inside its margin. */
+  cardImageScale?: number;
+  /** Mirrors a `cardImageFit: "contain"` poster horizontally — e.g. to turn a
+   *  device mockup around so it faces the other way. */
+  cardImageFlip?: boolean;
+  /** Transparent mockup cross-faded in on hover, over its own coloured
+   *  backdrop (desktop only — no autoplay/touch fallback, unlike `cardVideo`,
+   *  since there's no motion to reveal). Pairs a full-bleed `cardImageFit:
+   *  "cover"` poster with a floating-mockup reveal, so the poster can be a
+   *  branded photo while the interface itself still shows on interaction. */
+  cardHoverImage?: string;
+  cardHoverImageWidth?: number;
+  cardHoverImageHeight?: number;
   /** Switches the card to the deep "nebula" surface, with this colour glowing
    *  in from the lower left. Dark cards only. */
   cardAccent?: string;
+  /** Muted looping demo clip shown in place of `cardImage` on hover (desktop)
+   *  or automatically once in view (touch). Optional — omitting it keeps the
+   *  static mockup as the only state. */
+  cardVideo?: string;
+  /** Panel backdrop shown behind `cardVideo` while it plays, so a video that
+   *  doesn't fill the panel edge-to-edge reads as continuous with its own
+   *  background instead of cutting against the card's usual colour. Defaults
+   *  to black. */
+  cardVideoBackdrop?: string;
+  /** "cover" scales the clip up until it touches every edge (cropping
+   *  whichever axis overshoots), for a subject centred with margin to spare
+   *  (e.g. a phone screen recording). Defaults to "contain", which always
+   *  shows the whole frame. */
+  cardVideoFit?: "contain" | "cover";
+  /** Public Canva "view?embed" URL, shown as an embedded presentation on the
+   *  case-study page as interim content before a full case study is built. */
+  presentationEmbedUrl?: string;
 };
 
 export const projects: Project[] = [
@@ -685,15 +721,19 @@ export const projects: Project[] = [
     deviceMockup: false,
     description:
       "一套 AI 智慧監控平台，透過電腦視覺與生成式 AI 技術，補足職安巡檢間的監控盲區，提升工廠安全管理效率。\n針對研華智慧製造場域需求，設計跨產業 AI 影像分析系統，結合 VLM 視覺偵測與 LLM 對話技術，並透過結構化 Prompt 設計降低 AI 使用門檻，打造直覺化、易操作的監控介面。協助職安人員快速建立偵測條件，即時辨識現場安全風險、追蹤事件脈絡，並自動生成符合 ISO 45001 規範的稽核報告，將傳統被動式監控轉化為主動式智慧安全管理。",
-    cardTags: ["B2B AI SaaS", "0→1 Product", "Product Strategy", "UX Research"],
+    cardTags: ["0→1 Product", "B2B AI SaaS"],
     cardHeadline: "建立 AI 工安監控平台，補足人工巡檢的監控空窗",
     cardDescription:
       "傳統工廠仰賴人工巡檢，難以及時掌握巡檢間的安全風險。我透過訪談職環安人員與系統整合商，設計整合 VLM 與 LLM 的 AI 監控平台，協助企業從被動巡檢轉向主動風險管理。",
-    color: "#0E2A55",
+    color: "#1D4ED8",
     cardAccent: "#1FD9A6",
-    cardImage: "/images/projects/vision-detect/card-mockup.png",
-    cardImageWidth: 1800,
-    cardImageHeight: 1105,
+    cardImage: "/images/projects/vision-detect/card-laptop-photo.png",
+    cardImageWidth: 2000,
+    cardImageHeight: 1500,
+    cardImageFit: "contain",
+    cardImageBackdrop: "#DFDFDF",
+    cardVideo: "/images/projects/vision-detect/card-demo.mp4",
+    cardVideoBackdrop: "#DFDFDF",
     duration: "9 weeks",
     team: ["Project Manager ×2", "Software Engineer ×2", "UI/UX Designer ×1 - Me"],
     role: [
@@ -1096,15 +1136,18 @@ export const projects: Project[] = [
     deviceMockup: false,
     description:
       "Sports Note 是台灣跑步領域的媒體與社群平台，整合賽事資訊、跑步紀錄、線上報名與運動內容等服務。針對 Alpha 版本缺乏實際使用者驗證的問題，我執行 13 位跑者的易用性測試與訪談，並蒐集 199 份問卷，分析不同跑者的需求與使用行為，重新收斂產品功能優先順序，將研究洞察轉化為介面優化與產品迭代方向。",
-    cardTags: ["UX Research", "UsabilityTesting", "Design System"],
+    cardTags: ["UX Research", "Design System"],
     cardHeadline: "以使用者研究驅動跑步 App 的產品優化",
     cardDescription:
       "Sports Note 是台灣最大的跑步社群平台。本專案於產品 Alpha 階段，透過易用性測試、跑者訪談與 199 份問卷調查，深入分析不同使用者的需求與行為，收斂產品功能優先順序，並將研究洞察轉化為介面優化與功能規劃，協助團隊制定後續產品迭代方向。",
     color: "#045CC4",
-    cardImage: "/images/projects/h2u/card-mockup-hand.png",
-    cardImageWidth: 1300,
-    cardImageHeight: 1218,
-    cardImageAnchor: "bottom",
+    cardImage: "/images/projects/h2u/card-cover.png",
+    cardImageFit: "contain",
+    cardImageBackdrop: "#005BC2",
+    cardImageWidth: 2000,
+    cardImageHeight: 1310,
+    cardVideo: "/images/projects/h2u/card-demo.mp4",
+    cardVideoFit: "cover",
     duration: "July 2022 (2 month)",
     team: ["Product Manager ×1", "UI/UX Designer ×2 - Me", "Software Engineer ×1"],
     role: [
@@ -1720,12 +1763,12 @@ export const projects: Project[] = [
           ],
           beforeImage: "/images/projects/h2u/optimization-1-before.png",
           beforeImageAlt: "優化前：地圖與數據資訊擠在同一畫面，地圖視覺權重過高",
-          beforeImageWidth: 1600,
-          beforeImageHeight: 2800,
+          beforeImageWidth: 1400,
+          beforeImageHeight: 2450,
           afterImage: "/images/projects/h2u/optimization-1-after.png",
           afterImageAlt: "優化後：新增數據／地圖 Tab 切換，核心數據放大呈現",
-          afterImageWidth: 3012,
-          afterImageHeight: 2800,
+          afterImageWidth: 1400,
+          afterImageHeight: 1301,
         },
         {
           number: "2",
@@ -1739,12 +1782,12 @@ export const projects: Project[] = [
           ],
           beforeImage: "/images/projects/h2u/optimization-2-before.png",
           beforeImageAlt: "優化前：以滑動手勢停止跑步紀錄",
-          beforeImageWidth: 1600,
-          beforeImageHeight: 2800,
+          beforeImageWidth: 1400,
+          beforeImageHeight: 2450,
           afterImage: "/images/projects/h2u/optimization-2-after.png",
           afterImageAlt: "優化後：改以點擊按鈕停止跑步紀錄",
-          afterImageWidth: 1600,
-          afterImageHeight: 2800,
+          afterImageWidth: 1400,
+          afterImageHeight: 2450,
         },
       ],
     },
@@ -1795,6 +1838,40 @@ export const projects: Project[] = [
     },
   },
   {
+    id: "8",
+    slug: "museum-ai-guide",
+    name: "Museum AI Guide",
+    client: "Museum AI Guide",
+    type: "個人研究．碩士論文",
+    image: "/images/projects/museum-ai-guide/hero.png",
+    deviceMockup: false,
+    cardTags: ["Generative AI", "RAG System"],
+    cardHeadline: "讓觀眾看見文物「當年被使用」的樣子",
+    cardDescription:
+      "我設計並開發多模態 RAG 導覽系統，結合知識檢索與生成式影像，讓觀眾提問後同時獲得可信的解說與文物情境重現圖，經 30 人對照實驗證實知識建構與參與度皆顯著提升。",
+    color: "#2A1D12",
+    cardAccent: "#C4956A",
+    cardImage: "/images/projects/museum-ai-guide/card-hand-photo.jpg",
+    cardImageWidth: 2000,
+    cardImageHeight: 1500,
+    cardImageFit: "contain",
+    cardImageBackdrop: "#7A7871",
+    cardImageScale: 1.55,
+    presentationEmbedUrl: "https://www.canva.com/design/DAHSO25n1g8/xUAAeCPKUccPVuHoQqeRbg/view?embed",
+    description:
+      "以多模態 RAG 技術打造的博物館 AI 導覽系統，結合知識檢索與生成式影像，將靜態的文物說明牌轉化為可對話、可視覺化的知識探索體驗。研究成果獲 IEEE ICASI 2026 口頭發表。",
+    duration: "2025 – 2026（碩士論文研究）",
+    team: ["Researcher, Designer & Developer ×1 - Me", "Advisor ×1"],
+    role: [
+      "Field Research",
+      "Curator Interview",
+      "Experiment Design",
+      "RAG System Development",
+      "UI Design",
+      "Quantitative Analysis",
+    ],
+  },
+  {
     id: "6",
     slug: "touchtune",
     name: "TouchTune",
@@ -1802,14 +1879,19 @@ export const projects: Project[] = [
     type: "團隊協作．碩士設計專題",
     image: "/images/projects/touchtune/touchtune-hero-v7.jpg",
     deviceMockup: false,
-    cardTags: ["Product Design", "Wearable Device", "Inclusive Design", "Interaction Design"],
+    cardTags: ["Product Design", "Wearable Device"],
     cardHeadline: "打造讓聽障者感受音樂的穿戴式裝置",
     cardDescription:
       "透過使用者研究、軟硬體整合與產品設計，將音樂轉化為觸覺回饋，打破傳統輔具冰冷的既有印象，並結合 App 延伸情感分享與音樂互動體驗。",
     color: "#5532FA",
-    cardImage: "/images/projects/touchtune/card-collage-v3.png",
-    cardImageWidth: 1351,
-    cardImageHeight: 1260,
+    cardImage: "/images/projects/touchtune/card-cover.jpg",
+    cardImageWidth: 2000,
+    cardImageHeight: 1125,
+    cardImageFit: "contain",
+    cardImageBackdrop: "#0C0818",
+    cardHoverImage: "/images/projects/touchtune/card-collage-v3.png",
+    cardHoverImageWidth: 1351,
+    cardHoverImageHeight: 1260,
     theme: "dark",
     description:
       "TouchTune 是一款專為聽障人士設計的穿戴式裝置。它透過將聲音轉化為多頻率的振動，提供多感官的音樂體驗。",
@@ -2245,31 +2327,37 @@ export const projects: Project[] = [
   },
 ];
 
+// Ordered as a working method — find the problem, solve it, ship it — rather
+// than three interchangeable skills.
 export const bringItems = [
   {
     icon: "search",
-    title: "研究驅動的產品決策",
+    title: "Research-driven Designer",
+    titleZh: "研究驅動的設計者",
     description:
-      "從 13 場深度訪談到 199 份問卷分析，我習慣用真實使用者行為驗證假設，把模糊需求收斂成明確的產品方向。",
+      "在設計之前，我習慣先釐清問題，透過使用者研究、數據分析與情境探索驗證假設，確保設計真正回應使用者需求。",
   },
   {
-    icon: "layers",
-    title: "跨領域整合能力",
-    description:
-      "橫跨醫療、旅遊、AI 與物聯網領域的產品經驗，讓我能快速理解陌生產業、串接工程與商業限制，把想法落地。",
+    icon: "layout-dashboard",
+    title: "Complexity Translator",
+    titleZh: "複雜問題的轉譯者",
+    description: "我擅長將複雜的科技與資訊，轉化為人容易理解、操作與感受的體驗。",
   },
   {
-    icon: "cpu",
-    title: "技術與設計的橋樑",
+    icon: "bot",
+    title: "Technical Collaborator",
+    titleZh: "能動手實作的設計夥伴",
     description:
-      "熟悉生成式 AI 與電腦視覺技術，也會寫 Python 處理資料，讓設計提案更貼近工程可行性，減少來回溝通成本。",
+      "我持續探索 AI 技術在產品開發中的應用，並透過實際專案累積經驗，能從使用者需求與技術可行性雙向思考產品機會，將 AI 技術轉化為具體的產品價值。",
   },
 ];
 
 export const aboutContent = {
   bio: [
-    "我是林瑞苓（Lina），國立臺北科技大學創新設計研究所在讀，主修人機互動與生成式 AI 應用。作品橫跨醫療、旅遊與物聯網產業，擅長把使用者研究轉化為可落地的產品策略。",
-    "「TouchTune」榮獲 2025 IDA 設計獎佳作與 2025 A' Design Award 金獎；目前擔任台灣感性學會執行秘書，也持續在 HCI 與生成式 AI 領域深耕研究。",
+    "具備 HCI 背景與 B2B AI、健康產品的跨領域設計經驗\n專長於複雜系統與 AI 產品的介面及使用者體驗設計",
+    "我擅長處理複雜且牽涉多方需求的問題。",
+    "當需求尚未明確、牽涉多方角色，或技術與使用者需求彼此交織時，\n我習慣先停下來釐清真正要解決的問題。透過使用者研究，\n我能快速掌握人在特定情境下的真實行為與需求，並從使用情境與系統脈絡重新梳理，找出當下最需要解決的核心。",
+    "我相信好的設計，不只是把介面做得簡單，而是在使用者需求、商業目標與技術限制之間找到合理的平衡。我擅長以系統思維拆解問題，結合 AI 與技術可行性，將複雜需求轉化為清晰、可用且具產品價值的體驗。",
   ],
   education: [
     {
@@ -2278,10 +2366,82 @@ export const aboutContent = {
       org: "National Taipei University of Technology (NTUT), Taipei · GPA 4.0/4.3",
     },
   ],
-  photos: [
-    "/images/profile-headshot.jpg",
-    "/images/hero/ida-award.jpg",
-    "/images/hero/presentation.jpg",
-    "/images/hero/vr-testing.jpg",
-  ],
+  photos: ["/images/hero/ida-award.jpg", "/images/hero/presentation.jpg", "/images/hero/vr-testing.jpg"],
 };
+
+export const beyondPixels = [
+  { src: "/images/about/on-stage.jpg", alt: "Presenting at a project showcase", caption: "On Stage" },
+  {
+    src: "/images/about/team-project.jpg",
+    alt: "Team standing with their wheelchair basketball VR project poster",
+    caption: "Team Project",
+  },
+  { src: "/images/about/beach-portrait.jpg", alt: "By the sea at dusk", caption: "By the Sea" },
+  {
+    src: "/images/about/island-road-trip.jpg",
+    alt: "Riding scooters in a line down an island road",
+    caption: "Island Road Trip",
+  },
+  { src: "/images/about/wildflowers.jpg", alt: "A coastal hill and wildflowers", caption: "Wildflowers" },
+  {
+    src: "/images/about/mountain-hike.jpg",
+    alt: "Hiking group at the Alishan visitor center",
+    caption: "Mountain Hike",
+  },
+  { src: "/images/about/ancient-forest.jpg", alt: "Walking beneath a giant cedar", caption: "Ancient Forest" },
+  { src: "/images/about/coffee-break.jpg", alt: "Coffee and dessert with design magazines", caption: "Coffee Break" },
+  { src: "/images/about/golden-hour.jpg", alt: "Sunset over a fishing harbor", caption: "Golden Hour" },
+  {
+    src: "/images/about/trail-explorers.jpg",
+    alt: "Backpacking through an old ruin on a trail",
+    caption: "Trail Explorers",
+  },
+  { src: "/images/about/prototyping.jpg", alt: "An ALARM hardware prototype on a desk", caption: "Prototyping" },
+  {
+    src: "/images/about/award-night.jpg",
+    alt: "Team accepting the OpenHCI Best Popularity award",
+    caption: "Award Night",
+  },
+  {
+    src: "/images/about/hackathon-win.png",
+    alt: "Team receiving the Meta Taiwan AR Hackathon technical excellence award",
+    caption: "Hackathon Win",
+  },
+  { src: "/images/about/team-photo.jpg", alt: "Large group photo at the OpenHCI closing ceremony", caption: "Team Photo" },
+];
+
+export const workExperience = [
+  {
+    dates: "JUN 2025 – AUG 2025",
+    title: "UI/UX Intern, Early Design Campaign",
+    company: "Advantech Co., Ltd.",
+    initial: "A",
+    color: "#045CC4",
+    points: [
+      "主導 3 場訪談（系統整合商與兩家 EHS 人員），釐清使用情境痛點與需求，協助 PM 定義專案範圍與使用者需求。",
+      "設計直覺的 VLM（視覺語言模型）提示詞輸入方式，改善自然語言輸入造成的模型不穩定與輸出品質問題。",
+    ],
+  },
+  {
+    dates: "JUN 2024 – DEC 2024",
+    title: "UI/UX Intern, Mobile Technology Department",
+    company: "EZTRAVEL Co., Ltd.",
+    initial: "E",
+    color: "#21B30B",
+    points: [
+      "分析競品電商的會員點數系統資訊架構、營運模式與流程，找出高效益的設計模式並優化介面，協助產品成功上線。",
+      "使用 Python 清洗與篩選客服資料，資料量減少 74%、處理速度提升 3.8 倍，並設計自動回覆流程提升營運效率與準確度。",
+    ],
+  },
+  {
+    dates: "JUL 2022 – AUG 2022",
+    title: "Software Development Intern, R&D Department",
+    company: "H2U Corporation",
+    initial: "H",
+    color: "#8B5CF6",
+    points: [
+      "主導 13 場半結構式訪談與易用性測試，評估賽事列表與跑步功能，依任務完成時間與錯誤率排定介面優化優先序。",
+      "蒐集 199 份問卷，分析跑者運動行為與習慣，將 10 項功能需求收斂為 4 項核心功能，重新定義產品差異化方向。",
+    ],
+  },
+];

@@ -8,7 +8,7 @@
   --muted: #666666;
   --muted-2: #999999;
   --line: #e0e0e0;
-  --accent: #d7f56f;
+  --accent: #d97757;
   --accent-strong: #21b30b;
 }
 
@@ -49,6 +49,34 @@ body {
   }
   50% {
     transform: scale(1.12);
+  }
+}
+
+@keyframes icon-wiggle {
+  0%,
+  40%,
+  100% {
+    transform: rotate(0deg);
+  }
+  10% {
+    transform: rotate(14deg);
+  }
+  20% {
+    transform: rotate(-8deg);
+  }
+  30% {
+    transform: rotate(4deg);
+  }
+}
+
+@keyframes icon-blink {
+  0%,
+  92%,
+  100% {
+    transform: scaleY(1);
+  }
+  96% {
+    transform: scaleY(0.6);
   }
 }
 

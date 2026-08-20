@@ -79,7 +79,7 @@ export function Nav() {
               onDark ? "text-white" : "text-ink"
             }`}
           >
-            JUI LING
+            Jui Ling
           </Link>
 
           <ul className="hidden items-center gap-1 text-sm md:flex">

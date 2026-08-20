@@ -45,7 +45,7 @@ export function Hero() {
 
           <EnterOnLoad delay={0.68} y={16}>
             <p className="mt-8 max-w-xl text-base leading-relaxed text-muted md:text-lg">
-              擅長將模糊問題轉化為可落地的產品解決方案。
+              Making sense of complex problems and turning them into meaningful experiences.
             </p>
           </EnterOnLoad>
         </div>

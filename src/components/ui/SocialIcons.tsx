@@ -42,3 +42,11 @@ export function XIcon({ size = 16, className }: IconProps) {
     </svg>
   );
 }
+
+export function FacebookIcon({ size = 16, className }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className}>
+      <path d="M14 22v-8.4h2.9l.4-3.4H14V8c0-1 .3-1.7 1.8-1.7H17.5V3.2C17.2 3.2 16.1 3 14.9 3c-2.5 0-4.3 1.6-4.3 4.4v2.8H7.7v3.4h2.9V22h3.4z" />
+    </svg>
+  );
+}

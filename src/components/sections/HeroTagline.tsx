@@ -48,7 +48,7 @@ function Arrow() {
 export function HeroTagline() {
   return (
     <span className="flex items-center gap-[0.3em] font-bold tracking-tight text-ink">
-      <span>Building</span>
+      <span>Designing</span>
 
       <span className="flex items-center">
         <svg viewBox="0 0 40 40" className="h-[0.76em] w-[0.76em] shrink-0" aria-hidden>
@@ -60,17 +60,7 @@ export function HeroTagline() {
 
       <span className="text-muted-2">&amp;</span>
 
-      <span className="flex items-center">
-        <span style={{ color: ACCENT }}>1</span>
-        <Arrow />
-        {/* two touching rings read far cleaner at small sizes than a drawn lemniscate */}
-        <svg viewBox="0 0 82 44" className="h-[0.76em] w-[1.42em] shrink-0" aria-hidden>
-          <circle cx="24" cy="22" r="16.5" fill="none" stroke={ACCENT} strokeWidth="7.5" />
-          <circle cx="58" cy="22" r="16.5" fill="none" stroke={ACCENT} strokeWidth="7.5" />
-        </svg>
-      </span>
-
-      <span>Products</span>
+      <span>Beyond</span>
     </span>
   );
 }

@@ -217,44 +217,44 @@ export type CompetitorTool = {
 };
 
 export type CompetitorCriterion = {
-  label: string;
-  values: [string, string, string];
+  label: Localized;
+  values: [Localized, Localized, Localized];
 };
 
 export type CompetitorPatternRef = {
   tag: string;
   title: string;
-  intro: string;
+  intro: Localized;
   sourceLabel: string;
   sourceUrl: string;
   image: string;
-  lead: string;
-  principles: { title: string; description: string }[];
-  conclusion: string;
+  lead: Localized;
+  principles: { title: Localized; description: Localized }[];
+  conclusion: Localized;
 };
 
 export type CompetitorInterfaceShot = {
   tool: string;
-  description: string;
-  source: string;
+  description: Localized;
+  source: Localized;
   image: string;
   annotation?: string;
   extraImages?: string[];
 };
 
 export type CompetitorAnalysis = {
-  eyebrow: string;
-  title: string;
-  description: string;
+  eyebrow: Localized;
+  title: Localized;
+  description: Localized;
   tools: [CompetitorTool, CompetitorTool, CompetitorTool];
   criteria: CompetitorCriterion[];
   patternRef: CompetitorPatternRef;
-  interfaceIntro: string;
+  interfaceIntro: Localized;
   interfaceShots: CompetitorInterfaceShot[];
   outcome: {
-    title: string;
-    description: string;
-    items: { tag: string; refLabel: string; title: string; body: string; image: string }[];
+    title: Localized;
+    description: Localized;
+    items: { tag: Localized; refLabel: Localized; title: Localized; body: Localized; image: string }[];
   };
 };
 
@@ -1069,10 +1069,12 @@ export const projects: Project[] = [
     },
     personaAvatar: "/images/projects/vision-detect/persona-avatar.png",
     competitorAnalysis: {
-      eyebrow: "競品分析",
-      title: "分析現有產品如何設定 Prompt 變數",
-      description:
-        "在設計 Prompt 輸入介面時，鑑於工廠職安領域缺乏可直接參考的 UI 案例，我轉而分析間接競品的元件架構與互動邏輯，並評估其在職安情境下的適用性與可行性，作為介面開發的設計依據。",
+      eyebrow: { zh: "競品分析", en: "Competitor Analysis" },
+      title: { zh: "分析現有產品如何設定 Prompt 變數", en: "How Existing Products Handle Prompt Variables" },
+      description: {
+        zh: "在設計 Prompt 輸入介面時，鑑於工廠職安領域缺乏可直接參考的 UI 案例，我轉而分析間接競品的元件架構與互動邏輯，並評估其在職安情境下的適用性與可行性，作為介面開發的設計依據。",
+        en: "With no directly comparable UI in the factory-EHS space, I analyzed indirect competitors' component architecture and interaction logic, evaluating their fit and feasibility for an EHS context to ground the interface design.",
+      },
       tools: [
         { name: "Microsoft AI Builder", logo: "/images/projects/vision-detect/competitor-analysis/logo-microsoft.png" },
         { name: "Salesforce Prompt Builder", logo: "/images/projects/vision-detect/competitor-analysis/logo-salesforce.svg" },
@@ -1080,80 +1082,129 @@ export const projects: Project[] = [
       ],
       criteria: [
         {
-          label: "元件設計",
+          label: { zh: "元件設計", en: "Component Design" },
           values: [
-            "Input Chip：以元件邊界顏色標示",
-            "Underlined Text Link：以顏色標示",
-            "Inline Variable Tokens：採用純文字語法 {{var}}，並以顏色標示",
+            { zh: "Input Chip：以元件邊界顏色標示", en: "Input Chip: marked by the component's border color" },
+            { zh: "Underlined Text Link：以顏色標示", en: "Underlined Text Link: marked by color" },
+            {
+              zh: "Inline Variable Tokens：採用純文字語法 {{var}}，並以顏色標示",
+              en: "Inline Variable Tokens: plain-text {{var}} syntax, marked by color",
+            },
           ],
         },
         {
-          label: "目標使用者",
-          values: ["一般業務人員", "CRM 系統管理員", "工程師"],
-        },
-        {
-          label: "填寫順序",
-          values: ["插入變數 → 選型別 → 填值", "先選資料來源 → 挑欄位", "寫語法 → 表單填值"],
-        },
-        {
-          label: "驗證機制",
-          values: ["測試後看結果", "變數值與輸出並排比對", "即時防呆＋批次測試"],
-        },
-        {
-          label: "點擊互動（Popup）",
+          label: { zh: "目標使用者", en: "Target User" },
           values: [
-            "有：點擊 chip 彈出設定表單（Name／Formula／Sample data）",
-            "無：以搜尋選單「插入」欄位，非點擊既有標籤編輯",
-            "無：填值於獨立表單區，與句中文字分離",
+            { zh: "一般業務人員", en: "General business users" },
+            { zh: "CRM 系統管理員", en: "CRM system admins" },
+            { zh: "工程師", en: "Engineers" },
+          ],
+        },
+        {
+          label: { zh: "填寫順序", en: "Fill-in Order" },
+          values: [
+            { zh: "插入變數 → 選型別 → 填值", en: "Insert variable → choose type → fill value" },
+            { zh: "先選資料來源 → 挑欄位", en: "Choose data source first → pick field" },
+            { zh: "寫語法 → 表單填值", en: "Write syntax → fill in a form" },
+          ],
+        },
+        {
+          label: { zh: "驗證機制", en: "Validation" },
+          values: [
+            { zh: "測試後看結果", en: "Run a test, see the result" },
+            { zh: "變數值與輸出並排比對", en: "Variable values and output shown side by side" },
+            { zh: "即時防呆＋批次測試", en: "Real-time guardrails + batch testing" },
+          ],
+        },
+        {
+          label: { zh: "點擊互動（Popup）", en: "Click Interaction (Popup)" },
+          values: [
+            {
+              zh: "有：點擊 chip 彈出設定表單（Name／Formula／Sample data）",
+              en: "Yes: clicking the chip opens a setup form (Name / Formula / Sample data)",
+            },
+            {
+              zh: "無：以搜尋選單「插入」欄位，非點擊既有標籤編輯",
+              en: "No: fields are \"inserted\" via a search menu, not edited by clicking an existing tag",
+            },
+            {
+              zh: "無：填值於獨立表單區，與句中文字分離",
+              en: "No: values are filled in a separate form area, detached from the sentence text",
+            },
           ],
         },
       ],
       patternRef: {
         tag: "S/AI",
         title: "設計原則參考｜Shape of AI — Madlibs Pattern",
-        intro: "競品之外，同時參考 AI Patterns 資料庫：",
+        intro: { zh: "競品之外，同時參考 AI Patterns 資料庫：", en: "Beyond competitors, I also referenced the AI Patterns database:" },
         sourceLabel: "shapeof.ai/patterns/madlibs",
         sourceUrl: "https://shapeof.ai/patterns/madlibs",
         image: "/images/projects/vision-detect/competitor-analysis/madlibs-reference.png",
-        lead: "此原則須注意的設計考量，將作為後續介面的決策依據",
+        lead: {
+          zh: "此原則須注意的設計考量，將作為後續介面的決策依據",
+          en: "The design considerations this pattern calls out, used as the basis for later interface decisions",
+        },
         principles: [
           {
-            title: "彈性由情境決定",
-            description:
-              "硬性欄位確保輸出一致但缺乏彈性；靈活欄位激發創意但難預測。重複性工作流追求精準，創意發想給予彈性。",
+            title: { zh: "彈性由情境決定", en: "Flexibility Depends on Context" },
+            description: {
+              zh: "硬性欄位確保輸出一致但缺乏彈性；靈活欄位激發創意但難預測。重複性工作流追求精準，創意發想給予彈性。",
+              en: "Rigid fields keep output consistent but inflexible; open fields invite creativity but are unpredictable. Repetitive workflows want precision; creative work wants flexibility.",
+            },
           },
           {
-            title: "區分必填與選填",
-            description: "突顯關鍵變數、標示可略過欄位，降低認知負荷。",
+            title: { zh: "區分必填與選填", en: "Distinguish Required from Optional" },
+            description: {
+              zh: "突顯關鍵變數、標示可略過欄位，降低認知負荷。",
+              en: "Highlight key variables and mark skippable fields to reduce cognitive load.",
+            },
           },
           {
-            title: "讓句構可見",
-            description: "不隱藏模板結構，使用者能理解 Prompt 如何組成、也更信任輸出。",
+            title: { zh: "讓句構可見", en: "Make the Sentence Structure Visible" },
+            description: {
+              zh: "不隱藏模板結構，使用者能理解 Prompt 如何組成、也更信任輸出。",
+              en: "Don't hide the template structure — users understand how the prompt is built and trust the output more.",
+            },
           },
           {
-            title: "規劃多步驟串接",
-            description: "填空結果可帶入下一步，設計時決定哪些該鎖定、哪些可修改延伸。",
+            title: { zh: "規劃多步驟串接", en: "Plan for Multi-Step Chaining" },
+            description: {
+              zh: "填空結果可帶入下一步，設計時決定哪些該鎖定、哪些可修改延伸。",
+              en: "A filled-in result can carry into the next step — decide up front what should be locked and what stays editable.",
+            },
           },
           {
-            title: "填空即教學",
-            description: "結構良好的 Madlibs 同時示範「有效的 Prompt 長什麼樣」。",
+            title: { zh: "填空即教學", en: "Filling It In Is the Tutorial" },
+            description: {
+              zh: "結構良好的 Madlibs 同時示範「有效的 Prompt 長什麼樣」。",
+              en: "A well-structured Madlibs pattern doubles as a demonstration of what an effective prompt looks like.",
+            },
           },
         ],
-        conclusion:
-          "最適合任務明確、輸入可預測、流程重複的場景。工安偵測正屬此類：偵測句型固定，變動的只有人、物、場域。",
+        conclusion: {
+          zh: "最適合任務明確、輸入可預測、流程重複的場景。工安偵測正屬此類：偵測句型固定，變動的只有人、物、場域。",
+          en: "Best suited to clear tasks, predictable input, and repeated workflows. EHS detection fits exactly this: the detection sentence stays fixed — only the person, object, and setting change.",
+        },
       },
-      interfaceIntro: "實際畫面佐證三家在「變數呈現方式」上的差異。",
+      interfaceIntro: {
+        zh: "實際畫面佐證三家在「變數呈現方式」上的差異。",
+        en: "Real screens showing how the three products differ in how they present variables.",
+      },
       interfaceShots: [
         {
           tool: "Microsoft AI Builder",
-          description: "藥丸標籤（chip）嵌入句中，邊界最明確。",
-          source: "來源：Microsoft Learn 官方文件",
+          description: { zh: "藥丸標籤（chip）嵌入句中，邊界最明確。", en: "A pill-shaped chip embedded in the sentence, with the clearest boundary." },
+          source: { zh: "來源：Microsoft Learn 官方文件", en: "Source: Microsoft Learn official docs" },
           image: "/images/projects/vision-detect/competitor-analysis/screenshot-microsoft.png",
         },
         {
           tool: "Salesforce Prompt Builder",
-          description: "合併欄位以底線＋顏色標示，融入純文字句子。",
-          source: "來源：Salesforce Admins Blog",
+          description: {
+            zh: "合併欄位以底線＋顏色標示，融入純文字句子。",
+            en: "Merge fields are marked with an underline and color, blended into a plain-text sentence.",
+          },
+          source: { zh: "來源：Salesforce Admins Blog", en: "Source: Salesforce Admins Blog" },
           image: "/images/projects/vision-detect/competitor-analysis/screenshot-salesforce.png",
           annotation: "{topic}　{{audience}}",
           extraImages: [
@@ -1164,34 +1215,49 @@ export const projects: Project[] = [
         },
         {
           tool: "PromptLayer",
-          description: "純文字語法 {var} ／ {{var}}，無視覺標示。",
-          source: "來源：PromptLayer 官方文件",
+          description: { zh: "純文字語法 {var} ／ {{var}}，無視覺標示。", en: "Plain-text {var} / {{var}} syntax, with no visual marking." },
+          source: { zh: "來源：PromptLayer 官方文件", en: "Source: PromptLayer official docs" },
           image: "/images/projects/vision-detect/competitor-analysis/screenshot-promptlayer.png",
         },
       ],
       outcome: {
-        title: "基於上述的競品分析，收斂出三個設計原則，並設計出 Prompt Template 操作機制",
-        description: "以 Gear Detection—Whether wearing specific gear 情境示意 Prompt 輸入介面",
+        title: {
+          zh: "基於上述的競品分析，收斂出三個設計原則，並設計出 Prompt Template 操作機制",
+          en: "From this competitor analysis, three design principles converged into the Prompt Template mechanism",
+        },
+        description: {
+          zh: "以 Gear Detection—Whether wearing specific gear 情境示意 Prompt 輸入介面",
+          en: "Illustrated with the Gear Detection — Whether Wearing Specific Gear scenario's prompt interface",
+        },
         items: [
           {
-            tag: "原則一",
-            refLabel: "參考 Salesforce Prompt Builder",
-            title: "先選類型：Dropdown 選擇偵測類型",
-            body: "先從 9 種 Prompt Template 中選擇偵測類型，底下變數會自適應更換。",
+            tag: { zh: "原則一", en: "Principle 1" },
+            refLabel: { zh: "參考 Salesforce Prompt Builder", en: "Reference: Salesforce Prompt Builder" },
+            title: { zh: "先選類型：Dropdown 選擇偵測類型", en: "Choose Type First: a Dropdown for the Detection Type" },
+            body: {
+              zh: "先從 9 種 Prompt Template 中選擇偵測類型，底下變數會自適應更換。",
+              en: "Choose the detection type from 9 prompt templates first — the variables below adapt automatically.",
+            },
             image: "/images/projects/vision-detect/competitor-analysis/outcome-principle-1.gif",
           },
           {
-            tag: "原則二",
-            refLabel: "參考 Shape of AI · Madlibs",
-            title: "句構唯讀：固定語句，結構完整可見",
-            body: "從結構上消除自然語言輸入的變異性；同時讓使用者理解 Prompt 如何組成。",
+            tag: { zh: "原則二", en: "Principle 2" },
+            refLabel: { zh: "參考 Shape of AI · Madlibs", en: "Reference: Shape of AI · Madlibs" },
+            title: { zh: "句構唯讀：固定語句，結構完整可見", en: "Read-Only Structure: a Fixed Sentence, Fully Visible" },
+            body: {
+              zh: "從結構上消除自然語言輸入的變異性；同時讓使用者理解 Prompt 如何組成。",
+              en: "Structurally eliminates the variability of free-form input, while helping users understand how the prompt is built.",
+            },
             image: "/images/projects/vision-detect/competitor-analysis/outcome-principle-2.gif",
           },
           {
-            tag: "原則三",
-            refLabel: "綜合 AI Builder ＋ Madlibs",
-            title: "變數填空：以 Input Chip 嵌在句中，Popup 選變數",
-            body: "句中以 Input Chip 明確標示點擊範圍，點擊可觸發 Popup 快速選擇變數。",
+            tag: { zh: "原則三", en: "Principle 3" },
+            refLabel: { zh: "綜合 AI Builder ＋ Madlibs", en: "Combines AI Builder + Madlibs" },
+            title: { zh: "變數填空：以 Input Chip 嵌在句中，Popup 選變數", en: "Fill-in Variables: Input Chips in the Sentence, a Popup to Choose" },
+            body: {
+              zh: "句中以 Input Chip 明確標示點擊範圍，點擊可觸發 Popup 快速選擇變數。",
+              en: "Input chips clearly mark the clickable area in the sentence; clicking one opens a popup to quickly choose the variable.",
+            },
             image: "/images/projects/vision-detect/competitor-analysis/outcome-principle-3.gif",
           },
         ],

@@ -5,6 +5,13 @@ import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
 import { PulseDot } from "@/components/ui/PulseBadge";
 import { AccordionPanel, PlusMinusIcon } from "@/components/ui/Accordion";
 import type { CompetitorAnalysis as CompetitorAnalysisData } from "@/lib/data";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
+
+const COPY = {
+  compareCol: { zh: "比較項目", en: "Criteria" },
+  fixedStructure: { zh: "固定句構", en: "Fixed structure" },
+  fillInBlank: { zh: "句中填空", en: "Fill-in-the-blank" },
+} as const;
 
 function ImageCallout({
   dot,
@@ -40,6 +47,7 @@ function ImageCallout({
 }
 
 export function CompetitorAnalysis({ data }: { data: CompetitorAnalysisData }) {
+  const { lang } = useLanguage();
   const [principlesOpen, setPrinciplesOpen] = useState(false);
   const [activeOutcome, setActiveOutcome] = useState(0);
   const [outcomeImageVisible, setOutcomeImageVisible] = useState(true);
@@ -58,13 +66,13 @@ export function CompetitorAnalysis({ data }: { data: CompetitorAnalysisData }) {
       <RevealOnScroll className="flex flex-col items-center text-center">
         <span className="inline-flex items-center gap-2 rounded-full border border-line bg-white px-4 py-1.5 text-xs font-medium text-ink-soft">
           <PulseDot color="#0B7DC9" size={7} />
-          {data.eyebrow}
+          {data.eyebrow[lang]}
         </span>
         <h3 className="mt-5 max-w-xl text-2xl font-semibold tracking-tight text-ink md:text-3xl">
-          {data.title}
+          {data.title[lang]}
         </h3>
         <p className="mx-auto mt-4 max-w-xl text-sm text-muted md:text-base">
-          {data.description}
+          {data.description[lang]}
         </p>
       </RevealOnScroll>
 
@@ -75,7 +83,7 @@ export function CompetitorAnalysis({ data }: { data: CompetitorAnalysisData }) {
             <thead>
               <tr className="border-b border-line">
                 <th className="w-[160px] px-5 py-4 text-xs font-medium text-muted-2">
-                  比較項目
+                  {COPY.compareCol[lang]}
                 </th>
                 {data.tools.map((tool) => (
                   <th key={tool.name} className="border-l border-line px-5 py-4">
@@ -93,16 +101,16 @@ export function CompetitorAnalysis({ data }: { data: CompetitorAnalysisData }) {
             </thead>
             <tbody>
               {data.criteria.map((criterion, i) => (
-                <tr key={criterion.label} className={i > 0 ? "border-t border-line" : undefined}>
+                <tr key={criterion.label.zh} className={i > 0 ? "border-t border-line" : undefined}>
                   <td className="px-5 py-4 align-top text-[13px] font-medium text-ink-soft">
-                    {criterion.label}
+                    {criterion.label[lang]}
                   </td>
                   {criterion.values.map((value, vi) => (
                     <td
                       key={vi}
                       className="border-l border-line px-5 py-4 align-top text-[13px] leading-relaxed text-muted"
                     >
-                      {value}
+                      {value[lang]}
                     </td>
                   ))}
                 </tr>
@@ -117,7 +125,7 @@ export function CompetitorAnalysis({ data }: { data: CompetitorAnalysisData }) {
         <div className="rounded-2xl border border-line bg-paper-alt p-6 md:p-10">
           <p className="text-sm font-semibold text-ink md:text-base">{data.patternRef.title}</p>
           <p className="mt-3 text-[13px] text-muted">
-            {data.patternRef.intro}{" "}
+            {data.patternRef.intro[lang]}{" "}
             <a
               href={data.patternRef.sourceUrl}
               target="_blank"
@@ -137,12 +145,12 @@ export function CompetitorAnalysis({ data }: { data: CompetitorAnalysisData }) {
             <ImageCallout
               dot={{ x: 24, y: 65 }}
               label={{ x: 24, y: 53 }}
-              text="固定句構"
+              text={COPY.fixedStructure[lang]}
             />
             <ImageCallout
               dot={{ x: 55, y: 65 }}
               label={{ x: 55, y: 53 }}
-              text="句中填空"
+              text={COPY.fillInBlank[lang]}
             />
             <div className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-white via-white/85 to-transparent md:h-28" />
           </div>
@@ -154,18 +162,18 @@ export function CompetitorAnalysis({ data }: { data: CompetitorAnalysisData }) {
               className="flex w-full items-center gap-3 px-4 py-4 text-left"
             >
               <span className="flex-1 text-[13px] font-medium leading-relaxed text-ink-soft">
-                {data.patternRef.lead}
+                {data.patternRef.lead[lang]}
               </span>
               <PlusMinusIcon open={principlesOpen} />
             </button>
             <AccordionPanel open={principlesOpen}>
               <div className="grid gap-4 px-4 pb-5 sm:grid-cols-2">
                 {data.patternRef.principles.map((p, i) => (
-                  <div key={p.title} className="rounded-xl border border-line bg-paper-alt p-4">
+                  <div key={p.title.zh} className="rounded-xl border border-line bg-paper-alt p-4">
                     <p className="text-[13px] font-semibold text-ink">
-                      {i + 1}. {p.title}
+                      {i + 1}. {p.title[lang]}
                     </p>
-                    <p className="mt-1.5 text-xs leading-relaxed text-muted">{p.description}</p>
+                    <p className="mt-1.5 text-xs leading-relaxed text-muted">{p.description[lang]}</p>
                   </div>
                 ))}
               </div>
@@ -173,7 +181,7 @@ export function CompetitorAnalysis({ data }: { data: CompetitorAnalysisData }) {
           </div>
 
           <p className="mt-5 rounded-xl border border-[#0B7DC9]/25 bg-[#D8EEFD]/40 px-4 py-3 text-[13px] leading-relaxed text-ink-soft">
-            {data.patternRef.conclusion}
+            {data.patternRef.conclusion[lang]}
           </p>
         </div>
       </RevealOnScroll>
@@ -181,15 +189,15 @@ export function CompetitorAnalysis({ data }: { data: CompetitorAnalysisData }) {
       {/* Outcome */}
       <RevealOnScroll delay={0.25} className="mt-10">
         <div className="rounded-2xl border border-line bg-paper-alt p-6 md:p-10">
-          <p className="text-sm font-semibold text-ink md:text-base">{data.outcome.title}</p>
-          <p className="mt-3 text-[13px] text-muted">{data.outcome.description}</p>
+          <p className="text-sm font-semibold text-ink md:text-base">{data.outcome.title[lang]}</p>
+          <p className="mt-3 text-[13px] text-muted">{data.outcome.description[lang]}</p>
 
           <div className="mt-6 flex flex-col items-center gap-8 md:flex-row md:items-stretch">
             <div className="w-full max-w-[340px] shrink-0 overflow-hidden rounded-xl border border-line bg-white shadow-[0_12px_32px_-12px_rgba(15,23,42,0.18)]">
               <img
                 key={data.outcome.items[activeOutcome].image}
                 src={data.outcome.items[activeOutcome].image}
-                alt={`${data.outcome.title} — ${data.outcome.items[activeOutcome].tag}`}
+                alt={`${data.outcome.title[lang]} — ${data.outcome.items[activeOutcome].tag[lang]}`}
                 className={`h-auto w-full object-contain transition-opacity duration-500 ease-in-out ${
                   outcomeImageVisible ? "opacity-100" : "opacity-0"
                 }`}
@@ -200,7 +208,7 @@ export function CompetitorAnalysis({ data }: { data: CompetitorAnalysisData }) {
                 const active = i === activeOutcome;
                 return (
                   <div
-                    key={item.tag}
+                    key={item.tag.zh}
                     className={`rounded-lg border transition-colors duration-300 ${
                       active ? "border-[#0B7DC9]/30 bg-[#D8EEFD]/40" : "border-line bg-white"
                     }`}
@@ -215,15 +223,15 @@ export function CompetitorAnalysis({ data }: { data: CompetitorAnalysisData }) {
                           active ? "bg-[#006AB7] text-white" : "bg-ink-soft/10 text-ink-soft"
                         }`}
                       >
-                        {item.tag}
+                        {item.tag[lang]}
                       </span>
-                      <p className="text-[13px] text-ink-soft">{item.title}</p>
+                      <p className="text-[13px] text-ink-soft">{item.title[lang]}</p>
                     </button>
                     <AccordionPanel open={active}>
                       <div className="px-4 pb-3 pl-[3.25rem]">
-                        <p className="text-xs leading-relaxed text-muted">{item.body}</p>
+                        <p className="text-xs leading-relaxed text-muted">{item.body[lang]}</p>
                         <p className="mt-2 border-t border-line/70 pt-2 text-[11px] text-muted-2">
-                          {item.refLabel}
+                          {item.refLabel[lang]}
                         </p>
                       </div>
                     </AccordionPanel>

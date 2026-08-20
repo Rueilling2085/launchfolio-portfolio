@@ -724,7 +724,7 @@ export const projects: Project[] = [
     cardTags: ["0→1 Product", "B2B AI SaaS"],
     cardHeadline: "建立 AI 工安監控平台，補足人工巡檢的監控空窗",
     cardDescription:
-      "傳統工廠仰賴人工巡檢，難以及時掌握巡檢間的安全風險。我透過訪談職環安人員與系統整合商，設計整合 VLM 與 LLM 的 AI 監控平台，協助企業從被動巡檢轉向主動風險管理。",
+      "傳統工廠仰賴人工巡檢，難以及時掌握巡檢間的安全風險。我訪談職環安人員與系統整合商定義範圍，並設計「Prompt Template」互動機制——把模糊的自然語言輸入收斂成固定句型、可替換變數的操作介面，解決 VLM 判讀不穩定的問題，協助企業從被動巡檢轉向主動風險管理。",
     color: "#1D4ED8",
     cardAccent: "#1FD9A6",
     cardImage: "/images/projects/vision-detect/card-laptop-photo.png",
@@ -1135,11 +1135,11 @@ export const projects: Project[] = [
     heroAspect: "2000/1310",
     deviceMockup: false,
     description:
-      "Sports Note 是台灣跑步領域的媒體與社群平台，整合賽事資訊、跑步紀錄、線上報名與運動內容等服務。針對 Alpha 版本缺乏實際使用者驗證的問題，我執行 13 位跑者的易用性測試與訪談，並蒐集 199 份問卷，分析不同跑者的需求與使用行為，重新收斂產品功能優先順序，將研究洞察轉化為介面優化與產品迭代方向。",
+      "Sports Note 是台灣跑步領域的媒體與社群平台，整合賽事資訊、跑步紀錄、線上報名與運動內容等服務。針對 Alpha 版本缺乏實際使用者驗證的問題，我執行 13 位跑者的易用性測試與訪談，並蒐集 118 份問卷，分析不同跑者的需求與使用行為，重新收斂產品功能優先順序，將研究洞察轉化為介面優化與產品迭代方向。",
     cardTags: ["UX Research", "Design System"],
     cardHeadline: "以使用者研究驅動跑步 App 的產品優化",
     cardDescription:
-      "Sports Note 是台灣最大的跑步社群平台。本專案於產品 Alpha 階段，透過易用性測試、跑者訪談與 199 份問卷調查，深入分析不同使用者的需求與行為，收斂產品功能優先順序，並將研究洞察轉化為介面優化與功能規劃，協助團隊制定後續產品迭代方向。",
+      "Sports Note 是台灣最大的跑步社群平台。本專案於產品 Alpha 階段，透過易用性測試、跑者訪談與 118 份問卷調查，找出資訊架構與操作流程的核心痛點，重新梳理畫面配置（例如將地圖與數據分頁顯示、把滑動停止改成點擊按鈕），協助團隊制定後續產品迭代方向。",
     color: "#045CC4",
     cardImage: "/images/projects/h2u/card-cover.png",
     cardImageFit: "contain",
@@ -1882,7 +1882,7 @@ export const projects: Project[] = [
     cardTags: ["Product Design", "Wearable Device"],
     cardHeadline: "打造讓聽障者感受音樂的穿戴式裝置",
     cardDescription:
-      "透過使用者研究、軟硬體整合與產品設計，將音樂轉化為觸覺回饋，打破傳統輔具冰冷的既有印象，並結合 App 延伸情感分享與音樂互動體驗。",
+      "透過使用者研究、軟硬體整合與產品設計，將音樂轉化為觸覺回饋，打破傳統輔具冰冷的既有印象。歷經 5 次原型迭代，同步優化外觀造型與震動機構配置，並結合 App 延伸情感分享與音樂互動體驗。",
     color: "#5532FA",
     cardImage: "/images/projects/touchtune/card-cover.jpg",
     cardImageWidth: 2000,
@@ -2442,7 +2442,7 @@ export const workExperience = [
     color: "#8B5CF6",
     points: [
       "主導 13 場半結構式訪談與易用性測試，評估賽事列表與跑步功能，依任務完成時間與錯誤率排定介面優化優先序。",
-      "蒐集 199 份問卷，分析跑者運動行為與習慣，將 10 項功能需求收斂為 4 項核心功能，重新定義產品差異化方向。",
+      "蒐集 118 份問卷，分析跑者運動行為與習慣，將 10 項功能需求收斂為 4 項核心功能，重新定義產品差異化方向。",
     ],
   },
 ];

@@ -1,8 +1,12 @@
+"use client";
+
 import Image from "next/image";
 import { Marquee } from "@/components/ui/Marquee";
 import type { ScreenGallery as ScreenGalleryData } from "@/lib/data";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 export function ScreenGallery({ data }: { data: ScreenGalleryData }) {
+  const { lang } = useLanguage();
   return (
     <div>
       <Marquee
@@ -17,7 +21,7 @@ export function ScreenGallery({ data }: { data: ScreenGalleryData }) {
           >
             <Image
               src={img.src}
-              alt={img.alt}
+              alt={img.alt[lang]}
               width={img.width}
               height={img.height}
               sizes="(min-width: 768px) 210px, 165px"

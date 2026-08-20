@@ -1,8 +1,13 @@
+"use client";
+
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
 import { PulseDot } from "@/components/ui/PulseBadge";
 import type { ResearchBackground as ResearchBackgroundData } from "@/lib/data";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
+
+const HIGHLIGHT = { zh: "「聽」", en: "Hear" } as const;
 
 function StatValue({ value, color }: { value: string; color: string }) {
   const match = value.match(/^([+\-]?[\d.,]+)(.*)$/);
@@ -35,6 +40,7 @@ export function ResearchBackground({
   data: ResearchBackgroundData;
   dark?: boolean;
 }) {
+  const { lang } = useLanguage();
   return (
     <div className="relative mt-16 md:mt-24">
       {data.eyebrow && (
@@ -47,7 +53,7 @@ export function ResearchBackground({
             }
           >
             <PulseDot color={dark ? "#8B7BFF" : "#5532FA"} size={7} />
-            {data.eyebrow}
+            {data.eyebrow[lang]}
           </span>
         </RevealOnScroll>
       )}
@@ -61,7 +67,7 @@ export function ResearchBackground({
                 : "text-sm leading-relaxed text-muted md:whitespace-nowrap md:text-base"
             }
           >
-            {data.source}
+            {data.source[lang]}
           </p>
         </RevealOnScroll>
       )}
@@ -81,7 +87,7 @@ export function ResearchBackground({
               }
             >
               <p className={dark ? "text-sm text-white/50" : "text-sm text-muted"}>
-                {data.growthStat.label}
+                {data.growthStat.label[lang]}
               </p>
               <div className="flex items-center gap-3">
                 <StatValue value={data.growthStat.from} color={dark ? "#B9A6FF" : "#1E116E"} />
@@ -96,7 +102,7 @@ export function ResearchBackground({
         )}
 
         {data.stats.map((stat, i) => (
-          <RevealOnScroll key={stat.label} delay={0.05 + i * 0.08}>
+          <RevealOnScroll key={stat.label.zh} delay={0.05 + i * 0.08}>
             <div
               className={
                 dark
@@ -104,7 +110,7 @@ export function ResearchBackground({
                   : "flex h-full flex-col items-center gap-3 rounded-2xl border border-line bg-white px-6 py-8 text-center"
               }
             >
-              <p className={dark ? "text-sm text-white/50" : "text-sm text-muted"}>{stat.label}</p>
+              <p className={dark ? "text-sm text-white/50" : "text-sm text-muted"}>{stat.label[lang]}</p>
               <StatValue value={stat.value} color={dark ? "#B9A6FF" : "#1E116E"} />
             </div>
           </RevealOnScroll>
@@ -116,7 +122,7 @@ export function ResearchBackground({
           <div className="relative aspect-[3/4] w-full overflow-hidden rounded-2xl sm:aspect-[16/10] md:aspect-[21/10]">
             <Image
               src={data.image}
-              alt={data.imageAlt ?? ""}
+              alt={data.imageAlt?.[lang] ?? ""}
               fill
               sizes="(min-width: 768px) 1200px, 100vw"
               className="object-cover"
@@ -126,10 +132,10 @@ export function ResearchBackground({
 
             <div className="absolute inset-x-4 bottom-4 rounded-2xl border border-white/15 bg-black/30 p-6 backdrop-blur-xl md:inset-x-8 md:bottom-8 md:p-8">
               <h3 className="text-xl font-semibold leading-snug text-white md:text-2xl">
-                <HighlightedText text={data.subtitle} highlight="「聽」" />
+                <HighlightedText text={data.subtitle[lang]} highlight={HIGHLIGHT[lang]} />
               </h3>
               <p className="mt-3 text-sm leading-relaxed text-white/70 md:text-base">
-                {data.body}
+                {data.body[lang]}
               </p>
             </div>
           </div>

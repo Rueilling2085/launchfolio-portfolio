@@ -1,8 +1,11 @@
+"use client";
+
 import Image from "next/image";
 import { AudioWaveform, Smile, Smartphone, type LucideIcon } from "lucide-react";
 import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
 import { PulseDot } from "@/components/ui/PulseBadge";
 import type { ProductFeatures as ProductFeaturesData, ProductFeatureItem } from "@/lib/data";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 const ICONS: Record<ProductFeatureItem["icon"], LucideIcon> = {
   waveform: AudioWaveform,
@@ -21,21 +24,24 @@ function FeatureIcon({ icon }: { icon: ProductFeatureItem["icon"] }) {
 
 function FeatureCard({
   item,
+  lang,
 }: {
   item: Pick<ProductFeatureItem, "icon" | "title" | "description">;
+  lang: "zh" | "en";
 }) {
   return (
     <div className="flex items-start gap-3 rounded-xl border border-white/15 bg-white/10 p-4 shadow-[0_20px_60px_-20px_rgba(0,0,0,0.6)] backdrop-blur-xl">
       <FeatureIcon icon={item.icon} />
       <div>
-        <p className="text-sm font-semibold text-white">{item.title}</p>
-        <p className="mt-1 text-xs leading-relaxed text-white/70">{item.description}</p>
+        <p className="text-sm font-semibold text-white">{item.title[lang]}</p>
+        <p className="mt-1 text-xs leading-relaxed text-white/70">{item.description[lang]}</p>
       </div>
     </div>
   );
 }
 
 export function ProductFeatures({ data }: { data: ProductFeaturesData }) {
+  const { lang } = useLanguage();
   return (
     <div className="relative left-1/2 w-screen -translate-x-1/2 overflow-hidden bg-[#0A0118] px-5 py-16 md:px-14 md:py-24">
       <div className="pointer-events-none absolute inset-x-0 top-0 h-2/3 bg-[radial-gradient(ellipse_60%_60%_at_50%_0%,rgba(85,50,250,0.3),transparent_70%)]" />
@@ -45,7 +51,7 @@ export function ProductFeatures({ data }: { data: ProductFeaturesData }) {
           <RevealOnScroll className="flex justify-center">
             <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-medium text-white/80 backdrop-blur-sm">
               <PulseDot color="#8B7BFF" size={7} />
-              {data.eyebrow}
+              {data.eyebrow[lang]}
             </span>
           </RevealOnScroll>
         )}
@@ -68,7 +74,7 @@ export function ProductFeatures({ data }: { data: ProductFeaturesData }) {
           <div className="relative aspect-[3508/2136] w-full p-8">
             <Image
               src={data.image}
-              alt={data.imageAlt ?? ""}
+              alt={data.imageAlt?.[lang] ?? ""}
               fill
               sizes="(min-width: 768px) 900px, 100vw"
               className="object-contain"
@@ -77,11 +83,11 @@ export function ProductFeatures({ data }: { data: ProductFeaturesData }) {
 
           {data.items.map((item) => (
             <div
-              key={item.title}
+              key={item.title.zh}
               className="absolute w-[240px]"
               style={{ top: item.position.top, left: item.position.left }}
             >
-              <FeatureCard item={item} />
+              <FeatureCard item={item} lang={lang} />
             </div>
           ))}
         </RevealOnScroll>
@@ -101,7 +107,7 @@ export function ProductFeatures({ data }: { data: ProductFeaturesData }) {
             <div className="relative h-full w-full p-4">
               <Image
                 src={data.image}
-                alt={data.imageAlt ?? ""}
+                alt={data.imageAlt?.[lang] ?? ""}
                 fill
                 sizes="100vw"
                 className="object-contain"
@@ -110,7 +116,7 @@ export function ProductFeatures({ data }: { data: ProductFeaturesData }) {
           </div>
           <div className="mt-6 flex flex-col gap-4">
             {data.items.map((item) => (
-              <FeatureCard key={item.title} item={item} />
+              <FeatureCard key={item.title.zh} item={item} lang={lang} />
             ))}
           </div>
         </div>
@@ -120,7 +126,7 @@ export function ProductFeatures({ data }: { data: ProductFeaturesData }) {
             <div className="relative aspect-[12288/8730] w-full overflow-hidden rounded-3xl">
               <Image
                 src={data.appShowcase.image}
-                alt={data.appShowcase.imageAlt ?? ""}
+                alt={data.appShowcase.imageAlt?.[lang] ?? ""}
                 fill
                 sizes="(min-width: 768px) 1024px, 100vw"
                 className="object-cover"
@@ -134,6 +140,7 @@ export function ProductFeatures({ data }: { data: ProductFeaturesData }) {
                     title: data.appShowcase.title,
                     description: data.appShowcase.description,
                   }}
+                  lang={lang}
                 />
               </div>
             </div>

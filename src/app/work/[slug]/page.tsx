@@ -255,7 +255,9 @@ export default async function ProjectCaseStudyPage({
                       <p className="text-xs font-medium text-muted-2">Role</p>
                       <ul className="mt-1 space-y-0.5 text-sm text-ink-soft">
                         {project.role.map((item) => (
-                          <li key={item}>{item}</li>
+                          <li key={typeof item === "string" ? item : item.zh}>
+                            {typeof item === "string" ? item : <Localized value={item} />}
+                          </li>
                         ))}
                       </ul>
                     </div>

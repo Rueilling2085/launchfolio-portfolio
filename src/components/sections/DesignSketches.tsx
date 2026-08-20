@@ -1,8 +1,11 @@
+"use client";
+
 import Image from "next/image";
 import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
 import { PulseDot } from "@/components/ui/PulseBadge";
 import { DesignPrinciples } from "@/components/sections/DesignPrinciples";
 import type { DesignSketches as DesignSketchesData } from "@/lib/data";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 function SketchFrame({
   src,
@@ -26,6 +29,7 @@ function SketchFrame({
 }
 
 export function DesignSketches({ data }: { data: DesignSketchesData }) {
+  const { lang } = useLanguage();
   const [first, second, third] = data.images;
 
   return (
@@ -37,7 +41,7 @@ export function DesignSketches({ data }: { data: DesignSketchesData }) {
           <RevealOnScroll className="flex justify-center">
             <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-medium text-white/80 backdrop-blur-sm">
               <PulseDot color="#8B7BFF" size={7} />
-              {data.eyebrow}
+              {data.eyebrow[lang]}
             </span>
           </RevealOnScroll>
         )}
@@ -46,12 +50,12 @@ export function DesignSketches({ data }: { data: DesignSketchesData }) {
           <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-4 md:p-8">
             <div className="flex flex-col gap-4 sm:flex-row">
               {first && (
-                <SketchFrame src={first.src} alt={first.alt} aspect="1386 / 990" className="sm:w-[54%]" />
+                <SketchFrame src={first.src} alt={first.alt?.[lang]} aspect="1386 / 990" className="sm:w-[54%]" />
               )}
               {third && (
                 <SketchFrame
                   src={third.src}
-                  alt={third.alt}
+                  alt={third.alt?.[lang]}
                   aspect="933 / 1311"
                   className="sm:w-[28%]"
                 />
@@ -59,7 +63,7 @@ export function DesignSketches({ data }: { data: DesignSketchesData }) {
               {second && (
                 <SketchFrame
                   src={second.src}
-                  alt={second.alt}
+                  alt={second.alt?.[lang]}
                   aspect="762 / 1691"
                   className="sm:w-[18%]"
                 />

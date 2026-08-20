@@ -1,9 +1,13 @@
+"use client";
+
 import Image from "next/image";
 import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
 import { PulseDot } from "@/components/ui/PulseBadge";
 import type { Prototyping as PrototypingData } from "@/lib/data";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 export function Prototyping({ data }: { data: PrototypingData }) {
+  const { lang } = useLanguage();
   return (
     <div className="relative left-1/2 w-screen -translate-x-1/2 overflow-hidden bg-[#0A0118] px-5 pb-16 pt-8 md:px-14 md:pb-24 md:pt-10">
       <div className="pointer-events-none absolute inset-x-0 top-0 h-2/3 bg-[radial-gradient(ellipse_60%_60%_at_50%_0%,rgba(85,50,250,0.25),transparent_70%)]" />
@@ -13,7 +17,7 @@ export function Prototyping({ data }: { data: PrototypingData }) {
           <RevealOnScroll className="flex justify-center">
             <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-medium text-white/80 backdrop-blur-sm">
               <PulseDot color="#8B7BFF" size={7} />
-              {data.eyebrow}
+              {data.eyebrow[lang]}
             </span>
           </RevealOnScroll>
         )}
@@ -24,7 +28,7 @@ export function Prototyping({ data }: { data: PrototypingData }) {
               <div className="grid w-full max-w-sm grid-cols-2 gap-5 sm:max-w-xl sm:gap-8 md:shrink-0">
                 {data.items.map((item) => (
                   <div
-                    key={item.label}
+                    key={item.label.zh}
                     className="relative aspect-[799/2047] w-full overflow-hidden rounded-2xl"
                   >
                     <div
@@ -36,7 +40,7 @@ export function Prototyping({ data }: { data: PrototypingData }) {
                     >
                       <Image
                         src={item.src}
-                        alt={item.alt ?? item.label}
+                        alt={item.alt?.[lang] ?? item.label[lang]}
                         fill
                         sizes="(min-width: 768px) 320px, 50vw"
                         className="object-cover"
@@ -44,7 +48,7 @@ export function Prototyping({ data }: { data: PrototypingData }) {
                     </div>
                     <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/70 via-black/25 to-transparent" />
                     <p className="absolute inset-x-0 bottom-4 text-center text-sm font-medium text-white">
-                      {item.label}
+                      {item.label[lang]}
                     </p>
                   </div>
                 ))}
@@ -52,7 +56,7 @@ export function Prototyping({ data }: { data: PrototypingData }) {
 
               {data.description && (
                 <p className="text-sm leading-relaxed text-white/70 md:text-base">
-                  {data.description}
+                  {data.description[lang]}
                 </p>
               )}
             </div>
@@ -64,12 +68,12 @@ export function Prototyping({ data }: { data: PrototypingData }) {
             <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-4 md:p-8">
               {data.wearingFlow.title && (
                 <h3 className="text-center text-sm font-bold text-white">
-                  {data.wearingFlow.title}
+                  {data.wearingFlow.title[lang]}
                 </h3>
               )}
               {data.wearingFlow.description && (
                 <p className="mx-auto mt-2 max-w-none text-center text-sm leading-relaxed text-white/70 md:whitespace-nowrap md:text-base">
-                  {data.wearingFlow.description}
+                  {data.wearingFlow.description[lang]}
                 </p>
               )}
 
@@ -84,7 +88,7 @@ export function Prototyping({ data }: { data: PrototypingData }) {
                     >
                       <Image
                         src={step.image}
-                        alt={step.imageAlt ?? step.label}
+                        alt={step.imageAlt?.[lang] ?? step.label[lang]}
                         fill
                         sizes="(min-width: 768px) 450px, 100vw"
                         className="object-contain object-bottom"
@@ -97,7 +101,7 @@ export function Prototyping({ data }: { data: PrototypingData }) {
                         <span className="text-3xl font-normal text-[#B9A6FF]/70">
                           {step.number}
                         </span>
-                        <p className="mt-1 text-sm font-medium text-white/80">{step.label}</p>
+                        <p className="mt-1 text-sm font-medium text-white/80">{step.label[lang]}</p>
                       </div>
                     </div>
                   ))}

@@ -4,6 +4,8 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Shapes, Hand, Cpu, ChevronDown, type LucideIcon } from "lucide-react";
 import type { DesignPrinciple } from "@/lib/data";
+import type { Localized } from "@/lib/i18n/resolve";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 const ICONS: Record<DesignPrinciple["icon"], LucideIcon> = {
   structure: Shapes,
@@ -15,10 +17,12 @@ function PrincipleAccordionItem({
   principle,
   isOpen,
   onToggle,
+  lang,
 }: {
   principle: DesignPrinciple;
   isOpen: boolean;
   onToggle: () => void;
+  lang: "zh" | "en";
 }) {
   const Icon = ICONS[principle.icon];
 
@@ -33,7 +37,7 @@ function PrincipleAccordionItem({
           <Icon size={18} />
         </span>
         <span className="flex-1 text-sm font-semibold text-white md:text-base">
-          {principle.title}
+          {principle.title[lang]}
         </span>
         <motion.span
           animate={{ rotate: isOpen ? 180 : 0 }}
@@ -55,10 +59,10 @@ function PrincipleAccordionItem({
           >
             <div className="flex flex-col gap-4 px-5 pb-5 pl-[68px]">
               {principle.items.map((item) => (
-                <div key={item.label}>
-                  <p className="text-sm font-medium text-white/90">{item.label}</p>
+                <div key={item.label.zh}>
+                  <p className="text-sm font-medium text-white/90">{item.label[lang]}</p>
                   <p className="mt-1 text-xs leading-relaxed text-white/60 md:text-sm">
-                    {item.description}
+                    {item.description[lang]}
                   </p>
                 </div>
               ))}
@@ -74,25 +78,27 @@ export function DesignPrinciples({
   intro,
   principles,
 }: {
-  intro?: string;
+  intro?: Localized;
   principles: DesignPrinciple[];
 }) {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const { lang } = useLanguage();
 
   return (
     <div className="mt-10">
       {intro && (
         <p className="whitespace-nowrap text-center text-sm leading-relaxed text-white/60 md:text-base">
-          {intro}
+          {intro[lang]}
         </p>
       )}
       <div className="mt-6 flex flex-col gap-3">
         {principles.map((principle, i) => (
           <PrincipleAccordionItem
-            key={principle.title}
+            key={principle.title.zh}
             principle={principle}
             isOpen={openIndex === i}
             onToggle={() => setOpenIndex(openIndex === i ? null : i)}
+            lang={lang}
           />
         ))}
       </div>

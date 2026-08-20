@@ -1,7 +1,10 @@
+"use client";
+
 import { Compass, Lightbulb, type LucideIcon } from "lucide-react";
 import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
 import { PulseDot } from "@/components/ui/PulseBadge";
 import type { Reflection } from "@/lib/data";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 const ICONS: Record<Reflection["blocks"][number]["icon"], LucideIcon> = {
   insight: Lightbulb,
@@ -9,6 +12,7 @@ const ICONS: Record<Reflection["blocks"][number]["icon"], LucideIcon> = {
 };
 
 export function ProjectReflection({ data }: { data: Reflection }) {
+  const { lang } = useLanguage();
   return (
     <div className="relative left-1/2 w-screen -translate-x-1/2 overflow-hidden bg-[#0A0118] px-5 py-16 md:px-14 md:py-24">
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-2/3 bg-[radial-gradient(ellipse_60%_60%_at_50%_100%,rgba(85,50,250,0.22),transparent_70%)]" />

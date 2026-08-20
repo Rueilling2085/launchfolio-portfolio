@@ -86,11 +86,15 @@ export function ProjectMetaCards({ project, dark }: { project: Project; dark?: b
         ))}
       </MetaCard>
       <MetaCard icon={Briefcase} label={COPY.role[lang]} dark={dark}>
-        {project.role.map((item) => (
-          <span key={item} className="block">
-            {item}
-          </span>
-        ))}
+        {project.role.map((item) => {
+          const text = typeof item === "string" ? item : item[lang];
+          const key = typeof item === "string" ? item : item.zh;
+          return (
+            <span key={key} className="block">
+              {text}
+            </span>
+          );
+        })}
       </MetaCard>
       {awards && awards.length > 0 && (
         <MetaCard icon={Award} label={COPY.awards[lang]} dark={dark}>

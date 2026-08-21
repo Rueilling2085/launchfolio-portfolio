@@ -123,7 +123,7 @@ export function CompetitorAnalysis({ data }: { data: CompetitorAnalysisData }) {
       {/* Shape of AI — Madlibs pattern reference */}
       <RevealOnScroll delay={0.1} className="mt-10">
         <div className="rounded-2xl border border-line bg-paper-alt p-6 md:p-10">
-          <p className="text-sm font-semibold text-ink md:text-base">{data.patternRef.title}</p>
+          <p className="text-sm font-semibold text-ink md:text-base">{data.patternRef.title[lang]}</p>
           <p className="mt-3 text-[13px] text-muted">
             {data.patternRef.intro[lang]}{" "}
             <a
@@ -139,7 +139,7 @@ export function CompetitorAnalysis({ data }: { data: CompetitorAnalysisData }) {
           <div className="relative mt-5 aspect-[3/1] w-full overflow-hidden rounded-xl border border-line bg-white">
             <img
               src={data.patternRef.image}
-              alt={data.patternRef.title}
+              alt={data.patternRef.title[lang]}
               className="absolute inset-0 h-full w-full object-cover object-top"
             />
             <ImageCallout

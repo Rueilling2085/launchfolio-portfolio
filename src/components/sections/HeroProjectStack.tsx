@@ -4,31 +4,33 @@ import { useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronRight } from "lucide-react";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 const photos = [
   {
     src: "/images/profile-headshot.jpg",
-    alt: "Jui-Ling Lin",
-    caption: "嗨，這是我！",
+    alt: { zh: "Jui-Ling Lin", en: "Jui-Ling Lin" },
+    caption: { zh: "嗨，這是我！", en: "Hi, this is me!" },
   },
   {
     src: "/images/hero/ida-award.jpg",
-    alt: "19th IDA Design Awards",
-    caption: "19th IDA Design Awards",
+    alt: { zh: "19th IDA Design Awards", en: "19th IDA Design Awards" },
+    caption: { zh: "19th IDA Design Awards", en: "19th IDA Design Awards" },
   },
   {
     src: "/images/hero/presentation.jpg",
-    alt: "研究成果發表",
-    caption: "成果發表會",
+    alt: { zh: "研究成果發表", en: "Presenting my research findings" },
+    caption: { zh: "成果發表會", en: "Research presentation" },
   },
   {
     src: "/images/hero/presentation-landscape.jpg",
-    alt: "研究發表",
-    caption: "研究發表",
+    alt: { zh: "研究發表", en: "Research presentation" },
+    caption: { zh: "研究發表", en: "Research presentation" },
   },
 ];
 
 export function HeroProjectStack() {
+  const { lang } = useLanguage();
   const [index, setIndex] = useState(0);
   const photo = photos[index];
 
@@ -52,7 +54,7 @@ export function HeroProjectStack() {
             >
               <Image
                 src={photo.src}
-                alt={photo.alt}
+                alt={photo.alt[lang]}
                 fill
                 sizes="360px"
                 className="object-cover"
@@ -72,14 +74,14 @@ export function HeroProjectStack() {
         <div>
           <AnimatePresence mode="wait">
             <motion.p
-              key={photo.caption}
+              key={photo.caption.zh}
               className="text-sm text-muted-2"
               initial={{ opacity: 0, y: 4 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -4 }}
               transition={{ duration: 0.3 }}
             >
-              {photo.caption}
+              {photo.caption[lang]}
             </motion.p>
           </AnimatePresence>
           <div className="mt-2 flex gap-1.5">

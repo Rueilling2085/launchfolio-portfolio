@@ -9,7 +9,13 @@ import type { HowItWorks as HowItWorksData } from "@/lib/data";
 import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 const STEP_DURATION = 5;
-const COPY = { step: { zh: "步驟", en: "Step" } } as const;
+const COPY = {
+  step: { zh: "步驟", en: "Step" },
+  scenarioAlt: {
+    zh: "職環安人員於現場使用 VisionDetect AI 監控儀表板",
+    en: "EHS staff using the VisionDetect AI monitoring dashboard on-site",
+  },
+} as const;
 
 function isVideo(src: string) {
   return /\.(mp4|webm|mov)$/i.test(src);
@@ -61,7 +67,7 @@ export function HowItWorks({
         <div className="relative aspect-[16/9] w-full overflow-hidden rounded-2xl border border-line">
           <Image
             src="/images/projects/vision-detect/ehs-persona-scenario.png"
-            alt="職環安人員於現場使用 VisionDetect AI 監控儀表板"
+            alt={COPY.scenarioAlt[lang]}
             fill
             sizes="(min-width: 768px) 800px, 100vw"
             className="object-cover"

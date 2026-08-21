@@ -25,7 +25,7 @@ export type ProjectBackgroundItem = {
 };
 
 export type MatrixBubble = {
-  label: string;
+  label: Localized;
   top: number;
   left: number;
   size: number;
@@ -34,50 +34,50 @@ export type MatrixBubble = {
 };
 
 export type MatrixDot = {
-  label: string;
+  label: Localized;
   top: number;
   left: number;
   tier: 1 | 2;
 };
 
 export type MatrixExcluded = {
-  label: string;
+  label: Localized;
   top: number;
   left: number;
   size: number;
 };
 
 export type MatrixSideCard = {
-  title: string;
+  title: Localized;
   image: string;
-  description: string;
+  description: Localized;
   imagePosition?: string;
 };
 
 export type PriorityMatrix = {
-  legend: { tier: 1 | 2 | 3; label: string }[];
+  legend: { tier: 1 | 2 | 3; label: Localized }[];
   bubbles: MatrixBubble[];
   dots: MatrixDot[];
   excluded: MatrixExcluded[];
-  axis: { top: string; bottom: string; right: string; yLabel: string; xLabel: string };
+  axis: { top: Localized; bottom: Localized; right: Localized; yLabel: Localized; xLabel: Localized };
   sideCards: MatrixSideCard[];
 };
 
 export type ProcessStep = {
-  label: string[];
+  label: Localized[];
   emphasis: boolean;
 };
 
 export type ProcessSolution = {
   icon: string;
-  title: string;
-  description: string;
+  title: Localized;
+  description: Localized;
 };
 
 export type ProcessPainPoint = {
   step: number;
-  title: string;
-  description: string;
+  title: Localized;
+  description: Localized;
   solution: ProcessSolution;
 };
 
@@ -223,7 +223,7 @@ export type CompetitorCriterion = {
 
 export type CompetitorPatternRef = {
   tag: string;
-  title: string;
+  title: Localized;
   intro: Localized;
   sourceLabel: string;
   sourceUrl: string;
@@ -836,27 +836,27 @@ export const projects: Project[] = [
     },
     priorityMatrix: {
       legend: [
-        { tier: 1, label: "最終採用．優先 PoC 場域" },
-        { tier: 2, label: "候選場域．本輪未列入優先" },
-        { tier: 3, label: "已排除（硬體／技術限制）" },
+        { tier: 1, label: { zh: "最終採用．優先 PoC 場域", en: "Selected — priority PoC setting" } },
+        { tier: 2, label: { zh: "候選場域．本輪未列入優先", en: "Candidate — not prioritized this round" } },
+        { tier: 3, label: { zh: "已排除（硬體／技術限制）", en: "Excluded (hardware / technical limits)" } },
       ],
       bubbles: [
         {
-          label: "危險性機械\n行動警戒",
+          label: { zh: "危險性機械\n行動警戒", en: "Hazardous machinery\nmotion alerts" },
           top: 18,
           left: 69,
           size: 116,
           tier: 1,
         },
         {
-          label: "配戴用具的確實度",
+          label: { zh: "配戴用具的確實度", en: "PPE compliance" },
           top: 36,
           left: 87,
           size: 110,
           tier: 1,
         },
         {
-          label: "管制區域進出偵測",
+          label: { zh: "管制區域進出偵測", en: "Restricted-area access detection" },
           top: 70,
           left: 64,
           size: 112,
@@ -864,80 +864,90 @@ export const projects: Project[] = [
         },
       ],
       dots: [
-        { label: "無塵室服裝規範", top: 48, left: 47, tier: 2 },
-        { label: "承包商安全監控", top: 55, left: 47, tier: 2 },
-        { label: "管制區域控管", top: 61, left: 33, tier: 2 },
-        { label: "人員作業區域", top: 67, left: 33, tier: 2 },
-        { label: "無塵室門禁控管", top: 73, left: 33, tier: 2 },
+        { label: { zh: "無塵室服裝規範", en: "Cleanroom attire compliance" }, top: 48, left: 47, tier: 2 },
+        { label: { zh: "承包商安全監控", en: "Contractor safety monitoring" }, top: 55, left: 47, tier: 2 },
+        { label: { zh: "管制區域控管", en: "Restricted-area control" }, top: 61, left: 33, tier: 2 },
+        { label: { zh: "人員作業區域", en: "Personnel work-zone tracking" }, top: 67, left: 33, tier: 2 },
+        { label: { zh: "無塵室門禁控管", en: "Cleanroom access control" }, top: 73, left: 33, tier: 2 },
       ],
       excluded: [
-        { label: "設備周界警示", top: 63, left: 15, size: 108 },
-        { label: "氣體洩漏偵測", top: 82, left: 10, size: 92 },
+        { label: { zh: "設備周界警示", en: "Equipment perimeter alerts" }, top: 63, left: 15, size: 108 },
+        { label: { zh: "氣體洩漏偵測", en: "Gas-leak detection" }, top: 82, left: 10, size: 92 },
       ],
       axis: {
-        top: "優先度高",
-        bottom: "優先度低",
-        right: "可行性高",
-        yLabel: "客戶期望優先度",
-        xLabel: "技術可行性",
+        top: { zh: "優先度高", en: "High priority" },
+        bottom: { zh: "優先度低", en: "Low priority" },
+        right: { zh: "可行性高", en: "High feasibility" },
+        yLabel: { zh: "客戶期望優先度", en: "Client-expected priority" },
+        xLabel: { zh: "技術可行性", en: "Technical feasibility" },
       },
       sideCards: [
         {
-          title: "危險性機械行動警戒",
+          title: { zh: "危險性機械行動警戒", en: "Hazardous Machinery Motion Alerts" },
           image: "/images/projects/vision-detect/scenario-forklift.png",
-          description: "偵測堆高機是否有超速行駛的情況。",
+          description: { zh: "偵測堆高機是否有超速行駛的情況。", en: "Detects whether a forklift is moving above the speed limit." },
         },
         {
-          title: "配戴用具的確實度",
+          title: { zh: "配戴用具的確實度", en: "PPE Compliance" },
           image: "/images/projects/vision-detect/scenario-ppe.png",
-          description: "偵測承攬商是否確實配戴，個人防護用具或相關設備。",
+          description: { zh: "偵測承攬商是否確實配戴，個人防護用具或相關設備。", en: "Detects whether contractors are properly wearing personal protective equipment." },
           imagePosition: "center 15%",
         },
       ],
     },
     processFlow: {
       steps: [
-        { label: ["巡檢準備", "與路線規劃"], emphasis: false },
-        { label: ["承包商聯繫", "與說明"], emphasis: false },
-        { label: ["現場", "巡檢"], emphasis: true },
-        { label: ["事件發生", "與處理"], emphasis: true },
-        { label: ["重大事故", "通報與調查"], emphasis: true },
-        { label: ["定期報告", "與稽核"], emphasis: false },
+        { label: [{ zh: "巡檢準備", en: "Patrol" }, { zh: "與路線規劃", en: "prep & routing" }], emphasis: false },
+        { label: [{ zh: "承包商聯繫", en: "Contractor" }, { zh: "與說明", en: "contact & briefing" }], emphasis: false },
+        { label: [{ zh: "現場", en: "On-site" }, { zh: "巡檢", en: "patrol" }], emphasis: true },
+        { label: [{ zh: "事件發生", en: "Incident" }, { zh: "與處理", en: "occurs & is handled" }], emphasis: true },
+        { label: [{ zh: "重大事故", en: "Major incident" }, { zh: "通報與調查", en: "reporting & investigation" }], emphasis: true },
+        { label: [{ zh: "定期報告", en: "Periodic" }, { zh: "與稽核", en: "reporting & audit" }], emphasis: false },
       ],
       painPoints: [
         {
           step: 3,
-          title: "現場巡檢",
-          description:
-            "人工巡檢一天僅 2–3 次，留下大量監控空窗。",
+          title: { zh: "現場巡檢", en: "On-Site Patrol" },
+          description: {
+            zh: "人工巡檢一天僅 2–3 次，留下大量監控空窗。",
+            en: "Manual patrols run only 2–3 times a day, leaving large monitoring gaps.",
+          },
           solution: {
             icon: "scan-eye",
-            title: "24 小時主動式 VLM 影像監控",
-            description: "補足人工巡檢時段之間的空窗。",
+            title: { zh: "24 小時主動式 VLM 影像監控", en: "24-Hour Proactive VLM Video Monitoring" },
+            description: { zh: "補足人工巡檢時段之間的空窗。", en: "Closes the gaps between manual patrol rounds." },
           },
         },
         {
           step: 4,
-          title: "事件發生與處理",
-          description:
-            "傳統 CCTV 只被動錄影，缺乏即時異常偵測，安全空窗未能改善。",
+          title: { zh: "事件發生與處理", en: "Incident Occurrence & Handling" },
+          description: {
+            zh: "傳統 CCTV 只被動錄影，缺乏即時異常偵測，安全空窗未能改善。",
+            en: "Traditional CCTV only records passively, with no real-time anomaly detection, so the safety gap goes unaddressed.",
+          },
           solution: {
             icon: "scan-eye",
-            title: "透過 VLM 主動偵測違規與異常",
-            description:
-              "從「被動錄影」轉為「主動分析」，即時保存影像證據。",
+            title: { zh: "透過 VLM 主動偵測違規與異常", en: "Proactive VLM Detection of Violations & Anomalies" },
+            description: {
+              zh: "從「被動錄影」轉為「主動分析」，即時保存影像證據。",
+              en: "Shifts from \"passive recording\" to \"proactive analysis,\" preserving video evidence in real time.",
+            },
           },
         },
         {
           step: 5,
-          title: "重大事故通報與調查",
-          description:
-            "重大事故發生時，關鍵資訊（如事件時間軸、成因）無法即時取得。",
+          title: { zh: "重大事故通報與調查", en: "Major Incident Reporting & Investigation" },
+          description: {
+            zh: "重大事故發生時，關鍵資訊（如事件時間軸、成因）無法即時取得。",
+            en: "When a major incident occurs, key information — the timeline, the root cause — isn't available in real time.",
+          },
           solution: {
             icon: "bot-message-square",
-            title: "LLM 驅動的事件重建與自動報告生成",
-            description:
-              "整合事件時間軸、偵測結果與影像證據，可用自然語言快速查詢，8 小時內生成符合 ISO 45001 標準的稽核報告。",
+            title: { zh: "LLM 驅動的事件重建與自動報告生成", en: "LLM-Driven Incident Reconstruction & Auto Report Generation" },
+            description: {
+              zh: "整合事件時間軸、偵測結果與影像證據，可用自然語言快速查詢，8 小時內生成符合 ISO 45001 標準的稽核報告。",
+              en: "Consolidates the incident timeline, detection results, and video evidence into a natural-language-searchable record, generating an ISO 45001-compliant audit report within 8 hours.",
+            },
           },
         },
       ],
@@ -1136,7 +1146,10 @@ export const projects: Project[] = [
       ],
       patternRef: {
         tag: "S/AI",
-        title: "設計原則參考｜Shape of AI — Madlibs Pattern",
+        title: {
+          zh: "設計原則參考｜Shape of AI — Madlibs Pattern",
+          en: "Design Principle Reference | Shape of AI — Madlibs Pattern",
+        },
         intro: { zh: "競品之外，同時參考 AI Patterns 資料庫：", en: "Beyond competitors, I also referenced the AI Patterns database:" },
         sourceLabel: "shapeof.ai/patterns/madlibs",
         sourceUrl: "https://shapeof.ai/patterns/madlibs",

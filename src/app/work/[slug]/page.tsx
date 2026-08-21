@@ -365,7 +365,12 @@ export default async function ProjectCaseStudyPage({
             <div id="how-it-works" className="scroll-mt-24">
               <div className="mt-10 md:mt-14">
                 <NextStepDecision>
-                  為回應上述使用者需求，與 PM 共同定義本產品的操作流程。
+                  <Localized
+                    value={{
+                      zh: "為回應上述使用者需求，與 PM 共同定義本產品的操作流程。",
+                      en: "In response to these user needs, I worked with the PM to define how the product's operating flow would work.",
+                    }}
+                  />
                 </NextStepDecision>
               </div>
               <HowItWorks data={project.howItWorks} avatar={project.personaAvatar} />

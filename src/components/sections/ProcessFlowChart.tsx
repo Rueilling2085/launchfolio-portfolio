@@ -9,6 +9,7 @@ import {
 import Image from "next/image";
 import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
 import { NextStepDecision } from "@/components/ui/NextStepDecision";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 import type { ProcessFlow } from "@/lib/data";
 
 const SOLUTION_ICONS: Record<string, LucideIcon> = {
@@ -16,11 +17,30 @@ const SOLUTION_ICONS: Record<string, LucideIcon> = {
   "bot-message-square": BotMessageSquare,
 };
 
+const COPY = {
+  decisionLead: {
+    zh: "確定驗證場域後，進一步訪談",
+    en: "After settling on the validation setting, I went further and interviewed",
+  },
+  decisionHighlight: {
+    zh: "最了解工廠職安合規的角色「職環安人員」",
+    en: "the role that knows factory safety compliance best: EHS staff",
+  },
+  heading: {
+    zh: "分析職環安人員工作流程，找出產品導入節點",
+    en: "Mapping EHS Workflows to Find Where the Product Fits In",
+  },
+  imageAlt: {
+    zh: "職環安人員於倉儲現場巡檢",
+    en: "EHS staff conducting a patrol at a warehouse site",
+  },
+} as const;
+
 const META = [
-  { label: "Persona", value: "職環安人員（EHS）" },
-  { label: "Services", value: "精密機械加工廠與化學濾網廠" },
-  { label: "Goal", value: "工區巡查與安全監督" },
-];
+  { label: "Persona", value: { zh: "職環安人員（EHS）", en: "EHS staff" } },
+  { label: "Services", value: { zh: "精密機械加工廠與化學濾網廠", en: "Precision machining plants & chemical filter factories" } },
+  { label: "Goal", value: { zh: "工區巡查與安全監督", en: "Site patrols & safety oversight" } },
+] as const;
 
 export function ProcessFlowChart({
   data,
@@ -29,17 +49,18 @@ export function ProcessFlowChart({
   data: ProcessFlow;
   avatar?: string;
 }) {
+  const { lang } = useLanguage();
   return (
     <RevealOnScroll>
       <div>
           <div className="mx-auto max-w-2xl text-center">
             <NextStepDecision>
-              確定驗證場域後，進一步訪談
-              <span className="text-ink">最了解工廠職安合規的角色「職環安人員」</span>
+              {COPY.decisionLead[lang]}
+              <span className="text-ink">{COPY.decisionHighlight[lang]}</span>
             </NextStepDecision>
 
             <h3 className="mt-3 text-2xl font-semibold tracking-tight text-ink md:text-3xl">
-              分析職環安人員工作流程，找出產品導入節點
+              {COPY.heading[lang]}
             </h3>
           </div>
 
@@ -47,7 +68,7 @@ export function ProcessFlowChart({
           <div className="relative aspect-[21/9] w-full overflow-hidden rounded-2xl">
             <Image
               src="/images/projects/vision-detect/journey-photo-TEMP-watermarked.png"
-              alt="職環安人員於倉儲現場巡檢"
+              alt={COPY.imageAlt[lang]}
               fill
               sizes="(min-width: 768px) 900px, 100vw"
               className="object-cover brightness-90 saturate-75"
@@ -66,7 +87,7 @@ export function ProcessFlowChart({
                 {META.map((item) => (
                   <span key={item.label}>
                     <span className="font-semibold text-white">{item.label}: </span>
-                    {item.value}
+                    {item.value[lang]}
                   </span>
                 ))}
               </div>
@@ -89,8 +110,8 @@ export function ProcessFlowChart({
                       }`}
                     >
                       {step.label.map((line) => (
-                        <span key={line} className="block whitespace-nowrap">
-                          {line}
+                        <span key={line.zh} className="block whitespace-nowrap">
+                          {line[lang]}
                         </span>
                       ))}
                     </p>
@@ -112,8 +133,8 @@ export function ProcessFlowChart({
                 <span className="inline-flex items-center rounded-full bg-red-50 px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-red-600">
                   Problem
                 </span>
-                <p className="mt-2 text-xs text-ink">{pp.title}</p>
-                <p className="mt-2 text-xs leading-relaxed text-muted">{pp.description}</p>
+                <p className="mt-2 text-xs text-ink">{pp.title[lang]}</p>
+                <p className="mt-2 text-xs leading-relaxed text-muted">{pp.description[lang]}</p>
               </div>
             ))}
           </div>
@@ -131,9 +152,9 @@ export function ProcessFlowChart({
                       <SolutionIcon size={16} className="mt-0.5 shrink-0 text-[#0B7DC9]" />
                     )}
                     <div>
-                      <p className="text-xs text-ink">{pp.solution.title}</p>
+                      <p className="text-xs text-ink">{pp.solution.title[lang]}</p>
                       <p className="mt-1 text-xs leading-relaxed text-ink-soft/80">
-                        {pp.solution.description}
+                        {pp.solution.description[lang]}
                       </p>
                     </div>
                   </div>

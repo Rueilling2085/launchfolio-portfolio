@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { ChevronDown, Rocket } from "lucide-react";
+import { Localized } from "@/lib/i18n/Localized";
 
 function GlowLine() {
   return (
@@ -15,7 +16,9 @@ export function NextStepDecision({ children }: { children: ReactNode }) {
         <span className="mx-auto mb-2 mt-5 flex h-11 w-11 items-center justify-center rounded-2xl bg-[#D8EEFD] text-[#0B7DC9]">
           <Rocket size={20} />
         </span>
-        <p className="text-[11px] font-semibold text-ink-soft">下一步決策</p>
+        <p className="text-[11px] font-semibold text-ink-soft">
+          <Localized value={{ zh: "下一步決策", en: "Next Step" }} />
+        </p>
         <p className="mt-2.5 text-sm leading-relaxed text-muted md:text-base">{children}</p>
         <div className="mt-5">
           <GlowLine />

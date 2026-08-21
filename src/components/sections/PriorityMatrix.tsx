@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 import type {
   PriorityMatrix as PriorityMatrixData,
   MatrixBubble,
@@ -18,6 +19,7 @@ const TIER_COLOR: Record<1 | 2, string> = {
 const PLOT_HEIGHT = "h-[300px] sm:h-[360px] lg:h-[440px]";
 
 function Bubble({ bubble }: { bubble: MatrixBubble }) {
+  const { lang } = useLanguage();
   const isPrimary = bubble.tier === 1;
   const color = TIER_COLOR[bubble.tier];
   return (
@@ -41,7 +43,7 @@ function Bubble({ bubble }: { bubble: MatrixBubble }) {
         }`}
         style={{ backgroundColor: isPrimary ? "#D8EEFD" : "rgba(148,153,161,0.18)" }}
       >
-        {bubble.label.split("\n").map((line, i) => (
+        {bubble.label[lang].split("\n").map((line, i) => (
           <span key={i} className="block whitespace-nowrap">
             {line}
           </span>
@@ -52,6 +54,7 @@ function Bubble({ bubble }: { bubble: MatrixBubble }) {
 }
 
 function Dot({ dot }: { dot: MatrixDot }) {
+  const { lang } = useLanguage();
   return (
     <div
       className="absolute flex -translate-y-1/2 items-center gap-1.5 whitespace-nowrap text-[11px] text-muted"
@@ -61,18 +64,19 @@ function Dot({ dot }: { dot: MatrixDot }) {
         className="h-2 w-2 shrink-0 rounded-full"
         style={{ backgroundColor: TIER_COLOR[dot.tier] }}
       />
-      {dot.label}
+      {dot.label[lang]}
     </div>
   );
 }
 
 function Excluded({ item }: { item: MatrixExcluded }) {
+  const { lang } = useLanguage();
   return (
     <div
       className="absolute flex -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-dashed border-muted-2 px-2 text-center text-[10px] leading-tight text-muted"
       style={{ top: `${item.top}%`, left: `${item.left}%`, width: item.size, height: item.size }}
     >
-      {item.label}
+      {item.label[lang]}
     </div>
   );
 }
@@ -92,6 +96,22 @@ function AxisPill({ label, direction }: { label: string; direction: "up" | "down
   );
 }
 
+function CardImageCaption({
+  title,
+  description,
+}: {
+  title: MatrixSideCard["title"];
+  description: MatrixSideCard["description"];
+}) {
+  const { lang } = useLanguage();
+  return (
+    <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black/75 via-black/10 to-transparent p-3 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+      <p className="text-xs font-semibold text-white">{title[lang]}</p>
+      <p className="mt-1 text-[11px] leading-snug text-white/80">{description[lang]}</p>
+    </div>
+  );
+}
+
 function LegendDot({ tier }: { tier: 1 | 2 | 3 }) {
   if (tier === 3) {
     return <span className="h-3 w-3 shrink-0 rounded-full border border-dashed border-muted-2" />;
@@ -104,59 +124,53 @@ function LegendDot({ tier }: { tier: 1 | 2 | 3 }) {
   );
 }
 
-function CaptionOverlay({ card }: { card: MatrixSideCard }) {
-  return (
-    <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black/75 via-black/10 to-transparent p-3 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-      <p className="text-xs font-semibold text-white">{card.title}</p>
-      <p className="mt-1 text-[11px] leading-snug text-white/80">{card.description}</p>
-    </div>
-  );
-}
-
 function PositionedImageCard({ card, top }: { card: MatrixSideCard; top: number }) {
+  const { lang } = useLanguage();
   return (
     <div className="absolute left-0 right-0 -translate-y-1/2" style={{ top: `${top}%` }}>
       <div className="group relative aspect-[4/3] w-full overflow-hidden rounded-xl border border-line shadow-sm">
         <Image
           src={card.image}
-          alt={card.title}
+          alt={card.title[lang]}
           fill
           sizes="300px"
           style={{ objectPosition: card.imagePosition }}
           className="object-cover transition-transform duration-500 group-hover:scale-105"
         />
-        <CaptionOverlay card={card} />
+        <CardImageCaption title={card.title} description={card.description} />
       </div>
     </div>
   );
 }
 
 function SimpleImageCard({ card }: { card: MatrixSideCard }) {
+  const { lang } = useLanguage();
   return (
     <div className="group relative aspect-[4/3] w-full overflow-hidden rounded-xl border border-line">
       <Image
         src={card.image}
-        alt={card.title}
+        alt={card.title[lang]}
         fill
         sizes="(max-width: 640px) 50vw, 320px"
         style={{ objectPosition: card.imagePosition }}
         className="object-cover transition-transform duration-500 group-hover:scale-105"
       />
-      <CaptionOverlay card={card} />
+      <CardImageCaption title={card.title} description={card.description} />
     </div>
   );
 }
 
 export function PriorityMatrix({ data }: { data: PriorityMatrixData }) {
+  const { lang } = useLanguage();
   const imageTops = [24, 79];
 
   return (
     <div>
       <div className="mb-7 flex flex-wrap items-center gap-x-5 gap-y-2 text-[11px] text-muted">
         {data.legend.map((item) => (
-          <span key={item.label} className="flex items-center gap-2">
+          <span key={item.label.zh} className="flex items-center gap-2">
             <LegendDot tier={item.tier} />
-            {item.label}
+            {item.label[lang]}
           </span>
         ))}
       </div>
@@ -165,13 +179,13 @@ export function PriorityMatrix({ data }: { data: PriorityMatrixData }) {
         <div className="flex-1">
             <div className="flex items-stretch gap-2.5">
               <div className={`flex w-16 shrink-0 flex-col items-center justify-between text-[11px] text-ink ${PLOT_HEIGHT}`}>
-                <AxisPill label={data.axis.top} direction="up" />
+                <AxisPill label={data.axis.top[lang]} direction="up" />
                 <span className="flex flex-1 items-center justify-center">
                   <span className="-rotate-90 whitespace-nowrap font-medium">
-                    {data.axis.yLabel} →
+                    {data.axis.yLabel[lang]} →
                   </span>
                 </span>
-                <AxisPill label={data.axis.bottom} direction="down" />
+                <AxisPill label={data.axis.bottom[lang]} direction="down" />
               </div>
 
               <div className="relative min-w-0 flex-1">
@@ -182,34 +196,34 @@ export function PriorityMatrix({ data }: { data: PriorityMatrixData }) {
                   <span className="absolute inset-y-0 left-1/2 border-l border-dashed border-[#B7BCC4]" />
 
                   {data.excluded.map((item) => (
-                    <Excluded key={item.label} item={item} />
+                    <Excluded key={item.label.zh} item={item} />
                   ))}
                   {data.dots.map((dot) => (
-                    <Dot key={dot.label} dot={dot} />
+                    <Dot key={dot.label.zh} dot={dot} />
                   ))}
                   {data.bubbles.map((bubble) => (
-                    <Bubble key={bubble.label} bubble={bubble} />
+                    <Bubble key={bubble.label.zh} bubble={bubble} />
                   ))}
                 </div>
 
                 <div className="mt-2 flex items-center justify-end">
-                  <AxisPill label={data.axis.right} direction="right" />
+                  <AxisPill label={data.axis.right[lang]} direction="right" />
                 </div>
-                <p className="mt-1 text-center text-[11px] font-medium text-ink">{data.axis.xLabel} →</p>
+                <p className="mt-1 text-center text-[11px] font-medium text-ink">{data.axis.xLabel[lang]} →</p>
               </div>
             </div>
         </div>
 
         <div className={`relative hidden w-[300px] shrink-0 lg:block ${PLOT_HEIGHT}`}>
           {data.sideCards.map((card, i) => (
-            <PositionedImageCard key={card.title} card={card} top={imageTops[i]} />
+            <PositionedImageCard key={card.title.zh} card={card} top={imageTops[i]} />
           ))}
         </div>
       </div>
 
       <div className="mt-8 grid grid-cols-2 gap-4 lg:hidden">
         {data.sideCards.map((card) => (
-          <SimpleImageCard key={card.title} card={card} />
+          <SimpleImageCard key={card.title.zh} card={card} />
         ))}
       </div>
     </div>

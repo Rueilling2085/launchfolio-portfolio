@@ -32,7 +32,7 @@ const WORKFLOW_COPY = {
   cam3Title: { zh: "攝影機 3．測試與設定", en: "Camera 3 · Test & Setup" },
   cam3Desc: {
     zh: "……再重複一次，時間隨攝影機數量線性增加。",
-    en: "…and repeat again — time scales linearly with camera count.",
+    en: "…and repeat again, as time scales linearly with camera count.",
   },
   zoneTitle: { zh: "影像來源 1．測試區", en: "Source 1 · Test Zone" },
   zoneDesc: { zh: "在這裡微調一次偵測 Prompt 即可。", en: "Tune the detection prompt here, just once." },
@@ -83,13 +83,13 @@ function BeforeAfterSlider({
       >
         <img
           src={afterImage}
-          alt={`${title} — After`}
+          alt={`${title}, After`}
           draggable={false}
           className="absolute inset-0 h-full w-full object-cover"
         />
         <img
           src={beforeImage}
-          alt={`${title} — Before`}
+          alt={`${title}, Before`}
           draggable={false}
           className="absolute inset-0 h-full w-full object-cover"
           style={{ clipPath: `inset(0 ${100 - percent}% 0 0)` }}
@@ -152,7 +152,7 @@ function AnnotatedBeforeAfter({
             )}
             <img
               src={beforeImage}
-              alt={`${title} — Before`}
+              alt={`${title}, Before`}
               className="w-full rounded-xl shadow-[0_20px_40px_-16px_rgba(0,0,0,0.35)]"
             />
           </div>
@@ -166,7 +166,7 @@ function AnnotatedBeforeAfter({
             )}
             <img
               src={afterImage}
-              alt={`${title} — After`}
+              alt={`${title}, After`}
               className="w-full rounded-xl shadow-[0_20px_40px_-16px_rgba(0,0,0,0.35)]"
             />
           </div>
@@ -467,7 +467,7 @@ function PromptOptimization({
                   <span className="shrink-0 inline-flex items-center rounded-full bg-red-50 px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-red-600">
                     Before
                   </span>
-                  <p className="text-[13px] font-normal text-white">{painPoint}</p>
+                  <p className="text-[15px] font-normal text-white">{painPoint}</p>
                 </div>
               </>
             )}
@@ -489,7 +489,7 @@ function PromptOptimization({
                   <span className="shrink-0 inline-flex items-center rounded-full bg-[#D8EEFD] px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-[#0B7DC9]">
                     After
                   </span>
-                  <p className="text-[13px] font-normal text-white">{solution}</p>
+                  <p className="text-[15px] font-normal text-white">{solution}</p>
                 </div>
               </>
             )}

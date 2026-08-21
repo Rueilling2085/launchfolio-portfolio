@@ -723,7 +723,7 @@ export const projects: Project[] = [
     deviceMockup: false,
     description: {
       zh: "一套 AI 智慧監控平台，透過電腦視覺與生成式 AI 技術，補足職安巡檢間的監控盲區，提升工廠安全管理效率。\n針對研華智慧製造場域需求，設計跨產業 AI 影像分析系統，結合 VLM 視覺偵測與 LLM 對話技術，並透過結構化 Prompt 設計降低 AI 使用門檻，打造直覺化、易操作的監控介面。協助職安人員快速建立偵測條件，即時辨識現場安全風險、追蹤事件脈絡，並自動生成符合 ISO 45001 規範的稽核報告，將傳統被動式監控轉化為主動式智慧安全管理。",
-      en: "An AI monitoring platform that uses computer vision and generative AI to close the surveillance gap between manual safety patrols, raising factory safety-management efficiency.\nBuilt for Advantech's smart-manufacturing use case: a cross-industry AI image-analysis system combining VLM visual detection with LLM conversation, using structured prompt design to lower the barrier to using AI and produce an intuitive, easy-to-operate monitoring interface. It helps EHS staff quickly set up detection conditions, spot on-site safety risks in real time, trace incident context, and auto-generate ISO 45001-compliant audit reports — turning reactive monitoring into proactive, intelligent safety management.",
+      en: "An AI monitoring platform that uses computer vision and generative AI to close the surveillance gap between manual safety patrols, raising factory safety-management efficiency.\nBuilt for Advantech's smart-manufacturing use case: a cross-industry AI image-analysis system combining VLM visual detection with LLM conversation, using structured prompt design to lower the barrier to using AI and produce an intuitive, easy-to-operate monitoring interface. It helps EHS staff quickly set up detection conditions, spot on-site safety risks in real time, trace incident context, and auto-generate ISO 45001-compliant audit reports, turning reactive monitoring into proactive, intelligent safety management.",
     },
     cardTags: ["0→1 Product", "B2B AI SaaS"],
     cardHeadline: {
@@ -732,7 +732,7 @@ export const projects: Project[] = [
     },
     cardDescription: {
       zh: "傳統工廠仰賴人工巡檢，難以及時掌握巡檢間的安全風險。我訪談職環安人員與系統整合商定義範圍，並設計「Prompt Template」互動機制——把模糊的自然語言輸入收斂成固定句型、可替換變數的操作介面，解決 VLM 判讀不穩定的問題，協助企業從被動巡檢轉向主動風險管理。",
-      en: "Traditional factories rely on manual patrols and can't catch risks between rounds. I interviewed EHS staff and a systems integrator to define scope, then designed a \"Prompt Template\" interaction — turning ambiguous natural-language input into a fixed-sentence, swappable-variable interface that fixed the VLM's unstable readings, helping the business move from reactive patrols to proactive risk management.",
+      en: "Traditional factories rely on manual patrols and can't catch risks between rounds. I interviewed EHS staff and a systems integrator to define scope, then designed a \"Prompt Template\" interaction, turning ambiguous natural-language input into a fixed-sentence, swappable-variable interface that fixed the VLM's unstable readings, helping the business move from reactive patrols to proactive risk management.",
     },
     color: "#1D4ED8",
     cardAccent: "#1FD9A6",
@@ -778,7 +778,7 @@ export const projects: Project[] = [
           title: { zh: "2. 跨場域的可行性驗證 (PoC Selection)", en: "2. Cross-Domain Feasibility Validation (PoC Selection)" },
           challenge: {
             zh: "產品可應用場域廣泛，需在「技術可行性」與「商業需求」間取得平衡。",
-            en: "The product could apply to a wide range of settings — we needed to balance technical feasibility against actual business demand.",
+            en: "The product could apply to a wide range of settings. We needed to balance technical feasibility against actual business demand.",
           },
           action: {
             zh: "透過訪談結果分析可行性/需求矩陣，收斂並提取出首次的 PoC 驗證場域。",
@@ -836,8 +836,8 @@ export const projects: Project[] = [
     },
     priorityMatrix: {
       legend: [
-        { tier: 1, label: { zh: "最終採用．優先 PoC 場域", en: "Selected — priority PoC setting" } },
-        { tier: 2, label: { zh: "候選場域．本輪未列入優先", en: "Candidate — not prioritized this round" } },
+        { tier: 1, label: { zh: "最終採用．優先 PoC 場域", en: "Selected, priority PoC setting" } },
+        { tier: 2, label: { zh: "候選場域．本輪未列入優先", en: "Candidate, not prioritized this round" } },
         { tier: 3, label: { zh: "已排除（硬體／技術限制）", en: "Excluded (hardware / technical limits)" } },
       ],
       bubbles: [
@@ -939,7 +939,7 @@ export const projects: Project[] = [
           title: { zh: "重大事故通報與調查", en: "Major Incident Reporting & Investigation" },
           description: {
             zh: "重大事故發生時，關鍵資訊（如事件時間軸、成因）無法即時取得。",
-            en: "When a major incident occurs, key information — the timeline, the root cause — isn't available in real time.",
+            en: "When a major incident occurs, key information such as the timeline and the root cause isn't available in real time.",
           },
           solution: {
             icon: "bot-message-square",
@@ -1011,7 +1011,7 @@ export const projects: Project[] = [
       branches: [
         {
           title: { zh: "優化影像設定流程", en: "Streamlined the Setup Flow" },
-          description: { zh: "統一設定流程，一次驗證、全域套用。", en: "Unified the setup flow — verify once, apply everywhere." },
+          description: { zh: "統一設定流程，一次驗證、全域套用。", en: "Unified the setup flow. Verify once, apply everywhere." },
         },
         {
           title: { zh: "優化 Prompt 輸入介面", en: "Refined the Prompt Interface" },
@@ -1034,7 +1034,7 @@ export const projects: Project[] = [
           },
           solution: {
             zh: "在 Test Zone 微調 1 支影像來源，一鍵套用到 10 個 Operational Zone，減少 80% 人工作業。",
-            en: "Tune one video source in a Test Zone, then apply it to 10 Operational Zones with one click — cutting manual work by 80%.",
+            en: "Tune one video source in a Test Zone, then apply it to 10 Operational Zones with one click, cutting manual work by 80%.",
           },
           beforeImage: "/images/projects/vision-detect/ui-before.png",
           afterImage: "/images/projects/vision-detect/ui-after.png",
@@ -1055,11 +1055,11 @@ export const projects: Project[] = [
           ],
           workflowBefore: {
             zh: "每增加一支攝影機就需重複測試一次，設定時間隨鏡頭數倍增。",
-            en: "Every added camera meant repeating the test — setup time multiplied with camera count.",
+            en: "Every added camera meant repeating the test. Setup time multiplied with camera count.",
           },
           workflowAfter: {
             zh: "完成單一驗證後一鍵套用全場，節省 80% 重複操作時間。",
-            en: "Verify once, then apply site-wide with one click — saving 80% of the repeated work.",
+            en: "Verify once, then apply site-wide with one click, saving 80% of the repeated work.",
           },
         },
         {
@@ -1067,11 +1067,11 @@ export const projects: Project[] = [
           title: { zh: "設計 Prompt Template，提升模型判讀精準度", en: "Designed a Prompt Template to Improve Model Accuracy" },
           painPoint: {
             zh: "自然語言 Prompt，語意邊界模糊、任務意圖不明確，導致 VLM 輸出結果不穩定，這在工業安全場域中是不可接受的風險。",
-            en: "Free-form natural-language prompts had ambiguous boundaries and unclear intent, making the VLM's output unstable — an unacceptable risk in an industrial safety setting.",
+            en: "Free-form natural-language prompts had ambiguous boundaries and unclear intent, making the VLM's output unstable, an unacceptable risk in an industrial safety setting.",
           },
           solution: {
             zh: "Prompt Template，採用固定句型結構，僅替換人員、物件、地點等變數，有效提升 VLM 判讀的準確度與穩定性。",
-            en: "A Prompt Template with a fixed sentence structure where only variables (person, object, location) change — meaningfully improving the VLM's accuracy and stability.",
+            en: "A Prompt Template with a fixed sentence structure where only variables (person, object, location) change, meaningfully improving the VLM's accuracy and stability.",
           },
           promptOptimization: true,
         },
@@ -1148,7 +1148,7 @@ export const projects: Project[] = [
         tag: "S/AI",
         title: {
           zh: "設計原則參考｜Shape of AI — Madlibs Pattern",
-          en: "Design Principle Reference | Shape of AI — Madlibs Pattern",
+          en: "Design Principle Reference | Shape of AI, Madlibs Pattern",
         },
         intro: { zh: "競品之外，同時參考 AI Patterns 資料庫：", en: "Beyond competitors, I also referenced the AI Patterns database:" },
         sourceLabel: "shapeof.ai/patterns/madlibs",
@@ -1177,14 +1177,14 @@ export const projects: Project[] = [
             title: { zh: "讓句構可見", en: "Make the Sentence Structure Visible" },
             description: {
               zh: "不隱藏模板結構，使用者能理解 Prompt 如何組成、也更信任輸出。",
-              en: "Don't hide the template structure — users understand how the prompt is built and trust the output more.",
+              en: "Don't hide the template structure. Users understand how the prompt is built and trust the output more.",
             },
           },
           {
             title: { zh: "規劃多步驟串接", en: "Plan for Multi-Step Chaining" },
             description: {
               zh: "填空結果可帶入下一步，設計時決定哪些該鎖定、哪些可修改延伸。",
-              en: "A filled-in result can carry into the next step — decide up front what should be locked and what stays editable.",
+              en: "A filled-in result can carry into the next step. Decide up front what should be locked and what stays editable.",
             },
           },
           {
@@ -1197,7 +1197,7 @@ export const projects: Project[] = [
         ],
         conclusion: {
           zh: "最適合任務明確、輸入可預測、流程重複的場景。工安偵測正屬此類：偵測句型固定，變動的只有人、物、場域。",
-          en: "Best suited to clear tasks, predictable input, and repeated workflows. EHS detection fits exactly this: the detection sentence stays fixed — only the person, object, and setting change.",
+          en: "Best suited to clear tasks, predictable input, and repeated workflows. EHS detection fits exactly this: the detection sentence stays fixed. Only the person, object, and setting change.",
         },
       },
       interfaceIntro: {
@@ -1240,7 +1240,7 @@ export const projects: Project[] = [
         },
         description: {
           zh: "以 Gear Detection—Whether wearing specific gear 情境示意 Prompt 輸入介面",
-          en: "Illustrated with the Gear Detection — Whether Wearing Specific Gear scenario's prompt interface",
+          en: "Illustrated with the Gear Detection, Whether Wearing Specific Gear scenario's prompt interface",
         },
         items: [
           {
@@ -1249,7 +1249,7 @@ export const projects: Project[] = [
             title: { zh: "先選類型：Dropdown 選擇偵測類型", en: "Choose Type First: a Dropdown for the Detection Type" },
             body: {
               zh: "先從 9 種 Prompt Template 中選擇偵測類型，底下變數會自適應更換。",
-              en: "Choose the detection type from 9 prompt templates first — the variables below adapt automatically.",
+              en: "Choose the detection type from 9 prompt templates first. The variables below adapt automatically.",
             },
             image: "/images/projects/vision-detect/competitor-analysis/outcome-principle-1.gif",
           },
@@ -1330,7 +1330,7 @@ export const projects: Project[] = [
           },
           challenge: {
             zh: "Alpha 版本已完成主要功能，但缺乏使用者驗證，無法確認資訊架構與操作流程是否符合跑者需求。",
-            en: "The Alpha build had its core features done but no user validation — we couldn't confirm the information architecture and flow actually matched what runners needed.",
+            en: "The Alpha build had its core features done but no user validation. We couldn't confirm the information architecture and flow actually matched what runners needed.",
           },
           action: {
             zh: "建立 Function Map 與 User Flow，規劃易用性測試，邀請 13 位不同程度跑者完成情境任務並進行訪談，分析任務完成率、操作時間與錯誤率。",
@@ -1384,7 +1384,7 @@ export const projects: Project[] = [
       },
       goal: {
         zh: "快速驗證現有 Alpha 版本 App，測試「賽事列表」與「執行跑步」兩項核心功能，找出操作過程中容易感到困惑的地方。",
-        en: "Quickly validate the existing Alpha build by testing the two core features — Race List and Run Tracking — to surface points where users got confused.",
+        en: "Quickly validate the existing Alpha build by testing the two core features, Race List and Run Tracking, to surface points where users got confused.",
       },
       phases: [
         {
@@ -1429,7 +1429,7 @@ export const projects: Project[] = [
         title: { zh: "設計任務情境腳本，模擬真實使用情境", en: "Designing Task Scenarios to Mirror Real Usage" },
         intro: {
           zh: "在正式測試前，我先操作兩項核心功能，並設計 14 組情境任務，將欲驗證的功能自然融入其中。\n例如，以「#5 請搜尋一場特定的賽事」作為任務，引導受測者自然進入賽事列表，而非直接要求操作特定功能。\n這樣的設計更貼近真實使用情境，也能避免過度引導，讓測試結果更真實。",
-          en: "Before the formal test, I walked through both core features myself and designed 14 scenario-based tasks that naturally worked the features I wanted to validate into each one.\nFor example, task #5 — \"search for a specific race\" — leads participants into the race list naturally, instead of asking them to operate a specific feature directly.\nThis kept things closer to real usage and avoided over-guiding participants, making the results more trustworthy.",
+          en: "Before the formal test, I walked through both core features myself and designed 14 scenario-based tasks that naturally worked the features I wanted to validate into each one.\nFor example, task #5, \"search for a specific race,\" leads participants into the race list naturally, instead of asking them to operate a specific feature directly.\nThis kept things closer to real usage and avoided over-guiding participants, making the results more trustworthy.",
         },
         features: [
           { icon: "calendar", label: { zh: "賽事列表", en: "Race List" } },
@@ -1592,7 +1592,7 @@ export const projects: Project[] = [
           title: { zh: "「雲端跑」用詞不熟悉", en: "Unfamiliar with the term \"Cloud Run\"" },
           detail: {
             zh: "13 位受測者中有 8 位表示不熟悉「雲端跑」一詞\n認為「線上跑」聽起來更直覺，反映出UX Writing 需要進一步優化。",
-            en: "8 of the 13 participants said they weren't familiar with the term \"Cloud Run,\"\nand felt \"Online Run\" would read more intuitively — a sign the UX writing needed further work.",
+            en: "8 of the 13 participants said they weren't familiar with the term \"Cloud Run,\"\nand felt \"Online Run\" would read more intuitively, a sign the UX writing needed further work.",
           },
           image: "/images/projects/h2u/finding-cloud-run-white.png",
           imageAlt: { zh: "雲端跑分頁截圖", en: "Screenshot of the Cloud Run tab" },
@@ -1649,7 +1649,7 @@ export const projects: Project[] = [
         title: { zh: "半結構式訪談結果", en: "Semi-Structured Interview Results" },
         intro: {
           zh: "從功能、介面呈現與技術三個面向分析產品優化項目，協助團隊快速辨識現有問題並判斷改善優先級；其中標示項目為經產品團隊討論後，確認可優先投入改善的業務範圍。",
-          en: "Product-improvement items were analyzed across three dimensions — feature, interface, and technical — to help the team quickly identify existing issues and prioritize fixes; the tagged items are the ones the product team confirmed as priority areas after discussion.",
+          en: "Product-improvement items were analyzed across three dimensions, feature, interface, and technical, to help the team quickly identify existing issues and prioritize fixes; the tagged items are the ones the product team confirmed as priority areas after discussion.",
         },
         legend: [
           { category: "feature", label: { zh: "功能優化", en: "Feature optimization" } },
@@ -1773,7 +1773,7 @@ export const projects: Project[] = [
                 label: { zh: "步數感測延遲", en: "Step-sensing lag" },
                 summary: {
                   zh: "使用者已開始動作，但 App 顯示延遲，甚至突然「爆量加總」，反映不靈敏。",
-                  en: "Users had already started moving but the app's display lagged, then suddenly jumped in a burst — indicating an unresponsive sensor.",
+                  en: "Users had already started moving but the app's display lagged, then suddenly jumped in a burst, indicating an unresponsive sensor.",
                 },
                 direction: { zh: "優化感測資料即時性", en: "Improve the real-time responsiveness of sensor data" },
                 priorityCategory: "tech",
@@ -1821,7 +1821,7 @@ export const projects: Project[] = [
       goalTitle: { zh: "透過問卷調查釐清跑者需求與下載意願", en: "Using a Survey to Clarify Runner Needs and Download Intent" },
       goal: {
         zh: "為了解跑者的需求與使用情境，我規劃並發放問卷，共蒐集 118 份有效樣本\n從使用者輪廓、跑步習慣、功能需求與期待，作為後續產品定位與功能優化的參考。",
-        en: "To understand runner needs and usage context, I designed and distributed a survey, collecting 118 valid responses\ncovering user profile, running habits, feature needs, and expectations — used to inform product positioning and feature priorities going forward.",
+        en: "To understand runner needs and usage context, I designed and distributed a survey, collecting 118 valid responses\ncovering user profile, running habits, feature needs, and expectations, used to inform product positioning and feature priorities going forward.",
       },
       stats: [
         { value: "118", unit: { zh: "份", en: "responses" }, label: { zh: "有效問卷", en: "Valid responses" } },
@@ -1932,7 +1932,7 @@ export const projects: Project[] = [
           insight: [
             {
               zh: "有跑步習慣者主要受健康動機驅動（81.9%）；相較之下，非跑步習慣者多因缺乏啟動動機而未開始，其中 48.9% 更表示難以持續。因此，App 應聚焦於降低開始門檻，協助使用者跨出第一步並建立運動習慣。",
-              en: "Runners with a habit are mainly driven by health (81.9%); non-runners, by contrast, mostly never start due to a lack of motivation, and 48.9% say they struggle to keep it up. The app should therefore focus on lowering the barrier to entry — helping users take the first step and build the habit.",
+              en: "Runners with a habit are mainly driven by health (81.9%); non-runners, by contrast, mostly never start due to a lack of motivation, and 48.9% say they struggle to keep it up. The app should therefore focus on lowering the barrier to entry, helping users take the first step and build the habit.",
             },
           ],
         },
@@ -1940,7 +1940,7 @@ export const projects: Project[] = [
           introTitle: { zh: "以使用者需求收斂產品核心功能", en: "Converging on Core Features from User Needs" },
           introText: {
             zh: "透過跑者功能重要性評估，將 11 項候選功能收斂為 4 項核心需求\n包含訓練數據分析、配速工具、公里／英哩分段與生理數據分析，作為後續功能優先級與產品規劃的依據。",
-            en: "By having runners rate feature importance, we narrowed 11 candidate features down to 4 core needs —\ntraining data analysis, pace tools, km/mile splits, and physiological data analysis — to guide feature priority and product planning going forward.",
+            en: "By having runners rate feature importance, we narrowed 11 candidate features down to 4 core needs,\ntraining data analysis, pace tools, km/mile splits, and physiological data analysis, to guide feature priority and product planning going forward.",
           },
           priorityChart: {
             title: { zh: "跑者 vs 非跑者：功能重要性分組對照", en: "Runners vs. Non-Runners: Feature Importance Comparison" },
@@ -2020,11 +2020,11 @@ export const projects: Project[] = [
           insight: [
             {
               zh: "結果顯示，受試者認為跑步 App 最重要的條件為功能定位清楚完整（76 人）及畫面簡潔乾淨（51 人），顯示使用者優先重視功能的實用性與操作效率，而非品牌形象或附加功能。",
-              en: "Respondents ranked clear, complete feature positioning (76) and a clean, simple interface (51) as the most important qualities in a running app — showing users prioritize practicality and operational efficiency over branding or extra features.",
+              en: "Respondents ranked clear, complete feature positioning (76) and a clean, simple interface (51) as the most important qualities in a running app, showing users prioritize practicality and operational efficiency over branding or extra features.",
             },
             {
               zh: "在跑步過程中，受試者最關注平均速度／即時配速、總距離及時長，反映使用者更重視能直接掌握跑步狀態的核心資訊，其餘心率、卡路里及環境資訊的重要性相對較低。",
-              en: "While running, respondents cared most about average speed/real-time pace, total distance, and duration — reflecting a priority on core information about their current run over heart rate, calories, or environmental data.",
+              en: "While running, respondents cared most about average speed/real-time pace, total distance, and duration, reflecting a priority on core information about their current run over heart rate, calories, or environmental data.",
             },
           ],
         },
@@ -2045,11 +2045,11 @@ export const projects: Project[] = [
       photo: "/images/projects/h2u/interview-photo.jpg",
       quotes: [
         { zh: "我希望每達到一公里的里程碑時，提供視覺或觸覺回饋。", en: "I'd like visual or haptic feedback every time I hit a one-kilometer milestone." },
-        { zh: "在跑步過程中，可以強調「距離」與「總時間」指標，「步數」在視覺上可以降低比重，也許可以改成「爬升」。", en: "While running, distance and total time should be emphasized more; step count could carry less visual weight — maybe swap it for elevation gain." },
+        { zh: "在跑步過程中，可以強調「距離」與「總時間」指標，「步數」在視覺上可以降低比重，也許可以改成「爬升」。", en: "While running, distance and total time should be emphasized more; step count could carry less visual weight. Maybe swap it for elevation gain." },
         { zh: "希望能有社群功能，可以跟其他人分享跑步路線和軌跡。", en: "I'd like a community feature so I can share my running routes and tracks with others." },
         { zh: "App 內的商店對跑者來說缺乏實用價值。", en: "The in-app shop doesn't offer much practical value for runners." },
         { zh: "地圖功能在實際跑步過程中的重要性比較低。", en: "The map feature matters less during an actual run." },
-        { zh: "平均配速（距離 / 時間）通常是在跑完後才查看，建議在跑步進行中顯示「即時配速」，提供比較精準的回饋。", en: "I usually only check average pace (distance / time) after finishing — I'd suggest showing real-time pace during the run for more accurate feedback." },
+        { zh: "平均配速（距離 / 時間）通常是在跑完後才查看，建議在跑步進行中顯示「即時配速」，提供比較精準的回饋。", en: "I usually only check average pace (distance / time) after finishing. I'd suggest showing real-time pace during the run for more accurate feedback." },
         { zh: "在跑步過程中，總時間、平均配速與步數的字體太小，不容易閱讀。", en: "While running, the type for total time, average pace, and step count is too small to read easily." },
       ],
     },
@@ -2168,7 +2168,7 @@ export const projects: Project[] = [
     },
     cardDescription: {
       zh: "我設計並開發多模態 RAG 導覽系統，結合知識檢索與生成式影像，讓觀眾提問後同時獲得可信的解說與文物情境重現圖，經 30 人對照實驗證實知識建構與參與度皆顯著提升。",
-      en: "I designed and built a multimodal RAG guide system that pairs knowledge retrieval with generative imagery, so a visitor's question returns both a trustworthy explanation and a generated scene showing the artifact in use — validated in a 30-person controlled study to significantly improve knowledge-building and engagement.",
+      en: "I designed and built a multimodal RAG guide system that pairs knowledge retrieval with generative imagery, so a visitor's question returns both a trustworthy explanation and a generated scene showing the artifact in use, validated in a 30-person controlled study to significantly improve knowledge-building and engagement.",
     },
     color: "#2A1D12",
     cardAccent: "#C4956A",
@@ -2257,7 +2257,7 @@ export const projects: Project[] = [
           title: { zh: "2. 軟硬體整合與共融設計", en: "2. Hardware/Software Integration & Inclusive Design" },
           challenge: {
             zh: "需在軟硬體整合的限制下佈局震動元件，確保用戶能清楚感知音樂；同時外觀須打破傳統醫療輔具的冰冷刻板印象，實現共融設計，讓非聽障者也樂於配戴。",
-            en: "Had to lay out the vibration modules within hardware/software constraints while keeping the music clearly perceptible — and the form had to break away from the cold, clinical look of typical assistive devices, so even non-Deaf people would want to wear it.",
+            en: "Had to lay out the vibration modules within hardware/software constraints while keeping the music clearly perceptible, and the form had to break away from the cold, clinical look of typical assistive devices, so even non-Deaf people would want to wear it.",
           },
           action: {
             zh: "與團隊歷經 5 次原型迭代，同步優化外觀造型與震動元件的機構配置，兼顧功能與美感。",
@@ -2288,7 +2288,7 @@ export const projects: Project[] = [
       subtitle: { zh: "聽障人士如何「聽」見聲音？", en: "How Do d/Deaf People \"Hear\" Sound?" },
       body: {
         zh: "得益於大腦的可塑性，當某種感官功能喪失時，大腦會透過利用其他感官來進行代償。聽障人士便是透過偵測「振動」，利用觸覺來感受聲音。因此，對他們而言，音樂是一種全身性的體驗，許多人會將手放在樂器或音響喇叭上，以感知音樂的節奏、低音與拍子。",
-        en: "Thanks to the brain's plasticity, when one sense is lost, the brain compensates by leaning on the others. d/Deaf people sense sound by detecting vibration through touch. For them, music becomes a full-body experience — many rest a hand on an instrument or speaker to feel its rhythm, bass, and beat.",
+        en: "Thanks to the brain's plasticity, when one sense is lost, the brain compensates by leaning on the others. d/Deaf people sense sound by detecting vibration through touch. For them, music becomes a full-body experience. Many rest a hand on an instrument or speaker to feel its rhythm, bass, and beat.",
       },
       image: "/images/projects/touchtune/music-seniro.jpg",
       imageAlt: { zh: "群眾在演唱會中隨音樂舉手歡呼", en: "A crowd raising their hands to the music at a concert" },
@@ -2316,7 +2316,7 @@ export const projects: Project[] = [
       ],
       solutionIntro: {
         zh: "我們將聲音轉化為多頻率振動，不僅能幫助聽障者感受音樂的節奏與頻率，更能提升他們在社交活動中的參與度，帶來更豐富的感官體驗與情感連結。",
-        en: "We turn sound into multi-frequency vibration — not only helping d/Deaf users feel a song's rhythm and frequency, but also raising their participation in social settings, with a richer sensory experience and emotional connection.",
+        en: "We turn sound into multi-frequency vibration, not only helping d/Deaf users feel a song's rhythm and frequency, but also raising their participation in social settings, with a richer sensory experience and emotional connection.",
       },
       solutionPoints: [
         {
@@ -2381,14 +2381,14 @@ export const projects: Project[] = [
               label: { zh: "造型與語意", en: "Form & visual language" },
               description: {
                 zh: "確認產品的外型語彙，如流動感曲線、幾何簡約等，確保視覺風格符合設計定位。",
-                en: "Settled the product's visual vocabulary — flowing curves, minimal geometry — to keep the look aligned with the design positioning.",
+                en: "Settled the product's visual vocabulary, flowing curves and minimal geometry, to keep the look aligned with the design positioning.",
               },
             },
             {
               label: { zh: "分件與層次", en: "Parting lines & layering" },
               description: {
                 zh: "思考產品的結構層次，內層與外層的分離，並規劃內部組件的走線與收納空間。",
-                en: "Worked out the structural layers — separating inner and outer shells — and planned routing and storage space for internal components.",
+                en: "Worked out the structural layers, separating inner and outer shells, and planned routing and storage space for internal components.",
               },
             },
             {
@@ -2406,7 +2406,7 @@ export const projects: Project[] = [
           items: [
             {
               label: { zh: "包覆範圍與尺寸", en: "Coverage & sizing" },
-              description: { zh: "明確定義裝置在身體上的分佈區域，如手腕至手肘下方的區段，符合人體尺寸工學。", en: "Defined exactly where the device sits on the body — from the wrist down to below the elbow — matched to ergonomic sizing." },
+              description: { zh: "明確定義裝置在身體上的分佈區域，如手腕至手肘下方的區段，符合人體尺寸工學。", en: "Defined exactly where the device sits on the body, from the wrist down to below the elbow, matched to ergonomic sizing." },
             },
             {
               label: { zh: "材質與親膚性", en: "Material & skin comfort" },
@@ -2429,12 +2429,12 @@ export const projects: Project[] = [
               label: { zh: "硬體功能配置", en: "Hardware layout" },
               description: {
                 zh: "明確標示互動元件，如震動模組、燈光、感測器的精確位置與作用範圍，如 GSR 膚電感測器分布於食指與中指。",
-                en: "Marked the exact position and coverage of interactive components — vibration modules, lights, sensors — such as placing the GSR skin-conductance sensors on the index and middle fingers.",
+                en: "Marked the exact position and coverage of interactive components, vibration modules, lights, and sensors, such as placing the GSR skin-conductance sensors on the index and middle fingers.",
               },
             },
             {
               label: { zh: "回饋邏輯與情境對應", en: "Feedback logic & context mapping" },
-              description: { zh: "思考功能如何對應使用者的行為或情緒，如震動的時序性如何呈現音樂的節奏快慢、強弱。", en: "Worked out how features map to user behavior or emotion — e.g. how vibration timing conveys a song's tempo and intensity." },
+              description: { zh: "思考功能如何對應使用者的行為或情緒，如震動的時序性如何呈現音樂的節奏快慢、強弱。", en: "Worked out how features map to user behavior or emotion, e.g. how vibration timing conveys a song's tempo and intensity." },
             },
             {
               label: { zh: "軟硬整合", en: "Hardware/software integration" },
@@ -2466,7 +2466,7 @@ export const projects: Project[] = [
         title: { zh: "驗證後的最終穿戴流程", en: "The Validated Final Wearing Flow" },
         description: {
           zh: "經過原型反覆測試，收斂出三個穿戴步驟：戴上裝置、調整手腕束帶、固定手臂綁帶，確保裝置在動態情境下依然穩固貼合。",
-          en: "After repeated prototype testing, the wearing process converged to three steps — put on the device, adjust the wrist strap, secure the arm strap — keeping it snug even during movement.",
+          en: "After repeated prototype testing, the wearing process converged to three steps, put on the device, adjust the wrist strap, and secure the arm strap, keeping it snug even during movement.",
         },
         steps: [
           {
@@ -2634,7 +2634,7 @@ export const projects: Project[] = [
           },
           {
             src: "/images/projects/touchtune/gallery/live-activity-alert.webp",
-            alt: { zh: "即時情緒回饋・情緒高張狀態畫面", en: "Real-time emotion feedback — heightened-emotion state" },
+            alt: { zh: "即時情緒回饋・情緒高張狀態畫面", en: "Real-time emotion feedback, heightened-emotion state" },
             width: 533,
             height: 1000,
           },
@@ -2685,7 +2685,7 @@ export const projects: Project[] = [
             },
             {
               zh: "專案中最大的挑戰，是如何在有限的產品尺寸內整合震動模組，同時兼顧美感與佩戴舒適性，突破傳統輔具偏向醫療器材的既有印象。透過反覆討論與設計迭代，我深刻體會到，這不只是解決功能需求，更需要兼顧使用者的情感認同與日常配戴意願。",
-              en: "The biggest challenge was fitting the vibration modules into a limited form factor while keeping it both good-looking and comfortable — breaking away from the clinical look typical of assistive devices. Through repeated discussion and iteration, I came to see that this wasn't just about meeting functional requirements; it also had to earn users' emotional buy-in and their willingness to wear it day to day.",
+              en: "The biggest challenge was fitting the vibration modules into a limited form factor while keeping it both good-looking and comfortable, breaking away from the clinical look typical of assistive devices. Through repeated discussion and iteration, I came to see that this wasn't just about meeting functional requirements; it also had to earn users' emotional buy-in and their willingness to wear it day to day.",
             },
           ],
         },
@@ -2714,7 +2714,7 @@ export const bringItems = [
     titleZh: "研究驅動的設計者",
     description: {
       zh: "在設計之前，我習慣先釐清問題，透過使用者研究、數據分析與情境探索驗證假設，確保設計真正回應使用者需求。",
-      en: "Before I design anything, I clarify the problem first — validating assumptions through user research, data analysis, and contextual inquiry so the design actually answers a real need.",
+      en: "Before I design anything, I clarify the problem first, validating assumptions through user research, data analysis, and contextual inquiry so the design actually answers a real need.",
     },
   },
   {
@@ -2753,7 +2753,7 @@ export const aboutContent = {
     },
     {
       zh: "我相信好的設計，不只是把介面做得簡單，而是在使用者需求、商業目標與技術限制之間找到合理的平衡。我擅長以系統思維拆解問題，結合 AI 與技術可行性，將複雜需求轉化為清晰、可用且具產品價值的體驗。",
-      en: "I believe good design isn't just a simple interface — it's finding the right balance between user needs, business goals, and technical constraints. I use systems thinking to break down problems and combine that with AI and technical feasibility to turn complex requirements into experiences that are clear, usable, and genuinely valuable.",
+      en: "I believe good design isn't just a simple interface. It's finding the right balance between user needs, business goals, and technical constraints. I use systems thinking to break down problems and combine that with AI and technical feasibility to turn complex requirements into experiences that are clear, usable, and genuinely valuable.",
     },
   ],
   education: [
@@ -2838,7 +2838,7 @@ export const workExperience = [
     points: [
       {
         zh: "分析競品電商的會員點數系統資訊架構、營運模式與流程，找出高效益的設計模式並優化介面，協助產品成功上線。",
-        en: "Analyzed competitors' e-commerce loyalty-points systems — information architecture, operating model, and flow — to identify high-impact design patterns, optimized the interface, and helped ship the product successfully.",
+        en: "Analyzed competitors' e-commerce loyalty-points systems, information architecture, operating model, and flow, to identify high-impact design patterns, optimized the interface, and helped ship the product successfully.",
       },
       {
         zh: "使用 Python 清洗與篩選客服資料，資料量減少 74%、處理速度提升 3.8 倍，並設計自動回覆流程提升營運效率與準確度。",

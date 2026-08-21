@@ -71,7 +71,7 @@ function BeforeMedia({ item }: { item: InterfaceOptimizationCase }) {
     return (
       <Image
         src={item.beforeImage}
-        alt={item.beforeImageAlt?.[lang] ?? `${item.title[lang]} — Before`}
+        alt={item.beforeImageAlt?.[lang] ?? `${item.title[lang]}, Before`}
         width={item.beforeImageWidth}
         height={item.beforeImageHeight}
         sizes="(min-width: 768px) 340px, 90vw"
@@ -116,7 +116,7 @@ function SideBySideBeforeAfter({ item }: { item: InterfaceOptimizationCase }) {
           <div className="relative mt-4 w-full max-w-[340px]">
             <Image
               src={item.afterImage}
-              alt={item.afterImageAlt?.[lang] ?? `${item.title[lang]} — After`}
+              alt={item.afterImageAlt?.[lang] ?? `${item.title[lang]}, After`}
               width={item.afterImageWidth}
               height={item.afterImageHeight}
               sizes="(min-width: 768px) 340px, 90vw"
@@ -228,7 +228,7 @@ function OptimizationCase({ item, index }: { item: InterfaceOptimizationCase; in
                 <div className="relative mt-2">
                   <Image
                     src={item.afterImage!}
-                    alt={item.afterImageAlt?.[lang] ?? `${item.title[lang]} — After`}
+                    alt={item.afterImageAlt?.[lang] ?? `${item.title[lang]}, After`}
                     width={item.afterImageWidth!}
                     height={item.afterImageHeight!}
                     sizes="(min-width: 768px) 620px, 90vw"

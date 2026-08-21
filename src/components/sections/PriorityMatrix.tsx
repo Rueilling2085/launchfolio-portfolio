@@ -44,7 +44,7 @@ function Bubble({ bubble }: { bubble: MatrixBubble }) {
         style={{ backgroundColor: isPrimary ? "#D8EEFD" : "rgba(148,153,161,0.18)" }}
       >
         {bubble.label[lang].split("\n").map((line, i) => (
-          <span key={i} className="block whitespace-nowrap">
+          <span key={i} className="block">
             {line}
           </span>
         ))}

@@ -23,12 +23,16 @@ const COPY = {
     en: "After settling on the validation setting, I went further and interviewed",
   },
   decisionHighlight: {
-    zh: "最了解工廠職安合規的角色「職環安人員」",
-    en: "the role that knows factory safety compliance best: EHS staff",
+    zh: "最了解工廠職安合規的角色：",
+    en: "the role that knows factory safety compliance best:",
+  },
+  decisionEmphasis: {
+    zh: "職環安人員",
+    en: "EHS staff",
   },
   heading: {
     zh: "分析職環安人員工作流程，找出產品導入節點",
-    en: "Mapping EHS Workflows to Find Where the Product Fits In",
+    en: "Mapping EHS Workflows\nto Find Where the Product Fits In",
   },
   imageAlt: {
     zh: "職環安人員於倉儲現場巡檢",
@@ -56,10 +60,12 @@ export function ProcessFlowChart({
           <div className="mx-auto max-w-2xl text-center">
             <NextStepDecision>
               {COPY.decisionLead[lang]}
-              <span className="text-ink">{COPY.decisionHighlight[lang]}</span>
+              {COPY.decisionHighlight[lang]}
+              <br />
+              <span className="text-ink">{COPY.decisionEmphasis[lang]}</span>
             </NextStepDecision>
 
-            <h3 className="mt-3 text-2xl font-semibold tracking-tight text-ink md:text-3xl">
+            <h3 className="mt-3 whitespace-pre-line text-2xl font-semibold tracking-tight text-ink md:text-3xl">
               {COPY.heading[lang]}
             </h3>
           </div>
@@ -83,7 +89,7 @@ export function ProcessFlowChart({
                   <Image src={avatar} alt="Persona" fill sizes="36px" className="object-cover" />
                 </span>
               )}
-              <div className="flex flex-wrap items-center gap-x-5 gap-y-1 text-[11px] text-white/85">
+              <div className="flex flex-wrap items-center gap-x-5 gap-y-1 text-[13px] text-white/85">
                 {META.map((item) => (
                   <span key={item.label}>
                     <span className="font-semibold text-white">{item.label}: </span>
@@ -98,14 +104,14 @@ export function ProcessFlowChart({
                 <div key={i} className="flex flex-1 items-end justify-center gap-1">
                   <div className="text-center">
                     <p
-                      className={`text-[10px] font-semibold uppercase tracking-wide ${
+                      className={`text-[11px] font-semibold uppercase tracking-wide ${
                         step.emphasis ? "text-white" : "text-white/45"
                       }`}
                     >
                       Step {i + 1}
                     </p>
                     <p
-                      className={`mt-0.5 text-[12px] leading-tight ${
+                      className={`mt-0.5 text-[13px] leading-tight ${
                         step.emphasis ? "font-medium text-white" : "text-white/45"
                       }`}
                     >

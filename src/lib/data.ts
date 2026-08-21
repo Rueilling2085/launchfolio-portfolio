@@ -831,7 +831,7 @@ export const projects: Project[] = [
       title: { zh: "找出本次專案可驗證的 PoC 場域", en: "Finding a Testable PoC Setting for This Project" },
       description: {
         zh: "透過盤點系統整合商與職環安人員的實際需求，依優先度與技術可行性\n建立評估矩陣，收斂出兩個場域，作為本次優先導入的 PoC",
-        en: "By mapping the real needs of the systems integrator and EHS staff, I built a priority/feasibility evaluation matrix\nand converged on two settings to prioritize as the first PoC.",
+        en: "By mapping the real needs of the systems integrator and EHS staff,\nI built a priority/feasibility evaluation matrix\nand converged on two settings to prioritize as the first PoC.",
       },
     },
     priorityMatrix: {

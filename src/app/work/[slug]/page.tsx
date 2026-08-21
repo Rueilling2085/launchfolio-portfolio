@@ -34,7 +34,6 @@ import { CompetitorAnalysis } from "@/components/sections/CompetitorAnalysis";
 import { CaseStudySideNav, type SideNavSection } from "@/components/sections/CaseStudySideNav";
 import { NextProjects } from "@/components/sections/NextProjects";
 import { NextStepDecision } from "@/components/ui/NextStepDecision";
-import { Code2 } from "lucide-react";
 import { projects } from "@/lib/data";
 import { Localized } from "@/lib/i18n/Localized";
 
@@ -176,14 +175,20 @@ export default async function ProjectCaseStudyPage({
                   href={project.repoUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`inline-flex items-center gap-2 rounded-full border px-3.5 py-1.5 text-sm font-medium transition-colors ${
+                  className={`inline-flex items-center gap-2.5 rounded-full border px-5 py-2.5 text-base font-medium shadow-[0_8px_28px_-4px_rgba(217,119,87,0.4)] transition-colors ${
                     dark
                       ? "border-white/20 text-white/80 hover:border-white/40 hover:text-white"
-                      : "border-line text-ink-soft hover:border-muted-2 hover:text-ink"
+                      : "border-[#D1D5DB] text-ink-soft hover:border-muted-2 hover:text-ink"
                   }`}
                 >
-                  <Code2 size={15} />
-                  <Localized value={{ zh: "查看程式碼", en: "View Code" }} />
+                  <Image
+                    src="/images/icons/github-logo.png"
+                    alt=""
+                    width={20}
+                    height={20}
+                    className={dark ? "h-5 w-5 invert" : "h-5 w-5"}
+                  />
+                  <Localized value={{ zh: "View on GitHub", en: "View on GitHub" }} />
                 </a>
               )}
             </div>
@@ -204,14 +209,12 @@ export default async function ProjectCaseStudyPage({
               <Localized value={project.description} />
             </p>
 
-            {!project.presentationEmbedUrl && (
-              <div className="w-full">
-                <ProjectMetaCards project={project} dark={dark} />
-                {project.overview?.highlights && (
-                  <ProjectHighlights items={project.overview.highlights} color={project.color ?? "#1D4ED8"} dark={dark} />
-                )}
-              </div>
-            )}
+            <div className="w-full">
+              {!project.presentationEmbedUrl && <ProjectMetaCards project={project} dark={dark} />}
+              {project.overview?.highlights && (
+                <ProjectHighlights items={project.overview.highlights} color={project.color ?? "#1D4ED8"} dark={dark} />
+              )}
+            </div>
           </div>
         </SectionContainer>
 
@@ -271,7 +274,12 @@ export default async function ProjectCaseStudyPage({
           <div id="overview" className="scroll-mt-24">
             {project.appIntroVisual && <AppIntroVisual data={project.appIntroVisual} />}
             {project.overview ? (
-              <ProjectOverview overview={project.overview} dark={dark} />
+              <>
+                <ProjectOverview overview={project.overview} dark={dark} />
+                {project.presentationEmbedUrl && (
+                  <PresentationEmbed url={project.presentationEmbedUrl} />
+                )}
+              </>
             ) : (
               <>
                 {!project.presentationEmbedUrl && (

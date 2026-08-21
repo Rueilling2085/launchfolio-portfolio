@@ -1881,7 +1881,7 @@ export const projects: Project[] = [
     cardImageFit: "contain",
     cardImageBackdrop: "#7A7871",
     cardImageScale: 1.55,
-    presentationEmbedUrl: "https://www.canva.com/design/DAHSO25n1g8/xUAAeCPKUccPVuHoQqeRbg/view?embed",
+    presentationEmbedUrl: "https://www.canva.com/design/DAHSO25n1g8/bZPhBm9jh1Zh5-f8iVNKnA/view?embed",
     repoUrl: "https://github.com/Rueilling2085/rag-museum-chatbot",
     description: {
       zh: "以多模態 RAG 技術打造的博物館 AI 導覽系統，結合知識檢索與生成式影像，將靜態的文物說明牌轉化為可對話、可視覺化的知識探索體驗。研究成果獲 IEEE ICASI 2026 口頭發表。",
@@ -1901,37 +1901,10 @@ export const projects: Project[] = [
       niche: { zh: "個人研究．碩士論文・多模態 RAG・生成式 AI", en: "Master's Research · Multimodal RAG · Generative AI" },
       projectIntro:
         "以多模態 RAG 技術打造的博物館 AI 導覽系統，結合知識檢索與生成式影像，將靜態的文物說明牌轉化為可對話、可視覺化的知識探索體驗。",
-      challenges: [
-        {
-          title: { zh: "找出知識傳遞的落差", en: "Identifying the Knowledge-Delivery Gap" },
-          challenge: {
-            zh: "傳統博物館的知識傳遞長期依賴靜態標籤，但標籤受限於字數，往往只能提供文物的基本資料，難以回應來自不同知識背景的觀眾。此外，策展人會透過展品搭配，幫助觀眾想像文物過去的真實使用情境，然而一旦館藏出現缺佚，敘事脈絡便難以延續。",
-            en: "Traditional museums rely on static placards for knowledge transfer, but a placard's character limit usually only covers an artifact's basic facts, struggling to answer visitors coming from very different knowledge backgrounds. Curators also use complementary exhibits to help visitors imagine how an artifact was actually used, but once a piece in the collection goes missing, that narrative thread breaks.",
-          },
-          action: {
-            zh: "為此，我們致力於建構一款對話式的 AI 導覽系統。然而在測試中發現，若直接採用通用的大型語言模型（LLM），容易因缺乏特定文化知識的訓練而產生「AI 幻覺」，反而損害了展覽的權威性與可信度。",
-            en: "So we set out to build a conversational AI guide. But testing revealed that a general-purpose LLM, without training on the specific cultural knowledge involved, was prone to \"AI hallucination,\" which undermined the exhibit's authority and credibility instead of strengthening it.",
-          },
-          result: {
-            zh: "確立以 RAG（檢索增強生成）為核心的技術方向，而非直接仰賴通用 LLM。",
-            en: "Settled on RAG (Retrieval-Augmented Generation) as the core technical direction, rather than relying on a general-purpose LLM directly.",
-          },
-        },
-        {
-          title: { zh: "以 RAG 打造可信、可視覺化的知識探索體驗", en: "Grounding the System in RAG for a Trustworthy, Visual Experience" },
-          challenge: {
-            zh: "需要讓每一則回答都有據可查，同時讓缺佚的文物也能被觀眾具體想像。",
-            en: "Needed every answer to be verifiable, while also letting visitors concretely picture artifacts no longer in the collection.",
-          },
-          action: {
-            zh: "本系統以 RAG 為核心，串聯公開權威資料庫進行知識檢索，確保每一則回答都有據可查。觀眾只需用自然語言提問，系統便從已建置好的知識庫中檢索並生成回應，甚至能即時生成對應的情境圖像，讓缺佚的文物也得以還原場景。",
-            en: "Built the system around RAG, connecting to public authoritative databases for knowledge retrieval so every answer stays traceable to a source. Visitors just ask in natural language, and the system retrieves from the knowledge base and generates a response, even producing a matching scene image on the spot so a missing artifact can still be visualized in context.",
-          },
-          result: {
-            zh: "從資料建置、索引、檢索、評估到介面設計，完成一套可複製的策展導覽工作流程，讓觀眾從被動的資訊接收者，轉變為主動的知識建構者。",
-            en: "Delivered a repeatable curation-and-guide workflow spanning data building, indexing, retrieval, evaluation, and interface design, turning visitors from passive recipients of information into active builders of their own understanding.",
-          },
-        },
+      highlights: [
+        { value: { zh: "35 件文物", en: "35 artifacts" }, label: { zh: "知識庫規模", en: "Knowledge base scale" } },
+        { value: { zh: "212 則對話", en: "212 dialogues" }, label: { zh: "30 位受測者實測", en: "Tested by 30 participants" } },
+        { value: { zh: "13.21%", en: "13.21%" }, label: { zh: "辨識出的知識缺口", en: "Knowledge gaps identified" } },
       ],
     },
   },

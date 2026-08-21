@@ -143,10 +143,12 @@ export type InterfaceOptimizationCase = {
   beforeImageWidth?: number;
   beforeImageHeight?: number;
   beforeVideo?: string;
+  beforeSwipeHint?: { hand: string; arrow: string };
   afterImage?: string;
   afterImageAlt?: Localized;
   afterImageWidth?: number;
   afterImageHeight?: number;
+  afterTapHint?: { hand: string; left: string; top: string };
 };
 
 export type InterfaceOptimization = {
@@ -1255,8 +1257,8 @@ export const projects: Project[] = [
     heroAspect: "2000/1310",
     deviceMockup: false,
     description: {
-      zh: "Sports Note 是台灣跑步領域的媒體與社群平台，整合賽事資訊、跑步紀錄、線上報名與運動內容等服務。針對 Alpha 版本缺乏實際使用者驗證的問題，我執行 13 位跑者的易用性測試與訪談，並蒐集 118 份問卷，分析不同跑者的需求與使用行為，重新收斂產品功能優先順序，將研究洞察轉化為介面優化與產品迭代方向。",
-      en: "Sports Note is a Taiwanese running media and community platform bringing together race info, run tracking, online registration, and running content. To address the Alpha version's lack of real user validation, I ran usability tests and interviews with 13 runners and collected 118 survey responses, analyzing different runners' needs and behavior to re-prioritize the feature set and turn research insight into interface fixes and a product-iteration roadmap.",
+      zh: "Sports Note 是台灣跑步領域的媒體與社群平台，整合賽事資訊、跑步紀錄、線上報名與運動內容等服務。針對 Alpha 版本缺乏實際使用者驗證的問題，我執行 13 位跑者的易用性測試與訪談，將研究洞察轉化為實際介面優化產出結果。",
+      en: "Sports Note is a Taiwanese running media and community platform bringing together race info, run tracking, online registration, and running content. To address the Alpha version's lack of real user validation, I ran usability tests and interviews with 13 runners, turning research insight into concrete interface optimizations.",
     },
     cardTags: ["UX Research", "Design System"],
     cardHeadline: {
@@ -1280,8 +1282,7 @@ export const projects: Project[] = [
     role: [
       { zh: "易用性測試", en: "Usability Testing" },
       { zh: "專家訪談", en: "Expert Interviews" },
-      { zh: "問卷設計與分析結果", en: "Survey Design & Analysis" },
-      { zh: "Design System 維護", en: "Design System Maintenance" },
+      { zh: "Design System 更新與維護", en: "Design System Updates & Maintenance" },
     ],
     overview: {
       niche: {
@@ -1297,10 +1298,10 @@ export const projects: Project[] = [
         },
         {
           value: { zh: "4 項問題", en: "4 issues" },
-          label: { zh: "收斂出高優先度問題", en: "High-priority issues found" },
+          label: { zh: "從 2 項功能收斂出高優先度問題", en: "Narrowed from 2 features to top issues" },
         },
         {
-          value: { zh: "2 項優化", en: "2 optimizations" },
+          value: { zh: "2 項介面優化", en: "2 interface optimizations" },
           label: { zh: "已落地驗證", en: "Shipped & validated" },
         },
       ],
@@ -1756,7 +1757,7 @@ export const projects: Project[] = [
         "/images/projects/h2u/interview-avatar-2.jpg",
         "/images/projects/h2u/interview-avatar-3.jpg",
       ],
-      photo: "/images/projects/h2u/interview-photo.jpg",
+      photo: "/images/projects/h2u/interview-photo-v2.jpg",
       quotes: [
         { zh: "我希望每達到一公里的里程碑時，提供視覺或觸覺回饋。", en: "I'd like visual or haptic feedback every time I hit a one-kilometer milestone." },
         { zh: "在跑步過程中，可以強調「距離」與「總時間」指標，「步數」在視覺上可以降低比重，也許可以改成「爬升」。", en: "While running, distance and total time should be emphasized more; step count could carry less visual weight. Maybe swap it for elevation gain." },
@@ -1799,19 +1800,28 @@ export const projects: Project[] = [
           title: { zh: "重新設計停止跑步操作，減少過程中的干擾", en: "Redesigning the Stop-Run Action to Reduce Mid-Run Friction" },
           sideBySide: true,
           painPoints: [
-            { zh: "根據專業跑者的訪談回饋，使用「滑動手勢」停止跑步會增加操作負擔，需分心操作手機，影響跑步節奏與效率。", en: "Per experienced-runner interviews, the swipe gesture for stopping a run adds operational burden, forcing users to divert attention to the phone and disrupting their pace and efficiency." },
+            { zh: "根據易用性測試結果，發現「滑動手勢」操作不直覺，增加使用者的操作負擔，進而影響跑步時的節奏與操作效率。", en: "Usability testing found the swipe gesture wasn't intuitive, adding to users' operational burden and disrupting their pace and efficiency while running." },
           ],
           solutions: [
-            { zh: "改以「點擊」停止跑步，降低操作負擔，讓跑者能更快速完成操作。", en: "Switched to a tap to stop the run, lowering the operational burden so runners can complete the action faster." },
+            { zh: "改以「點擊」方式停止跑步，降低操作負擔，讓跑者能更快速完成操作。", en: "Switched to tapping to stop the run, lowering the operational burden so runners can complete the action faster." },
           ],
-          beforeImage: "/images/projects/h2u/optimization-2-before.png",
+          beforeImage: "/images/projects/h2u/swipe-hint/before-frame-v1.jpg",
           beforeImageAlt: { zh: "優化前：以滑動手勢停止跑步紀錄", en: "Before: stopping a run recording with a swipe gesture" },
           beforeImageWidth: 680,
-          beforeImageHeight: 1190,
-          afterImage: "/images/projects/h2u/optimization-2-after.png",
+          beforeImageHeight: 1358,
+          beforeSwipeHint: {
+            hand: "/images/projects/h2u/swipe-hint/hand.png",
+            arrow: "/images/projects/h2u/swipe-hint/arrow.png",
+          },
+          afterImage: "/images/projects/h2u/swipe-hint/after-frame-v1.jpg",
           afterImageAlt: { zh: "優化後：改以點擊按鈕停止跑步紀錄", en: "After: stopping a run recording by tapping a button" },
           afterImageWidth: 680,
-          afterImageHeight: 1190,
+          afterImageHeight: 1358,
+          afterTapHint: {
+            hand: "/images/projects/h2u/swipe-hint/hand.png",
+            left: "74.3%",
+            top: "85%",
+          },
         },
       ],
     },

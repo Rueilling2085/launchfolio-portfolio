@@ -4,6 +4,8 @@ import Image from "next/image";
 import { AlertTriangle, Lightbulb } from "lucide-react";
 import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
 import { PulseDot } from "@/components/ui/PulseBadge";
+import { SwipeGestureHint } from "@/components/sections/SwipeGestureHint";
+import { TapGestureHint } from "@/components/sections/TapGestureHint";
 import { useLanguage } from "@/lib/i18n/LanguageProvider";
 import type {
   InterfaceOptimization as InterfaceOptimizationData,
@@ -68,6 +70,18 @@ function BeforeMedia({ item }: { item: InterfaceOptimizationCase }) {
     );
   }
   if (item.beforeImage && item.beforeImageWidth && item.beforeImageHeight) {
+    if (item.beforeSwipeHint) {
+      return (
+        <SwipeGestureHint
+          base={item.beforeImage}
+          baseWidth={item.beforeImageWidth}
+          baseHeight={item.beforeImageHeight}
+          hand={item.beforeSwipeHint.hand}
+          arrow={item.beforeSwipeHint.arrow}
+          alt={item.beforeImageAlt?.[lang] ?? `${item.title[lang]}, Before`}
+        />
+      );
+    }
     return (
       <Image
         src={item.beforeImage}
@@ -114,14 +128,26 @@ function SideBySideBeforeAfter({ item }: { item: InterfaceOptimizationCase }) {
         </span>
         {item.afterImage && item.afterImageWidth && item.afterImageHeight && (
           <div className="relative mt-4 w-full max-w-[340px]">
-            <Image
-              src={item.afterImage}
-              alt={item.afterImageAlt?.[lang] ?? `${item.title[lang]}, After`}
-              width={item.afterImageWidth}
-              height={item.afterImageHeight}
-              sizes="(min-width: 768px) 340px, 90vw"
-              className="h-auto w-full"
-            />
+            {item.afterTapHint ? (
+              <TapGestureHint
+                base={item.afterImage}
+                baseWidth={item.afterImageWidth}
+                baseHeight={item.afterImageHeight}
+                hand={item.afterTapHint.hand}
+                handLeft={item.afterTapHint.left}
+                handTop={item.afterTapHint.top}
+                alt={item.afterImageAlt?.[lang] ?? `${item.title[lang]}, After`}
+              />
+            ) : (
+              <Image
+                src={item.afterImage}
+                alt={item.afterImageAlt?.[lang] ?? `${item.title[lang]}, After`}
+                width={item.afterImageWidth}
+                height={item.afterImageHeight}
+                sizes="(min-width: 768px) 340px, 90vw"
+                className="h-auto w-full"
+              />
+            )}
           </div>
         )}
         {hasSolutions && (

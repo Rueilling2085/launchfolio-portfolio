@@ -2,6 +2,7 @@
 
 import { Fragment, useState } from "react";
 import Image from "next/image";
+import { motion } from "framer-motion";
 import { ChevronDown, ChevronRight } from "lucide-react";
 import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
 import { PulseDot } from "@/components/ui/PulseBadge";
@@ -287,9 +288,16 @@ function FindingCard({
     <RevealOnScroll delay={0.05 * index}>
       <div className="flex h-full flex-col items-center rounded-2xl border border-line bg-white p-5">
         {finding.image && (
-          <div className="w-full max-w-[240px] shrink-0">
+          <motion.div
+            className="w-full max-w-[240px] shrink-0"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            whileHover={{ scale: 1.05, transition: { duration: 0.3, ease: "easeOut" } }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.7, delay: 0.15 + 0.05 * index, ease: "easeOut" }}
+          >
             <AnnotatedImage finding={finding} />
-          </div>
+          </motion.div>
         )}
 
         <div className="mt-5 min-w-0 w-full">
@@ -326,7 +334,7 @@ function SemiStructuredInterviewTable({ data }: { data: SemiStructuredInterview 
             </tr>
           </thead>
           <tbody>
-            {data.groups.map((group) => (
+            {data.groups.map((group, gi) => (
               <Fragment key={group.topic.zh}>
                 {group.items.map((item, i) => (
                   <tr key={item.id} className="border-t border-line align-top">
@@ -335,7 +343,7 @@ function SemiStructuredInterviewTable({ data }: { data: SemiStructuredInterview 
                         className="px-3 py-3 font-medium text-ink"
                         rowSpan={group.items.length}
                       >
-                        {group.topic[lang]}
+                        {gi + 1}. {group.topic[lang]}
                       </td>
                     )}
                     <td className="px-3 py-3">
@@ -365,13 +373,16 @@ function SemiStructuredInterviewTable({ data }: { data: SemiStructuredInterview 
         </table>
       </div>
 
-      <div className="mt-3 flex flex-wrap items-center justify-end gap-x-4 gap-y-1.5">
+      <div className="mt-3 flex flex-wrap items-center justify-end gap-x-2 gap-y-1.5">
         {data.legend.map((item) => (
-          <span key={item.category} className="flex items-center gap-1.5 text-xs text-muted-2">
-            <span
-              className="h-3 w-3 rounded-sm"
-              style={{ background: CATEGORY_STYLES[item.category].bg }}
-            />
+          <span
+            key={item.category}
+            className="inline-flex items-center rounded-md px-2 py-1 text-xs font-medium"
+            style={{
+              background: CATEGORY_STYLES[item.category].bg,
+              color: CATEGORY_STYLES[item.category].text,
+            }}
+          >
             {item.label[lang]}
           </span>
         ))}

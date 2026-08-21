@@ -23,7 +23,9 @@ export function Nav() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [onDark, setOnDark] = useState(false);
   const [activeHref, setActiveHref] = useState<string | null>(null);
+  const [logoSpins, setLogoSpins] = useState(0);
   const { lang, toggle: toggleLang } = useLanguage();
+  const spinLogo = () => setLogoSpins((s) => s + 1);
 
   useEffect(() => {
     // the band the floating nav occupies
@@ -82,7 +84,15 @@ export function Nav() {
               onDark ? "text-white" : "text-ink"
             }`}
           >
-            <Image src="/images/logo.png" alt="" width={20} height={20} className="h-5 w-5" unoptimized />
+            <motion.span
+              className="inline-flex h-5 w-5 shrink-0"
+              animate={{ rotate: logoSpins * 360 }}
+              transition={{ duration: 0.7, ease: "easeInOut" }}
+              onHoverStart={spinLogo}
+              onTap={spinLogo}
+            >
+              <Image src="/images/logo.png" alt="" width={20} height={20} className="h-5 w-5" unoptimized />
+            </motion.span>
             Jui Ling
           </Link>
 

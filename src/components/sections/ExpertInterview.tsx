@@ -70,32 +70,28 @@ export function ExpertInterview({ data }: { data: ExpertInterviewData }) {
             <p className="text-sm leading-relaxed text-muted">{data.intro[lang]}</p>
           </div>
 
-          <div className="mt-10 grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-10">
-            <div className="relative flex flex-col gap-4">
-              {data.quotes.map((quote, i) => (
-                <QuoteBubble
-                  key={quote.zh}
-                  quote={quote}
-                  marginLeft={STAGGER_INDENT[i % STAGGER_INDENT.length]}
-                  hoverTilt={HOVER_TILT[i % HOVER_TILT.length]}
-                  bg={BUBBLE_BG[i % BUBBLE_BG.length]}
-                />
-              ))}
+          {data.photo && (
+            <div className="relative mt-8 aspect-[21/9] w-full overflow-hidden rounded-[1.5rem]">
+              <Image
+                src={data.photo}
+                alt=""
+                fill
+                sizes="(min-width: 768px) 900px, 90vw"
+                className="object-cover"
+              />
             </div>
+          )}
 
-            {data.photo && (
-              <div className="relative hidden overflow-hidden rounded-[1.75rem] bg-gradient-to-br from-[#045CC4] to-[#0493FB] p-[3px] md:block">
-                <div className="relative h-full min-h-[520px] overflow-hidden rounded-[1.5rem]">
-                  <Image
-                    src={data.photo}
-                    alt=""
-                    fill
-                    sizes="(min-width: 768px) 45vw, 90vw"
-                    className="object-cover"
-                  />
-                </div>
-              </div>
-            )}
+          <div className="relative mt-10 flex flex-col gap-4">
+            {data.quotes.map((quote, i) => (
+              <QuoteBubble
+                key={quote.zh}
+                quote={quote}
+                marginLeft={STAGGER_INDENT[i % STAGGER_INDENT.length]}
+                hoverTilt={HOVER_TILT[i % HOVER_TILT.length]}
+                bg={BUBBLE_BG[i % BUBBLE_BG.length]}
+              />
+            ))}
           </div>
         </div>
       </RevealOnScroll>

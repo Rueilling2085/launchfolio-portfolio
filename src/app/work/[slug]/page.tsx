@@ -32,6 +32,7 @@ import { DesignHighlight } from "@/components/sections/DesignHighlight";
 import { DesignIteration } from "@/components/sections/DesignIteration";
 import { CompetitorAnalysis } from "@/components/sections/CompetitorAnalysis";
 import { CaseStudySideNav, type SideNavSection } from "@/components/sections/CaseStudySideNav";
+import { NextProjects } from "@/components/sections/NextProjects";
 import { NextStepDecision } from "@/components/ui/NextStepDecision";
 import { Code2 } from "lucide-react";
 import { projects } from "@/lib/data";
@@ -53,6 +54,11 @@ export default async function ProjectCaseStudyPage({
     notFound();
   }
 
+  const currentIndex = projects.findIndex((p) => p.slug === project.slug);
+  const nextProjects = [1, 2].map(
+    (offset) => projects[(currentIndex + offset) % projects.length]
+  );
+
   const dark = project.theme === "dark";
   const darkBg = "bg-[#0A0118]";
   const dotGrid =
@@ -70,6 +76,9 @@ export default async function ProjectCaseStudyPage({
       : null,
     project.usabilityTesting
       ? { id: "usability-testing", label: { zh: "易用性測試", en: "Usability Testing" } }
+      : null,
+    project.expertInterview
+      ? { id: "expert-interview", label: { zh: "專家訪談", en: "Expert Interviews" } }
       : null,
     project.interfaceOptimization
       ? { id: "interface-optimization", label: { zh: "介面優化", en: "Interface Optimization" } }
@@ -423,6 +432,8 @@ export default async function ProjectCaseStudyPage({
               <CompetitorAnalysis data={project.competitorAnalysis} />
             </div>
           )}
+
+          <NextProjects projects={nextProjects} />
         </SectionContainer>
       </main>
       <Footer />

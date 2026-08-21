@@ -193,6 +193,8 @@ export type ProjectChallengeItem = {
   challenge: Localized;
   action: Localized;
   result: Localized;
+  resultStats?: { value: Localized; label: Localized }[];
+  resultTrend?: { from: Localized; to: Localized; label: Localized };
 };
 
 export type AppIntroVisual = {
@@ -261,7 +263,7 @@ export type CompetitorAnalysis = {
 export type ResearchBackground = {
   eyebrow?: Localized;
   source?: Localized;
-  growthStat?: { from: string; to: string; label: Localized };
+  growthStat?: { from: Localized; to: Localized; label: Localized };
   stats: { value: string; label: Localized }[];
   subtitle: Localized;
   body: Localized;
@@ -710,6 +712,8 @@ export type Project = {
   /** Public Canva "view?embed" URL, shown as an embedded presentation on the
    *  case-study page as interim content before a full case study is built. */
   presentationEmbedUrl?: string;
+  /** Public GitHub repo URL, shown as a "View Code" link next to the hero title. */
+  repoUrl?: string;
 };
 
 export const projects: Project[] = [
@@ -731,7 +735,7 @@ export const projects: Project[] = [
       en: "Built an AI safety-monitoring platform to close the gap between manual inspections",
     },
     cardDescription: {
-      zh: "傳統工廠仰賴人工巡檢，難以及時掌握巡檢間的安全風險。我訪談職環安人員與系統整合商定義範圍，並設計「Prompt Template」互動機制——把模糊的自然語言輸入收斂成固定句型、可替換變數的操作介面，解決 VLM 判讀不穩定的問題，協助企業從被動巡檢轉向主動風險管理。",
+      zh: "傳統工廠仰賴人工巡檢，難以及時掌握巡檢間的安全風險。我訪談職環安人員與系統整合商定義範圍，並設計「Prompt Template」互動機制，把模糊的自然語言輸入收斂成固定句型、可替換變數的操作介面，解決 VLM 判讀不穩定的問題，協助企業從被動巡檢轉向主動風險管理。",
       en: "Traditional factories rely on manual patrols and can't catch risks between rounds. I interviewed EHS staff and a systems integrator to define scope, then designed a \"Prompt Template\" interaction, turning ambiguous natural-language input into a fixed-sentence, swappable-variable interface that fixed the VLM's unstable readings, helping the business move from reactive patrols to proactive risk management.",
     },
     color: "#1D4ED8",
@@ -787,6 +791,11 @@ export const projects: Project[] = [
           result: {
             zh: "從 10 個候選場域中收斂至 2 個，最終聚焦於工廠安全（工安）場域，作為首期 PoC 驗證重點。",
             en: "Narrowed 10 candidate settings down to 2, ultimately focusing the first PoC on factory safety (EHS).",
+          },
+          resultTrend: {
+            from: { zh: "10", en: "10" },
+            to: { zh: "2", en: "2" },
+            label: { zh: "候選場域收斂", en: "Candidate settings narrowed" },
           },
         },
         {
@@ -1147,7 +1156,7 @@ export const projects: Project[] = [
       patternRef: {
         tag: "S/AI",
         title: {
-          zh: "設計原則參考｜Shape of AI — Madlibs Pattern",
+          zh: "設計原則參考｜Shape of AI，Madlibs Pattern",
           en: "Design Principle Reference | Shape of AI, Madlibs Pattern",
         },
         intro: { zh: "競品之外，同時參考 AI Patterns 資料庫：", en: "Beyond competitors, I also referenced the AI Patterns database:" },
@@ -1239,7 +1248,7 @@ export const projects: Project[] = [
           en: "From this competitor analysis, three design principles converged into the Prompt Template mechanism",
         },
         description: {
-          zh: "以 Gear Detection—Whether wearing specific gear 情境示意 Prompt 輸入介面",
+          zh: "以 Gear Detection，Whether wearing specific gear 情境示意 Prompt 輸入介面",
           en: "Illustrated with the Gear Detection, Whether Wearing Specific Gear scenario's prompt interface",
         },
         items: [
@@ -1340,6 +1349,10 @@ export const projects: Project[] = [
             zh: "完成 13 場易用性測試與訪談；找出 4 項高優先度介面問題，作為後續優化依據。",
             en: "Completed 13 usability tests and interviews, surfacing 4 high-priority interface issues that guided the next round of fixes.",
           },
+          resultStats: [
+            { value: { zh: "13", en: "13" }, label: { zh: "場易用性測試", en: "usability tests conducted" } },
+            { value: { zh: "4", en: "4" }, label: { zh: "項高優先度問題", en: "priority issues surfaced" } },
+          ],
         },
         {
           title: {
@@ -1358,6 +1371,10 @@ export const projects: Project[] = [
             zh: "收集 118 份有效問卷；完成 3 位專家訪談；將 10+ 項需求收斂為 4 個核心功能方向；建立產品 Roadmap 的優先順序。",
             en: "Collected 118 valid survey responses, completed 3 expert interviews, narrowed 10+ requirements down to 4 core feature directions, and set the priority order for the product roadmap.",
           },
+          resultStats: [
+            { value: { zh: "118", en: "118" }, label: { zh: "份有效問卷", en: "survey responses collected" } },
+            { value: { zh: "4", en: "4" }, label: { zh: "項核心功能方向", en: "core feature directions" } },
+          ],
         },
         {
           title: { zh: "3. 將研究洞察轉化為產品設計", en: "3. Turning Research Insight into Product Design" },
@@ -1373,6 +1390,9 @@ export const projects: Project[] = [
             zh: "提出 7 項產品優化方案；維護並更新 Design System；設計方案獲團隊採納，作為後續版本開發依據。",
             en: "Delivered 7 product optimization proposals; maintained and updated the Design System; the team adopted the designs as the basis for the next release.",
           },
+          resultStats: [
+            { value: { zh: "7", en: "7" }, label: { zh: "項優化方案", en: "optimization proposals delivered" } },
+          ],
         },
       ],
     },
@@ -2163,12 +2183,12 @@ export const projects: Project[] = [
     deviceMockup: false,
     cardTags: ["Generative AI", "RAG System"],
     cardHeadline: {
-      zh: "讓觀眾看見文物「當年被使用」的樣子",
-      en: "Letting visitors see an artifact the way it was actually used",
+      zh: "建構多模態 RAG 導覽系統，讓文物問答更精準、有據可循",
+      en: "Built a multimodal RAG guide system for more precise, evidence-backed answers",
     },
     cardDescription: {
-      zh: "我設計並開發多模態 RAG 導覽系統，結合知識檢索與生成式影像，讓觀眾提問後同時獲得可信的解說與文物情境重現圖，經 30 人對照實驗證實知識建構與參與度皆顯著提升。",
-      en: "I designed and built a multimodal RAG guide system that pairs knowledge retrieval with generative imagery, so a visitor's question returns both a trustworthy explanation and a generated scene showing the artifact in use, validated in a 30-person controlled study to significantly improve knowledge-building and engagement.",
+      zh: "為國立故宮博物院展覽設計並建構的 AI-native RAG 對話系統。有別於字數受限的靜態標籤，也不同於容易產生「AI 幻覺」的通用 LLM，我串聯權威資料庫進行知識檢索，讓每則回答都有據可查，並即時生成情境圖像還原缺佚文物。經 30 人對照實驗證實，知識建構與參與度皆顯著提升。",
+      en: "An AI-native RAG conversation system designed and built for the National Palace Museum's exhibitions. Unlike character-limited static placards or a general-purpose LLM prone to hallucination, I grounded every answer in authoritative databases and generated context images to restore missing artifacts in place. A 30-person controlled study confirmed significant gains in knowledge-building and engagement.",
     },
     color: "#2A1D12",
     cardAccent: "#C4956A",
@@ -2179,6 +2199,7 @@ export const projects: Project[] = [
     cardImageBackdrop: "#7A7871",
     cardImageScale: 1.55,
     presentationEmbedUrl: "https://www.canva.com/design/DAHSO25n1g8/xUAAeCPKUccPVuHoQqeRbg/view?embed",
+    repoUrl: "https://github.com/Rueilling2085/rag-museum-chatbot",
     description: {
       zh: "以多模態 RAG 技術打造的博物館 AI 導覽系統，結合知識檢索與生成式影像，將靜態的文物說明牌轉化為可對話、可視覺化的知識探索體驗。研究成果獲 IEEE ICASI 2026 口頭發表。",
       en: "A museum AI guide system built on multimodal RAG technology, pairing knowledge retrieval with generative imagery to turn a static artifact placard into a conversational, visual knowledge-exploration experience. The research was presented orally at IEEE ICASI 2026.",
@@ -2193,6 +2214,43 @@ export const projects: Project[] = [
       "UI Design",
       "Quantitative Analysis",
     ],
+    overview: {
+      niche: { zh: "個人研究．碩士論文・多模態 RAG・生成式 AI", en: "Master's Research · Multimodal RAG · Generative AI" },
+      projectIntro:
+        "以多模態 RAG 技術打造的博物館 AI 導覽系統，結合知識檢索與生成式影像，將靜態的文物說明牌轉化為可對話、可視覺化的知識探索體驗。",
+      challenges: [
+        {
+          title: { zh: "1. 找出知識傳遞的落差", en: "1. Identifying the Knowledge-Delivery Gap" },
+          challenge: {
+            zh: "傳統博物館的知識傳遞長期依賴靜態標籤，但標籤受限於字數，往往只能提供文物的基本資料，難以回應來自不同知識背景的觀眾。此外，策展人會透過展品搭配，幫助觀眾想像文物過去的真實使用情境，然而一旦館藏出現缺佚，敘事脈絡便難以延續。",
+            en: "Traditional museums rely on static placards for knowledge transfer, but a placard's character limit usually only covers an artifact's basic facts, struggling to answer visitors coming from very different knowledge backgrounds. Curators also use complementary exhibits to help visitors imagine how an artifact was actually used, but once a piece in the collection goes missing, that narrative thread breaks.",
+          },
+          action: {
+            zh: "為此，我們致力於建構一款對話式的 AI 導覽系統。然而在測試中發現，若直接採用通用的大型語言模型（LLM），容易因缺乏特定文化知識的訓練而產生「AI 幻覺」，反而損害了展覽的權威性與可信度。",
+            en: "So we set out to build a conversational AI guide. But testing revealed that a general-purpose LLM, without training on the specific cultural knowledge involved, was prone to \"AI hallucination,\" which undermined the exhibit's authority and credibility instead of strengthening it.",
+          },
+          result: {
+            zh: "確立以 RAG（檢索增強生成）為核心的技術方向，而非直接仰賴通用 LLM。",
+            en: "Settled on RAG (Retrieval-Augmented Generation) as the core technical direction, rather than relying on a general-purpose LLM directly.",
+          },
+        },
+        {
+          title: { zh: "2. 以 RAG 打造可信、可視覺化的知識探索體驗", en: "2. Grounding the System in RAG for a Trustworthy, Visual Experience" },
+          challenge: {
+            zh: "需要讓每一則回答都有據可查，同時讓缺佚的文物也能被觀眾具體想像。",
+            en: "Needed every answer to be verifiable, while also letting visitors concretely picture artifacts no longer in the collection.",
+          },
+          action: {
+            zh: "本系統以 RAG 為核心，串聯公開權威資料庫進行知識檢索，確保每一則回答都有據可查。觀眾只需用自然語言提問，系統便從已建置好的知識庫中檢索並生成回應，甚至能即時生成對應的情境圖像，讓缺佚的文物也得以還原場景。",
+            en: "Built the system around RAG, connecting to public authoritative databases for knowledge retrieval so every answer stays traceable to a source. Visitors just ask in natural language, and the system retrieves from the knowledge base and generates a response, even producing a matching scene image on the spot so a missing artifact can still be visualized in context.",
+          },
+          result: {
+            zh: "從資料建置、索引、檢索、評估到介面設計，完成一套可複製的策展導覽工作流程，讓觀眾從被動的資訊接收者，轉變為主動的知識建構者。",
+            en: "Delivered a repeatable curation-and-guide workflow spanning data building, indexing, retrieval, evaluation, and interface design, turning visitors from passive recipients of information into active builders of their own understanding.",
+          },
+        },
+      ],
+    },
   },
   {
     id: "6",
@@ -2205,7 +2263,7 @@ export const projects: Project[] = [
     cardTags: ["Product Design", "Wearable Device"],
     cardHeadline: {
       zh: "打造讓聽障者感受音樂的穿戴式裝置",
-      en: "Built a wearable that lets d/Deaf and hard-of-hearing people feel music",
+      en: "Built a wearable that lets people who are deaf or hard of hearing feel music",
     },
     cardDescription: {
       zh: "透過使用者研究、軟硬體整合與產品設計，將音樂轉化為觸覺回饋，打破傳統輔具冰冷的既有印象。歷經 5 次原型迭代，同步優化外觀造型與震動機構配置，並結合 App 延伸情感分享與音樂互動體驗。",
@@ -2223,7 +2281,7 @@ export const projects: Project[] = [
     theme: "dark",
     description: {
       zh: "TouchTune 是一款專為聽障人士設計的穿戴式裝置。它透過將聲音轉化為多頻率的振動，提供多感官的音樂體驗。",
-      en: "TouchTune is a wearable device designed for the d/Deaf and hard-of-hearing community. It translates sound into multi-frequency vibration, delivering a multisensory music experience.",
+      en: "TouchTune is a wearable device designed for people who are deaf or hard of hearing. It translates sound into multi-frequency vibration, delivering a multisensory music experience.",
     },
     duration: "September 2025 (5 months)",
     team: ["Industrial Designer ×2", "PM, UI/UX Designer ×1 - Me"],
@@ -2242,7 +2300,7 @@ export const projects: Project[] = [
           title: { zh: "1. 用戶研究與需求洞察", en: "1. User Research & Needs Discovery" },
           challenge: {
             zh: "專案初期缺乏與目標使用者（聽障人士）直接接觸的管道，難以確立真實需求。",
-            en: "Early on there was no direct channel to the target users (the d/Deaf and hard-of-hearing community), making it hard to pin down real needs.",
+            en: "Early on there was no direct channel to the target users (people who are deaf or hard of hearing), making it hard to pin down real needs.",
           },
           action: {
             zh: "負責文獻研究，整理大量二手資料，深入分析聽障者的「感官代償」機制與體驗缺口。",
@@ -2267,6 +2325,10 @@ export const projects: Project[] = [
             zh: "最終設計成功兼顧功能性與親和力，榮獲 IDA Design Awards、unDesign Award 兩項國際設計獎肯定。",
             en: "The final design landed both functionality and approachability, earning recognition from the IDA Design Awards and the unDesign Award.",
           },
+          resultStats: [
+            { value: { zh: "5", en: "5" }, label: { zh: "次原型迭代", en: "prototype iterations" } },
+            { value: { zh: "2", en: "2" }, label: { zh: "項國際設計獎", en: "international design awards" } },
+          ],
         },
       ],
       awards: [
@@ -2280,15 +2342,15 @@ export const projects: Project[] = [
         zh: "根據世界衛生組織（WHO）《2021 年世界聽力報告》，全球聽力損失人口持續攀升，觸覺正逐漸成為聲音感知的重要替代途徑。",
         en: "Per the WHO's 2021 World Report on Hearing, the global population with hearing loss keeps rising, and touch is becoming an important substitute channel for perceiving sound.",
       },
-      growthStat: { from: "15億", to: "25億", label: { zh: "全球聽力損失人口（預估 2050 年）", en: "People with hearing loss worldwide (projected, 2050)" } },
+      growthStat: { from: { zh: "15億", en: "1.5B" }, to: { zh: "25億", en: "2.5B" }, label: { zh: "全球聽力損失人口（預估 2050 年）", en: "People with hearing loss worldwide (projected, 2050)" } },
       stats: [
         { value: "20%", label: { zh: "約佔全球總人口", en: "Of the global population" } },
         { value: "+67%", label: { zh: "較現今成長", en: "Growth from today" } },
       ],
-      subtitle: { zh: "聽障人士如何「聽」見聲音？", en: "How Do d/Deaf People \"Hear\" Sound?" },
+      subtitle: { zh: "聽障人士如何「聽」見聲音？", en: "How Do Deaf or Hard-of-Hearing People \"Hear\" Sound?" },
       body: {
         zh: "得益於大腦的可塑性，當某種感官功能喪失時，大腦會透過利用其他感官來進行代償。聽障人士便是透過偵測「振動」，利用觸覺來感受聲音。因此，對他們而言，音樂是一種全身性的體驗，許多人會將手放在樂器或音響喇叭上，以感知音樂的節奏、低音與拍子。",
-        en: "Thanks to the brain's plasticity, when one sense is lost, the brain compensates by leaning on the others. d/Deaf people sense sound by detecting vibration through touch. For them, music becomes a full-body experience. Many rest a hand on an instrument or speaker to feel its rhythm, bass, and beat.",
+        en: "Thanks to the brain's plasticity, when one sense is lost, the brain compensates by leaning on the others. People who are deaf or hard of hearing sense sound by detecting vibration through touch. For them, music becomes a full-body experience. Many rest a hand on an instrument or speaker to feel its rhythm, bass, and beat.",
       },
       image: "/images/projects/touchtune/music-seniro.jpg",
       imageAlt: { zh: "群眾在演唱會中隨音樂舉手歡呼", en: "A crowd raising their hands to the music at a concert" },
@@ -2316,7 +2378,7 @@ export const projects: Project[] = [
       ],
       solutionIntro: {
         zh: "我們將聲音轉化為多頻率振動，不僅能幫助聽障者感受音樂的節奏與頻率，更能提升他們在社交活動中的參與度，帶來更豐富的感官體驗與情感連結。",
-        en: "We turn sound into multi-frequency vibration, not only helping d/Deaf users feel a song's rhythm and frequency, but also raising their participation in social settings, with a richer sensory experience and emotional connection.",
+        en: "We turn sound into multi-frequency vibration, not only helping users who are deaf or hard of hearing feel a song's rhythm and frequency, but also raising their participation in social settings, with a richer sensory experience and emotional connection.",
       },
       solutionPoints: [
         {
@@ -2681,7 +2743,7 @@ export const projects: Project[] = [
           paragraphs: [
             {
               zh: "本專案為碩士團隊合作項目。由於初期無法直接接觸聽障使用者，我獨立進行文獻研究整理聽障者的音樂感知方式與相關穿戴式產品案例，作為團隊設計方向的基礎，並進一步帶領團隊發想產品外觀與機構設計。",
-              en: "This was a master's team project. Since we had no direct access to d/Deaf users early on, I independently ran a literature review covering how they perceive music and relevant wearable precedents, laying the groundwork for the team's direction, and went on to lead the team through ideating the product's form and mechanical design.",
+              en: "This was a master's team project. Since we had no direct access to users who are deaf or hard of hearing early on, I independently ran a literature review covering how they perceive music and relevant wearable precedents, laying the groundwork for the team's direction, and went on to lead the team through ideating the product's form and mechanical design.",
             },
             {
               zh: "專案中最大的挑戰，是如何在有限的產品尺寸內整合震動模組，同時兼顧美感與佩戴舒適性，突破傳統輔具偏向醫療器材的既有印象。透過反覆討論與設計迭代，我深刻體會到，這不只是解決功能需求，更需要兼顧使用者的情感認同與日常配戴意願。",
@@ -2710,8 +2772,7 @@ export const projects: Project[] = [
 export const bringItems = [
   {
     icon: "search",
-    title: "Research-driven Designer",
-    titleZh: "研究驅動的設計者",
+    title: { zh: "研究驅動的設計者", en: "Research-driven Designer" },
     description: {
       zh: "在設計之前，我習慣先釐清問題，透過使用者研究、數據分析與情境探索驗證假設，確保設計真正回應使用者需求。",
       en: "Before I design anything, I clarify the problem first, validating assumptions through user research, data analysis, and contextual inquiry so the design actually answers a real need.",
@@ -2719,8 +2780,7 @@ export const bringItems = [
   },
   {
     icon: "layout-dashboard",
-    title: "Complexity Translator",
-    titleZh: "複雜問題的轉譯者",
+    title: { zh: "複雜問題的轉譯者", en: "Complexity Translator" },
     description: {
       zh: "我擅長將複雜的科技與資訊，轉化為人容易理解、操作與感受的體驗。",
       en: "I turn complex technology and information into experiences people can understand, operate, and feel at ease with.",
@@ -2728,8 +2788,7 @@ export const bringItems = [
   },
   {
     icon: "bot",
-    title: "Technical Collaborator",
-    titleZh: "能動手實作的設計夥伴",
+    title: { zh: "能動手實作的設計夥伴", en: "Technical Collaborator" },
     description: {
       zh: "我持續探索 AI 技術在產品開發中的應用，並透過實際專案累積經驗，能從使用者需求與技術可行性雙向思考產品機會，將 AI 技術轉化為具體的產品價值。",
       en: "I keep exploring how AI fits into real product development, weighing user needs against technical feasibility to turn AI capability into concrete product value.",

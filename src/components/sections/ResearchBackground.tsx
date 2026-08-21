@@ -4,22 +4,11 @@ import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
 import { PulseDot } from "@/components/ui/PulseBadge";
+import { StatValue } from "@/components/ui/StatValue";
 import type { ResearchBackground as ResearchBackgroundData } from "@/lib/data";
 import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 const HIGHLIGHT = { zh: "「聽」", en: "Hear" } as const;
-
-function StatValue({ value, color }: { value: string; color: string }) {
-  const match = value.match(/^([+\-]?[\d.,]+)(.*)$/);
-  const number = match ? match[1] : value;
-  const unit = match ? match[2] : "";
-  return (
-    <span className="text-[40px] font-bold leading-none md:text-[48px]" style={{ color }}>
-      {number}
-      {unit && <span className="text-[22px] font-semibold md:text-[26px]">{unit}</span>}
-    </span>
-  );
-}
 
 function HighlightedText({ text, highlight }: { text: string; highlight: string }) {
   const parts = text.split(highlight);
@@ -90,12 +79,12 @@ export function ResearchBackground({
                 {data.growthStat.label[lang]}
               </p>
               <div className="flex items-center gap-3">
-                <StatValue value={data.growthStat.from} color={dark ? "#B9A6FF" : "#1E116E"} />
+                <StatValue value={data.growthStat.from[lang]} color={dark ? "#B9A6FF" : "#1E116E"} />
                 <ArrowRight
                   size={28}
                   className={dark ? "text-white/30" : "text-ink-soft/30"}
                 />
-                <StatValue value={data.growthStat.to} color={dark ? "#B9A6FF" : "#1E116E"} />
+                <StatValue value={data.growthStat.to[lang]} color={dark ? "#B9A6FF" : "#1E116E"} />
               </div>
             </div>
           </RevealOnScroll>

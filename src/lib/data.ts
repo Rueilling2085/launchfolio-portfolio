@@ -1513,7 +1513,7 @@ export const projects: Project[] = [
             scenario: { zh: "你不想設定任何的目標，想直接開始執行跑步", en: "You don't want to set a goal and want to start running directly" },
             goal: { zh: "回執行跑步畫面→開始", en: "Return to run screen → start" },
             response: { zh: "定位時間過久", en: "GPS lock took too long" },
-            time: "30s 以上",
+            time: "30s+",
             hasError: true,
             efficiency: 2,
             note: { zh: "建議考量網路定位狀況，可增設離線地圖", en: "Suggest accounting for weak GPS/network conditions, e.g. adding an offline map" },

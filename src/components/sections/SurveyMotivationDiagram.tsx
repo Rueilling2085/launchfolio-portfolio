@@ -2,6 +2,7 @@
 
 import { UserRound, ListChecks, Target, TriangleAlert, Lightbulb, type LucideIcon } from "lucide-react";
 import type { SurveyMotivation, SurveyMotivationGroup } from "@/lib/data";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 const GROUP_ICONS: Record<NonNullable<SurveyMotivationGroup["icon"]>, LucideIcon> = {
   profile: UserRound,
@@ -10,6 +11,7 @@ const GROUP_ICONS: Record<NonNullable<SurveyMotivationGroup["icon"]>, LucideIcon
 };
 
 function GroupCard({ group }: { group: SurveyMotivationGroup }) {
+  const { lang } = useLanguage();
   const Icon = group.icon ? GROUP_ICONS[group.icon] : null;
 
   return (
@@ -19,15 +21,15 @@ function GroupCard({ group }: { group: SurveyMotivationGroup }) {
           <Icon size={18} />
         </span>
       )}
-      <p className="text-sm font-semibold text-ink">{group.label}</p>
+      <p className="text-sm font-semibold text-ink">{group.label[lang]}</p>
       {group.children && group.children.length > 0 && (
         <div className="mt-3 flex flex-col gap-2">
           {group.children.map((child) => (
             <span
-              key={child}
+              key={child.zh}
               className="rounded-lg bg-paper-alt px-3 py-2 text-xs leading-relaxed text-ink-soft"
             >
-              {child}
+              {child[lang]}
             </span>
           ))}
         </div>
@@ -37,6 +39,7 @@ function GroupCard({ group }: { group: SurveyMotivationGroup }) {
 }
 
 export function SurveyMotivationDiagram({ data }: { data: SurveyMotivation }) {
+  const { lang } = useLanguage();
   return (
     <div className="relative overflow-hidden rounded-[2rem] border border-line bg-white p-6 md:p-12">
       <div className="relative grid grid-cols-1 items-center gap-10 md:grid-cols-[290px_1fr] md:gap-16">
@@ -47,7 +50,7 @@ export function SurveyMotivationDiagram({ data }: { data: SurveyMotivation }) {
             </span>
             {data.problemLabel}
           </p>
-          <p className="mt-3 text-sm leading-relaxed text-muted">{data.problemText}</p>
+          <p className="mt-3 text-sm leading-relaxed text-muted">{data.problemText[lang]}</p>
 
           {data.goalLabel && data.goalText && (
             <>
@@ -58,18 +61,18 @@ export function SurveyMotivationDiagram({ data }: { data: SurveyMotivation }) {
                 </span>
                 {data.goalLabel}
               </p>
-              <p className="mt-3 text-sm leading-relaxed text-muted">{data.goalText}</p>
+              <p className="mt-3 text-sm leading-relaxed text-muted">{data.goalText[lang]}</p>
             </>
           )}
         </div>
 
         <div>
           {data.groupsTitle && (
-            <p className="mb-4 text-sm font-semibold text-ink">{data.groupsTitle}</p>
+            <p className="mb-4 text-sm font-semibold text-ink">{data.groupsTitle[lang]}</p>
           )}
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             {data.groups.map((group) => (
-              <GroupCard key={group.label} group={group} />
+              <GroupCard key={group.label.zh} group={group} />
             ))}
           </div>
         </div>

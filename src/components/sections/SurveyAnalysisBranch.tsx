@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { ListChecks, Target, UserRound, type LucideIcon } from "lucide-react";
 import type { SurveyMotivationGroup } from "@/lib/data";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 const ICONS: Record<NonNullable<SurveyMotivationGroup["icon"]>, LucideIcon> = {
   profile: UserRound,
@@ -17,6 +18,7 @@ export function SurveyAnalysisBranch({
   group: SurveyMotivationGroup;
   dark?: boolean;
 }) {
+  const { lang } = useLanguage();
   const containerRef = useRef<HTMLDivElement>(null);
   const parentRef = useRef<HTMLSpanElement>(null);
   const childRefs = useRef<(HTMLSpanElement | null)[]>([]);
@@ -71,7 +73,7 @@ export function SurveyAnalysisBranch({
           dark ? "bg-white/[0.06] text-white/70" : "bg-paper-alt text-ink-soft"
         }`}
       >
-        {group.label}
+        {group.label[lang]}
       </span>
     );
   }
@@ -106,13 +108,13 @@ export function SurveyAnalysisBranch({
         {Icon && (
           <Icon size={13} className={`shrink-0 ${dark ? "text-[#4DB5FF]" : "text-[#0493FB]"}`} />
         )}
-        {group.label}
+        {group.label[lang]}
       </span>
 
       <div className="relative z-10 flex flex-1 flex-col gap-2.5">
         {children.map((child, i) => (
           <span
-            key={child}
+            key={child.zh}
             ref={(el) => {
               childRefs.current[i] = el;
             }}
@@ -122,7 +124,7 @@ export function SurveyAnalysisBranch({
                 : "bg-white text-ink-soft shadow-sm ring-1 ring-line/70"
             }`}
           >
-            {child}
+            {child[lang]}
           </span>
         ))}
       </div>

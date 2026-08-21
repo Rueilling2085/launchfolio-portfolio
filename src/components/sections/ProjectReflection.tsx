@@ -22,7 +22,7 @@ export function ProjectReflection({ data }: { data: Reflection }) {
           <RevealOnScroll className="flex justify-center">
             <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-medium text-white/80 backdrop-blur-sm">
               <PulseDot color="#8B7BFF" size={7} />
-              {data.eyebrow}
+              {data.eyebrow[lang]}
             </span>
           </RevealOnScroll>
         )}
@@ -31,7 +31,7 @@ export function ProjectReflection({ data }: { data: Reflection }) {
           {data.blocks.map((block, i) => {
             const Icon = ICONS[block.icon];
             return (
-              <RevealOnScroll key={block.title} delay={0.05 * i}>
+              <RevealOnScroll key={block.title.zh} delay={0.05 * i}>
                 <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-6 md:p-10">
                   <div className="flex items-center gap-3">
                     <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#5532FA]/15 text-[#B9A6FF]">
@@ -39,7 +39,7 @@ export function ProjectReflection({ data }: { data: Reflection }) {
                     </span>
                     <div>
                       <p className="text-base font-semibold text-white md:text-lg">
-                        {block.title}
+                        {block.title[lang]}
                       </p>
                       {block.subtitle && (
                         <p className="mt-0.5 text-xs tracking-wide text-white/40">
@@ -51,8 +51,8 @@ export function ProjectReflection({ data }: { data: Reflection }) {
 
                   <div className="mt-5 flex flex-col gap-4">
                     {block.paragraphs.map((p) => (
-                      <p key={p} className="text-sm leading-relaxed text-white/65 md:text-base">
-                        {p}
+                      <p key={p.zh} className="text-sm leading-relaxed text-white/65 md:text-base">
+                        {p[lang]}
                       </p>
                     ))}
                   </div>

@@ -1,7 +1,10 @@
+"use client";
+
 import Image from "next/image";
 import { AlertTriangle, Lightbulb } from "lucide-react";
 import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
 import { PulseDot } from "@/components/ui/PulseBadge";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 import type {
   InterfaceOptimization as InterfaceOptimizationData,
   InterfaceOptimizationCase,
@@ -51,6 +54,7 @@ function PointCard({
 }
 
 function BeforeMedia({ item }: { item: InterfaceOptimizationCase }) {
+  const { lang } = useLanguage();
   if (item.beforeVideo) {
     return (
       <video
@@ -67,7 +71,7 @@ function BeforeMedia({ item }: { item: InterfaceOptimizationCase }) {
     return (
       <Image
         src={item.beforeImage}
-        alt={item.beforeImageAlt ?? `${item.title} — Before`}
+        alt={item.beforeImageAlt?.[lang] ?? `${item.title[lang]} — Before`}
         width={item.beforeImageWidth}
         height={item.beforeImageHeight}
         sizes="(min-width: 768px) 340px, 90vw"
@@ -79,6 +83,7 @@ function BeforeMedia({ item }: { item: InterfaceOptimizationCase }) {
 }
 
 function SideBySideBeforeAfter({ item }: { item: InterfaceOptimizationCase }) {
+  const { lang } = useLanguage();
   const hasPainPoints = Boolean(item.painPoints && item.painPoints.length > 0);
   const hasSolutions = Boolean(item.solutions && item.solutions.length > 0);
 
@@ -97,7 +102,7 @@ function SideBySideBeforeAfter({ item }: { item: InterfaceOptimizationCase }) {
               Pain Points
             </span>
             {item.painPoints!.map((point) => (
-              <PointCard key={point} icon={AlertTriangle} text={point} accent="#DC2626" accentBg="#FEE2E2" />
+              <PointCard key={point.zh} icon={AlertTriangle} text={point[lang]} accent="#DC2626" accentBg="#FEE2E2" />
             ))}
           </div>
         )}
@@ -111,7 +116,7 @@ function SideBySideBeforeAfter({ item }: { item: InterfaceOptimizationCase }) {
           <div className="relative mt-4 w-full max-w-[340px]">
             <Image
               src={item.afterImage}
-              alt={item.afterImageAlt ?? `${item.title} — After`}
+              alt={item.afterImageAlt?.[lang] ?? `${item.title[lang]} — After`}
               width={item.afterImageWidth}
               height={item.afterImageHeight}
               sizes="(min-width: 768px) 340px, 90vw"
@@ -125,7 +130,7 @@ function SideBySideBeforeAfter({ item }: { item: InterfaceOptimizationCase }) {
               Solution
             </span>
             {item.solutions!.map((solution) => (
-              <PointCard key={solution} icon={Lightbulb} text={solution} accent="#045CC4" accentBg="#E4EEFF" />
+              <PointCard key={solution.zh} icon={Lightbulb} text={solution[lang]} accent="#045CC4" accentBg="#E4EEFF" />
             ))}
           </div>
         )}
@@ -135,6 +140,7 @@ function SideBySideBeforeAfter({ item }: { item: InterfaceOptimizationCase }) {
 }
 
 function OptimizationCase({ item, index }: { item: InterfaceOptimizationCase; index: number }) {
+  const { lang } = useLanguage();
   const hasBeforeMedia = Boolean(item.beforeVideo || item.beforeImage);
   const hasAfterMedia = Boolean(item.afterImage && item.afterImageWidth && item.afterImageHeight);
   const hasPainPoints = Boolean(item.painPoints && item.painPoints.length > 0);
@@ -146,7 +152,7 @@ function OptimizationCase({ item, index }: { item: InterfaceOptimizationCase; in
       <div id={`opt-${item.number}`} className="scroll-mt-24">
         <div className="flex items-baseline justify-center gap-3 text-center">
           <span className="text-lg font-bold text-[#045CC4]">{item.number}.</span>
-          <h3 className="text-xl font-semibold tracking-tight text-ink md:text-2xl">{item.title}</h3>
+          <h3 className="text-xl font-semibold tracking-tight text-ink md:text-2xl">{item.title[lang]}</h3>
         </div>
 
         {item.sideBySide ? (
@@ -173,7 +179,7 @@ function OptimizationCase({ item, index }: { item: InterfaceOptimizationCase; in
                 </span>
                 <div className="mt-4 flex flex-col gap-3">
                   {item.painPoints!.map((point) => (
-                    <PointCard key={point} icon={AlertTriangle} text={point} accent="#DC2626" accentBg="#FEE2E2" />
+                    <PointCard key={point.zh} icon={AlertTriangle} text={point[lang]} accent="#DC2626" accentBg="#FEE2E2" />
                   ))}
                 </div>
               </div>
@@ -187,11 +193,11 @@ function OptimizationCase({ item, index }: { item: InterfaceOptimizationCase; in
             <div className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2">
               {item.hmw!.map((question) => (
                 <div
-                  key={question}
+                  key={question.zh}
                   className="rounded-xl border border-[#0493FB]/25 bg-[#E4EEFF] p-4 text-left"
                 >
                   <p className="text-sm leading-relaxed text-ink-soft">
-                    <BoldText text={question} />
+                    <BoldText text={question[lang]} />
                   </p>
                 </div>
               ))}
@@ -208,7 +214,7 @@ function OptimizationCase({ item, index }: { item: InterfaceOptimizationCase; in
                 </span>
                 <div className="mt-4 flex flex-col gap-3">
                   {item.solutions!.map((solution) => (
-                    <PointCard key={solution} icon={Lightbulb} text={solution} accent="#045CC4" accentBg="#E4EEFF" />
+                    <PointCard key={solution.zh} icon={Lightbulb} text={solution[lang]} accent="#045CC4" accentBg="#E4EEFF" />
                   ))}
                 </div>
               </div>
@@ -222,7 +228,7 @@ function OptimizationCase({ item, index }: { item: InterfaceOptimizationCase; in
                 <div className="relative mt-2">
                   <Image
                     src={item.afterImage!}
-                    alt={item.afterImageAlt ?? `${item.title} — After`}
+                    alt={item.afterImageAlt?.[lang] ?? `${item.title[lang]} — After`}
                     width={item.afterImageWidth!}
                     height={item.afterImageHeight!}
                     sizes="(min-width: 768px) 620px, 90vw"
@@ -241,6 +247,7 @@ function OptimizationCase({ item, index }: { item: InterfaceOptimizationCase; in
 }
 
 export function InterfaceOptimization({ data }: { data: InterfaceOptimizationData }) {
+  const { lang } = useLanguage();
   return (
     <div className="mt-16 rounded-[2rem] bg-paper-alt py-16 md:mt-24 md:py-24">
       <div className="mx-auto max-w-6xl px-6">
@@ -248,14 +255,14 @@ export function InterfaceOptimization({ data }: { data: InterfaceOptimizationDat
           <RevealOnScroll className="flex justify-center">
             <span className="inline-flex items-center gap-2 rounded-full border border-line bg-white px-4 py-1.5 text-xs font-medium text-ink-soft">
               <PulseDot color="#045CC4" size={7} />
-              {data.eyebrow}
+              {data.eyebrow[lang]}
             </span>
           </RevealOnScroll>
         )}
 
         {data.title && (
           <RevealOnScroll delay={0.05} className="mt-5 text-center">
-            <h2 className="text-2xl font-semibold tracking-tight text-ink md:text-3xl">{data.title}</h2>
+            <h2 className="text-2xl font-semibold tracking-tight text-ink md:text-3xl">{data.title[lang]}</h2>
           </RevealOnScroll>
         )}
 

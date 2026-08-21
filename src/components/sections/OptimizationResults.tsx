@@ -1,9 +1,13 @@
+"use client";
+
 import Image from "next/image";
 import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
 import { PulseDot } from "@/components/ui/PulseBadge";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 import type { OptimizationResults as OptimizationResultsData, OptimizationResultItem } from "@/lib/data";
 
 function ResultCard({ item, index }: { item: OptimizationResultItem; index: number }) {
+  const { lang } = useLanguage();
   return (
     <RevealOnScroll delay={index * 0.08}>
       <div className="rounded-[2rem] border border-line bg-white p-6 md:p-10">
@@ -12,7 +16,7 @@ function ResultCard({ item, index }: { item: OptimizationResultItem; index: numb
             <div key={image.src} className="w-[140px] shrink-0 sm:w-[170px]">
               <Image
                 src={image.src}
-                alt={image.alt ?? item.title}
+                alt={image.alt?.[lang] ?? item.title[lang]}
                 width={image.width}
                 height={image.height}
                 sizes="170px"
@@ -23,14 +27,15 @@ function ResultCard({ item, index }: { item: OptimizationResultItem; index: numb
         </div>
 
         <div className="mx-auto mt-10 max-w-2xl text-center">
-          <p className="text-2xl font-bold tracking-tight text-ink md:text-3xl">{item.title}</p>
+          <p className="text-2xl font-bold tracking-tight text-ink md:text-3xl">{item.title[lang]}</p>
           <div className="mt-5 flex flex-col gap-4 text-left">
             {item.points.map((point, i) => (
-              <p key={point.label} className="text-sm leading-relaxed text-muted">
+              <p key={point.label.zh} className="text-sm leading-relaxed text-muted">
                 <span className="font-semibold text-ink">
-                  {i + 1}. {point.label}：
+                  {i + 1}. {point.label[lang]}
+                  {lang === "zh" ? "：" : ": "}
                 </span>
-                {point.description}
+                {point.description[lang]}
               </p>
             ))}
           </div>
@@ -41,26 +46,27 @@ function ResultCard({ item, index }: { item: OptimizationResultItem; index: numb
 }
 
 export function OptimizationResults({ data }: { data: OptimizationResultsData }) {
+  const { lang } = useLanguage();
   return (
     <div className="relative mt-16 md:mt-24">
       {data.eyebrow && (
         <RevealOnScroll className="flex justify-center">
           <span className="inline-flex items-center gap-2 rounded-full border border-line bg-white px-4 py-1.5 text-xs font-medium text-ink-soft">
             <PulseDot color="#045CC4" size={7} />
-            {data.eyebrow}
+            {data.eyebrow[lang]}
           </span>
         </RevealOnScroll>
       )}
 
       {data.title && (
         <RevealOnScroll delay={0.05} className="mt-5 text-center">
-          <h2 className="text-2xl font-semibold tracking-tight text-ink md:text-3xl">{data.title}</h2>
+          <h2 className="text-2xl font-semibold tracking-tight text-ink md:text-3xl">{data.title[lang]}</h2>
         </RevealOnScroll>
       )}
 
       <div className="mt-10 flex flex-col gap-6">
         {data.items.map((item, i) => (
-          <ResultCard key={item.title} item={item} index={i} />
+          <ResultCard key={item.title.zh} item={item} index={i} />
         ))}
       </div>
     </div>

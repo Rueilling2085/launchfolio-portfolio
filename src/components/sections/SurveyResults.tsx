@@ -2,6 +2,8 @@
 
 import { Fragment, useState } from "react";
 import { RunningIcon } from "@/components/ui/RunningIcon";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
+import type { Localized } from "@/lib/i18n/resolve";
 import type {
   SurveyResultsSection as SurveyResultsSectionData,
   SurveyResultsHabitTab,
@@ -16,6 +18,15 @@ const CHART_HEIGHT = 200;
 const FUNNEL_SPLIT_COLORS = ["#045CC4", "#D9DEE7"];
 const FUNNEL_TEXT_COLORS = ["#045CC4", "#999999"];
 
+const COPY = {
+  totalSample: { zh: "總樣本", en: "Total sample" },
+  totalSampleCount: { zh: "總樣本 {n} 人", en: "{n} total respondents" },
+  peopleCount: { zh: "（{n}人）", en: "({n})" },
+  hasHabit: { zh: "有", en: "Yes" },
+  noHabit: { zh: "無", en: "No" },
+  tabComingSoon: { zh: "此分頁內容準備中", en: "This tab is coming soon" },
+} as const;
+
 function FunnelDonut({
   split,
   total,
@@ -25,6 +36,7 @@ function FunnelDonut({
   total: number;
   size?: number;
 }) {
+  const { lang } = useLanguage();
   const cx = size / 2;
   const cy = size / 2;
   const r = size * 0.37;
@@ -47,7 +59,7 @@ function FunnelDonut({
       <g transform={`rotate(-90 ${cx} ${cy})`}>
         {arcs.map((a) => (
           <circle
-            key={a.item.label}
+            key={a.item.label.zh}
             cx={cx}
             cy={cy}
             r={r}
@@ -76,24 +88,25 @@ function FunnelDonut({
         className="fill-muted-2"
         style={{ fontSize: size * 0.085 }}
       >
-        總樣本
+        {COPY.totalSample[lang]}
       </text>
     </svg>
   );
 }
 
 function FunnelChart({ funnel }: { funnel: SurveyResultsHabitTab["funnel"] }) {
+  const { lang } = useLanguage();
   return (
     <div>
-      <p className="text-base font-semibold text-ink">{funnel.title}</p>
-      <p className="mt-1 text-xs text-muted">總樣本 {funnel.total} 人</p>
+      <p className="text-base font-semibold text-ink">{funnel.title[lang]}</p>
+      <p className="mt-1 text-xs text-muted">{COPY.totalSampleCount[lang].replace("{n}", String(funnel.total))}</p>
 
       <div className="mt-6 flex flex-col items-start gap-5">
         <FunnelDonut split={funnel.split} total={funnel.total} size={160} />
 
         <div className="flex flex-col gap-3 self-stretch">
           {funnel.split.map((item, i) => (
-            <Fragment key={item.label}>
+            <Fragment key={item.label.zh}>
               <p className="flex items-baseline gap-2 text-sm">
                 <span
                   className="text-xl font-bold"
@@ -101,13 +114,19 @@ function FunnelChart({ funnel }: { funnel: SurveyResultsHabitTab["funnel"] }) {
                 >
                   {item.percent}
                 </span>
-                <span className="text-ink-soft">（{item.value}人）{item.label}</span>
+                <span className="text-ink-soft">
+                  {COPY.peopleCount[lang].replace("{n}", String(item.value))}
+                  {item.label[lang]}
+                </span>
               </p>
               {i === 0 && (
                 <p className="flex items-baseline gap-2 text-sm">
                   <span className="mb-0.5 h-1.5 w-1.5 shrink-0 self-center rounded-full bg-[#045CC4]" />
                   <span className="font-bold text-[#045CC4]">{funnel.result.percent}</span>
-                  <span className="text-muted">（{funnel.result.value}人）{funnel.result.label}</span>
+                  <span className="text-muted">
+                    {COPY.peopleCount[lang].replace("{n}", String(funnel.result.value))}
+                    {funnel.result.label[lang]}
+                  </span>
                 </p>
               )}
             </Fragment>
@@ -119,10 +138,11 @@ function FunnelChart({ funnel }: { funnel: SurveyResultsHabitTab["funnel"] }) {
 }
 
 function BarCrossChart({ chart }: { chart: SurveyResultsHabitTab["crossAnalysis"] }) {
+  const { lang } = useLanguage();
   return (
     <div>
-      <p className="text-base font-semibold text-ink">{chart.title}</p>
-      <p className="mt-1 text-xs text-muted">{chart.subtitle}</p>
+      <p className="text-base font-semibold text-ink">{chart.title[lang]}</p>
+      <p className="mt-1 text-xs text-muted">{chart.subtitle[lang]}</p>
 
       <div className="mt-6 overflow-x-auto">
         <div className="flex min-w-[480px] items-start gap-3">
@@ -168,13 +188,15 @@ function BarCrossChart({ chart }: { chart: SurveyResultsHabitTab["crossAnalysis"
         </div>
 
         <div className="shrink-0">
-          <p className="text-xs font-medium text-ink-soft">{chart.legendLabel}</p>
+          <p className="text-xs font-medium text-ink-soft">{chart.legendLabel[lang]}</p>
           <div className="mt-2 flex flex-col gap-1.5 text-xs text-muted">
             <span className="flex items-center gap-1.5">
-              <span className="h-2.5 w-2.5 rounded-sm bg-[#045CC4]" />有
+              <span className="h-2.5 w-2.5 rounded-sm bg-[#045CC4]" />
+              {COPY.hasHabit[lang]}
             </span>
             <span className="flex items-center gap-1.5">
-              <span className="h-2.5 w-2.5 rounded-sm bg-[#D9DEE7]" />無
+              <span className="h-2.5 w-2.5 rounded-sm bg-[#D9DEE7]" />
+              {COPY.noHabit[lang]}
             </span>
           </div>
         </div>
@@ -185,18 +207,19 @@ function BarCrossChart({ chart }: { chart: SurveyResultsHabitTab["crossAnalysis"
 }
 
 function MotivationList({ data }: { data: SurveyResultsHabitTab["motivation"] }) {
+  const { lang } = useLanguage();
   return (
     <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
       <div>
         <p className="flex items-center gap-2 text-sm font-semibold text-ink">
           <RunningIcon size={24} className="shrink-0 text-[#045CC4]" />
-          {data.withHabitLabel}
+          {data.withHabitLabel[lang]}
         </p>
         <div className="mt-4 flex flex-col gap-3">
           {data.withHabitItems.map((item) => (
-            <p key={item.label} className="flex items-baseline gap-4 text-sm">
+            <p key={item.label.zh} className="flex items-baseline gap-4 text-sm">
               <span className="w-14 shrink-0 text-xl font-bold text-[#045CC4]">{item.value}</span>
-              <span className="text-ink-soft">{item.label}</span>
+              <span className="text-ink-soft">{item.label[lang]}</span>
             </p>
           ))}
         </div>
@@ -204,13 +227,13 @@ function MotivationList({ data }: { data: SurveyResultsHabitTab["motivation"] })
       <div>
         <p className="flex items-center gap-2 text-sm font-semibold text-muted">
           <RunningIcon size={24} className="shrink-0 text-muted-2" />
-          {data.withoutHabitLabel}
+          {data.withoutHabitLabel[lang]}
         </p>
         <div className="mt-4 flex flex-col gap-3">
           {data.withoutHabitItems.map((item) => (
-            <p key={item.label} className="flex items-baseline gap-4 text-sm">
+            <p key={item.label.zh} className="flex items-baseline gap-4 text-sm">
               <span className="w-14 shrink-0 text-xl font-bold text-muted-2">{item.value}</span>
-              <span className="text-muted">{item.label}</span>
+              <span className="text-muted">{item.label[lang]}</span>
             </p>
           ))}
         </div>
@@ -268,20 +291,21 @@ function PriorityBarList({
 }
 
 function PriorityChart({ data }: { data: SurveyResultsFeatureTab["priorityChart"] }) {
+  const { lang } = useLanguage();
   return (
     <div>
-      <p className="text-base font-semibold text-ink">{data.title}</p>
-      {data.subtitle && <p className="mt-1 text-xs text-muted">{data.subtitle}</p>}
+      <p className="text-base font-semibold text-ink">{data.title[lang]}</p>
+      {data.subtitle && <p className="mt-1 text-xs text-muted">{data.subtitle[lang]}</p>}
 
       <div className="mt-6 grid grid-cols-1 gap-8 md:grid-cols-2">
         <PriorityBarList
-          title={data.withHabitLabel}
-          items={data.items.map((item) => ({ label: item.label, value: item.withHabit }))}
+          title={data.withHabitLabel[lang]}
+          items={data.items.map((item) => ({ label: item.label[lang], value: item.withHabit }))}
           dotColor="#045CC4"
         />
         <PriorityBarList
-          title={data.withoutHabitLabel}
-          items={data.items.map((item) => ({ label: item.label, value: item.withoutHabit }))}
+          title={data.withoutHabitLabel[lang]}
+          items={data.items.map((item) => ({ label: item.label[lang], value: item.withoutHabit }))}
           dotColor="#9AA6B8"
         />
       </div>
@@ -290,39 +314,40 @@ function PriorityChart({ data }: { data: SurveyResultsFeatureTab["priorityChart"
 }
 
 function PriorityInsight({ insight }: { insight: SurveyPriorityInsight }) {
+  const { lang } = useLanguage();
   return (
     <div className="rounded-2xl border border-[#0493FB]/25 bg-[#E4EEFF] p-5 text-sm leading-relaxed text-ink-soft">
-      <p className="text-sm font-semibold text-ink">{insight.commonNeeds.title}</p>
+      <p className="text-sm font-semibold text-ink">{insight.commonNeeds.title[lang]}</p>
       <ul className="mt-2 flex flex-col gap-1.5">
         {insight.commonNeeds.points.map((point) => (
-          <li key={point} className="flex gap-2">
+          <li key={point.zh} className="flex gap-2">
             <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#045CC4]" />
-            <span>{point}</span>
+            <span>{point[lang]}</span>
           </li>
         ))}
       </ul>
 
       <div className="mt-5 border-t border-[#0493FB]/20 pt-4">
-        <p className="text-sm font-semibold text-ink">{insight.groupDifferences.title}</p>
+        <p className="text-sm font-semibold text-ink">{insight.groupDifferences.title[lang]}</p>
         <div className="mt-3 grid grid-cols-1 gap-4 sm:grid-cols-2">
           <div>
-            <p className="text-xs font-semibold text-[#045CC4]">{insight.groupDifferences.withHabitLabel}</p>
+            <p className="text-xs font-semibold text-[#045CC4]">{insight.groupDifferences.withHabitLabel[lang]}</p>
             <ul className="mt-2 flex flex-col gap-1.5">
               {insight.groupDifferences.withHabitItems.map((item) => (
-                <li key={item} className="flex gap-2">
+                <li key={item.zh} className="flex gap-2">
                   <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#045CC4]" />
-                  <span>{item}</span>
+                  <span>{item[lang]}</span>
                 </li>
               ))}
             </ul>
           </div>
           <div>
-            <p className="text-xs font-semibold text-muted-2">{insight.groupDifferences.withoutHabitLabel}</p>
+            <p className="text-xs font-semibold text-muted-2">{insight.groupDifferences.withoutHabitLabel[lang]}</p>
             <ul className="mt-2 flex flex-col gap-1.5">
               {insight.groupDifferences.withoutHabitItems.map((item) => (
-                <li key={item} className="flex gap-2">
+                <li key={item.zh} className="flex gap-2">
                   <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-muted-2" />
-                  <span>{item}</span>
+                  <span>{item[lang]}</span>
                 </li>
               ))}
             </ul>
@@ -330,7 +355,7 @@ function PriorityInsight({ insight }: { insight: SurveyPriorityInsight }) {
         </div>
       </div>
 
-      <p className="mt-5 border-t border-[#0493FB]/20 pt-4">{insight.summary}</p>
+      <p className="mt-5 border-t border-[#0493FB]/20 pt-4">{insight.summary[lang]}</p>
     </div>
   );
 }
@@ -351,16 +376,17 @@ function barGradientColor(index: number, total: number) {
 }
 
 function GoodAppConditionsChart({ data }: { data: SurveyResultsFeatureTab["goodAppConditions"] }) {
+  const { lang } = useLanguage();
   const max = Math.max(...data.items.map((item) => item.value));
 
   return (
     <div>
-      <p className="text-base font-semibold text-ink">{data.title}</p>
-      {data.subtitle && <p className="mt-1 text-xs text-muted">{data.subtitle}</p>}
+      <p className="text-base font-semibold text-ink">{data.title[lang]}</p>
+      {data.subtitle && <p className="mt-1 text-xs text-muted">{data.subtitle[lang]}</p>}
 
       <div className="mt-8 flex items-end justify-around gap-2" style={{ height: COLUMN_CHART_HEIGHT }}>
         {data.items.map((item, i) => (
-          <div key={item.label} className="flex h-full flex-1 flex-col items-center justify-end gap-2">
+          <div key={item.label.zh} className="flex h-full flex-1 flex-col items-center justify-end gap-2">
             <span className="text-xs font-semibold text-ink-soft">{item.value}</span>
             <div
               className="w-full max-w-9 rounded-t-md"
@@ -374,8 +400,8 @@ function GoodAppConditionsChart({ data }: { data: SurveyResultsFeatureTab["goodA
       </div>
       <div className="mt-2 flex justify-around gap-2 text-center text-[11px] leading-snug text-muted">
         {data.items.map((item) => (
-          <span key={item.label} className="flex-1 whitespace-pre-line">
-            {item.label}
+          <span key={item.label.zh} className="flex-1 whitespace-pre-line">
+            {item.label[lang]}
           </span>
         ))}
       </div>
@@ -384,16 +410,17 @@ function GoodAppConditionsChart({ data }: { data: SurveyResultsFeatureTab["goodA
 }
 
 function TrackedMetricsChart({ data }: { data: SurveyResultsFeatureTab["trackedMetrics"] }) {
+  const { lang } = useLanguage();
   const max = Math.max(...data.items.map((item) => item.value));
 
   return (
     <div>
-      <p className="text-base font-semibold text-ink">{data.title}</p>
-      {data.subtitle && <p className="mt-1 text-xs text-muted">{data.subtitle}</p>}
+      <p className="text-base font-semibold text-ink">{data.title[lang]}</p>
+      {data.subtitle && <p className="mt-1 text-xs text-muted">{data.subtitle[lang]}</p>}
 
       <div className="mt-8 flex items-end justify-around gap-1.5" style={{ height: COLUMN_CHART_HEIGHT }}>
         {data.items.map((item, i) => (
-          <div key={item.label} className="flex h-full flex-1 flex-col items-center justify-end gap-2">
+          <div key={item.label.zh} className="flex h-full flex-1 flex-col items-center justify-end gap-2">
             <span className="text-xs font-semibold text-ink-soft">{item.value}</span>
             <div
               className="w-full max-w-9 rounded-t-md"
@@ -407,8 +434,8 @@ function TrackedMetricsChart({ data }: { data: SurveyResultsFeatureTab["trackedM
       </div>
       <div className="mt-2 flex justify-around gap-1.5 text-center text-[10px] leading-snug text-muted">
         {data.items.map((item) => (
-          <span key={item.label} className="flex-1">
-            {item.label}
+          <span key={item.label.zh} className="flex-1">
+            {item.label[lang]}
           </span>
         ))}
       </div>
@@ -427,7 +454,8 @@ function InsightText({ text }: { text: string }) {
   );
 }
 
-function InsightBox({ insight }: { insight: string | string[] }) {
+function InsightBox({ insight }: { insight: Localized | Localized[] }) {
+  const { lang } = useLanguage();
   const items = Array.isArray(insight) ? insight : [insight];
 
   return (
@@ -435,27 +463,28 @@ function InsightBox({ insight }: { insight: string | string[] }) {
       {items.length > 1 ? (
         <ul className="flex flex-col gap-2.5">
           {items.map((item) => (
-            <li key={item} className="flex gap-2">
+            <li key={item.zh} className="flex gap-2">
               <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#045CC4]" />
               <span>
-                <InsightText text={item} />
+                <InsightText text={item[lang]} />
               </span>
             </li>
           ))}
         </ul>
       ) : (
-        <InsightText text={items[0]} />
+        <InsightText text={items[0][lang]} />
       )}
     </div>
   );
 }
 
 export function SurveyResults({ data }: { data: SurveyResultsSectionData }) {
+  const { lang } = useLanguage();
   const [active, setActive] = useState(data.tabs[0]?.key);
 
   return (
     <div className="mt-14 md:mt-16">
-      <h3 className="text-2xl font-semibold tracking-tight text-ink md:text-3xl">{data.title}</h3>
+      <h3 className="text-2xl font-semibold tracking-tight text-ink md:text-3xl">{data.title[lang]}</h3>
 
       <div className="mt-5 flex gap-6 border-b border-line">
         {data.tabs.map((tab) => (
@@ -467,7 +496,7 @@ export function SurveyResults({ data }: { data: SurveyResultsSectionData }) {
               active === tab.key ? "font-semibold text-ink" : "font-medium text-muted hover:text-ink-soft"
             }`}
           >
-            {tab.label}
+            {tab.label[lang]}
             {active === tab.key && (
               <span className="absolute inset-x-0 -bottom-px h-1 rounded-full bg-[#045CC4]" />
             )}
@@ -499,10 +528,10 @@ export function SurveyResults({ data }: { data: SurveyResultsSectionData }) {
           <div className="flex flex-col gap-6">
             {data.feature.introTitle && (
               <div>
-                <p className="text-base font-semibold text-ink">{data.feature.introTitle}</p>
+                <p className="text-base font-semibold text-ink">{data.feature.introTitle[lang]}</p>
                 {data.feature.introText && (
                   <p className="mt-2 whitespace-pre-line text-sm leading-relaxed text-muted">
-                    {data.feature.introText}
+                    {data.feature.introText[lang]}
                   </p>
                 )}
               </div>
@@ -527,7 +556,7 @@ export function SurveyResults({ data }: { data: SurveyResultsSectionData }) {
           </div>
         ) : (
           <div className="rounded-2xl border border-dashed border-line bg-paper-alt p-8 text-center text-sm text-muted">
-            此分頁內容準備中
+            {COPY.tabComingSoon[lang]}
           </div>
         )}
       </div>

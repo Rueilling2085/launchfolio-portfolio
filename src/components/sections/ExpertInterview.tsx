@@ -1,18 +1,22 @@
+"use client";
+
 import Image from "next/image";
 import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
 import { PulseDot } from "@/components/ui/PulseBadge";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 import type { ExpertInterview as ExpertInterviewData } from "@/lib/data";
 
 const STAGGER_INDENT = ["0%", "14%", "6%", "18%", "2%", "16%", "8%"];
 
 export function ExpertInterview({ data }: { data: ExpertInterviewData }) {
+  const { lang } = useLanguage();
   return (
     <div className="relative mt-16 md:mt-24">
       {data.eyebrow && (
         <RevealOnScroll className="flex justify-center">
           <span className="inline-flex items-center gap-2 rounded-full border border-line bg-white px-4 py-1.5 text-xs font-medium text-ink-soft">
             <PulseDot color="#045CC4" size={7} />
-            {data.eyebrow}
+            {data.eyebrow[lang]}
           </span>
         </RevealOnScroll>
       )}
@@ -31,18 +35,18 @@ export function ExpertInterview({ data }: { data: ExpertInterviewData }) {
                 </span>
               ))}
             </div>
-            <p className="text-sm leading-relaxed text-muted">{data.intro}</p>
+            <p className="text-sm leading-relaxed text-muted">{data.intro[lang]}</p>
           </div>
 
           <div className="mt-10 grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-10">
             <div className="flex flex-col gap-4">
               {data.quotes.map((quote, i) => (
                 <div
-                  key={quote}
+                  key={quote.zh}
                   className="w-fit max-w-[92%] rounded-2xl bg-paper-alt px-5 py-4 text-sm leading-relaxed text-ink-soft"
                   style={{ marginLeft: STAGGER_INDENT[i % STAGGER_INDENT.length] }}
                 >
-                  {quote}
+                  {quote[lang]}
                 </div>
               ))}
             </div>

@@ -1,10 +1,12 @@
 "use client";
 
 import { Home, User, Settings, type LucideIcon } from "lucide-react";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
+import type { Localized } from "@/lib/i18n/resolve";
 
 type Node = {
   id: string;
-  label: string;
+  label: Localized;
   col: 0 | 1 | 2 | 3 | 4 | 5;
   y: number;
   keyFlow?: boolean;
@@ -28,37 +30,37 @@ const COL_W = [130, 160, 140, 170, 210, 140];
 const BOX_H = 40;
 
 const NODES: Node[] = [
-  { id: "root", label: "聽障者APP", col: 0, y: 580, keyFlow: true },
+  { id: "root", label: { zh: "聽障者APP", en: "HoH User App" }, col: 0, y: 580, keyFlow: true },
 
-  { id: "home", label: "首頁", col: 1, y: 250, keyFlow: true, icon: "home" },
-  { id: "personal", label: "個人化設定", col: 1, y: 610, keyFlow: true, icon: "personal" },
-  { id: "settings", label: "設定", col: 1, y: 880, icon: "settings" },
+  { id: "home", label: { zh: "首頁", en: "Home" }, col: 1, y: 250, keyFlow: true, icon: "home" },
+  { id: "personal", label: { zh: "個人化設定", en: "Personalization" }, col: 1, y: 610, keyFlow: true, icon: "personal" },
+  { id: "settings", label: { zh: "設定", en: "Settings" }, col: 1, y: 880, icon: "settings" },
 
-  { id: "latest", label: "最新", col: 2, y: 70, keyFlow: true },
-  { id: "records", label: "紀錄", col: 2, y: 250 },
-  { id: "create", label: "建立", col: 2, y: 430, keyFlow: true },
-  { id: "deviceSettings", label: "裝置設定", col: 2, y: 610, keyFlow: true },
-  { id: "login", label: "登入/登出", col: 2, y: 760 },
-  { id: "privacy", label: "隱私權設定", col: 2, y: 820 },
-  { id: "support", label: "客服中心", col: 2, y: 880 },
-  { id: "faq", label: "疑問查詢", col: 2, y: 940 },
-  { id: "tutorial", label: "教學步驟", col: 2, y: 1000 },
+  { id: "latest", label: { zh: "最新", en: "Latest" }, col: 2, y: 70, keyFlow: true },
+  { id: "records", label: { zh: "紀錄", en: "Records" }, col: 2, y: 250 },
+  { id: "create", label: { zh: "建立", en: "Create" }, col: 2, y: 430, keyFlow: true },
+  { id: "deviceSettings", label: { zh: "裝置設定", en: "Device Settings" }, col: 2, y: 610, keyFlow: true },
+  { id: "login", label: { zh: "登入/登出", en: "Log In/Out" }, col: 2, y: 760 },
+  { id: "privacy", label: { zh: "隱私權設定", en: "Privacy Settings" }, col: 2, y: 820 },
+  { id: "support", label: { zh: "客服中心", en: "Support Center" }, col: 2, y: 880 },
+  { id: "faq", label: { zh: "疑問查詢", en: "FAQ" }, col: 2, y: 940 },
+  { id: "tutorial", label: { zh: "教學步驟", en: "Tutorial" }, col: 2, y: 1000 },
 
-  { id: "startRecord", label: "開始記錄", col: 3, y: 70, keyFlow: true },
-  { id: "history", label: "歷史紀錄", col: 3, y: 250 },
-  { id: "editNameDate", label: "編輯名稱和日期", col: 3, y: 400, keyFlow: true },
-  { id: "emotionMusicRecord", label: "情緒與音樂日誌", col: 3, y: 460, keyFlow: true },
-  { id: "tutorialScreen", label: "教學步驟畫面", col: 3, y: 520 },
-  { id: "lightMode", label: "燈光模式設定", col: 3, y: 580, keyFlow: true },
-  { id: "vibrationSetting", label: "振動裝置設定", col: 3, y: 640, keyFlow: true },
-  { id: "batteryCheck", label: "查看裝置電量", col: 3, y: 700 },
+  { id: "startRecord", label: { zh: "開始記錄", en: "Start Recording" }, col: 3, y: 70, keyFlow: true },
+  { id: "history", label: { zh: "歷史紀錄", en: "History" }, col: 3, y: 250 },
+  { id: "editNameDate", label: { zh: "編輯名稱和日期", en: "Edit Name & Date" }, col: 3, y: 400, keyFlow: true },
+  { id: "emotionMusicRecord", label: { zh: "情緒與音樂日誌", en: "Emotion & Music Journal" }, col: 3, y: 460, keyFlow: true },
+  { id: "tutorialScreen", label: { zh: "教學步驟畫面", en: "Tutorial Screen" }, col: 3, y: 520 },
+  { id: "lightMode", label: { zh: "燈光模式設定", en: "Light Mode Settings" }, col: 3, y: 580, keyFlow: true },
+  { id: "vibrationSetting", label: { zh: "振動裝置設定", en: "Vibration Settings" }, col: 3, y: 640, keyFlow: true },
+  { id: "batteryCheck", label: { zh: "查看裝置電量", en: "Check Battery" }, col: 3, y: 700 },
 
-  { id: "deviceConnect", label: "裝置連結", col: 4, y: 40, keyFlow: true },
-  { id: "liveScreen", label: "即時情緒回饋", col: 5, y: 40, keyFlow: true },
-  { id: "titleDate", label: "標題＆日期", col: 4, y: 160 },
-  { id: "emotionData", label: "情緒反應數據和示意圖", col: 4, y: 220 },
-  { id: "musicData", label: "音樂數據和示意圖", col: 4, y: 280 },
-  { id: "musicPlayer", label: "音樂播放器", col: 4, y: 340 },
+  { id: "deviceConnect", label: { zh: "裝置連結", en: "Device Connection" }, col: 4, y: 40, keyFlow: true },
+  { id: "liveScreen", label: { zh: "即時情緒回饋", en: "Real-Time Emotion Feedback" }, col: 5, y: 40, keyFlow: true },
+  { id: "titleDate", label: { zh: "標題＆日期", en: "Title & Date" }, col: 4, y: 160 },
+  { id: "emotionData", label: { zh: "情緒反應數據和示意圖", en: "Emotion Data & Diagram" }, col: 4, y: 220 },
+  { id: "musicData", label: { zh: "音樂數據和示意圖", en: "Music Data & Diagram" }, col: 4, y: 280 },
+  { id: "musicPlayer", label: { zh: "音樂播放器", en: "Music Player" }, col: 4, y: 340 },
 ];
 
 const EDGES: Edge[] = [
@@ -107,6 +109,7 @@ function nodeBox(n: Node) {
 }
 
 export function InformationArchitecture({ legend }: { legend?: string }) {
+  const { lang } = useLanguage();
   const byId = Object.fromEntries(NODES.map((n) => [n.id, n]));
 
   return (
@@ -165,7 +168,7 @@ export function InformationArchitecture({ legend }: { legend?: string }) {
                         n.keyFlow ? "font-semibold text-white" : "text-white/55"
                       }`}
                     >
-                      {n.label}
+                      {n.label[lang]}
                     </span>
                   </div>
                 </foreignObject>
@@ -179,7 +182,7 @@ export function InformationArchitecture({ legend }: { legend?: string }) {
                   fill={n.keyFlow ? "#FFFFFF" : "rgba(255,255,255,0.55)"}
                   fontWeight={n.keyFlow ? 600 : 400}
                 >
-                  {n.label}
+                  {n.label[lang]}
                 </text>
               )}
             </g>

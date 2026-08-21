@@ -1,8 +1,11 @@
 "use client";
 
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
+import type { Localized } from "@/lib/i18n/resolve";
+
 type FlowNode = {
   id: string;
-  label: string;
+  label: Localized;
   x: number;
   y: number;
   w: number;
@@ -22,11 +25,11 @@ type FlowEdge = {
 };
 
 const NODES: FlowNode[] = [
-  { id: "power", label: "按下「開機」鍵", x: 60, y: 50, w: 260, h: 52, keyFlow: true },
-  { id: "bluetooth", label: "按下「藍芽」鍵", x: 60, y: 130, w: 260, h: 52, keyFlow: true },
+  { id: "power", label: { zh: "按下「開機」鍵", en: 'Press "Power"' }, x: 60, y: 50, w: 260, h: 52, keyFlow: true },
+  { id: "bluetooth", label: { zh: "按下「藍芽」鍵", en: 'Press "Bluetooth"' }, x: 60, y: 130, w: 260, h: 52, keyFlow: true },
   {
     id: "decision",
-    label: "確認 App 是否\n連結成功",
+    label: { zh: "確認 App 是否\n連結成功", en: "Confirm App\nconnected" },
     x: 110,
     y: 260,
     w: 160,
@@ -36,15 +39,15 @@ const NODES: FlowNode[] = [
   },
   {
     id: "successRedirect",
-    label: "跳轉至裝置設定畫面",
+    label: { zh: "跳轉至裝置設定畫面", en: "Redirect to Device Settings" },
     x: 60,
     y: 440,
     w: 260,
     h: 52,
     keyFlow: true,
   },
-  { id: "personalization", label: "前往「個人化設定」", x: 60, y: 520, w: 260, h: 52, keyFlow: true },
-  { id: "save", label: "儲存", x: 130, y: 600, w: 120, h: 52, shape: "pill", keyFlow: true },
+  { id: "personalization", label: { zh: "前往「個人化設定」", en: 'Go to "Personalization"' }, x: 60, y: 520, w: 260, h: 52, keyFlow: true },
+  { id: "save", label: { zh: "儲存", en: "Save" }, x: 130, y: 600, w: 120, h: 52, shape: "pill", keyFlow: true },
 ];
 
 const EDGES: FlowEdge[] = [
@@ -94,6 +97,7 @@ function detourPath(start: { x: number; y: number }, end: { x: number; y: number
 }
 
 export function DeviceConnectionFlow() {
+  const { lang } = useLanguage();
   const byId = Object.fromEntries(NODES.map((n) => [n.id, n]));
 
   return (
@@ -141,7 +145,7 @@ export function DeviceConnectionFlow() {
             const cx = n.x + n.w / 2;
             const cy = n.y + n.h / 2;
             const points = `${cx},${n.y} ${n.x + n.w},${cy} ${cx},${n.y + n.h} ${n.x},${cy}`;
-            const lines = n.label.split("\n");
+            const lines = n.label[lang].split("\n");
             return (
               <g key={n.id}>
                 <polygon points={points} fill={fill} stroke={stroke} strokeWidth={1.5} />
@@ -184,7 +188,7 @@ export function DeviceConnectionFlow() {
                 fontWeight={n.keyFlow ? 600 : 400}
                 fill={textFill}
               >
-                {n.label}
+                {n.label[lang]}
               </text>
             </g>
           );
@@ -200,7 +204,7 @@ export function DeviceConnectionFlow() {
           fontWeight={600}
           fill="#C7BBFF"
         >
-          硬體
+          {lang === "zh" ? "硬體" : "Hardware"}
         </text>
 
         <rect
@@ -221,7 +225,7 @@ export function DeviceConnectionFlow() {
           fontWeight={600}
           fill="rgba(255,255,255,0.75)"
         >
-          軟體
+          {lang === "zh" ? "軟體" : "Software"}
         </text>
       </svg>
     </div>

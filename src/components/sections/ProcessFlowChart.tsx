@@ -89,7 +89,7 @@ export function ProcessFlowChart({
                   <Image src={avatar} alt="Persona" fill sizes="36px" className="object-cover" />
                 </span>
               )}
-              <div className="flex flex-wrap items-center gap-x-5 gap-y-1 text-[13px] text-white/85">
+              <div className="flex flex-wrap items-center gap-x-5 gap-y-1 text-[15px] text-white/85">
                 {META.map((item) => (
                   <span key={item.label}>
                     <span className="font-semibold text-white">{item.label}: </span>
@@ -104,14 +104,14 @@ export function ProcessFlowChart({
                 <div key={i} className="flex flex-1 items-end justify-center gap-1">
                   <div className="text-center">
                     <p
-                      className={`text-[11px] font-semibold uppercase tracking-wide ${
+                      className={`text-[12px] font-semibold uppercase tracking-wide ${
                         step.emphasis ? "text-white" : "text-white/45"
                       }`}
                     >
                       Step {i + 1}
                     </p>
                     <p
-                      className={`mt-0.5 text-[13px] leading-tight ${
+                      className={`mt-0.5 text-[15px] leading-tight ${
                         step.emphasis ? "font-medium text-white" : "text-white/45"
                       }`}
                     >

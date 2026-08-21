@@ -1,12 +1,44 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
 import { PulseDot } from "@/components/ui/PulseBadge";
 import { useLanguage } from "@/lib/i18n/LanguageProvider";
+import type { Localized } from "@/lib/i18n/resolve";
 import type { ExpertInterview as ExpertInterviewData } from "@/lib/data";
 
 const STAGGER_INDENT = ["0%", "14%", "6%", "18%", "2%", "16%", "8%"];
+const HOVER_TILT = [-5, 4, -4, 5, -6, 3, -3.5];
+const BUBBLE_BG = ["bg-paper-alt", "bg-[#D8EEFD]/70"];
+
+function QuoteBubble({
+  quote,
+  marginLeft,
+  hoverTilt,
+  bg,
+}: {
+  quote: Localized;
+  marginLeft: string;
+  hoverTilt: number;
+  bg: string;
+}) {
+  const { lang } = useLanguage();
+  const [hovered, setHovered] = useState(false);
+  return (
+    <div
+      className={`w-fit max-w-[92%] cursor-default rounded-2xl px-5 py-4 text-sm leading-relaxed text-ink-soft shadow-sm transition-transform duration-300 ease-out ${bg}`}
+      style={{
+        marginLeft,
+        transform: `rotate(${hovered ? hoverTilt : 0}deg) scale(${hovered ? 1.03 : 1})`,
+      }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      {quote[lang]}
+    </div>
+  );
+}
 
 export function ExpertInterview({ data }: { data: ExpertInterviewData }) {
   const { lang } = useLanguage();
@@ -39,15 +71,15 @@ export function ExpertInterview({ data }: { data: ExpertInterviewData }) {
           </div>
 
           <div className="mt-10 grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-10">
-            <div className="flex flex-col gap-4">
+            <div className="relative flex flex-col gap-4">
               {data.quotes.map((quote, i) => (
-                <div
+                <QuoteBubble
                   key={quote.zh}
-                  className="w-fit max-w-[92%] rounded-2xl bg-paper-alt px-5 py-4 text-sm leading-relaxed text-ink-soft"
-                  style={{ marginLeft: STAGGER_INDENT[i % STAGGER_INDENT.length] }}
-                >
-                  {quote[lang]}
-                </div>
+                  quote={quote}
+                  marginLeft={STAGGER_INDENT[i % STAGGER_INDENT.length]}
+                  hoverTilt={HOVER_TILT[i % HOVER_TILT.length]}
+                  bg={BUBBLE_BG[i % BUBBLE_BG.length]}
+                />
               ))}
             </div>
 

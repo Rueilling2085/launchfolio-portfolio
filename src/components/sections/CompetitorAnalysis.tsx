@@ -197,7 +197,7 @@ export function CompetitorAnalysis({ data }: { data: CompetitorAnalysisData }) {
               <img
                 key={data.outcome.items[activeOutcome].image}
                 src={data.outcome.items[activeOutcome].image}
-                alt={`${data.outcome.title[lang]} — ${data.outcome.items[activeOutcome].tag[lang]}`}
+                alt={`${data.outcome.title[lang]}, ${data.outcome.items[activeOutcome].tag[lang]}`}
                 className={`h-auto w-full object-contain transition-opacity duration-500 ease-in-out ${
                   outcomeImageVisible ? "opacity-100" : "opacity-0"
                 }`}

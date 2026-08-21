@@ -128,7 +128,7 @@ export function CaseStudySideNav({
   return (
     <nav
       aria-label="Case study sections"
-      className={`fixed top-1/2 z-30 hidden -translate-y-1/2 items-stretch gap-3 text-right transition-opacity duration-300 2xl:flex ${
+      className={`fixed top-1/2 z-30 hidden -translate-y-1/2 items-stretch gap-3 text-left transition-opacity duration-300 2xl:flex ${
         visible ? "opacity-100" : "pointer-events-none opacity-0"
       }`}
       style={{ right: "calc(50% + 580px)" }}

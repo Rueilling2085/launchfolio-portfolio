@@ -3,11 +3,27 @@
 import { ArrowRight, ArrowDown } from "lucide-react";
 import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
 import { PulseDot } from "@/components/ui/PulseBadge";
+import { NextStepDecision } from "@/components/ui/NextStepDecision";
 import { SurveyMotivationDiagram } from "@/components/sections/SurveyMotivationDiagram";
 import { SurveyResults } from "@/components/sections/SurveyResults";
 import { CountUp } from "@/components/ui/CountUp";
 import { useLanguage } from "@/lib/i18n/LanguageProvider";
 import type { SurveyResearch as SurveyResearchData } from "@/lib/data";
+
+const COPY = {
+  bridge: {
+    zh: "除了易用性測試驅動的介面優化，我同時展開另一條研究線：\n透過大規模問卷調查，為產品下一階段的功能規劃收集方向。",
+    en: "Alongside the usability-testing-driven interface fixes, I ran a second research thread in parallel, a large-scale survey to gather direction for the product's next phase of feature planning.",
+  },
+  closingLead: {
+    zh: "這些洞察將",
+    en: "These insights will",
+  },
+  closingHighlight: {
+    zh: "指引產品下一階段的功能開發方向",
+    en: "guide the product's next round of feature development",
+  },
+} as const;
 
 function StructureColumn({ column }: { column: SurveyResearchData["structure"][number] }) {
   const { lang } = useLanguage();
@@ -52,8 +68,12 @@ export function SurveyResearch({ data }: { data: SurveyResearchData }) {
   const { lang } = useLanguage();
   return (
     <div className="relative mt-16 md:mt-24">
+      <RevealOnScroll className="mx-auto max-w-2xl text-center">
+        <p className="whitespace-pre-line text-sm leading-relaxed text-muted md:text-base">{COPY.bridge[lang]}</p>
+      </RevealOnScroll>
+
       {data.eyebrow && (
-        <RevealOnScroll className="flex justify-center">
+        <RevealOnScroll delay={0.05} className="mt-6 flex justify-center">
           <span className="inline-flex items-center gap-2 rounded-full border border-line bg-white px-4 py-1.5 text-xs font-medium text-ink-soft">
             <PulseDot color="#045CC4" size={7} />
             {data.eyebrow[lang]}
@@ -128,6 +148,13 @@ export function SurveyResearch({ data }: { data: SurveyResearchData }) {
           ))}
         </div>
       )}
+
+      <div className="mt-14">
+        <NextStepDecision>
+          {COPY.closingLead[lang]}
+          <span className="text-ink">{COPY.closingHighlight[lang]}</span>
+        </NextStepDecision>
+      </div>
     </div>
   );
 }

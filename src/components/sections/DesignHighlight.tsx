@@ -8,8 +8,8 @@ import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 const COPY = {
   viewDetail: { zh: "查看詳細內容", en: "View details" },
-  opt1: { zh: "優化一", en: "Fix 1" },
-  opt2: { zh: "優化二", en: "Fix 2" },
+  opt1: { zh: "優化一", en: "Optimization 1" },
+  opt2: { zh: "優化二", en: "Optimization 2" },
 } as const;
 
 function BranchCard({

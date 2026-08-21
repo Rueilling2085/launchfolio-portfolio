@@ -20,19 +20,6 @@ export function Hero() {
 
           <h1 className="mx-auto mt-10 w-full max-w-[840px] font-bold tracking-tight">
             <EnterOnLoad delay={0.3}>
-              <FitText>
-                <span
-                  className="bg-clip-text text-transparent"
-                  style={{
-                    backgroundImage: "linear-gradient(100deg, #E8916B, #D97757 45%, #A6472C)",
-                  }}
-                >
-                  Multidisciplinary
-                </span>
-              </FitText>
-            </EnterOnLoad>
-
-            <EnterOnLoad delay={0.42} className="mt-1">
               <FitText className="text-ink">Product Designer</FitText>
             </EnterOnLoad>
 

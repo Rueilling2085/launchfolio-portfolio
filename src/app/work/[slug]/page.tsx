@@ -8,6 +8,7 @@ import { LaptopMockup } from "@/components/ui/LaptopMockup";
 import { ProjectBackground } from "@/components/sections/ProjectBackground";
 import { ProjectOverview } from "@/components/sections/ProjectOverview";
 import { ProjectMetaCards } from "@/components/sections/ProjectMetaCards";
+import { ProjectHighlights } from "@/components/sections/ProjectHighlights";
 import { PresentationEmbed } from "@/components/sections/PresentationEmbed";
 import { ResearchBackground } from "@/components/sections/ResearchBackground";
 import { ProblemFraming } from "@/components/sections/ProblemFraming";
@@ -15,7 +16,8 @@ import { AppIntroVisual } from "@/components/sections/AppIntroVisual";
 import { UsabilityTesting } from "@/components/sections/UsabilityTesting";
 import { SurveyResearch } from "@/components/sections/SurveyResearch";
 import { InterfaceOptimization } from "@/components/sections/InterfaceOptimization";
-import { OptimizationResults } from "@/components/sections/OptimizationResults";
+import { DarkModeShowcase } from "@/components/sections/DarkModeShowcase";
+import { DesignSystemShowcase } from "@/components/sections/DesignSystemShowcase";
 import { ProblemSolution } from "@/components/sections/ProblemSolution";
 import { ProductFeatures } from "@/components/sections/ProductFeatures";
 import { DesignSketches } from "@/components/sections/DesignSketches";
@@ -31,6 +33,7 @@ import { DesignIteration } from "@/components/sections/DesignIteration";
 import { CompetitorAnalysis } from "@/components/sections/CompetitorAnalysis";
 import { CaseStudySideNav, type SideNavSection } from "@/components/sections/CaseStudySideNav";
 import { NextStepDecision } from "@/components/ui/NextStepDecision";
+import { Code2 } from "lucide-react";
 import { projects } from "@/lib/data";
 import { Localized } from "@/lib/i18n/Localized";
 
@@ -56,7 +59,9 @@ export default async function ProjectCaseStudyPage({
     "bg-[radial-gradient(circle,rgba(255,255,255,0.07)_1px,transparent_1px)] [background-size:22px_22px]";
 
   const rawSideNavSections: (SideNavSection | null)[] = [
-    project.overview ? { id: "overview", label: { zh: "專案總覽", en: "Overview" } } : null,
+    project.overview?.challenges?.length || project.appIntroVisual
+      ? { id: "overview", label: { zh: "專案總覽", en: "Overview" } }
+      : null,
     project.researchBackground
       ? { id: "research-background", label: { zh: "研究背景", en: "Research Background" } }
       : null,
@@ -66,14 +71,17 @@ export default async function ProjectCaseStudyPage({
     project.usabilityTesting
       ? { id: "usability-testing", label: { zh: "易用性測試", en: "Usability Testing" } }
       : null,
-    project.surveyResearch
-      ? { id: "survey-research", label: { zh: "問卷調查", en: "Survey Research" } }
-      : null,
     project.interfaceOptimization
       ? { id: "interface-optimization", label: { zh: "介面優化", en: "Interface Optimization" } }
       : null,
-    project.optimizationResults
-      ? { id: "optimization-results", label: { zh: "介面優化結果", en: "Optimization Results" } }
+    project.darkModeShowcase
+      ? { id: "dark-mode-showcase", label: { zh: "深色模式", en: "Dark Mode" } }
+      : null,
+    project.designSystemShowcase
+      ? { id: "design-system-showcase", label: { zh: "設計系統", en: "Design System" } }
+      : null,
+    project.surveyResearch
+      ? { id: "survey-research", label: { zh: "問卷調查", en: "Survey Research" } }
       : null,
     project.problemSolution
       ? { id: "problem-solution", label: { zh: "問題與解決方案", en: "Problem & Solution" } }
@@ -146,13 +154,30 @@ export default async function ProjectCaseStudyPage({
           </Link>
 
           <div className="relative mt-10 flex flex-col items-start text-left">
-            <h1
-              className={`text-3xl font-semibold tracking-tight md:text-5xl ${
-                dark ? "text-white" : "text-ink"
-              }`}
-            >
-              {project.name}
-            </h1>
+            <div className="flex flex-wrap items-center gap-4">
+              <h1
+                className={`text-3xl font-semibold tracking-tight md:text-5xl ${
+                  dark ? "text-white" : "text-ink"
+                }`}
+              >
+                {project.name}
+              </h1>
+              {project.repoUrl && (
+                <a
+                  href={project.repoUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`inline-flex items-center gap-2 rounded-full border px-3.5 py-1.5 text-sm font-medium transition-colors ${
+                    dark
+                      ? "border-white/20 text-white/80 hover:border-white/40 hover:text-white"
+                      : "border-line text-ink-soft hover:border-muted-2 hover:text-ink"
+                  }`}
+                >
+                  <Code2 size={15} />
+                  <Localized value={{ zh: "查看程式碼", en: "View Code" }} />
+                </a>
+              )}
+            </div>
             {project.cardHeadline && (
               <p
                 className={`mt-3 text-base font-medium md:text-lg ${
@@ -173,6 +198,9 @@ export default async function ProjectCaseStudyPage({
             {!project.presentationEmbedUrl && (
               <div className="w-full">
                 <ProjectMetaCards project={project} dark={dark} />
+                {project.overview?.highlights && (
+                  <ProjectHighlights items={project.overview.highlights} color={project.color ?? "#1D4ED8"} dark={dark} />
+                )}
               </div>
             )}
           </div>
@@ -290,21 +318,27 @@ export default async function ProjectCaseStudyPage({
             </div>
           )}
 
-          {project.surveyResearch && (
-            <div id="survey-research" className="scroll-mt-24">
-              <SurveyResearch data={project.surveyResearch} />
-            </div>
-          )}
-
           {project.interfaceOptimization && (
             <div id="interface-optimization" className="scroll-mt-24">
               <InterfaceOptimization data={project.interfaceOptimization} />
             </div>
           )}
 
-          {project.optimizationResults && (
-            <div id="optimization-results" className="scroll-mt-24">
-              <OptimizationResults data={project.optimizationResults} />
+          {project.darkModeShowcase && (
+            <div id="dark-mode-showcase" className="scroll-mt-24">
+              <DarkModeShowcase data={project.darkModeShowcase} />
+            </div>
+          )}
+
+          {project.designSystemShowcase && (
+            <div id="design-system-showcase" className="scroll-mt-24">
+              <DesignSystemShowcase data={project.designSystemShowcase} />
+            </div>
+          )}
+
+          {project.surveyResearch && (
+            <div id="survey-research" className="scroll-mt-24">
+              <SurveyResearch data={project.surveyResearch} />
             </div>
           )}
 

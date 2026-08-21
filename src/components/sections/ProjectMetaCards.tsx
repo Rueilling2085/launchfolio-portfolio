@@ -100,7 +100,9 @@ export function ProjectMetaCards({ project, dark }: { project: Project; dark?: b
         <MetaCard icon={Award} label={COPY.awards[lang]} dark={dark}>
           {awards.map((award) => (
             <span key={award.name} className="block">
-              {award.name} — {award.result[lang]}
+              {award.name}
+              {lang === "zh" ? "，" : ", "}
+              {award.result[lang]}
             </span>
           ))}
         </MetaCard>

@@ -155,30 +155,6 @@ export type InterfaceOptimization = {
   items: InterfaceOptimizationCase[];
 };
 
-export type OptimizationResultImage = {
-  src: string;
-  alt?: Localized;
-  width: number;
-  height: number;
-};
-
-export type OptimizationResultPoint = {
-  label: Localized;
-  description: Localized;
-};
-
-export type OptimizationResultItem = {
-  title: Localized;
-  images: OptimizationResultImage[];
-  points: OptimizationResultPoint[];
-};
-
-export type OptimizationResults = {
-  eyebrow?: Localized;
-  title?: Localized;
-  items: OptimizationResultItem[];
-};
-
 export type HowItWorks = {
   eyebrow: Localized;
   title?: Localized;
@@ -191,7 +167,9 @@ export type HowItWorks = {
 export type ProjectChallengeItem = {
   title: Localized;
   challenge: Localized;
-  action: Localized;
+  /** Omit to merge the action into `result` — used when the two read as one
+   *  continuous story rather than separate steps. */
+  action?: Localized;
   result: Localized;
   resultStats?: { value: Localized; label: Localized }[];
   resultTrend?: { from: Localized; to: Localized; label: Localized };
@@ -209,7 +187,10 @@ export type AppIntroVisual = {
 export type ProjectOverview = {
   niche?: Localized;
   projectIntro: string;
-  challenges: ProjectChallengeItem[];
+  /** 2-4 headline stats shown as a scannable row near the hero, in place of
+   *  (or alongside) the narrative challenge cards below. */
+  highlights?: { value: Localized; label: Localized }[];
+  challenges?: ProjectChallengeItem[];
   awards?: { name: string; result: Localized }[];
 };
 
@@ -578,6 +559,20 @@ export type ScreenGallery = {
   images: { src: string; alt: Localized; width: number; height: number }[];
 };
 
+export type DarkModeShowcase = {
+  heading: Localized;
+  description: Localized;
+  gallery: ScreenGallery;
+};
+
+export type DesignSystemShowcase = {
+  heading: Localized;
+  description: Localized;
+  typography: { src: string; width: number; height: number };
+  color: { src: string; width: number; height: number };
+  component: { src: string; width: number; height: number };
+};
+
 export type SceneShowcase = {
   appInHand: { image: string; imageAlt?: Localized };
   concertPhoto: { image: string; imageAlt?: Localized };
@@ -637,7 +632,8 @@ export type Project = {
   surveyResearch?: SurveyResearch;
   expertInterview?: ExpertInterview;
   interfaceOptimization?: InterfaceOptimization;
-  optimizationResults?: OptimizationResults;
+  darkModeShowcase?: DarkModeShowcase;
+  designSystemShowcase?: DesignSystemShowcase;
   problemSolution?: ProblemSolution;
   productFeatures?: ProductFeatures;
   designSketches?: DesignSketches;
@@ -759,59 +755,22 @@ export const projects: Project[] = [
       niche: { zh: "B2B SaaS・電腦視覺(VLM)・工業安全(EHS)", en: "B2B SaaS · Computer Vision (VLM) · Industrial Safety (EHS)" },
       projectIntro:
         "為研華打造的跨場域 AI 監控系統，結合 VLM 視覺偵測與 LLM 對話技術，補足醫療、零售、製造業在非巡檢時段的監控盲區。系統即時偵測現場隱形風險，並透過 Chatbot 快速釐清事件脈絡，自動生成符合 ISO 標準的稽核報告，實現全時段智慧化管理。",
-      challenges: [
+      highlights: [
         {
-          title: {
-            zh: "1. 從 0 到 1 的硬體驅動產品規劃 (0 to 1 Product Definition)",
-            en: "1. 0-to-1 Product Definition, Driven by the Hardware",
-          },
-          challenge: {
-            zh: "需在專案前期快速釐清市場需求與 AI 導入切入點。",
-            en: "Early on, we needed to quickly pin down market demand and where AI could realistically enter the workflow.",
-          },
-          action: {
-            zh: "主導訪談系統整合商（SI）與中小企業職環安人員（EHS），成功盤點實際業務痛點，確立 AI 輔助功能與關鍵導入節點。",
-            en: "Led interviews with a systems integrator (SI) and SME EHS staff, mapping real operational pain points and pinning down which AI-assisted features and entry points actually mattered.",
-          },
-          result: {
-            zh: "訪談 1 位 SI、2 位 EHS 人員，成功收斂出完整的產品流程與功能規劃，作為後續設計的基礎依據。",
-            en: "Interviewed 1 SI and 2 EHS staff, converging on a complete product flow and feature plan that became the foundation for everything designed afterward.",
-          },
+          value: { zh: "10 → 2", en: "10 → 2" },
+          label: { zh: "收斂場域", en: "Settings narrowed" },
         },
         {
-          title: { zh: "2. 跨場域的可行性驗證 (PoC Selection)", en: "2. Cross-Domain Feasibility Validation (PoC Selection)" },
-          challenge: {
-            zh: "產品可應用場域廣泛，需在「技術可行性」與「商業需求」間取得平衡。",
-            en: "The product could apply to a wide range of settings. We needed to balance technical feasibility against actual business demand.",
-          },
-          action: {
-            zh: "透過訪談結果分析可行性/需求矩陣，收斂並提取出首次的 PoC 驗證場域。",
-            en: "Analyzed interview findings through a feasibility/demand matrix to converge on the first setting to validate as a proof of concept.",
-          },
-          result: {
-            zh: "從 10 個候選場域中收斂至 2 個，最終聚焦於工廠安全（工安）場域，作為首期 PoC 驗證重點。",
-            en: "Narrowed 10 candidate settings down to 2, ultimately focusing the first PoC on factory safety (EHS).",
-          },
-          resultTrend: {
-            from: { zh: "10", en: "10" },
-            to: { zh: "2", en: "2" },
-            label: { zh: "候選場域收斂", en: "Candidate settings narrowed" },
-          },
+          value: { zh: "-80%", en: "-80%" },
+          label: { zh: "減少設定時間", en: "Setup time reduced" },
         },
         {
-          title: { zh: "3. 多領域知識的「模組化 UX 設計」(Modular UX Design)", en: "3. Modular UX Design for Cross-Domain Knowledge" },
-          challenge: {
-            zh: "需突破傳統 AI 限於單一場域訓練的瓶頸，並降低非工程背景使用者的操作門檻。",
-            en: "Needed to break past AI's usual single-domain training limitation, and lower the barrier for non-technical users.",
-          },
-          action: {
-            zh: "設計核心功能「情境式 VLM Template」，將醫療、零售與工安等跨領域知識轉化為結構化模組，打造易上手、直覺化的操作介面。",
-            en: "Designed the core \"contextual VLM Template\" feature, turning cross-domain knowledge (healthcare, retail, EHS) into structured modules for an interface that's intuitive and easy to pick up.",
-          },
-          result: {
-            zh: "Template 機制上線後，透過產品操作影片向 SI 展示，獲得正面認可，驗證了模組化設計降低操作門檻的方向可行。",
-            en: "After launch, a product demo video shown to the SI got a positive response, validating that the modular approach did lower the barrier to use.",
-          },
+          value: { zh: "2–3 次/天\n→ 24 小時", en: "2–3×/day\n→ 24 hrs" },
+          label: { zh: "巡檢頻率", en: "Patrol frequency" },
+        },
+        {
+          value: { zh: "1 次設定\n全部套用", en: "Set once\napply everywhere" },
+          label: { zh: "部署模式", en: "Deployment model" },
         },
       ],
     },
@@ -1331,68 +1290,18 @@ export const projects: Project[] = [
       },
       projectIntro:
         "Sports Note 是台灣最大的跑步社群平台，提供馬拉松賽事資訊、跑步紀錄、線上報名與運動內容等服務。本次專案正值 App Alpha 階段，團隊希望透過使用者研究重新檢視產品定位，了解不同跑者的需求，並找出最優先改善的體驗問題。在這個專案中，我主要負責規劃研究流程、執行易用性測試、訪談與問卷調查，將研究結果轉化為產品策略與介面優化方向，以建立後續產品迭代的重要依據。",
-      challenges: [
+      highlights: [
         {
-          title: {
-            zh: "1. 透過易用性測試，找出產品優化方向",
-            en: "1. Usability Testing to Find the Optimization Direction",
-          },
-          challenge: {
-            zh: "Alpha 版本已完成主要功能，但缺乏使用者驗證，無法確認資訊架構與操作流程是否符合跑者需求。",
-            en: "The Alpha build had its core features done but no user validation. We couldn't confirm the information architecture and flow actually matched what runners needed.",
-          },
-          action: {
-            zh: "建立 Function Map 與 User Flow，規劃易用性測試，邀請 13 位不同程度跑者完成情境任務並進行訪談，分析任務完成率、操作時間與錯誤率。",
-            en: "Built a function map and user flow, designed usability tests, and invited 13 runners of varying experience levels to complete scenario tasks and interviews, analyzing task completion rate, time on task, and error rate.",
-          },
-          result: {
-            zh: "完成 13 場易用性測試與訪談；找出 4 項高優先度介面問題，作為後續優化依據。",
-            en: "Completed 13 usability tests and interviews, surfacing 4 high-priority interface issues that guided the next round of fixes.",
-          },
-          resultStats: [
-            { value: { zh: "13", en: "13" }, label: { zh: "場易用性測試", en: "usability tests conducted" } },
-            { value: { zh: "4", en: "4" }, label: { zh: "項高優先度問題", en: "priority issues surfaced" } },
-          ],
+          value: { zh: "13 位跑者", en: "13 runners" },
+          label: { zh: "易用性測試", en: "Usability testing" },
         },
         {
-          title: {
-            zh: "2. 透過使用者研究，探索具商業價值的功能",
-            en: "2. User Research to Explore Commercially Valuable Features",
-          },
-          challenge: {
-            zh: "開發團隊希望重新盤點產品定位，了解不同跑者真正需要的功能並找出潛在功能開發需求。",
-            en: "The dev team wanted to re-examine the product's positioning, understand what different runners actually needed, and identify candidate features worth building.",
-          },
-          action: {
-            zh: "設計並發放問卷，一週內收集 118 份有效樣本，結合 3 位專業跑者訪談，整合量化與質化研究結果。",
-            en: "Designed and distributed a survey, collecting 118 valid responses within a week, combined with interviews with 3 experienced runners to merge quantitative and qualitative findings.",
-          },
-          result: {
-            zh: "收集 118 份有效問卷；完成 3 位專家訪談；將 10+ 項需求收斂為 4 個核心功能方向；建立產品 Roadmap 的優先順序。",
-            en: "Collected 118 valid survey responses, completed 3 expert interviews, narrowed 10+ requirements down to 4 core feature directions, and set the priority order for the product roadmap.",
-          },
-          resultStats: [
-            { value: { zh: "118", en: "118" }, label: { zh: "份有效問卷", en: "survey responses collected" } },
-            { value: { zh: "4", en: "4" }, label: { zh: "項核心功能方向", en: "core feature directions" } },
-          ],
+          value: { zh: "4 項問題", en: "4 issues" },
+          label: { zh: "收斂出高優先度問題", en: "High-priority issues found" },
         },
         {
-          title: { zh: "3. 將研究洞察轉化為產品設計", en: "3. Turning Research Insight into Product Design" },
-          challenge: {
-            zh: "如何將上述研究結果，轉化為真正的產品決策。",
-            en: "The challenge was turning all of the above research into real product decisions.",
-          },
-          action: {
-            zh: "根據研究洞察提出 7 項介面優化方案，完成 UI 設計、Design System 更新與工程交付。",
-            en: "Proposed 7 interface improvements based on the research insight, delivering the UI design, a Design System update, and engineering handoff.",
-          },
-          result: {
-            zh: "提出 7 項產品優化方案；維護並更新 Design System；設計方案獲團隊採納，作為後續版本開發依據。",
-            en: "Delivered 7 product optimization proposals; maintained and updated the Design System; the team adopted the designs as the basis for the next release.",
-          },
-          resultStats: [
-            { value: { zh: "7", en: "7" }, label: { zh: "項優化方案", en: "optimization proposals delivered" } },
-          ],
+          value: { zh: "2 項優化", en: "2 optimizations" },
+          label: { zh: "已落地驗證", en: "Shipped & validated" },
         },
       ],
     },
@@ -1616,8 +1525,8 @@ export const projects: Project[] = [
           },
           image: "/images/projects/h2u/finding-cloud-run-white.png",
           imageAlt: { zh: "雲端跑分頁截圖", en: "Screenshot of the Cloud Run tab" },
-          imageWidth: 1200,
-          imageHeight: 2100,
+          imageWidth: 560,
+          imageHeight: 980,
           markerPosition: { top: 24, left: 80 },
           calloutLabel: { zh: "不熟悉的用詞", en: "Unfamiliar term" },
           calloutPosition: { top: 24, left: 94 },
@@ -1630,8 +1539,8 @@ export const projects: Project[] = [
           },
           image: "/images/projects/h2u/finding-search-white-v2.png",
           imageAlt: { zh: "賽事搜尋截圖", en: "Screenshot of race search" },
-          imageWidth: 1200,
-          imageHeight: 2100,
+          imageWidth: 560,
+          imageHeight: 980,
           markerPosition: { top: 17, left: 88 },
           calloutLabel: { zh: "無法輸入局部關鍵字", en: "Can't search partial keywords" },
           calloutPosition: { top: 17, left: 100 },
@@ -1644,8 +1553,8 @@ export const projects: Project[] = [
           },
           image: "/images/projects/h2u/finding-stop-gesture-white-v2.png",
           imageAlt: { zh: "執行跑步停止紀錄截圖", en: "Screenshot of stopping a run recording" },
-          imageWidth: 1200,
-          imageHeight: 2100,
+          imageWidth: 560,
+          imageHeight: 980,
           markerPosition: { top: 85, left: 65 },
           calloutLabel: { zh: "滑動停止不直覺", en: "Swipe-to-stop isn't intuitive" },
           calloutPosition: { top: 85, left: 85 },
@@ -1658,8 +1567,8 @@ export const projects: Project[] = [
           },
           image: "/images/projects/h2u/finding-keyboard-white-v2.png",
           imageAlt: { zh: "設定目標公里數截圖", en: "Screenshot of setting a distance goal" },
-          imageWidth: 1200,
-          imageHeight: 2100,
+          imageWidth: 560,
+          imageHeight: 980,
           markerPosition: { top: 69, left: 81 },
           calloutLabel: { zh: "鍵盤不會自動收起", en: "Keyboard doesn't auto-dismiss" },
           calloutPosition: { top: 69, left: 99 },
@@ -1836,221 +1745,6 @@ export const projects: Project[] = [
         ],
       },
     },
-    surveyResearch: {
-      eyebrow: { zh: "問卷調查", en: "Survey Research" },
-      goalTitle: { zh: "透過問卷調查釐清跑者需求與下載意願", en: "Using a Survey to Clarify Runner Needs and Download Intent" },
-      goal: {
-        zh: "為了解跑者的需求與使用情境，我規劃並發放問卷，共蒐集 118 份有效樣本\n從使用者輪廓、跑步習慣、功能需求與期待，作為後續產品定位與功能優化的參考。",
-        en: "To understand runner needs and usage context, I designed and distributed a survey, collecting 118 valid responses\ncovering user profile, running habits, feature needs, and expectations, used to inform product positioning and feature priorities going forward.",
-      },
-      stats: [
-        { value: "118", unit: { zh: "份", en: "responses" }, label: { zh: "有效問卷", en: "Valid responses" } },
-        { value: "1", unit: { zh: "週", en: "week" }, label: { zh: "發放時長", en: "Distribution window" } },
-      ],
-      motivation: {
-        problemLabel: "Problem",
-        problemText: {
-          zh: "產品上線後下載量不如預期，團隊缺乏對使用者需求與下載考量的了解。",
-          en: "After launch, downloads fell short of expectations, and the team lacked insight into user needs and what drove the download decision.",
-        },
-        goalLabel: "Research Goal",
-        goalText: {
-          zh: "釐清跑者需求與使用情境，找出影響下載與使用意願的關鍵因素。",
-          en: "Clarify runner needs and usage context, and identify the key factors driving download and usage intent.",
-        },
-        groupsTitle: { zh: "問卷構面", en: "Survey Dimensions" },
-        groups: [
-          {
-            label: { zh: "使用者輪廓", en: "User Profile" },
-            icon: "profile",
-            children: [
-              { zh: "基本資料", en: "Basic information" },
-              { zh: "跑步行為與習慣調查", en: "Running behavior and habits" },
-            ],
-          },
-          {
-            label: { zh: "功能需求", en: "Feature Needs" },
-            icon: "needs",
-            children: [
-              { zh: "產品功能喜好", en: "Feature preferences" },
-              { zh: "附加功能需求", en: "Additional feature requests" },
-            ],
-          },
-        ],
-      },
-      structure: [
-        {
-          label: { zh: "問卷目標", en: "Survey Goals" },
-          items: [
-            { zh: "使用者跑步行為與習慣", en: "User running behavior and habits" },
-            { zh: "跑步工具使用偏好與功能需求", en: "Running tool preferences and feature needs" },
-            { zh: "競品分析與使用經驗評估", en: "Competitor analysis and experience evaluation" },
-          ],
-        },
-        {
-          label: { zh: "問卷架構", en: "Survey Structure" },
-          items: [
-            { zh: "跑者", en: "Runner" },
-            { zh: "產品", en: "Product" },
-            { zh: "競品", en: "Competitors" },
-          ],
-        },
-        {
-          label: { zh: "問卷分析", en: "Survey Analysis" },
-          items: [
-            { zh: "基本資料／跑步行為與習慣調查", en: "Basic info / running behavior and habits" },
-            { zh: "產品功能喜好／附加功能需求", en: "Product feature preferences / additional feature needs" },
-            { zh: "是否聽過或使用過相關競品／競品使用體驗", en: "Awareness/usage of competitors / competitor experience" },
-          ],
-        },
-      ],
-      results: {
-        title: { zh: "問卷結果", en: "Survey Results" },
-        tabs: [
-          { key: "habit", label: { zh: "跑步習慣", en: "Running Habits" } },
-          { key: "feature", label: { zh: "功能偏好", en: "Feature Preferences" } },
-        ],
-        habit: {
-          funnel: {
-            title: { zh: "樣本輪廓：跑步習慣與 App 使用漏斗", en: "Sample Profile: Running Habit & App Usage Funnel" },
-            total: 118,
-            split: [
-              { label: { zh: "有跑步習慣", en: "Has a running habit" }, value: 52, percent: "44%" },
-              { label: { zh: "無跑步習慣", en: "No running habit" }, value: 66, percent: "56%" },
-            ],
-            result: { label: { zh: "有跑步習慣且使用App", en: "Has a running habit and uses the app" }, value: 34, percent: "65%" },
-          },
-          crossAnalysis: {
-            title: { zh: "年齡與跑步習慣的關聯", en: "Age vs. Running Habit" },
-            subtitle: { zh: "交叉分析：年齡層 × 有/無跑步習慣者", en: "Cross-analysis: age group × running habit" },
-            legendLabel: { zh: "是否有跑步的習慣", en: "Has a running habit" },
-            bars: [
-              { age: "18~29", withHabit: 79, withoutHabit: 46 },
-              { age: "30~39", withHabit: 14, withoutHabit: 34 },
-              { age: "40~49", withHabit: 2, withoutHabit: 21 },
-              { age: "50+", withHabit: 0, withoutHabit: 4 },
-            ],
-          },
-          sampleInsight: {
-            zh: "在 118 位受訪者中，52 人（44%）有跑步習慣，其中 34 人（65%）同時使用 App 追蹤跑步。跑步習慣主要集中在 18~29 歲族群，並隨年齡增長明顯下降。",
-            en: "Of the 118 respondents, 52 (44%) had a running habit, and 34 of those (65%) also used an app to track their runs. The habit was concentrated in the 18–29 age group and dropped off noticeably with age.",
-          },
-          motivation: {
-            withHabitLabel: { zh: "「有跑步習慣者」的跑步目的", en: "Why runners with a habit run" },
-            withHabitItems: [
-              { value: "81.9%", label: { zh: "保持身體健康", en: "Staying healthy" } },
-              { value: "52.4%", label: { zh: "自主訓練", en: "Self-directed training" } },
-              { value: "48.0%", label: { zh: "提升運動表現、減重", en: "Improving performance, losing weight" } },
-            ],
-            withoutHabitLabel: { zh: "「無跑步習慣者」不跑步的原因", en: "Why non-runners don't run" },
-            withoutHabitItems: [
-              { value: "54.3%", label: { zh: "本身沒有跑步習慣", en: "Never had the habit to begin with" } },
-              { value: "48.9%", label: { zh: "沒有意志力堅持下去", en: "Can't stick with it" } },
-              { value: "31.9%", label: { zh: "沒有跑步同伴、時間", en: "No running partner or time" } },
-            ],
-          },
-          insight: [
-            {
-              zh: "有跑步習慣者主要受健康動機驅動（81.9%）；相較之下，非跑步習慣者多因缺乏啟動動機而未開始，其中 48.9% 更表示難以持續。因此，App 應聚焦於降低開始門檻，協助使用者跨出第一步並建立運動習慣。",
-              en: "Runners with a habit are mainly driven by health (81.9%); non-runners, by contrast, mostly never start due to a lack of motivation, and 48.9% say they struggle to keep it up. The app should therefore focus on lowering the barrier to entry, helping users take the first step and build the habit.",
-            },
-          ],
-        },
-        feature: {
-          introTitle: { zh: "以使用者需求收斂產品核心功能", en: "Converging on Core Features from User Needs" },
-          introText: {
-            zh: "透過跑者功能重要性評估，將 11 項候選功能收斂為 4 項核心需求\n包含訓練數據分析、配速工具、公里／英哩分段與生理數據分析，作為後續功能優先級與產品規劃的依據。",
-            en: "By having runners rate feature importance, we narrowed 11 candidate features down to 4 core needs,\ntraining data analysis, pace tools, km/mile splits, and physiological data analysis, to guide feature priority and product planning going forward.",
-          },
-          priorityChart: {
-            title: { zh: "跑者 vs 非跑者：功能重要性分組對照", en: "Runners vs. Non-Runners: Feature Importance Comparison" },
-            subtitle: { zh: "平均重要性評分（0–5分）", en: "Average importance rating (0–5)" },
-            withHabitLabel: { zh: "有跑步習慣（N=50）", en: "Has a running habit (N=50)" },
-            withoutHabitLabel: { zh: "沒有跑步習慣（N=163）", en: "No running habit (N=163)" },
-            items: [
-              { label: { zh: "訓練數據分析", en: "Training data analysis" }, withHabit: 4.16, withoutHabit: 4.14 },
-              { label: { zh: "生理數據分析", en: "Physiological data analysis" }, withHabit: 3.72, withoutHabit: 4.01 },
-              { label: { zh: "成就牆", en: "Achievement wall" }, withHabit: 3.72, withoutHabit: 3.75 },
-              { label: { zh: "卡路里計算", en: "Calorie tracking" }, withHabit: 3.58, withoutHabit: 3.74 },
-              { label: { zh: "配速工具", en: "Pace tools" }, withHabit: 3.78, withoutHabit: 3.79 },
-              { label: { zh: "公里/英哩分段", en: "Km/mile splits" }, withHabit: 3.74, withoutHabit: 3.75 },
-              { label: { zh: "語音回饋", en: "Voice feedback" }, withHabit: 3.54, withoutHabit: 3.33 },
-              { label: { zh: "里程排行", en: "Mileage leaderboard" }, withHabit: 3.22, withoutHabit: 3.34 },
-              { label: { zh: "天氣預測", en: "Weather forecast" }, withHabit: 2.42, withoutHabit: 2.75 },
-              { label: { zh: "社群平台", en: "Community platform" }, withHabit: 1.64, withoutHabit: 2.29 },
-              { label: { zh: "動態文章", en: "Feed / articles" }, withHabit: 1.50, withoutHabit: 2.04 },
-            ],
-            insight: {
-              commonNeeds: {
-                title: { zh: "共同需求", en: "Common Needs" },
-                points: [
-                  { zh: "不論是否具有跑步習慣，「訓練數據分析」與「配速工具」皆為最重要的功能。", en: "Regardless of running habit, \"training data analysis\" and \"pace tools\" were rated the most important features." },
-                  { zh: "顯示使用者普遍重視能協助掌握跑步表現、提升訓練效率的核心功能。", en: "This shows users broadly value core features that help them track performance and train more efficiently." },
-                ],
-              },
-              groupDifferences: {
-                title: { zh: "族群差異", en: "Group Differences" },
-                withHabitLabel: { zh: "有跑步習慣", en: "Has a running habit" },
-                withHabitItems: [
-                  { zh: "重視即時語音回饋", en: "Values real-time voice feedback" },
-                  { zh: "希望提升訓練效率", en: "Wants to improve training efficiency" },
-                  { zh: "著重跑步過程中的輔助", en: "Prioritizes in-run assistance" },
-                ],
-                withoutHabitLabel: { zh: "無跑步習慣", en: "No running habit" },
-                withoutHabitItems: [
-                  { zh: "重視生理數據分析", en: "Values physiological data analysis" },
-                  { zh: "重視天氣預測", en: "Values weather forecasts" },
-                  { zh: "重視社群互動與外部激勵", en: "Values social interaction and outside motivation" },
-                ],
-              },
-              summary: {
-                zh: "無跑步習慣者需要的是建立跑步習慣與持續動機；有跑步習慣者則更重視提升訓練品質與效率。",
-                en: "Non-runners need help building the habit and staying motivated; runners with the habit care more about improving training quality and efficiency.",
-              },
-            },
-          },
-          goodAppConditions: {
-            title: { zh: "好的跑步 App 應具備哪些條件？", en: "What Makes a Good Running App?" },
-            subtitle: { zh: "N=98，可複選", en: "N=98, multiple choice" },
-            items: [
-              { label: { zh: "功能定位\n清楚", en: "Clear feature\npositioning" }, value: 76 },
-              { label: { zh: "畫面簡約\n乾淨", en: "Clean, simple\ninterface" }, value: 51 },
-              { label: { zh: "輔助工具\n多元", en: "Diverse\nassist tools" }, value: 19 },
-              { label: { zh: "地圖模式", en: "Map mode" }, value: 16 },
-              { label: { zh: "品牌精神", en: "Brand identity" }, value: 2 },
-            ],
-          },
-          trackedMetrics: {
-            title: { zh: "跑步時主要關注哪些運動數據？", en: "Which Metrics Matter Most While Running?" },
-            subtitle: { zh: "N=249", en: "N=249" },
-            highlightCount: 4,
-            items: [
-              { label: { zh: "平均速度/即時配速", en: "Average speed / real-time pace" }, value: 67 },
-              { label: { zh: "總距離", en: "Total distance" }, value: 59 },
-              { label: { zh: "時長", en: "Duration" }, value: 57 },
-              { label: { zh: "心率", en: "Heart rate" }, value: 31 },
-              { label: { zh: "卡路里", en: "Calories" }, value: 18 },
-              { label: { zh: "溫度", en: "Temperature" }, value: 11 },
-              { label: { zh: "坡度", en: "Elevation" }, value: 2 },
-              { label: { zh: "濕度", en: "Humidity" }, value: 2 },
-              { label: { zh: "步頻", en: "Cadence" }, value: 1 },
-              { label: { zh: "訓練效果", en: "Training effect" }, value: 1 },
-            ],
-          },
-          insight: [
-            {
-              zh: "結果顯示，受試者認為跑步 App 最重要的條件為功能定位清楚完整（76 人）及畫面簡潔乾淨（51 人），顯示使用者優先重視功能的實用性與操作效率，而非品牌形象或附加功能。",
-              en: "Respondents ranked clear, complete feature positioning (76) and a clean, simple interface (51) as the most important qualities in a running app, showing users prioritize practicality and operational efficiency over branding or extra features.",
-            },
-            {
-              zh: "在跑步過程中，受試者最關注平均速度／即時配速、總距離及時長，反映使用者更重視能直接掌握跑步狀態的核心資訊，其餘心率、卡路里及環境資訊的重要性相對較低。",
-              en: "While running, respondents cared most about average speed/real-time pace, total distance, and duration, reflecting a priority on core information about their current run over heart rate, calories, or environmental data.",
-            },
-          ],
-        },
-      },
-      findings: [],
-    },
     expertInterview: {
       eyebrow: { zh: "專家訪談", en: "Expert Interviews" },
       intro: {
@@ -2093,12 +1787,12 @@ export const projects: Project[] = [
           ],
           beforeImage: "/images/projects/h2u/optimization-1-before.png",
           beforeImageAlt: { zh: "優化前：地圖與數據資訊擠在同一畫面，地圖視覺權重過高", en: "Before: map and data crammed into one screen, with the map carrying too much visual weight" },
-          beforeImageWidth: 1400,
-          beforeImageHeight: 2450,
+          beforeImageWidth: 680,
+          beforeImageHeight: 1190,
           afterImage: "/images/projects/h2u/optimization-1-after.png",
           afterImageAlt: { zh: "優化後：新增數據／地圖 Tab 切換，核心數據放大呈現", en: "After: added a Data/Map tab switcher with core data shown at a larger size" },
-          afterImageWidth: 1400,
-          afterImageHeight: 1301,
+          afterImageWidth: 1240,
+          afterImageHeight: 1152,
         },
         {
           number: "2",
@@ -2112,65 +1806,44 @@ export const projects: Project[] = [
           ],
           beforeImage: "/images/projects/h2u/optimization-2-before.png",
           beforeImageAlt: { zh: "優化前：以滑動手勢停止跑步紀錄", en: "Before: stopping a run recording with a swipe gesture" },
-          beforeImageWidth: 1400,
-          beforeImageHeight: 2450,
+          beforeImageWidth: 680,
+          beforeImageHeight: 1190,
           afterImage: "/images/projects/h2u/optimization-2-after.png",
           afterImageAlt: { zh: "優化後：改以點擊按鈕停止跑步紀錄", en: "After: stopping a run recording by tapping a button" },
-          afterImageWidth: 1400,
-          afterImageHeight: 2450,
+          afterImageWidth: 680,
+          afterImageHeight: 1190,
         },
       ],
     },
-    optimizationResults: {
-      eyebrow: { zh: "介面優化結果", en: "Optimization Results" },
-      items: [
-        {
-          title: { zh: "跑步模式（Run Mode）", en: "Run Mode" },
-          images: [
-            {
-              src: "/images/projects/h2u/result-run-mode-standard.png",
-              alt: { zh: "標準模式，顯示跑步距離、時長與配速", en: "Standard mode showing distance, duration, and pace" },
-              width: 1200,
-              height: 2100,
-            },
-            {
-              src: "/images/projects/h2u/result-run-mode-map.png",
-              alt: { zh: "地圖模式，顯示跑步路線與即時位置", en: "Map mode showing the running route and live position" },
-              width: 1200,
-              height: 2100,
-            },
-            {
-              src: "/images/projects/h2u/result-run-mode-alert.png",
-              alt: { zh: "達成目標時彈出提醒視窗", en: "An alert dialog when the goal is reached" },
-              width: 1200,
-              height: 2100,
-            },
-          ],
-          points: [
-            {
-              label: { zh: "標準模式／地圖模式切換", en: "Standard / Map mode switch" },
-              description: {
-                zh: "提供標準模式與地圖模式快速切換，讓跑者可依據不同跑步情境與需求，彈性選擇適合的資訊視圖。",
-                en: "Lets runners switch quickly between standard and map modes, choosing the view that fits their situation and needs.",
-              },
-            },
-            {
-              label: { zh: "距離提醒", en: "Distance alerts" },
-              description: {
-                zh: "透過震動與語音提醒即時回饋跑步里程，協助跑者掌握目前進度，並確認是否達成預期的訓練目標。",
-                en: "Vibration and voice cues give real-time feedback on distance covered, helping runners track progress and confirm whether they've hit their training goal.",
-              },
-            },
-            {
-              label: { zh: "資訊層級優化", en: "Information hierarchy" },
-              description: {
-                zh: "重新梳理資訊架構與視覺層級，突顯關鍵數據與核心功能，降低資訊干擾，讓跑者在運動過程中能快速掌握重要資訊並完成操作。",
-                en: "Reworked the information architecture and visual hierarchy to surface key data and core functions, cutting noise so runners can grasp what matters and act on it quickly mid-run.",
-              },
-            },
-          ],
-        },
-      ],
+    darkModeShowcase: {
+      heading: { zh: "深色模式", en: "Dark Mode" },
+      description: {
+        zh: "為配合低光源環境（例如：夜跑），同時設計出深色模式介面。",
+        en: "Also designed a dark mode interface for low-light settings, like running at night.",
+      },
+      gallery: {
+        images: [
+          { src: "/images/projects/h2u/dark-mode/race-list-onboarding.png", alt: { zh: "賽事列表與雲端跑新手指南", en: "Race list with Cloud Run onboarding" }, width: 1560, height: 3376 },
+          { src: "/images/projects/h2u/dark-mode/run-standard-mode.png", alt: { zh: "深色模式：執行跑步一般模式", en: "Dark mode: standard run mode" }, width: 1560, height: 3384 },
+          { src: "/images/projects/h2u/dark-mode/run-set-goal.png", alt: { zh: "深色模式：設定跑步目標", en: "Dark mode: setting a run goal" }, width: 1560, height: 3384 },
+          { src: "/images/projects/h2u/dark-mode/run-set-goal-custom.png", alt: { zh: "設定跑步目標（自訂）", en: "Setting a custom run goal" }, width: 1560, height: 3384 },
+          { src: "/images/projects/h2u/dark-mode/run-in-progress.png", alt: { zh: "執行跑步中（顯示公里數）", en: "Run in progress, showing distance" }, width: 1560, height: 3384 },
+          { src: "/images/projects/h2u/dark-mode/run-goal-exceeded.png", alt: { zh: "執行跑步已超過目標數", en: "Run in progress, goal exceeded" }, width: 1560, height: 3384 },
+          { src: "/images/projects/h2u/dark-mode/run-summary.png", alt: { zh: "跑步結束畫面", en: "Run summary screen" }, width: 1560, height: 3384 },
+          { src: "/images/projects/h2u/dark-mode/run-summary-edit-title.png", alt: { zh: "編輯跑步紀錄標題", en: "Editing the run record title" }, width: 1560, height: 3384 },
+          { src: "/images/projects/h2u/dark-mode/run-record-uploaded.png", alt: { zh: "深色模式：跑步紀錄已上傳並登錄賽事", en: "Dark mode: run record uploaded and registered to a race" }, width: 1560, height: 3384 },
+        ],
+      },
+    },
+    designSystemShowcase: {
+      heading: { zh: "設計系統", en: "Design System" },
+      description: {
+        zh: "我參與維護與更新 Sports Notes App 的設計系統，以確保產品開發的一致性與擴充性，同時提升使用者體驗與團隊協作效率。",
+        en: "I contributed to maintaining and updating the design system of the Sports Notes app to ensure consistency and scalability in product development, while enhancing user experience and team collaboration efficiency.",
+      },
+      typography: { src: "/images/projects/h2u/design-system/typography.svg", width: 905, height: 1008 },
+      color: { src: "/images/projects/h2u/design-system/color.svg", width: 905, height: 723 },
+      component: { src: "/images/projects/h2u/design-system/component.svg", width: 972, height: 1526 },
     },
   },
   {
@@ -2220,7 +1893,7 @@ export const projects: Project[] = [
         "以多模態 RAG 技術打造的博物館 AI 導覽系統，結合知識檢索與生成式影像，將靜態的文物說明牌轉化為可對話、可視覺化的知識探索體驗。",
       challenges: [
         {
-          title: { zh: "1. 找出知識傳遞的落差", en: "1. Identifying the Knowledge-Delivery Gap" },
+          title: { zh: "找出知識傳遞的落差", en: "Identifying the Knowledge-Delivery Gap" },
           challenge: {
             zh: "傳統博物館的知識傳遞長期依賴靜態標籤，但標籤受限於字數，往往只能提供文物的基本資料，難以回應來自不同知識背景的觀眾。此外，策展人會透過展品搭配，幫助觀眾想像文物過去的真實使用情境，然而一旦館藏出現缺佚，敘事脈絡便難以延續。",
             en: "Traditional museums rely on static placards for knowledge transfer, but a placard's character limit usually only covers an artifact's basic facts, struggling to answer visitors coming from very different knowledge backgrounds. Curators also use complementary exhibits to help visitors imagine how an artifact was actually used, but once a piece in the collection goes missing, that narrative thread breaks.",
@@ -2235,7 +1908,7 @@ export const projects: Project[] = [
           },
         },
         {
-          title: { zh: "2. 以 RAG 打造可信、可視覺化的知識探索體驗", en: "2. Grounding the System in RAG for a Trustworthy, Visual Experience" },
+          title: { zh: "以 RAG 打造可信、可視覺化的知識探索體驗", en: "Grounding the System in RAG for a Trustworthy, Visual Experience" },
           challenge: {
             zh: "需要讓每一則回答都有據可查，同時讓缺佚的文物也能被觀眾具體想像。",
             en: "Needed every answer to be verifiable, while also letting visitors concretely picture artifacts no longer in the collection.",
@@ -2297,7 +1970,7 @@ export const projects: Project[] = [
         "TouchTune 是一款專為聽障人士設計的穿戴式裝置。它透過將聲音轉化為多頻率的振動，提供多感官的音樂體驗。這不僅能幫助使用者感受音樂的節奏與音高，還能提升他們在社交活動中的參與度，帶來更豐富的感官體驗與更深層的情感連結。",
       challenges: [
         {
-          title: { zh: "1. 用戶研究與需求洞察", en: "1. User Research & Needs Discovery" },
+          title: { zh: "用戶研究與需求洞察", en: "User Research & Needs Discovery" },
           challenge: {
             zh: "專案初期缺乏與目標使用者（聽障人士）直接接觸的管道，難以確立真實需求。",
             en: "Early on there was no direct channel to the target users (people who are deaf or hard of hearing), making it hard to pin down real needs.",
@@ -2312,7 +1985,7 @@ export const projects: Project[] = [
           },
         },
         {
-          title: { zh: "2. 軟硬體整合與共融設計", en: "2. Hardware/Software Integration & Inclusive Design" },
+          title: { zh: "軟硬體整合與共融設計", en: "Hardware/Software Integration & Inclusive Design" },
           challenge: {
             zh: "需在軟硬體整合的限制下佈局震動元件，確保用戶能清楚感知音樂；同時外觀須打破傳統醫療輔具的冰冷刻板印象，實現共融設計，讓非聽障者也樂於配戴。",
             en: "Had to lay out the vibration modules within hardware/software constraints while keeping the music clearly perceptible, and the form had to break away from the cold, clinical look of typical assistive devices, so even non-Deaf people would want to wear it.",

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { FileText } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -77,10 +78,11 @@ export function Nav() {
         >
           <Link
             href="/#hero"
-            className={`text-xl font-bold tracking-tight transition-colors duration-500 ${
+            className={`flex items-center gap-2 text-xl font-bold tracking-tight transition-colors duration-500 ${
               onDark ? "text-white" : "text-ink"
             }`}
           >
+            <Image src="/images/logo.png" alt="" width={20} height={20} className="h-5 w-5" unoptimized />
             Jui Ling
           </Link>
 

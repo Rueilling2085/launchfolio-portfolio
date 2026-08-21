@@ -46,7 +46,7 @@ export function WhatCanIBring() {
             {bringItems.map((item, i) => {
               const Icon = ICONS[item.icon];
               return (
-                <RevealOnScroll key={item.title} delay={i * 0.08}>
+                <RevealOnScroll key={item.title.zh} delay={i * 0.08}>
                   <div className="flex flex-col gap-4">
                     {/* the site's signature orange, matching the hero — the
                         `accent-strong` token is a leftover green used elsewhere */}
@@ -54,14 +54,9 @@ export function WhatCanIBring() {
                       <Icon size={30} className={LOOP_ANIMATION[item.icon]} />
                     </span>
 
-                    {/* title and its Chinese reading belong together, so they sit
-                        tighter than the section's default gap */}
-                    <div className="flex flex-col gap-1">
-                      <p className="text-base font-bold tracking-wide uppercase md:text-lg">
-                        {item.title}
-                      </p>
-                      <p className="text-sm text-white/50 md:text-base">{item.titleZh}</p>
-                    </div>
+                    <p className="text-base font-bold tracking-wide uppercase md:text-lg">
+                      {item.title[lang]}
+                    </p>
 
                     <p className="text-base leading-relaxed text-white/75 md:text-lg">
                       {item.description[lang]}

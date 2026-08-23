@@ -83,13 +83,13 @@ export function Nav() {
             className={`flex items-center gap-2 text-xl font-bold tracking-tight transition-colors duration-500 ${
               onDark ? "text-white" : "text-ink"
             }`}
+            onMouseEnter={spinLogo}
+            onTouchStart={spinLogo}
           >
             <motion.span
               className="inline-flex h-5 w-5 shrink-0"
               animate={{ rotate: logoSpins * 360 }}
               transition={{ duration: 0.7, ease: "easeInOut" }}
-              onHoverStart={spinLogo}
-              onTap={spinLogo}
             >
               <Image src="/images/logo.png" alt="" width={20} height={20} className="h-5 w-5" unoptimized />
             </motion.span>

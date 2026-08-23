@@ -138,7 +138,7 @@ export function ProjectCard({ project }: { project: Project }) {
               </div>
             )}
 
-            <h3 className="mt-3 text-2xl leading-snug font-bold text-ink md:text-3xl">
+            <h3 className="mt-3 whitespace-pre-line text-2xl leading-snug font-bold text-ink md:text-3xl">
               {project.cardHeadline?.[lang]}
             </h3>
 

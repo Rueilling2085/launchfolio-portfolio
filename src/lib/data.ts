@@ -622,6 +622,7 @@ export type Project = {
   deviceMockup: boolean;
   heroAspect?: string;
   description: Localized;
+  descriptionLink?: { text: string; url: string };
   duration: string;
   team: string[];
   role: (string | Localized)[];
@@ -729,12 +730,12 @@ export const projects: Project[] = [
     },
     cardTags: ["0→1 Product", "B2B AI SaaS"],
     cardHeadline: {
-      zh: "建立 AI 工安監控平台，補足人工巡檢的監控空窗",
-      en: "Built an AI safety-monitoring platform to close the gap between manual inspections",
+      zh: "建立 AI 監控平台操作流程，設計模組化 Prompt 互動機制",
+      en: "Built the AI monitoring platform's operating flow with a modular prompt interaction",
     },
     cardDescription: {
-      zh: "傳統工廠仰賴人工巡檢，難以及時掌握巡檢間的安全風險。我訪談職環安人員與系統整合商定義範圍，並設計「Prompt Template」互動機制，把模糊的自然語言輸入收斂成固定句型、可替換變數的操作介面，解決 VLM 判讀不穩定的問題，協助企業從被動巡檢轉向主動風險管理。",
-      en: "Traditional factories rely on manual patrols and can't catch risks between rounds. I interviewed EHS staff and a systems integrator to define scope, then designed a \"Prompt Template\" interaction, turning ambiguous natural-language input into a fixed-sentence, swappable-variable interface that fixed the VLM's unstable readings, helping the business move from reactive patrols to proactive risk management.",
+      zh: "傳統工廠仰賴人工巡檢，難以及時掌握巡檢間的安全風險。透過訪談職安人員，釐清工作流程痛點與需求，設計模組化 Prompt 機制，以固定句型與變數替換降低自然語言輸入變異性，達到一次設定、全部套用，提升 AI 監控部署效率。",
+      en: "Traditional factories rely on manual patrols and can't catch risks between rounds. Through interviews with EHS staff, I clarified workflow pain points and needs, then designed a modular prompt mechanism that uses fixed sentence patterns with swappable variables to reduce natural-language input variability, so a single setup applies everywhere and AI monitoring deploys faster.",
     },
     color: "#1D4ED8",
     cardAccent: "#1FD9A6",
@@ -1266,8 +1267,8 @@ export const projects: Project[] = [
       en: "Drove a running app's product optimization with user research",
     },
     cardDescription: {
-      zh: "Sports Note 是台灣最大的跑步社群平台。本專案於產品 Alpha 階段，透過易用性測試、跑者訪談與 118 份問卷調查，找出資訊架構與操作流程的核心痛點，重新梳理畫面配置（例如將地圖與數據分頁顯示、把滑動停止改成點擊按鈕），協助團隊制定後續產品迭代方向。",
-      en: "Sports Note is Taiwan's largest running community platform. During the product's Alpha stage, I used usability testing, runner interviews, and a 118-response survey to find the core pain points in information architecture and flow, then reworked the screen layout (e.g. splitting map and data into separate tabs, replacing swipe-to-stop with a tap button) to guide the team's next iteration.",
+      zh: "本專案於產品 Alpha 階段，針對缺乏真實使用者操作驗證的問題，透過 13 位易用性測試與跑者訪談，辨識操作流程中的痛點，並結合操作時間、錯誤頻率等數據進行分析，將研究洞察轉化為具體的介面優化方案。",
+      en: "During the product's Alpha stage, to address the lack of real user validation, I ran usability testing and interviews with 13 runners to identify pain points in the flow, analyzing task time and error rates to turn research insight into concrete interface optimizations.",
     },
     color: "#045CC4",
     cardImage: "/images/projects/h2u/card-cover.png",
@@ -1866,12 +1867,12 @@ export const projects: Project[] = [
     deviceMockup: false,
     cardTags: ["Generative AI", "RAG System"],
     cardHeadline: {
-      zh: "建構多模態 RAG 導覽系統，讓文物問答更精準、有據可循",
-      en: "Built a multimodal RAG guide system for more precise, evidence-backed answers",
+      zh: "建構 RAG 導覽系統\n讓文物問答更精準",
+      en: "Built a RAG guide system for more precise artifact Q&A",
     },
     cardDescription: {
-      zh: "為國立故宮博物院展覽設計並建構的 AI-native RAG 對話系統。有別於字數受限的靜態標籤，也不同於容易產生「AI 幻覺」的通用 LLM，我串聯權威資料庫進行知識檢索，讓每則回答都有據可查，並即時生成情境圖像還原缺佚文物。經 30 人對照實驗證實，知識建構與參與度皆顯著提升。",
-      en: "An AI-native RAG conversation system designed and built for the National Palace Museum's exhibitions. Unlike character-limited static placards or a general-purpose LLM prone to hallucination, I grounded every answer in authoritative databases and generated context images to restore missing artifacts in place. A 30-person controlled study confirmed significant gains in knowledge-building and engagement.",
+      zh: "以國立故宮博物院特展知識庫建構 RAG 對話系統，串聯權威資料庫使回答可追溯，解決通用型 LLM 在領域知識幻覺問題，並生成情境圖像補足缺佚文物脈絡。經 30 人對照實驗驗證，顯著提升使用者的知識建構與參與度。",
+      en: "Built a RAG conversation system on the National Palace Museum's special-exhibition knowledge base, connecting authoritative databases so every answer stays traceable and addressing general-purpose LLMs' domain-knowledge hallucination problem, while generating context images to fill in missing artifacts. A 30-person controlled study confirmed significant gains in users' knowledge-building and engagement.",
     },
     color: "#2A1D12",
     cardAccent: "#C4956A",
@@ -1884,9 +1885,10 @@ export const projects: Project[] = [
     presentationEmbedUrl: "https://www.canva.com/design/DAHSO25n1g8/bZPhBm9jh1Zh5-f8iVNKnA/view?embed",
     repoUrl: "https://github.com/Rueilling2085/rag-museum-chatbot",
     description: {
-      zh: "以多模態 RAG 技術打造的博物館 AI 導覽系統，結合知識檢索與生成式影像，將靜態的文物說明牌轉化為可對話、可視覺化的知識探索體驗。研究成果獲 IEEE ICASI 2026 口頭發表。",
-      en: "A museum AI guide system built on multimodal RAG technology, pairing knowledge retrieval with generative imagery to turn a static artifact placard into a conversational, visual knowledge-exploration experience. The research was presented orally at IEEE ICASI 2026.",
+      zh: "以國立故宮博物院特展知識庫建構 AI-native RAG 對話系統。針對展覽資訊標籤字數有限，以及通用型 LLM 在特定領域知識中容易產生幻覺的問題，串聯權威資料庫進行知識檢索，確保回答具備可追溯的資料依據；同時補足缺佚文物脈絡，生成情境圖像以還原歷史脈絡。經 30 人對照實驗驗證，顯著提升使用者的知識建構與參與度。\n研究成果已獲 IEEE ICASI 2026 口頭發表。",
+      en: "Built an AI-native RAG conversation system on the National Palace Museum's special-exhibition knowledge base. To address the limited character count of exhibition labels and general-purpose LLMs' tendency to hallucinate in specialized domains, I connected authoritative databases for knowledge retrieval so every answer stays traceable, while generating context images to fill in missing artifacts and restore their historical context. A 30-person controlled study confirmed significant gains in users' knowledge-building and engagement.\nThe research was presented orally at IEEE ICASI 2026.",
     },
+    descriptionLink: { text: "IEEE ICASI 2026", url: "https://2026.icasi-conf.net/" },
     duration: "2025 – 2026 (Master's Thesis Research)",
     team: ["Researcher, Designer & Developer ×1 - Me", "Advisor ×1"],
     role: [
@@ -1903,7 +1905,7 @@ export const projects: Project[] = [
         "以多模態 RAG 技術打造的博物館 AI 導覽系統，結合知識檢索與生成式影像，將靜態的文物說明牌轉化為可對話、可視覺化的知識探索體驗。",
       highlights: [
         { value: { zh: "35 件文物", en: "35 artifacts" }, label: { zh: "知識庫規模", en: "Knowledge base scale" } },
-        { value: { zh: "212 則對話", en: "212 dialogues" }, label: { zh: "30 位受測者實測", en: "Tested by 30 participants" } },
+        { value: { zh: "212 則對話", en: "212 dialogues" }, label: { zh: "30 位受測者實測後產生", en: "Generated from 30 participants" } },
         { value: { zh: "13.21%", en: "13.21%" }, label: { zh: "辨識出的知識缺口", en: "Knowledge gaps identified" } },
       ],
     },
@@ -1951,41 +1953,9 @@ export const projects: Project[] = [
     overview: {
       projectIntro:
         "TouchTune 是一款專為聽障人士設計的穿戴式裝置。它透過將聲音轉化為多頻率的振動，提供多感官的音樂體驗。這不僅能幫助使用者感受音樂的節奏與音高，還能提升他們在社交活動中的參與度，帶來更豐富的感官體驗與更深層的情感連結。",
-      challenges: [
-        {
-          title: { zh: "用戶研究與需求洞察", en: "User Research & Needs Discovery" },
-          challenge: {
-            zh: "專案初期缺乏與目標使用者（聽障人士）直接接觸的管道，難以確立真實需求。",
-            en: "Early on there was no direct channel to the target users (people who are deaf or hard of hearing), making it hard to pin down real needs.",
-          },
-          action: {
-            zh: "負責文獻研究，整理大量二手資料，深入分析聽障者的「感官代償」機制與體驗缺口。",
-            en: "Ran a literature review across a large body of secondary sources, digging into the \"sensory substitution\" mechanism and where the experience gaps were.",
-          },
-          result: {
-            zh: "收斂出以「振動感官」為核心的產品定位，為後續設計方向提供明確依據。",
-            en: "Converged on a product position centered on vibration-based sensing, giving every design decision afterward a clear anchor.",
-          },
-        },
-        {
-          title: { zh: "軟硬體整合與共融設計", en: "Hardware/Software Integration & Inclusive Design" },
-          challenge: {
-            zh: "需在軟硬體整合的限制下佈局震動元件，確保用戶能清楚感知音樂；同時外觀須打破傳統醫療輔具的冰冷刻板印象，實現共融設計，讓非聽障者也樂於配戴。",
-            en: "Had to lay out the vibration modules within hardware/software constraints while keeping the music clearly perceptible, and the form had to break away from the cold, clinical look of typical assistive devices, so even non-Deaf people would want to wear it.",
-          },
-          action: {
-            zh: "與團隊歷經 5 次原型迭代，同步優化外觀造型與震動元件的機構配置，兼顧功能與美感。",
-            en: "Went through 5 prototype iterations with the team, refining the form and the vibration-module layout together, balancing function and aesthetics.",
-          },
-          result: {
-            zh: "最終設計成功兼顧功能性與親和力，榮獲 IDA Design Awards、unDesign Award 兩項國際設計獎肯定。",
-            en: "The final design landed both functionality and approachability, earning recognition from the IDA Design Awards and the unDesign Award.",
-          },
-          resultStats: [
-            { value: { zh: "5", en: "5" }, label: { zh: "次原型迭代", en: "prototype iterations" } },
-            { value: { zh: "2", en: "2" }, label: { zh: "項國際設計獎", en: "international design awards" } },
-          ],
-        },
+      highlights: [
+        { value: { zh: "5 次", en: "5 iterations" }, label: { zh: "原型迭代", en: "Prototype iterations" } },
+        { value: { zh: "2 項", en: "2 awards" }, label: { zh: "國際設計獎", en: "International design awards" } },
       ],
       awards: [
         { name: "IDA Design Awards", result: { zh: "Honorable Mention", en: "Honorable Mention" } },

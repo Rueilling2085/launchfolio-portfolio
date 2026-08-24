@@ -461,7 +461,7 @@ function PromptOptimization({
               className="w-full"
             />
             {painPoint && (
-              <>
+              <div className="hidden sm:block">
                 <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/70 via-black/25 to-transparent" />
                 <div className="absolute bottom-4 left-4 flex items-center gap-2 md:bottom-6 md:left-6">
                   <span className="shrink-0 inline-flex items-center rounded-full bg-red-50 px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-red-600">
@@ -469,9 +469,17 @@ function PromptOptimization({
                   </span>
                   <p className="text-[15px] font-normal text-white">{painPoint}</p>
                 </div>
-              </>
+              </div>
             )}
           </div>
+          {painPoint && (
+            <div className="mt-3 flex items-start gap-2 sm:hidden">
+              <span className="mt-0.5 shrink-0 inline-flex items-center rounded-full bg-red-50 px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-red-600">
+                Before
+              </span>
+              <p className="text-sm leading-relaxed text-muted">{painPoint}</p>
+            </div>
+          )}
         </div>
 
         {/* After */}
@@ -483,7 +491,7 @@ function PromptOptimization({
               className="w-full"
             />
             {solution && (
-              <>
+              <div className="hidden sm:block">
                 <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/70 via-black/25 to-transparent" />
                 <div className="absolute bottom-4 left-4 flex items-center gap-2 md:bottom-6 md:left-6">
                   <span className="shrink-0 inline-flex items-center rounded-full bg-[#D8EEFD] px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-[#0B7DC9]">
@@ -491,9 +499,17 @@ function PromptOptimization({
                   </span>
                   <p className="text-[15px] font-normal text-white">{solution}</p>
                 </div>
-              </>
+              </div>
             )}
           </div>
+          {solution && (
+            <div className="mt-3 flex items-start gap-2 sm:hidden">
+              <span className="mt-0.5 shrink-0 inline-flex items-center rounded-full bg-[#D8EEFD] px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-[#0B7DC9]">
+                After
+              </span>
+              <p className="text-sm leading-relaxed text-muted">{solution}</p>
+            </div>
+          )}
         </div>
       </div>
       </div>

@@ -71,7 +71,7 @@ export function ProcessFlowChart({
           </div>
 
           <div className="mt-10 rounded-2xl border border-line bg-[#EAEBED] p-6 md:p-8">
-          <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl sm:aspect-[21/9]">
+          <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl sm:aspect-[21/9]">
             <Image
               src="/images/projects/vision-detect/journey-photo-TEMP-watermarked.png"
               alt={COPY.imageAlt[lang]}
@@ -80,10 +80,13 @@ export function ProcessFlowChart({
               className="object-cover brightness-90 saturate-75"
             />
             <div className="pointer-events-none absolute inset-0 bg-[#0B2A52] mix-blend-multiply opacity-30" />
-            <div className="pointer-events-none absolute inset-x-0 top-0 h-1/3 bg-gradient-to-b from-black/70 to-transparent" />
-            <div className="pointer-events-none absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
 
-            <div className="absolute inset-x-0 top-0 flex items-center gap-3 p-4 md:p-6">
+            {/* text overlaid on the image only where there's room to breathe;
+                mobile gets the same info as separate blocks below instead */}
+            <div className="pointer-events-none absolute inset-x-0 top-0 hidden h-1/3 bg-gradient-to-b from-black/70 to-transparent sm:block" />
+            <div className="pointer-events-none absolute inset-x-0 bottom-0 hidden h-2/3 bg-gradient-to-t from-black/80 via-black/30 to-transparent sm:block" />
+
+            <div className="absolute inset-x-0 top-0 hidden items-center gap-3 p-4 sm:flex md:p-6">
               {avatar && (
                 <span className="relative h-9 w-9 shrink-0 overflow-hidden rounded-full ring-2 ring-white/50">
                   <Image src={avatar} alt="Persona" fill sizes="36px" className="object-cover" />
@@ -99,24 +102,24 @@ export function ProcessFlowChart({
               </div>
             </div>
 
-            <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-1 p-4 md:p-6">
+            <div className="absolute inset-x-0 bottom-0 hidden items-end justify-between gap-1 p-4 sm:flex md:p-6">
               {data.steps.map((step, i) => (
                 <div key={i} className="flex flex-1 items-end justify-center gap-1">
                   <div className="text-center">
                     <p
-                      className={`text-[7px] font-semibold uppercase tracking-wide sm:text-[12px] ${
+                      className={`text-[12px] font-semibold uppercase tracking-wide ${
                         step.emphasis ? "text-white" : "text-white/45"
                       }`}
                     >
                       Step {i + 1}
                     </p>
                     <p
-                      className={`mt-0.5 text-[9px] leading-tight sm:text-[15px] ${
+                      className={`mt-0.5 text-[15px] leading-tight ${
                         step.emphasis ? "font-medium text-white" : "text-white/45"
                       }`}
                     >
                       {step.label.map((line) => (
-                        <span key={line.zh} className="block sm:whitespace-nowrap">
+                        <span key={line.zh} className="block whitespace-nowrap">
                           {line[lang]}
                         </span>
                       ))}
@@ -130,6 +133,52 @@ export function ProcessFlowChart({
                   )}
                 </div>
               ))}
+            </div>
+          </div>
+
+          {/* mobile-only: same persona meta + step timeline as plain stacked
+              blocks instead of cramming both overlays onto a phone-width image */}
+          <div className="mt-4 flex flex-col gap-4 sm:hidden">
+            <div className="flex items-center gap-3 rounded-xl border border-line bg-white px-4 py-3">
+              {avatar && (
+                <span className="relative h-9 w-9 shrink-0 overflow-hidden rounded-full ring-2 ring-line">
+                  <Image src={avatar} alt="Persona" fill sizes="36px" className="object-cover" />
+                </span>
+              )}
+              <div className="flex flex-col gap-0.5 text-xs text-ink-soft">
+                {META.map((item) => (
+                  <span key={item.label}>
+                    <span className="font-semibold text-ink">{item.label}: </span>
+                    {item.value[lang]}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <div className="rounded-xl border border-line bg-white px-4 py-4">
+              <div className="flex flex-col">
+                {data.steps.map((step, i) => (
+                  <div key={i} className="flex gap-3">
+                    <div className="flex flex-col items-center">
+                      <span
+                        className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[9px] font-bold ${
+                          step.emphasis ? "bg-[#006AB7] text-white" : "bg-paper-alt text-muted"
+                        }`}
+                      >
+                        {i + 1}
+                      </span>
+                      {i < data.steps.length - 1 && <span className="my-0.5 w-px flex-1 bg-line" />}
+                    </div>
+                    <p
+                      className={`pb-4 text-[13px] leading-tight ${
+                        step.emphasis ? "font-medium text-ink" : "text-muted"
+                      }`}
+                    >
+                      {step.label.map((line) => line[lang]).join(" ")}
+                    </p>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
 

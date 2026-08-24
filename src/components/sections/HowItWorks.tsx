@@ -72,8 +72,8 @@ export function HowItWorks({
             sizes="(min-width: 768px) 800px, 100vw"
             className="object-cover"
           />
-          <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/80 via-black/35 to-transparent" />
-          <div className="absolute inset-x-0 bottom-0 flex items-start gap-3 p-6 md:p-8">
+          <div className="absolute inset-x-0 bottom-0 hidden h-2/3 bg-gradient-to-t from-black/80 via-black/35 to-transparent sm:block" />
+          <div className="absolute inset-x-0 bottom-0 hidden items-start gap-3 p-6 sm:flex md:p-8">
             {avatar && (
               <span className="relative h-9 w-9 shrink-0 overflow-hidden rounded-full ring-2 ring-white/50">
                 <Image src={avatar} alt="Persona" fill sizes="36px" className="object-cover" />
@@ -83,6 +83,19 @@ export function HowItWorks({
               &ldquo;{data.query[lang]}&rdquo;
             </p>
           </div>
+        </div>
+
+        {/* mobile-only: quote below the image instead of overlaid, since the
+            full sentence needs more vertical room than a phone-width 16:9 image has */}
+        <div className="mt-3 flex items-start gap-3 rounded-xl border border-line bg-paper-alt px-4 py-3 sm:hidden">
+          {avatar && (
+            <span className="relative h-9 w-9 shrink-0 overflow-hidden rounded-full ring-2 ring-line">
+              <Image src={avatar} alt="Persona" fill sizes="36px" className="object-cover" />
+            </span>
+          )}
+          <p className="text-sm italic leading-relaxed text-ink-soft">
+            &ldquo;{data.query[lang]}&rdquo;
+          </p>
         </div>
       </RevealOnScroll>
 

@@ -10,6 +10,7 @@ import type {
   MatrixExcluded,
   MatrixSideCard,
 } from "@/lib/data";
+import type { Localized } from "@/lib/i18n/resolve";
 
 const TIER_COLOR: Record<1 | 2, string> = {
   1: "#006AB7",
@@ -112,6 +113,49 @@ function CardImageCaption({
   );
 }
 
+function MobileMatrixList({ data }: { data: PriorityMatrixData }) {
+  const { lang } = useLanguage();
+
+  const groups: { tier: 1 | 2 | 3; items: { label: Localized }[] }[] = [
+    { tier: 1, items: [...data.bubbles, ...data.dots].filter((i) => i.tier === 1) },
+    { tier: 2, items: [...data.bubbles, ...data.dots].filter((i) => i.tier === 2) },
+    { tier: 3, items: data.excluded },
+  ];
+
+  return (
+    <div className="flex flex-col gap-5 sm:hidden">
+      {groups.map((group) => {
+        const legendItem = data.legend.find((l) => l.tier === group.tier);
+        if (!legendItem || group.items.length === 0) return null;
+        return (
+          <div key={group.tier}>
+            <p className="mb-2.5 flex items-center gap-2 text-[11px] font-medium text-muted">
+              <LegendDot tier={group.tier} />
+              {legendItem.label[lang]}
+            </p>
+            <div className="flex flex-col gap-2">
+              {group.items.map((item) => (
+                <div
+                  key={item.label.zh}
+                  className={`rounded-xl border px-3.5 py-2.5 text-[13px] leading-snug ${
+                    group.tier === 1
+                      ? "border-[#0B7DC9]/30 bg-[#D8EEFD]/50 font-semibold text-[#006AB7]"
+                      : group.tier === 2
+                        ? "border-line bg-[#F0F2F5] font-medium text-muted"
+                        : "border-dashed border-muted-2 text-muted"
+                  }`}
+                >
+                  {item.label[lang].replace(/\n/g, " ")}
+                </div>
+              ))}
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
 function LegendDot({ tier }: { tier: 1 | 2 | 3 }) {
   if (tier === 3) {
     return <span className="h-3 w-3 shrink-0 rounded-full border border-dashed border-muted-2" />;
@@ -175,7 +219,9 @@ export function PriorityMatrix({ data }: { data: PriorityMatrixData }) {
         ))}
       </div>
 
-      <div className="flex flex-col gap-10 lg:flex-row lg:items-start lg:gap-8">
+      <MobileMatrixList data={data} />
+
+      <div className="hidden flex-col gap-10 sm:flex lg:flex-row lg:items-start lg:gap-8">
         <div className="flex-1">
             <div className="flex items-stretch gap-2.5">
               <div className={`flex w-16 shrink-0 flex-col items-center justify-between text-[11px] text-ink ${PLOT_HEIGHT}`}>

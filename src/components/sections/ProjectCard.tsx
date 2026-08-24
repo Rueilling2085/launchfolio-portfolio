@@ -124,7 +124,7 @@ export function ProjectCard({ project }: { project: Project }) {
           coloured backing board), while the copy stays plain and readable. */}
       <div className="overflow-hidden rounded-[2rem] border border-line bg-white shadow-[0_20px_45px_-20px_rgba(10,13,18,0.15)]">
         <div className="flex flex-col sm:flex-row sm:items-stretch">
-          <div className="flex w-full flex-col justify-center px-6 py-10 sm:w-[36%] sm:px-10 sm:py-12 md:px-14">
+          <div className="order-2 flex w-full flex-col justify-center px-6 py-10 sm:order-1 sm:w-[36%] sm:px-10 sm:py-12 md:px-14">
             {project.cardTags && (
               <div className="flex flex-wrap items-center gap-2">
                 {project.cardTags.map((tag) => (
@@ -163,7 +163,7 @@ export function ProjectCard({ project }: { project: Project }) {
             onMouseLeave={handleMouseLeave}
             // only invert the nav over genuinely dark artwork
             {...(light ? {} : { "data-nav-dark": true })}
-            className="group/media relative flex aspect-[4/3] w-full items-center justify-center overflow-hidden sm:aspect-auto sm:w-[64%]"
+            className="group/media relative order-1 flex aspect-[4/3] w-full items-center justify-center overflow-hidden sm:order-2 sm:aspect-auto sm:w-[64%]"
           >
             {/* base layer: either a full-bleed poster (own or backdrop
                 colour) or the usual branded gradient + floating mockup */}

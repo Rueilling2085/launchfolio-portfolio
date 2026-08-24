@@ -71,7 +71,7 @@ export function ProcessFlowChart({
           </div>
 
           <div className="mt-10 rounded-2xl border border-line bg-[#EAEBED] p-6 md:p-8">
-          <div className="relative aspect-[21/9] w-full overflow-hidden rounded-2xl">
+          <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl sm:aspect-[21/9]">
             <Image
               src="/images/projects/vision-detect/journey-photo-TEMP-watermarked.png"
               alt={COPY.imageAlt[lang]}
@@ -89,7 +89,7 @@ export function ProcessFlowChart({
                   <Image src={avatar} alt="Persona" fill sizes="36px" className="object-cover" />
                 </span>
               )}
-              <div className="flex flex-wrap items-center gap-x-5 gap-y-1 text-[15px] text-white/85">
+              <div className="flex flex-wrap items-center gap-x-5 gap-y-1 text-xs text-white/85 sm:text-[15px]">
                 {META.map((item) => (
                   <span key={item.label}>
                     <span className="font-semibold text-white">{item.label}: </span>
@@ -104,19 +104,19 @@ export function ProcessFlowChart({
                 <div key={i} className="flex flex-1 items-end justify-center gap-1">
                   <div className="text-center">
                     <p
-                      className={`text-[12px] font-semibold uppercase tracking-wide ${
+                      className={`text-[7px] font-semibold uppercase tracking-wide sm:text-[12px] ${
                         step.emphasis ? "text-white" : "text-white/45"
                       }`}
                     >
                       Step {i + 1}
                     </p>
                     <p
-                      className={`mt-0.5 text-[15px] leading-tight ${
+                      className={`mt-0.5 text-[9px] leading-tight sm:text-[15px] ${
                         step.emphasis ? "font-medium text-white" : "text-white/45"
                       }`}
                     >
                       {step.label.map((line) => (
-                        <span key={line.zh} className="block whitespace-nowrap">
+                        <span key={line.zh} className="block sm:whitespace-nowrap">
                           {line[lang]}
                         </span>
                       ))}

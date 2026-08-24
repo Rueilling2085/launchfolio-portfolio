@@ -55,7 +55,7 @@ export function HowItWorks({
           </h2>
         )}
         <p
-          className={`max-w-none whitespace-nowrap text-2xl font-semibold tracking-tight text-ink md:text-3xl ${
+          className={`max-w-xl text-2xl font-semibold tracking-tight text-ink md:max-w-none md:whitespace-nowrap md:text-3xl ${
             data.title ? "mt-4" : "mt-6"
           }`}
         >

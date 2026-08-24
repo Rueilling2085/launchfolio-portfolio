@@ -33,6 +33,7 @@ import { DesignIteration } from "@/components/sections/DesignIteration";
 import { CompetitorAnalysis } from "@/components/sections/CompetitorAnalysis";
 import { CaseStudySideNav, type SideNavSection } from "@/components/sections/CaseStudySideNav";
 import { NextProjects } from "@/components/sections/NextProjects";
+import { ProjectWrapUp } from "@/components/sections/ProjectWrapUp";
 import { NextStepDecision } from "@/components/ui/NextStepDecision";
 import { LocalizedWithLink } from "@/components/ui/LocalizedWithLink";
 import { projects } from "@/lib/data";
@@ -131,6 +132,9 @@ export default async function ProjectCaseStudyPage({
       : null,
     project.competitorAnalysis
       ? { id: "competitor-analysis", label: { zh: "競品分析", en: "Competitor Analysis" } }
+      : null,
+    project.wrapUp
+      ? { id: "wrap-up", label: project.wrapUp.eyebrow ?? { zh: "收尾", en: "Wrapping Up" } }
       : null,
   ];
   const sideNavSections: SideNavSection[] = rawSideNavSections.filter(
@@ -439,6 +443,12 @@ export default async function ProjectCaseStudyPage({
           {project.competitorAnalysis && (
             <div id="competitor-analysis" className="scroll-mt-24">
               <CompetitorAnalysis data={project.competitorAnalysis} />
+            </div>
+          )}
+
+          {project.wrapUp && (
+            <div id="wrap-up" className="scroll-mt-24">
+              <ProjectWrapUp data={project.wrapUp} />
             </div>
           )}
 

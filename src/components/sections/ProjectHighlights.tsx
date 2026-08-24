@@ -9,7 +9,7 @@ export function ProjectHighlights({
   color,
   dark,
 }: {
-  items: { value: Localized; label: Localized }[];
+  items: { value: Localized; label: Localized; caption?: Localized }[];
   color: string;
   dark?: boolean;
 }) {
@@ -24,6 +24,11 @@ export function ProjectHighlights({
           <p className={dark ? "mt-1 whitespace-pre-line text-2xl font-bold leading-tight text-white md:text-3xl" : "mt-1 whitespace-pre-line text-2xl font-bold leading-tight text-ink md:text-3xl"}>
             {item.value[lang]}
           </p>
+          {item.caption && (
+            <p className={dark ? "mt-1.5 whitespace-pre-line text-[10px] font-semibold uppercase tracking-wide text-white/40" : "mt-1.5 whitespace-pre-line text-[10px] font-semibold uppercase tracking-wide text-muted-2"}>
+              {item.caption[lang]}
+            </p>
+          )}
         </RevealOnScroll>
       ))}
     </div>

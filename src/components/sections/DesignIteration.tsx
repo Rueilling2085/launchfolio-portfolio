@@ -528,26 +528,26 @@ export function DesignIteration({ data }: { data: DesignIterationData }) {
           {data.items.map((item, i) => (
             <RevealOnScroll key={item.title.zh} delay={i * 0.08}>
               <div id={`opt-${i + 1}`} className="mb-2 scroll-mt-24">
-                <div className="flex items-center justify-center gap-2.5 text-center">
+                <div className="mx-auto flex max-w-2xl flex-wrap items-center justify-center gap-x-2.5 gap-y-2 text-center">
                   {item.tag && (
-                    <span className="inline-flex items-center rounded-full bg-ink-soft/10 px-2.5 py-1 text-[10px] font-semibold text-ink-soft">
+                    <span className="inline-flex shrink-0 items-center rounded-full bg-ink-soft/10 px-2.5 py-1 text-[10px] font-semibold text-ink-soft">
                       {item.tag[lang]}
                     </span>
                   )}
-                  <p className="text-2xl font-semibold tracking-tight text-ink md:text-3xl">{item.title[lang]}</p>
+                  <p className="min-w-0 text-2xl font-semibold tracking-tight text-ink md:text-3xl">{item.title[lang]}</p>
                 </div>
 
                 {!item.stackedBeforeAfter && !item.promptOptimization && (
-                  <div className="mt-3 flex w-full items-start justify-between gap-4">
-                    <div className="shrink-0">
+                  <div className="mt-3 flex w-full flex-col items-start gap-4 sm:flex-row sm:items-start sm:justify-between">
+                    <div className="w-full sm:w-auto sm:shrink-0">
                       <span className="inline-flex items-center rounded-full bg-red-50 px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-red-600">
                         Before
                       </span>
-                      <p className="mt-2 whitespace-nowrap text-sm leading-relaxed text-muted">{item.painPoint[lang]}</p>
+                      <p className="mt-2 text-sm leading-relaxed text-muted sm:whitespace-nowrap">{item.painPoint[lang]}</p>
                     </div>
 
-                    <div className="flex flex-1 items-center justify-center pt-2">
-                      <svg viewBox="0 0 40 16" className="h-4 w-10 text-[#C7CBD1]">
+                    <div className="flex w-full items-center justify-center py-1 sm:flex-1 sm:pt-2">
+                      <svg viewBox="0 0 40 16" className="h-4 w-10 rotate-90 text-[#C7CBD1] sm:rotate-0">
                         <path d="M0 8h32" stroke="currentColor" strokeWidth="1.5" fill="none" />
                         <path
                           d="M26 3l6 5-6 5"
@@ -558,7 +558,7 @@ export function DesignIteration({ data }: { data: DesignIterationData }) {
                       </svg>
                     </div>
 
-                    <div className="max-w-[320px]">
+                    <div className="w-full sm:max-w-[320px]">
                       <span className="inline-flex items-center rounded-full bg-[#D8EEFD] px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-[#0B7DC9]">
                         After
                       </span>

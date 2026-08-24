@@ -16,7 +16,7 @@ const TIER_COLOR: Record<1 | 2, string> = {
   2: "#B7BCC4",
 };
 
-const PLOT_HEIGHT = "h-[300px] sm:h-[360px] lg:h-[440px]";
+const PLOT_HEIGHT = "h-[380px] sm:h-[360px] lg:h-[440px]";
 
 function Bubble({ bubble }: { bubble: MatrixBubble }) {
   const { lang } = useLanguage();
@@ -57,8 +57,8 @@ function Dot({ dot }: { dot: MatrixDot }) {
   const { lang } = useLanguage();
   return (
     <div
-      className="absolute flex -translate-y-1/2 items-center gap-1.5 whitespace-nowrap text-[11px] text-muted"
-      style={{ top: `${dot.top}%`, left: `${dot.left}%` }}
+      className="absolute flex -translate-y-1/2 items-center gap-1.5 text-[9px] leading-tight text-muted sm:text-[11px] sm:whitespace-nowrap"
+      style={{ top: `${dot.top}%`, left: `${dot.left}%`, width: "max-content", maxWidth: "38%" }}
     >
       <span
         className="h-2 w-2 shrink-0 rounded-full"

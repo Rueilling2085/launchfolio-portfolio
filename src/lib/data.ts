@@ -191,7 +191,7 @@ export type ProjectOverview = {
   projectIntro: string;
   /** 2-4 headline stats shown as a scannable row near the hero, in place of
    *  (or alongside) the narrative challenge cards below. */
-  highlights?: { value: Localized; label: Localized }[];
+  highlights?: { value: Localized; label: Localized; caption?: Localized }[];
   challenges?: ProjectChallengeItem[];
   awards?: { name: string; result: Localized }[];
 };
@@ -557,6 +557,15 @@ export type Reflection = {
   }[];
 };
 
+export type ProjectWrapUp = {
+  eyebrow?: Localized;
+  heading: Localized;
+  workedLabel: Localized;
+  worked: { title: Localized; body: Localized }[];
+  nextLabel: Localized;
+  next: { title: Localized; body: Localized }[];
+};
+
 export type ScreenGallery = {
   images: { src: string; alt: Localized; width: number; height: number }[];
 };
@@ -643,6 +652,7 @@ export type Project = {
   prototyping?: Prototyping;
   interfaceDesign?: InterfaceDesign;
   reflection?: Reflection;
+  wrapUp?: ProjectWrapUp;
   theme?: "dark";
   summary?: { eyebrow?: Localized; title: Localized; description: Localized };
   priorityMatrix?: PriorityMatrix;
@@ -760,20 +770,24 @@ export const projects: Project[] = [
         "為研華打造的跨場域 AI 監控系統，結合 VLM 視覺偵測與 LLM 對話技術，補足醫療、零售、製造業在非巡檢時段的監控盲區。系統即時偵測現場隱形風險，並透過 Chatbot 快速釐清事件脈絡，自動生成符合 ISO 標準的稽核報告，實現全時段智慧化管理。",
       highlights: [
         {
-          value: { zh: "10 → 2", en: "10 → 2" },
-          label: { zh: "收斂場域", en: "Settings narrowed" },
+          value: { zh: "-97%", en: "-97%" },
+          label: { zh: "部署週期縮短", en: "Deployment cycle reduced" },
+          caption: { zh: "30 天 → 1 天", en: "30 days → 1 day" },
         },
         {
-          value: { zh: "-80%", en: "-80%" },
-          label: { zh: "減少設定時間", en: "Setup time reduced" },
+          value: { zh: "3–5 位 → 1–2 位", en: "3–5 → 1–2" },
+          label: { zh: "工程人力需求", en: "Engineering headcount" },
+          caption: { zh: "工程師 → 非工程人員", en: "Engineers → non-engineers" },
         },
         {
-          value: { zh: "2–3 次/天\n→ 24 小時", en: "2–3×/day\n→ 24 hrs" },
+          value: { zh: "1 → N", en: "1 → N" },
+          label: { zh: "場域部署模式", en: "Site deployment model" },
+          caption: { zh: "一次設定 → 多場域套用", en: "Set once → apply everywhere" },
+        },
+        {
+          value: { zh: "2–3 次／天\n→ 24/7", en: "2–3×/day\n→ 24/7" },
           label: { zh: "巡檢頻率", en: "Patrol frequency" },
-        },
-        {
-          value: { zh: "1 次設定\n全部套用", en: "Set once\napply everywhere" },
-          label: { zh: "部署模式", en: "Deployment model" },
+          caption: { zh: "人工巡檢 → 全天候監控", en: "Manual patrols → round-the-clock monitoring" },
         },
       ],
     },
@@ -1246,6 +1260,44 @@ export const projects: Project[] = [
           },
         ],
       },
+    },
+    wrapUp: {
+      eyebrow: { zh: "收尾", en: "Wrapping Up" },
+      heading: { zh: "反思與下一步", en: "Reflection & Next Steps" },
+      workedLabel: { zh: "What worked", en: "What worked" },
+      worked: [
+        {
+          title: { zh: "3 場訪談，深入使用者痛點與情境需求", en: "3 interviews to surface pain points and context" },
+          body: {
+            zh: "從系統整合商到職安人員，釐清實際工作流程與 AI 導入節點，找出人工巡檢的監控盲區，讓產品需求更貼近工廠現場。",
+            en: "From systems integrators to EHS staff, I clarified the real workflow and where AI needed to fit in, surfacing the blind spots in manual patrols and grounding the product in what the factory floor actually needed.",
+          },
+        },
+        {
+          title: { zh: "模組化 Prompt Template 機制", en: "A modular Prompt Template mechanism" },
+          body: {
+            zh: "透過產品迭代，將原本模糊且不一致的自然語言輸入，收斂為固定句型與可替換變數的操作介面，降低 Prompt 輸入差異，提升 VLM 判讀穩定性。",
+            en: "Through product iteration, I converged vague, inconsistent natural-language input into a fixed-sentence, swappable-variable interface, cutting prompt variance and improving the VLM's reading stability.",
+          },
+        },
+      ],
+      nextLabel: { zh: "What I'd do differently & next", en: "What I'd do differently & next" },
+      next: [
+        {
+          title: { zh: "跨場域規模化驗證", en: "Cross-site scale validation" },
+          body: {
+            zh: "目前驗證主要來自單一場域試點。若有更多時間，我會延伸至不同產業與廠房環境，驗證模組化 Prompt 的複用性，確保固定句型能適應不同場域需求。",
+            en: "Validation so far comes mostly from a single pilot site. Given more time, I'd extend testing across different industries and factory environments to confirm the modular prompts generalize rather than just fit one setting.",
+          },
+        },
+        {
+          title: { zh: "建立 AI 異常判讀的人機協作機制", en: "A human-in-the-loop check for AI misreads" },
+          body: {
+            zh: "現階段聚焦於降低 AI 設定門檻，尚未涵蓋誤判與邊界案例的處理。下一步將設計快速覆核與修正機制，讓人能介入 AI 判讀，提升系統的可控性與現場信任。",
+            en: "The current focus is lowering the setup barrier; it doesn't yet cover misreads or edge cases. The next step is a quick review-and-correct flow so people can step in on AI judgments, building the system's controllability and on-site trust.",
+          },
+        },
+      ],
     },
   },
   {

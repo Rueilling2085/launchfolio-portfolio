@@ -163,7 +163,7 @@ export function ProjectCard({ project }: { project: Project }) {
             onMouseLeave={handleMouseLeave}
             // only invert the nav over genuinely dark artwork
             {...(light ? {} : { "data-nav-dark": true })}
-            className="group/media relative flex w-full items-center justify-center overflow-hidden sm:w-[64%]"
+            className="group/media relative flex aspect-[4/3] w-full items-center justify-center overflow-hidden sm:aspect-auto sm:w-[64%]"
           >
             {/* base layer: either a full-bleed poster (own or backdrop
                 colour) or the usual branded gradient + floating mockup */}

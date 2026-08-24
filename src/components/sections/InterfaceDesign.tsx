@@ -241,8 +241,8 @@ export function InterfaceDesign({ data }: { data: InterfaceDesignData }) {
                 sizes="(min-width: 768px) 1024px, 100vw"
                 className="object-cover"
               />
-              <div className="pointer-events-none absolute inset-x-0 bottom-0 flex h-[16%] items-center justify-center bg-gradient-to-t from-black/80 via-black/40 to-transparent px-6 backdrop-blur-md">
-                <p className="text-center text-lg font-medium text-white md:text-2xl">
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 flex items-center justify-center bg-gradient-to-t from-black/80 via-black/40 to-transparent px-6 py-3 backdrop-blur-md sm:h-[16%] sm:py-0">
+                <p className="text-center text-sm font-medium text-white sm:text-lg md:text-2xl">
                   {data.sceneShowcase.hero.slogan}
                 </p>
               </div>

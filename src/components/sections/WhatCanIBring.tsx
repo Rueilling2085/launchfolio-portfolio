@@ -35,7 +35,7 @@ export function WhatCanIBring() {
         {/* claws back some of SectionContainer's side padding — just for this
             section, so the three-column row gets more breathing room without
             changing the shared container everywhere else uses. */}
-        <div className="-mx-5 px-2 md:-mx-14 md:px-6">
+        <div className="-mx-5 px-4 md:-mx-14 md:px-6">
           <RevealOnScroll>
             <h2 className="text-3xl font-bold tracking-tight uppercase md:text-5xl">
               What Can I Bring

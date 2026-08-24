@@ -206,7 +206,7 @@ function TaskScenarioSection({ data }: { data: NonNullable<UsabilityTestingData[
       </div>
 
       {data.legend && (
-        <div className="mt-3 flex flex-wrap items-center justify-end gap-x-4 gap-y-1.5">
+        <div className="mt-3 flex flex-wrap items-center justify-start gap-x-4 gap-y-1.5">
           {data.legend.map((item) => (
             <span key={item.efficiency} className="flex items-center gap-1.5 text-xs text-muted-2">
               <EfficiencyBadge efficiency={item.efficiency} />

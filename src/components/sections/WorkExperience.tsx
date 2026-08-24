@@ -19,7 +19,7 @@ export function WorkExperience() {
       <SectionContainer id="work-experience" className="bg-ink py-20 text-white md:py-28">
         {/* matches About/What Can I Bring's narrower side padding, so all
             three sections' content areas line up at the same width. */}
-        <div className="-mx-5 px-2 md:-mx-14 md:px-6">
+        <div className="-mx-5 px-4 md:-mx-14 md:px-6">
           <RevealOnScroll>
             <h2 className="text-3xl font-bold tracking-tight uppercase md:text-5xl">
               Work Experience

@@ -17,7 +17,7 @@ export function AboutSection() {
       <SectionContainer id="about" className="bg-paper py-20 md:py-28">
         {/* matches What Can I Bring's narrower side padding, so the two
             sections' content areas line up at the same width. */}
-        <div className="-mx-5 px-2 md:-mx-14 md:px-6">
+        <div className="-mx-5 px-4 md:-mx-14 md:px-6">
           <div className="about-scroll-track grid grid-cols-1 gap-12 md:grid-cols-[1.2fr_0.8fr] md:gap-16">
             <div>
               <RevealOnScroll>

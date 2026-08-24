@@ -180,7 +180,7 @@ export default async function ProjectCaseStudyPage({
                   href={project.repoUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-medium shadow-[0_8px_28px_-4px_rgba(217,119,87,0.4)] transition-colors ${
+                  className={`inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-medium shadow-[0_6px_14px_-4px_rgba(217,119,87,0.4)] transition-colors ${
                     dark
                       ? "border-white/20 text-white/80 hover:border-white/40 hover:text-white"
                       : "border-[#D1D5DB] text-ink-soft hover:border-muted-2 hover:text-ink"

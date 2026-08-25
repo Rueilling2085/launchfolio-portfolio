@@ -66,8 +66,9 @@ export default async function ProjectCaseStudyPage({
     "bg-[radial-gradient(circle,rgba(255,255,255,0.07)_1px,transparent_1px)] [background-size:22px_22px]";
 
   const rawSideNavSections: (SideNavSection | null)[] = [
+    { id: "project-overview", label: { zh: "總覽", en: "Overview" } },
     project.overview?.challenges?.length || project.appIntroVisual
-      ? { id: "overview", label: { zh: "專案總覽", en: "Overview" } }
+      ? { id: "overview", label: { zh: "挑戰與成果", en: "Challenges & Outcomes" } }
       : null,
     project.researchBackground
       ? { id: "research-background", label: { zh: "研究背景", en: "Research Background" } }
@@ -134,7 +135,7 @@ export default async function ProjectCaseStudyPage({
       ? { id: "competitor-analysis", label: { zh: "競品分析", en: "Competitor Analysis" } }
       : null,
     project.wrapUp
-      ? { id: "wrap-up", label: project.wrapUp.eyebrow ?? { zh: "收尾", en: "Wrapping Up" } }
+      ? { id: "wrap-up", label: project.wrapUp.eyebrow ?? { zh: "總結", en: "Summary" } }
       : null,
   ];
   const sideNavSections: SideNavSection[] = rawSideNavSections.filter(
@@ -147,10 +148,11 @@ export default async function ProjectCaseStudyPage({
       <CaseStudySideNav sections={sideNavSections} dark={dark} />
       <main className="flex flex-1 flex-col">
         <SectionContainer
+          id="project-overview"
           className={
             dark
-              ? `relative isolate overflow-hidden pb-14 pt-36 md:pt-44 ${darkBg} ${dotGrid}`
-              : "pt-36 md:pt-44"
+              ? `relative isolate scroll-mt-24 overflow-hidden pb-14 pt-36 md:pt-44 ${darkBg} ${dotGrid}`
+              : "scroll-mt-24 pt-36 md:pt-44"
           }
         >
           {dark && (
@@ -448,7 +450,7 @@ export default async function ProjectCaseStudyPage({
 
           {project.wrapUp && (
             <div id="wrap-up" className="scroll-mt-24">
-              <ProjectWrapUp data={project.wrapUp} />
+              <ProjectWrapUp data={project.wrapUp} dark={dark} />
             </div>
           )}
 

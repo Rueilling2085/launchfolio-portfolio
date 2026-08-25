@@ -557,13 +557,16 @@ export type Reflection = {
   }[];
 };
 
+export type ProjectWrapUpItem = { icon: string; title: Localized; body: Localized };
+
 export type ProjectWrapUp = {
   eyebrow?: Localized;
   heading: Localized;
+  iconAccent?: string;
   workedLabel: Localized;
-  worked: { title: Localized; body: Localized }[];
+  worked: ProjectWrapUpItem[];
   nextLabel: Localized;
-  next: { title: Localized; body: Localized }[];
+  next: ProjectWrapUpItem[];
 };
 
 export type ScreenGallery = {
@@ -1262,11 +1265,12 @@ export const projects: Project[] = [
       },
     },
     wrapUp: {
-      eyebrow: { zh: "收尾", en: "Wrapping Up" },
+      eyebrow: { zh: "總結", en: "Summary" },
       heading: { zh: "反思與下一步", en: "Reflection & Next Steps" },
       workedLabel: { zh: "What worked", en: "What worked" },
       worked: [
         {
+          icon: "users",
           title: { zh: "3 場訪談，深入使用者痛點與情境需求", en: "3 interviews to surface pain points and context" },
           body: {
             zh: "從系統整合商到職安人員，釐清實際工作流程與 AI 導入節點，找出人工巡檢的監控盲區，讓產品需求更貼近工廠現場。",
@@ -1274,16 +1278,18 @@ export const projects: Project[] = [
           },
         },
         {
+          icon: "sliders",
           title: { zh: "模組化 Prompt Template 機制", en: "A modular Prompt Template mechanism" },
           body: {
-            zh: "透過產品迭代，將原本模糊且不一致的自然語言輸入，收斂為固定句型與可替換變數的操作介面，降低 Prompt 輸入差異，提升 VLM 判讀穩定性。",
-            en: "Through product iteration, I converged vague, inconsistent natural-language input into a fixed-sentence, swappable-variable interface, cutting prompt variance and improving the VLM's reading stability.",
+            zh: "透過介面迭代，將原本模糊的自然語言輸入，收斂為固定句型與可替換變數的操作介面，降低 Prompt 輸入差異，提升 VLM 判讀穩定性。",
+            en: "Through interface iteration, I converged vague natural-language input into a fixed-sentence, swappable-variable interface, cutting prompt variance and improving the VLM's reading stability.",
           },
         },
       ],
       nextLabel: { zh: "What I'd do differently & next", en: "What I'd do differently & next" },
       next: [
         {
+          icon: "expand",
           title: { zh: "跨場域規模化驗證", en: "Cross-site scale validation" },
           body: {
             zh: "目前驗證主要來自單一場域試點。若有更多時間，我會延伸至不同產業與廠房環境，驗證模組化 Prompt 的複用性，確保固定句型能適應不同場域需求。",
@@ -1291,10 +1297,19 @@ export const projects: Project[] = [
           },
         },
         {
-          title: { zh: "建立 AI 異常判讀的人機協作機制", en: "A human-in-the-loop check for AI misreads" },
+          icon: "clipboard-check",
+          title: { zh: "驗證非工程使用者的操作體驗", en: "Validate the non-engineer user experience" },
           body: {
-            zh: "現階段聚焦於降低 AI 設定門檻，尚未涵蓋誤判與邊界案例的處理。下一步將設計快速覆核與修正機制，讓人能介入 AI 判讀，提升系統的可控性與現場信任。",
-            en: "The current focus is lowering the setup barrier; it doesn't yet cover misreads or edge cases. The next step is a quick review-and-correct flow so people can step in on AI judgments, building the system's controllability and on-site trust.",
+            zh: "本專案目前僅透過操作影片進行流程驗證，下一步將邀請 EHS 人員實際操作，驗證非工程背景使用者是否能獨立完成 AI 偵測設定，並找出流程中的操作障礙，確認產品是否真正降低 AI 使用門檻。",
+            en: "So far this project has only validated the flow through demo videos. The next phase will have EHS staff actually operate it, to confirm whether non-engineering users can complete AI detection setup on their own, surface any friction points in the flow, and verify the product genuinely lowers the barrier to using AI.",
+          },
+        },
+        {
+          icon: "database",
+          title: { zh: "建立可累積的 AI 情境詞庫", en: "Build an accumulating AI context vocabulary" },
+          body: {
+            zh: "將使用者建立的人員、物件與場域詞彙保存為情境詞庫，當系統再次辨識到相同場景時，自動套用既有設定，減少重複輸入與 Prompt 調整，讓 AI 能隨使用情境累積與學習。",
+            en: "Save the people, object, and site vocabulary users define into a context vocabulary, so when the system recognizes the same scene again it automatically applies the existing setup — reducing repeated input and prompt tuning, and letting the AI accumulate and learn from usage over time.",
           },
         },
       ],
@@ -1908,6 +1923,56 @@ export const projects: Project[] = [
       color: { src: "/images/projects/h2u/design-system/color.svg", width: 905, height: 723 },
       component: { src: "/images/projects/h2u/design-system/component.svg", width: 972, height: 1526 },
     },
+    wrapUp: {
+      eyebrow: { zh: "總結", en: "Summary" },
+      heading: { zh: "反思與下一步", en: "Reflection & Next Steps" },
+      workedLabel: { zh: "What worked", en: "What worked" },
+      worked: [
+        {
+          icon: "route",
+          title: { zh: "情境化任務腳本，讓測試貼近真實使用", en: "Scenario-based task scripts that mirrored real usage" },
+          body: {
+            zh: "測試前先實際操作兩項核心功能，設計 14 組情境任務，例如請搜尋一場特定的賽事，而非直接要求受測者操作特定功能，降低研究者引導，更真實地觀察跑者如何理解與使用產品。",
+            en: "Before testing, I walked through both core features myself and designed 14 scenario-based tasks — like \"search for a specific race\" — instead of asking participants to operate a specific feature directly. This reduced researcher-led bias and let me observe more authentically how runners actually understood and used the product.",
+          },
+        },
+        {
+          icon: "bar-chart",
+          title: { zh: "結合質性與量化數據，收斂優化優先序", en: "Combined qualitative and quantitative data to prioritize fixes" },
+          body: {
+            zh: "透過 13 位跑者的易用性測試與訪談，同步記錄任務完成時間、錯誤次數與使用者回饋，交叉分析後收斂出 4 項高優先度問題，並將其中地圖視覺權重過高與停止跑步手勢不直覺落地為實際介面優化成果。",
+            en: "Through usability testing and interviews with 13 runners, I recorded task completion time, error counts, and user feedback in parallel. Cross-analyzing these narrowed the findings down to 4 high-priority issues, two of which — the map's excessive visual weight and the unintuitive stop-run gesture — became shipped interface optimizations.",
+          },
+        },
+      ],
+      nextLabel: { zh: "What I'd do differently & next", en: "What I'd do differently & next" },
+      next: [
+        {
+          icon: "users",
+          title: { zh: "擴大受測者樣本與真實跑步情境", en: "Expand the participant sample and real running conditions" },
+          body: {
+            zh: "本次測試以一般與資深跑者為主，且多數測試於室內進行。下一步會增加首次跑者等不同使用族群，並將測試延伸至實際跑步與低光源等情境，驗證資訊可讀性、停止操作與即時回饋在真實環境下的使用體驗。",
+            en: "This round focused on casual and experienced runners, with most sessions conducted indoors. The next phase would bring in more user types, like first-time runners, and extend testing to real outdoor runs and low-light conditions, to validate readability, the stop action, and real-time feedback under actual use.",
+          },
+        },
+        {
+          icon: "trending-up",
+          title: { zh: "建立優化上線後的成效追蹤機制", en: "Build a tracking mechanism for post-launch impact" },
+          body: {
+            zh: "目前 2 項介面優化已落地，但尚未進行第二輪測試驗證改善成效。下一步會透過優化前後的任務完成時間、錯誤率與操作成功率進行比較，確認設計調整是否真正解決原始問題，並持續迭代產品體驗。",
+            en: "The two shipped optimizations haven't yet been validated with a second round of testing. Next, I'd compare task completion time, error rate, and success rate before and after the change to confirm the redesign actually solved the original problem, and keep iterating from there.",
+          },
+        },
+        {
+          icon: "layers",
+          title: { zh: "從核心功能延伸至整體產品體驗", en: "Extend from core features to the whole product experience" },
+          body: {
+            zh: "本次研究聚焦「賽事列表」與「執行跑步」兩項核心功能，下一步將進一步驗證首頁、商城與個人頁面等功能，從單一功能優化延伸至整體產品體驗與使用者需求。",
+            en: "This research focused on the Race List and Run Tracking features. The next phase would validate the home screen, shop, and profile as well, extending from single-feature optimization to the overall product experience and user needs.",
+          },
+        },
+      ],
+    },
   },
   {
     id: "8",
@@ -1961,6 +2026,56 @@ export const projects: Project[] = [
         { value: { zh: "13.21%", en: "13.21%" }, label: { zh: "辨識出的知識缺口", en: "Knowledge gaps identified" } },
       ],
     },
+    wrapUp: {
+      heading: { zh: "反思與下一步", en: "Reflection & Next Steps" },
+      iconAccent: "#C4956A",
+      workedLabel: { zh: "What worked", en: "What worked" },
+      worked: [
+        {
+          icon: "database",
+          title: { zh: "以 RAG 架構解決通用 LLM 的知識幻覺問題", en: "Solving general LLMs' knowledge hallucination with a RAG architecture" },
+          body: {
+            zh: "針對通用型 LLM 在故宮特展知識庫中容易產生幻覺、以及展覽標籤字數有限的問題，透過串聯權威資料庫進行知識檢索，讓每則回答都具備可追溯的資料依據，同時補足說明文字不足之處，大幅提升回答的準確性與可信度。",
+            en: "General-purpose LLMs tend to hallucinate on the Museum's special-exhibition knowledge base, and exhibition labels have limited character counts. I addressed both by connecting authoritative databases for knowledge retrieval, so every answer carries traceable sourcing and fills in what the label text leaves out — substantially improving accuracy and trustworthiness.",
+          },
+        },
+        {
+          icon: "flask",
+          title: { zh: "透過 30 人對照實驗，量化驗證系統成效", en: "Quantitatively validating impact through a 30-person controlled experiment" },
+          body: {
+            zh: "設計對照實驗比較使用系統前後的使用者知識建構與參與度，並蒐集 212 則對話紀錄進行分析，進一步辨識出 13.21% 的知識缺口，以量化數據驗證系統設計的實際效益，而非僅憑主觀感受，研究成果也因此獲 IEEE ICASI 2026 口頭發表。",
+            en: "I designed a controlled experiment comparing users' knowledge-building and engagement before and after using the system, and analyzed 212 collected dialogues to identify a 13.21% knowledge gap — validating the system's real impact with quantitative data rather than subjective impressions. The research was accepted for oral presentation at IEEE ICASI 2026.",
+          },
+        },
+      ],
+      nextLabel: { zh: "What I'd do differently & next", en: "What I'd do differently & next" },
+      next: [
+        {
+          icon: "library",
+          title: { zh: "擴大知識庫規模，涵蓋更多展覽與文物類型", en: "Scale the knowledge base to cover more exhibitions and artifact types" },
+          body: {
+            zh: "目前知識庫聚焦於單一特展的 35 件文物，未來會延伸至常設展或其他特展，納入更多元的文物類型，驗證 RAG 架構在更大規模知識庫下的檢索準確度與可擴展性。",
+            en: "The knowledge base currently covers 35 artifacts from a single special exhibition. Going forward, I'd extend it to the permanent collection and other special exhibitions, incorporating more diverse artifact types to validate the RAG architecture's retrieval accuracy and scalability at a larger knowledge-base size.",
+          },
+        },
+        {
+          icon: "refresh",
+          title: { zh: "建立知識缺口的回饋與更新機制", en: "Build a feedback loop for updating identified knowledge gaps" },
+          body: {
+            zh: "目前透過對照實驗辨識出 13.21% 的知識缺口，但尚未建立將缺口回饋至知識庫、持續補充內容的機制。下一步會設計自動化的缺口偵測與更新流程，讓知識庫能隨使用者提問持續擴充與優化。",
+            en: "The controlled experiment identified a 13.21% knowledge gap, but there's no mechanism yet to feed those gaps back into the knowledge base and keep filling them in. Next, I'd design an automated gap-detection and update workflow so the knowledge base keeps expanding and improving as users ask questions.",
+          },
+        },
+        {
+          icon: "rocket",
+          title: { zh: "從實驗到實際場域部署", en: "From experiment to real on-site deployment" },
+          body: {
+            zh: "目前的驗證主要來自研究情境下的對照實驗，尚未在真實展場中與一般參觀者互動。下一步希望能與博物館合作進行小規模場域試點，觀察系統在真實參展情境下的使用行為。",
+            en: "Validation so far has come from a controlled experiment in a research setting, not from real interactions with general visitors on-site. Next, I'd hope to partner with a museum on a small on-site pilot, to observe how the system performs with real visitors in an actual exhibition setting.",
+          },
+        },
+      ],
+    },
   },
   {
     id: "6",
@@ -1969,6 +2084,7 @@ export const projects: Project[] = [
     client: "TouchTune",
     type: "團隊協作．碩士設計專題",
     image: "/images/projects/touchtune/touchtune-hero-v7.jpg",
+    heroAspect: "1600/1131",
     deviceMockup: false,
     cardTags: ["Product Design", "Wearable Device"],
     cardHeadline: {
@@ -2411,34 +2527,45 @@ export const projects: Project[] = [
         ],
       },
     },
-    reflection: {
-      eyebrow: { zh: "反思與展望", en: "Reflection & Outlook" },
-      blocks: [
+    wrapUp: {
+      eyebrow: { zh: "總結", en: "Summary" },
+      heading: { zh: "反思與下一步", en: "Reflection & Next Steps" },
+      workedLabel: { zh: "What worked", en: "What worked" },
+      worked: [
         {
-          icon: "insight",
-          title: { zh: "心得與收穫", en: "Insights & Takeaways" },
-          subtitle: "Insights & Takeaways",
-          paragraphs: [
-            {
-              zh: "本專案為碩士團隊合作項目。由於初期無法直接接觸聽障使用者，我獨立進行文獻研究整理聽障者的音樂感知方式與相關穿戴式產品案例，作為團隊設計方向的基礎，並進一步帶領團隊發想產品外觀與機構設計。",
-              en: "This was a master's team project. Since we had no direct access to users who are deaf or hard of hearing early on, I independently ran a literature review covering how they perceive music and relevant wearable precedents, laying the groundwork for the team's direction, and went on to lead the team through ideating the product's form and mechanical design.",
-            },
-            {
-              zh: "專案中最大的挑戰，是如何在有限的產品尺寸內整合震動模組，同時兼顧美感與佩戴舒適性，突破傳統輔具偏向醫療器材的既有印象。透過反覆討論與設計迭代，我深刻體會到，這不只是解決功能需求，更需要兼顧使用者的情感認同與日常配戴意願。",
-              en: "The biggest challenge was fitting the vibration modules into a limited form factor while keeping it both good-looking and comfortable, breaking away from the clinical look typical of assistive devices. Through repeated discussion and iteration, I came to see that this wasn't just about meeting functional requirements; it also had to earn users' emotional buy-in and their willingness to wear it day to day.",
-            },
-          ],
+          icon: "book",
+          title: { zh: "以文獻研究補足初期使用者研究的限制", en: "Filling early user-research gaps with a literature review" },
+          body: {
+            zh: "專案初期難以直接接觸聽障使用者，因此透過文獻研究整理聽障者感受音樂的觸覺方式與相關穿戴式產品案例，並參考 WHO 數據佐證設計方向，讓團隊在缺乏第一手使用者回饋的情況下，仍能建立具研究依據的設計決策。",
+            en: "Early on, we had no direct access to users who are deaf or hard of hearing, so I ran a literature review covering how they perceive music through touch and relevant wearable precedents, and referenced WHO data to back the design direction — letting the team make research-grounded decisions without first-hand user feedback.",
+          },
         },
         {
-          icon: "limitation",
-          title: { zh: "限制與未來規劃", en: "Limitations & Future Plans" },
-          subtitle: "Limitations",
-          paragraphs: [
-            {
-              zh: "經過五個月的開發，目前成果仍以概念原型為主，實體驗證仍有進一步發展空間。未來希望完成可穿戴實體原型，驗證電子元件配置與震動回饋的設計合理性，並透過實際使用者測試，評估長時間佩戴的舒適性與互動體驗，持續優化產品設計。",
-              en: "After five months, the current output is still mainly a concept prototype, with room to go further on physical validation. Going forward, I want to build a wearable physical prototype to validate the electronics layout and vibration-feedback design, then run real user testing to assess long-term wear comfort and interaction, continuing to refine the product.",
-            },
-          ],
+          icon: "repeat",
+          title: { zh: "透過 5 次原型迭代，收斂出完整的穿戴流程", en: "Converging on a complete wearing flow through 5 prototype iterations" },
+          body: {
+            zh: "從紙模型開始反覆驗證穿戴流程與固定方式，逐步比較不同束帶結構與配戴方式，最終收斂出三步驟穿戴流程，提升裝置在動態情境下的穩定性。設計成果最終獲得 IDA Design Awards 與 unDesign Award 兩項國際設計獎肯定。",
+            en: "Starting from paper prototypes, I repeatedly tested the wearing process and fastening methods, comparing different strap structures and wearing styles, and converged on a three-step wearing flow that keeps the device stable during movement. The design went on to win two international design awards: an IDA Design Awards Honorable Mention and an unDesign Award Gold.",
+          },
+        },
+      ],
+      nextLabel: { zh: "What I'd do differently & next", en: "What I'd do differently & next" },
+      next: [
+        {
+          icon: "cpu",
+          title: { zh: "從概念原型到實體驗證", en: "From concept prototype to physical validation" },
+          body: {
+            zh: "目前成果仍以概念原型為主，尚未完成電子元件與震動機構的整合。下一步會製作可實際運作的穿戴式原型，進一步驗證震動模組配置、電力與訊號傳輸等硬體限制，確認設計概念能否落實於真實使用情境。",
+            en: "The current output is still mainly a concept prototype, without the electronics and vibration mechanism integrated yet. The next phase would build a working wearable prototype to validate the vibration-module layout, power, and signal-transmission constraints, confirming whether the concept holds up in real use.",
+          },
+        },
+        {
+          icon: "message-circle",
+          title: { zh: "從真實使用者獲得配戴使用回饋", en: "Get real wear-and-use feedback from actual users" },
+          body: {
+            zh: "目前設計依據主要來自文獻與二手資料，尚缺乏第一手使用者驗證。下一步將邀請聽障使用者實際體驗，評估長時間配戴的舒適性、震動回饋的辨識度，以及情感分享功能在真實社交情境中的可用性，進一步驗證產品是否真正回應使用者需求。",
+            en: "The design so far rests mainly on literature and secondary sources, without first-hand user validation. The next phase would bring in real users who are deaf or hard of hearing to try the device, assessing long-term wear comfort, how distinguishable the vibration feedback is, and how usable the emotional-sharing feature is in real social settings — confirming whether the product actually meets user needs.",
+          },
         },
       ],
     },

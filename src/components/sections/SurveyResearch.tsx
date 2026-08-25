@@ -12,7 +12,7 @@ import type { SurveyResearch as SurveyResearchData } from "@/lib/data";
 
 const COPY = {
   bridge: {
-    zh: "除了易用性測試驅動的介面優化，我同時展開另一條研究線：\n透過大規模問卷調查，為產品下一階段的功能規劃收集方向。",
+    zh: "除了易用性測試驅動的介面優化，我同時展開另一條研究線：\n透過大規模問卷調查，為產品下一步的功能規劃收集方向。",
     en: "Alongside the usability-testing-driven interface fixes, I ran a second research thread in parallel, a large-scale survey to gather direction for the product's next phase of feature planning.",
   },
   closingLead: {
@@ -20,7 +20,7 @@ const COPY = {
     en: "These insights will",
   },
   closingHighlight: {
-    zh: "指引產品下一階段的功能開發方向",
+    zh: "指引產品下一步的功能開發方向",
     en: "guide the product's next round of feature development",
   },
 } as const;

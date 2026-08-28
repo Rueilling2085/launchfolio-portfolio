@@ -46,7 +46,7 @@ export function WhatCanIBring() {
             {bringItems.map((item, i) => {
               const Icon = ICONS[item.icon];
               return (
-                <RevealOnScroll key={item.title.zh} delay={i * 0.08}>
+                <RevealOnScroll key={item.title.zh} delay={i * 0.18}>
                   <div className="flex flex-col gap-4">
                     {/* the site's signature orange, matching the hero — the
                         `accent-strong` token is a leftover green used elsewhere */}

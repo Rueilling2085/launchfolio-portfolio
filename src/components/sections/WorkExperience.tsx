@@ -28,7 +28,7 @@ export function WorkExperience() {
 
           <div className="mt-12 flex flex-col border-t border-white/10 md:mt-16">
             {workExperience.map((job, i) => (
-              <RevealOnScroll key={`${job.company}-${job.dates}`} delay={i * 0.06}>
+              <RevealOnScroll key={`${job.company}-${job.dates}`} delay={i * 0.1}>
                 <div className="flex flex-col gap-2 border-b border-white/10 py-8 sm:flex-row sm:gap-10">
                   <span className="shrink-0 text-sm font-medium text-white/50 sm:w-40">
                     {job.dates}
@@ -37,10 +37,10 @@ export function WorkExperience() {
                     <p className="text-lg font-semibold text-white md:text-xl">{job.title}</p>
                     <p className="text-base text-white/60">{job.company}</p>
                     <div className="mt-3 flex flex-col gap-2">
-                      {job.points.map((point) => (
-                        <p key={point.zh} className="text-base leading-relaxed text-white/75">
-                          {point[lang]}
-                        </p>
+                      {job.points.map((point, pi) => (
+                        <RevealOnScroll key={point.zh} delay={0.1 + pi * 0.1}>
+                          <p className="text-base leading-relaxed text-white/75">{point[lang]}</p>
+                        </RevealOnScroll>
                       ))}
                     </div>
                   </div>

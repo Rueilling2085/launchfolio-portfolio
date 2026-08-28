@@ -6,10 +6,14 @@ import { widestString } from "@/lib/i18n/resolve";
 
 const ACCENT = "#D97757";
 
-function Face({ label, value }: { label: string; value: string | { zh: string; en: string } }) {
+type FaceText = string | { zh: string; en: string };
+
+function Face({ label, value }: { label: FaceText; value: FaceText }) {
   return (
     <span className="text-left leading-tight">
-      <span className="block text-[11px] whitespace-nowrap text-muted-2">{label}</span>
+      <span className="block text-[11px] whitespace-nowrap text-muted-2">
+        {typeof label === "string" ? label : <Localized value={label} />}
+      </span>
       <span className="block text-base font-semibold whitespace-nowrap text-ink">
         {typeof value === "string" ? value : <Localized value={value} />}
       </span>
@@ -29,8 +33,8 @@ function FlipChip({
 }: {
   media: ReactNode;
   mediaSide?: "left" | "right";
-  front: { label: string; value: string | { zh: string; en: string } };
-  back: { label: string; value: string | { zh: string; en: string } };
+  front: { label: FaceText; value: FaceText };
+  back: { label: FaceText; value: FaceText };
 }) {
   return (
     <div
@@ -45,10 +49,10 @@ function FlipChip({
         style={{ perspective: "600px" }}
       >
         {/* invisible spacer keeps the chip from resizing mid-flip — sized off
-            the English string, the longer form in every case here */}
+            whichever wording (in either language) is longest */}
         <span className="invisible block">
           <Face
-            label={front.label.length >= back.label.length ? front.label : back.label}
+            label={widestString(front.label).length >= widestString(back.label).length ? front.label : back.label}
             value={
               widestString(front.value).length >= widestString(back.value).length
                 ? front.value
@@ -94,8 +98,8 @@ export function HeroMetaChips() {
             />
           </span>
         }
-        front={{ label: "Hey, I am", value: "Jui Ling" }}
-        back={{ label: "You can also call me", value: "Lina" }}
+        front={{ label: { zh: "嗨，我是", en: "Hey, I am" }, value: { zh: "林瑞苓", en: "Jui Ling" } }}
+        back={{ label: { zh: "你也可以叫我", en: "You can also call me" }, value: "Lina" }}
       />
 
       <FlipChip
@@ -106,10 +110,10 @@ export function HeroMetaChips() {
           </span>
         }
         front={{
-          label: "Currently based in",
+          label: { zh: "目前居住於", en: "Currently based in" },
           value: { zh: "新北市", en: "New Taipei City" },
         }}
-        back={{ label: "Hometown", value: { zh: "新竹縣", en: "Hsinchu County" } }}
+        back={{ label: { zh: "家鄉", en: "Hometown" }, value: { zh: "新竹縣", en: "Hsinchu County" } }}
       />
     </div>
   );

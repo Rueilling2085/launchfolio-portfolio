@@ -26,41 +26,34 @@ export function AboutSection() {
                 </h2>
               </RevealOnScroll>
 
-              <RevealOnScroll delay={0.08}>
-                <div className="mt-6 flex flex-col gap-4 text-base leading-relaxed text-muted md:text-lg">
-                  {aboutContent.bio.map((paragraph, i) =>
-                    i === 0 ? (
-                      <p key={paragraph.zh} className="whitespace-pre-line font-semibold text-ink">
-                        {paragraph[lang]}
-                      </p>
-                    ) : (
-                      <p key={paragraph.zh} className="whitespace-pre-line">
-                        {paragraph[lang]}
-                      </p>
-                    )
-                  )}
-                </div>
-              </RevealOnScroll>
+              <div className="mt-6 flex flex-col gap-4 text-base leading-relaxed text-muted md:text-lg">
+                {aboutContent.bio.map((paragraph, i) => (
+                  <RevealOnScroll key={paragraph.zh} delay={0.08 + i * 0.15}>
+                    <p className={i === 0 ? "whitespace-pre-line font-semibold text-ink" : "whitespace-pre-line"}>
+                      {paragraph[lang]}
+                    </p>
+                  </RevealOnScroll>
+                ))}
+              </div>
 
-              <RevealOnScroll delay={0.16}>
+              <RevealOnScroll delay={0.08 + aboutContent.bio.length * 0.15}>
                 <div className="mt-10">
                   <p className="text-base font-bold tracking-wide text-ink uppercase">
                     Education
                   </p>
                   <div className="mt-3 flex flex-col gap-4 border-t border-line">
-                    {aboutContent.education.map((entry) => (
-                      <div
-                        key={entry.title}
-                        className="flex flex-col gap-1 border-b border-line pt-4 pb-4 sm:flex-row sm:items-baseline sm:gap-6"
-                      >
-                        <span className="shrink-0 text-sm font-medium text-muted-2 sm:w-32">
-                          {entry.dates}
-                        </span>
-                        <div>
-                          <p className="text-base font-semibold text-ink">{entry.title}</p>
-                          <p className="text-sm text-muted">{entry.org}</p>
+                    {aboutContent.education.map((entry, i) => (
+                      <RevealOnScroll key={entry.title.zh} delay={0.08 + i * 0.15}>
+                        <div className="flex flex-col gap-1 border-b border-line pt-4 pb-4 sm:flex-row sm:items-baseline sm:gap-6">
+                          <span className="shrink-0 text-sm font-medium text-muted-2 sm:w-32">
+                            {entry.dates}
+                          </span>
+                          <div>
+                            <p className="text-base font-semibold text-ink">{entry.title[lang]}</p>
+                            <p className="text-sm text-muted">{entry.org[lang]}</p>
+                          </div>
                         </div>
-                      </div>
+                      </RevealOnScroll>
                     ))}
                   </div>
                 </div>

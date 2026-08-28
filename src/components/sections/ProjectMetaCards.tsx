@@ -2,6 +2,7 @@
 
 import { Compass, Calendar, Users, Briefcase, Award, type LucideIcon } from "lucide-react";
 import type { Project } from "@/lib/data";
+import type { Localized } from "@/lib/i18n/resolve";
 import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 const COPY = {
@@ -12,19 +13,22 @@ const COPY = {
   awards: { zh: "得獎紀錄", en: "Awards" },
 } as const;
 
-function TeamMember({ member, dark }: { member: string; dark?: boolean }) {
-  const meSuffix = " - Me";
-  if (member.endsWith(meSuffix)) {
+const ME_SUFFIX = { zh: " - 我", en: " - Me" } as const;
+
+function TeamMember({ member, dark, lang }: { member: Localized; dark?: boolean; lang: "zh" | "en" }) {
+  const text = member[lang];
+  const suffix = ME_SUFFIX[lang];
+  if (text.endsWith(suffix)) {
     return (
       <span className="block">
-        {member.slice(0, -meSuffix.length)}
+        {text.slice(0, -suffix.length)}
         <strong className={dark ? "font-semibold text-white/70" : "font-semibold text-ink-soft"}>
-          {meSuffix}
+          {suffix}
         </strong>
       </span>
     );
   }
-  return <span className="block">{member}</span>;
+  return <span className="block">{text}</span>;
 }
 
 function MetaCard({
@@ -78,23 +82,19 @@ export function ProjectMetaCards({ project, dark }: { project: Project; dark?: b
         </MetaCard>
       )}
       <MetaCard icon={Calendar} label={COPY.duration[lang]} dark={dark}>
-        {project.duration}
+        {project.duration[lang]}
       </MetaCard>
       <MetaCard icon={Users} label={COPY.team[lang]} dark={dark}>
         {project.team.map((member) => (
-          <TeamMember key={member} member={member} dark={dark} />
+          <TeamMember key={member.zh} member={member} dark={dark} lang={lang} />
         ))}
       </MetaCard>
       <MetaCard icon={Briefcase} label={COPY.role[lang]} dark={dark}>
-        {project.role.map((item) => {
-          const text = typeof item === "string" ? item : item[lang];
-          const key = typeof item === "string" ? item : item.zh;
-          return (
-            <span key={key} className="block">
-              {text}
-            </span>
-          );
-        })}
+        {project.role.map((item) => (
+          <span key={item.zh} className="block">
+            {item[lang]}
+          </span>
+        ))}
       </MetaCard>
       {awards && awards.length > 0 && (
         <MetaCard icon={Award} label={COPY.awards[lang]} dark={dark}>

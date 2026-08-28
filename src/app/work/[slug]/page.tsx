@@ -208,13 +208,6 @@ export default async function ProjectCaseStudyPage({
                 <Localized value={project.cardHeadline} />
               </p>
             )}
-            <p
-              className={`mt-5 w-full whitespace-pre-line text-sm leading-relaxed md:text-base ${
-                dark ? "text-white/60" : "text-muted"
-              }`}
-            >
-              <LocalizedWithLink value={project.description} link={project.descriptionLink} />
-            </p>
 
             <div className="w-full">
               {!project.presentationEmbedUrl && <ProjectMetaCards project={project} dark={dark} />}
@@ -222,6 +215,14 @@ export default async function ProjectCaseStudyPage({
                 <ProjectHighlights items={project.overview.highlights} color={project.color ?? "#1D4ED8"} dark={dark} />
               )}
             </div>
+
+            <p
+              className={`mt-8 w-full whitespace-pre-line text-sm leading-relaxed md:text-base ${
+                dark ? "text-white/60" : "text-muted"
+              }`}
+            >
+              <LocalizedWithLink value={project.description} link={project.descriptionLink} />
+            </p>
           </div>
         </SectionContainer>
 
@@ -293,13 +294,17 @@ export default async function ProjectCaseStudyPage({
                   <div className="mx-auto mt-14 grid max-w-3xl grid-cols-1 gap-4 sm:grid-cols-3 md:mt-16">
                     <div className="rounded-2xl border border-line bg-white px-5 py-4">
                       <p className="text-xs font-medium text-muted-2">Duration</p>
-                      <p className="mt-1 text-sm text-ink-soft">{project.duration}</p>
+                      <p className="mt-1 text-sm text-ink-soft">
+                        <Localized value={project.duration} />
+                      </p>
                     </div>
                     <div className="rounded-2xl border border-line bg-white px-5 py-4">
                       <p className="text-xs font-medium text-muted-2">Team</p>
                       <ul className="mt-1 space-y-0.5 text-sm text-ink-soft">
                         {project.team.map((member) => (
-                          <li key={member}>{member}</li>
+                          <li key={member.zh}>
+                            <Localized value={member} />
+                          </li>
                         ))}
                       </ul>
                     </div>
@@ -307,8 +312,8 @@ export default async function ProjectCaseStudyPage({
                       <p className="text-xs font-medium text-muted-2">Role</p>
                       <ul className="mt-1 space-y-0.5 text-sm text-ink-soft">
                         {project.role.map((item) => (
-                          <li key={typeof item === "string" ? item : item.zh}>
-                            {typeof item === "string" ? item : <Localized value={item} />}
+                          <li key={item.zh}>
+                            <Localized value={item} />
                           </li>
                         ))}
                       </ul>

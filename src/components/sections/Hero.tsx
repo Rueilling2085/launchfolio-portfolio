@@ -5,6 +5,12 @@ import { CursorTag } from "@/components/ui/CursorTag";
 import { EnterOnLoad } from "@/components/ui/EnterOnLoad";
 import { HeroMetaChips } from "@/components/sections/HeroMetaChips";
 import { HeroTagline } from "@/components/sections/HeroTagline";
+import { Localized } from "@/lib/i18n/Localized";
+
+const SUBTITLE = {
+  zh: "把複雜的問題釐清、理解，並將它們轉化為有意義的體驗。",
+  en: "Making sense of complex problems and turning them into meaningful experiences.",
+} as const;
 
 export function Hero() {
   return (
@@ -32,7 +38,7 @@ export function Hero() {
 
           <EnterOnLoad delay={0.68} y={16}>
             <p className="mt-8 max-w-xl text-base leading-relaxed text-muted md:text-lg">
-              Making sense of complex problems and turning them into meaningful experiences.
+              <Localized value={SUBTITLE} />
             </p>
           </EnterOnLoad>
         </div>

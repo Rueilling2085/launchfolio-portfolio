@@ -635,9 +635,9 @@ export type Project = {
   heroAspect?: string;
   description: Localized;
   descriptionLink?: { text: string; url: string };
-  duration: string;
-  team: string[];
-  role: (string | Localized)[];
+  duration: Localized;
+  team: Localized[];
+  role: Localized[];
   background?: ProjectBackgroundItem[];
   overview?: ProjectOverview;
   appIntroVisual?: AppIntroVisual;
@@ -759,13 +759,17 @@ export const projects: Project[] = [
     cardImageBackdrop: "#DFDFDF",
     cardVideo: "/images/projects/vision-detect/card-demo.mp4",
     cardVideoBackdrop: "#DFDFDF",
-    duration: "9 weeks",
-    team: ["Project Manager ×2", "Software Engineer ×2", "UI/UX Designer ×1 - Me"],
+    duration: { zh: "9 週", en: "9 weeks" },
+    team: [
+      { zh: "專案經理 ×2", en: "Project Manager ×2" },
+      { zh: "軟體工程師 ×2", en: "Software Engineer ×2" },
+      { zh: "UI/UX 設計師 ×1 - 我", en: "UI/UX Designer ×1 - Me" },
+    ],
     role: [
-      "User interviews & analysis",
-      "Competitive analysis",
-      "User flows & UI design",
-      "Cross-team stakeholder workshops",
+      { zh: "使用者訪談與分析", en: "User interviews & analysis" },
+      { zh: "競品分析", en: "Competitive analysis" },
+      { zh: "使用者流程與介面設計", en: "User flows & UI design" },
+      { zh: "跨團隊工作坊", en: "Cross-team stakeholder workshops" },
     ],
     overview: {
       niche: { zh: "B2B SaaS・電腦視覺(VLM)・工業安全(EHS)", en: "B2B SaaS · Computer Vision (VLM) · Industrial Safety (EHS)" },
@@ -1345,8 +1349,12 @@ export const projects: Project[] = [
     cardImageHeight: 1310,
     cardVideo: "/images/projects/h2u/card-demo.mp4",
     cardVideoFit: "cover",
-    duration: "July 2022 (2 month)",
-    team: ["Product Manager ×1", "UI/UX Designer ×2 - Me", "Software Engineer ×1"],
+    duration: { zh: "2022 年 7 月（2 個月）", en: "July 2022 (2 month)" },
+    team: [
+      { zh: "產品經理 ×1", en: "Product Manager ×1" },
+      { zh: "UI/UX 設計師 ×2 - 我", en: "UI/UX Designer ×2 - Me" },
+      { zh: "軟體工程師 ×1", en: "Software Engineer ×1" },
+    ],
     role: [
       { zh: "易用性測試", en: "Usability Testing" },
       { zh: "專家訪談", en: "Expert Interviews" },
@@ -2006,15 +2014,18 @@ export const projects: Project[] = [
       en: "Built an AI-native RAG conversation system on the National Palace Museum's special-exhibition knowledge base. To address the limited character count of exhibition labels and general-purpose LLMs' tendency to hallucinate in specialized domains, I connected authoritative databases for knowledge retrieval so every answer stays traceable, while generating context images to fill in missing artifacts and restore their historical context. A 30-person controlled study confirmed significant gains in users' knowledge-building and engagement.\nThe research was presented orally at IEEE ICASI 2026.",
     },
     descriptionLink: { text: "IEEE ICASI 2026", url: "https://2026.icasi-conf.net/" },
-    duration: "2025 – 2026 (Master's Thesis Research)",
-    team: ["Researcher, Designer & Developer ×1 - Me", "Advisor ×1"],
+    duration: { zh: "2025 – 2026（碩士論文研究）", en: "2025 – 2026 (Master's Thesis Research)" },
+    team: [
+      { zh: "研究者、設計師 & 開發者 ×1 - 我", en: "Researcher, Designer & Developer ×1 - Me" },
+      { zh: "指導教授 ×1", en: "Advisor ×1" },
+    ],
     role: [
-      "Field Research",
-      "Curator Interview",
-      "Experiment Design",
-      "RAG System Development",
-      "UI Design",
-      "Quantitative Analysis",
+      { zh: "田野調查", en: "Field Research" },
+      { zh: "策展人訪談", en: "Curator Interview" },
+      { zh: "實驗設計", en: "Experiment Design" },
+      { zh: "RAG 系統開發", en: "RAG System Development" },
+      { zh: "介面設計", en: "UI Design" },
+      { zh: "量化分析", en: "Quantitative Analysis" },
     ],
     overview: {
       niche: { zh: "個人研究．碩士論文・多模態 RAG・生成式 AI", en: "Master's Research · Multimodal RAG · Generative AI" },
@@ -2109,14 +2120,17 @@ export const projects: Project[] = [
       zh: "TouchTune 是一款專為聽障人士設計的穿戴式裝置。它透過將聲音轉化為多頻率的振動，提供多感官的音樂體驗。",
       en: "TouchTune is a wearable device designed for people who are deaf or hard of hearing. It translates sound into multi-frequency vibration, delivering a multisensory music experience.",
     },
-    duration: "September 2025 (5 months)",
-    team: ["Industrial Designer ×2", "PM, UI/UX Designer ×1 - Me"],
+    duration: { zh: "2025 年 9 月（5 個月）", en: "September 2025 (5 months)" },
+    team: [
+      { zh: "工業設計師 ×2", en: "Industrial Designer ×2" },
+      { zh: "PM、UI/UX 設計師 ×1 - 我", en: "PM, UI/UX Designer ×1 - Me" },
+    ],
     role: [
-      "User Research",
-      "Competitive Analysis",
-      "Product Positioning",
-      "UI Design",
-      "3D rendering",
+      { zh: "使用者研究", en: "User Research" },
+      { zh: "競品分析", en: "Competitive Analysis" },
+      { zh: "產品定位", en: "Product Positioning" },
+      { zh: "介面設計", en: "UI Design" },
+      { zh: "3D 渲染", en: "3D rendering" },
     ],
     overview: {
       projectIntro:
@@ -2579,24 +2593,24 @@ export const bringItems = [
     icon: "search",
     title: { zh: "研究驅動的設計者", en: "Research-driven Designer" },
     description: {
-      zh: "在設計之前，我習慣先釐清問題，透過使用者研究、數據分析與情境探索驗證假設，確保設計真正回應使用者需求。",
-      en: "Before I design anything, I clarify the problem first, validating assumptions through user research, data analysis, and contextual inquiry so the design actually answers a real need.",
+      zh: "在設計之前，我先釐清問題。透過使用者研究、數據分析與情境探索驗證假設，從需求定義到解方驗證，讓設計建立在實際使用情境與證據之上。",
+      en: "Before I design anything, I clarify the problem first. I validate assumptions through user research, data analysis, and contextual inquiry — from defining requirements to validating the solution — so design stays grounded in real usage context and evidence.",
     },
   },
   {
     icon: "layout-dashboard",
     title: { zh: "複雜問題的轉譯者", en: "Complexity Translator" },
     description: {
-      zh: "我擅長將複雜的科技與資訊，轉化為人容易理解、操作與感受的體驗。",
-      en: "I turn complex technology and information into experiences people can understand, operate, and feel at ease with.",
+      zh: "面對 AI、資料與複雜系統，我擅長梳理技術邏輯與資訊架構，將複雜的系統規則轉化為清晰的互動流程與直覺的產品體驗。",
+      en: "Facing AI, data, and complex systems, I'm skilled at untangling technical logic and information architecture, turning complicated system rules into clear interaction flows and intuitive product experiences.",
     },
   },
   {
     icon: "bot",
-    title: { zh: "能動手實作的設計夥伴", en: "Technical Collaborator" },
+    title: { zh: "產品落地的推動者", en: "Implementation Driver" },
     description: {
-      zh: "我持續探索 AI 技術在產品開發中的應用，並透過實際專案累積經驗，能從使用者需求與技術可行性雙向思考產品機會，將 AI 技術轉化為具體的產品價值。",
-      en: "I keep exploring how AI fits into real product development, weighing user needs against technical feasibility to turn AI capability into concrete product value.",
+      zh: "我不只停留在設計方案，也會參與實際驗證與落地。透過原型製作與跨職能協作，從產品目標與技術可行性出發，推動設計從概念走向實際應用。",
+      en: "I don't stop at the design proposal — I stay involved through validation and shipping. Through prototyping and cross-functional collaboration, grounded in product goals and technical feasibility, I push designs from concept to real-world use.",
     },
   },
 ];
@@ -2623,8 +2637,8 @@ export const aboutContent = {
   education: [
     {
       dates: "SEP 2022 – JUL 2026",
-      title: "M.Des in Innovation and Design",
-      org: "National Taipei University of Technology (NTUT), Taipei · GPA 4.0/4.3",
+      title: { zh: "工業設計系創新設計所", en: "M.Des in Innovation and Design" },
+      org: { zh: "國立臺北科技大學 (NTUT)，臺北 · GPA 4.0/4.3", en: "National Taipei University of Technology (NTUT), Taipei · GPA 4.0/4.3" },
     },
   ],
   photos: ["/images/hero/ida-award.jpg", "/images/hero/presentation.jpg", "/images/hero/vr-testing.jpg"],

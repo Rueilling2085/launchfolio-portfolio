@@ -2641,48 +2641,80 @@ export const aboutContent = {
       org: { zh: "國立臺北科技大學 (NTUT)，臺北 · GPA 4.0/4.3", en: "National Taipei University of Technology (NTUT), Taipei · GPA 4.0/4.3" },
     },
   ],
-  photos: ["/images/hero/ida-award.jpg", "/images/hero/presentation.jpg", "/images/hero/vr-testing.jpg"],
+  photos: ["/images/hero/headshot-formal.jpg"],
 };
 
 export const beyondPixels = [
-  { src: "/images/about/on-stage.jpg", alt: "Presenting at a project showcase", caption: "On Stage" },
+  {
+    src: "/images/about/on-stage.jpg",
+    alt: "Presenting at a project showcase",
+    caption: { zh: "上台發表", en: "On Stage" },
+  },
   {
     src: "/images/about/team-project.jpg",
     alt: "Team standing with their wheelchair basketball VR project poster",
-    caption: "Team Project",
+    caption: { zh: "大專競賽", en: "Team Project" },
   },
-  { src: "/images/about/beach-portrait.jpg", alt: "By the sea at dusk", caption: "By the Sea" },
+  {
+    src: "/images/about/beach-portrait.jpg",
+    alt: "By the sea at dusk",
+    caption: { zh: "海邊", en: "By the Sea" },
+  },
   {
     src: "/images/about/island-road-trip.jpg",
     alt: "Riding scooters in a line down an island road",
-    caption: "Island Road Trip",
+    caption: { zh: "環島公路旅行", en: "Island Road Trip" },
   },
-  { src: "/images/about/wildflowers.jpg", alt: "A coastal hill and wildflowers", caption: "Wildflowers" },
+  {
+    src: "/images/about/wildflowers.jpg",
+    alt: "A coastal hill and wildflowers",
+    caption: { zh: "野花", en: "Wildflowers" },
+  },
   {
     src: "/images/about/mountain-hike.jpg",
     alt: "Hiking group at the Alishan visitor center",
-    caption: "Mountain Hike",
+    caption: { zh: "登山健行", en: "Mountain Hike" },
   },
-  { src: "/images/about/ancient-forest.jpg", alt: "Walking beneath a giant cedar", caption: "Ancient Forest" },
-  { src: "/images/about/coffee-break.jpg", alt: "Coffee and dessert with design magazines", caption: "Coffee Break" },
-  { src: "/images/about/golden-hour.jpg", alt: "Sunset over a fishing harbor", caption: "Golden Hour" },
+  {
+    src: "/images/about/ancient-forest.jpg",
+    alt: "Walking beneath a giant cedar",
+    caption: { zh: "阿里山登山", en: "Ancient Forest" },
+  },
+  {
+    src: "/images/about/coffee-break.jpg",
+    alt: "Coffee and dessert with design magazines",
+    caption: { zh: "咖啡時光", en: "Coffee Break" },
+  },
+  {
+    src: "/images/about/golden-hour.jpg",
+    alt: "Sunset over a fishing harbor",
+    caption: { zh: "澎湖海邊", en: "Golden Hour" },
+  },
   {
     src: "/images/about/trail-explorers.jpg",
     alt: "Backpacking through an old ruin on a trail",
-    caption: "Trail Explorers",
+    caption: { zh: "登山探險", en: "Trail Explorers" },
   },
-  { src: "/images/about/prototyping.jpg", alt: "An ALARM hardware prototype on a desk", caption: "Prototyping" },
+  {
+    src: "/images/about/prototyping.jpg",
+    alt: "An ALARM hardware prototype on a desk",
+    caption: { zh: "原型製作", en: "Prototyping" },
+  },
   {
     src: "/images/about/award-night.jpg",
     alt: "Team accepting the OpenHCI Best Popularity award",
-    caption: "Award Night",
+    caption: { zh: "OpenHCI 頒獎", en: "Award Night" },
   },
   {
     src: "/images/about/hackathon-win.png",
     alt: "Team receiving the Meta Taiwan AR Hackathon technical excellence award",
-    caption: "Hackathon Win",
+    caption: { zh: "黑客松獲獎", en: "Hackathon Win" },
   },
-  { src: "/images/about/team-photo.jpg", alt: "Large group photo at the OpenHCI closing ceremony", caption: "Team Photo" },
+  {
+    src: "/images/about/team-photo.jpg",
+    alt: "Large group photo at the OpenHCI closing ceremony",
+    caption: { zh: "團隊合照", en: "Team Photo" },
+  },
 ];
 
 export const workExperience = [

@@ -2813,16 +2813,16 @@ export const workExperience = [
     color: "#045CC4",
     points: [
       {
-        zh: "進行 3 場外部訪談，釐清工作流程痛點與 AI 導入需求，從 0–1 定義出監控流程。",
+        zh: "進行 3 場外部訪談，釐清工作流程痛點與 AI 導入需求，從 0–1 定義出監控流程",
         en: "Conducted 3 external interviews to clarify workflow pain points and AI-adoption needs, defining the monitoring flow from 0 to 1.",
       },
       {
-        zh: "優化影像設定流程，解決監控部署的擴展性瓶頸，使測試時間降低 80%。",
+        zh: "優化影像設定流程，解決監控部署的擴展性瓶頸，使測試時間降低 80%",
         en: "Optimized the camera setup flow to address the scalability bottleneck in monitoring deployment, cutting testing time by 80%.",
       },
       {
-        zh: "將自然語言 Prompt 轉為模組化 Template，降低輸入學習成本，並將 AI 判讀準確率提升至 90%。",
-        en: "Turned free-form natural-language prompts into a modular Template, lowering the learning curve for input, and raising AI detection accuracy to 90%.",
+        zh: "將自然語言 Prompt 轉為模組化 Template，降低輸入學習成本，並將 AI 判讀準確率提升至 90%",
+        en: "Turned free-form natural-language prompts into a modular Template, lowering the learning curve for input, and raising AI detection accuracy to 90%",
       },
     ],
   },
@@ -2835,16 +2835,16 @@ export const workExperience = [
     color: "#21B30B",
     points: [
       {
-        zh: "針對點數效期難以查詢的問題，透過分析競品的資訊架構與流程，將查詢層級由 4 層降至 2 層，完成介面優化並成功上線。",
-        en: "To address the difficulty of checking points expiration, I analyzed competitors' information architecture and flows, reducing the query depth from 4 levels to 2, completing the interface optimization and shipping it successfully.",
+        zh: "針對點數效期難以查詢的問題，透過分析競品的資訊架構與流程，將查詢層級由 4 層降至 2 層，完成介面優化並成功上線",
+        en: "To address the difficulty of checking points expiration, I analyzed competitors' information architecture and flows, reducing the query depth from 4 levels to 2, completing the interface optimization and shipping it successfully",
       },
       {
-        zh: "運用 Python 分析 22,734 則客服對話，透過關鍵字篩選、分詞與統計，收斂至 5,994 則機酒相關資料，降低 74% 無關資訊並辨識高頻客服問題。",
-        en: "Used Python to analyze 22,734 customer-service conversations, applying keyword filtering, tokenization, and statistical analysis to narrow them down to 5,994 flight-and-hotel-related records, cutting 74% of irrelevant data and identifying high-frequency service issues.",
+        zh: "運用 Python 分析 22,734 則客服對話，透過關鍵字篩選、分詞與統計，收斂至 5,994 則機酒相關資料，降低 74% 無關資訊並辨識高頻客服問題",
+        en: "Used Python to analyze 22,734 customer-service conversations, applying keyword filtering, tokenization, and statistical analysis to narrow them down to 5,994 flight-and-hotel-related records, cutting 74% of irrelevant data and identifying high-frequency service issues",
       },
       {
-        zh: "將分析結果轉化為 2 套客服自動回覆流程，建立知識庫並完成測試，實現客服回覆自動化。",
-        en: "Turned the analysis into 2 automated customer-service reply workflows, building a knowledge base and completing testing to automate customer service replies.",
+        zh: "將分析結果轉化為 2 套客服自動回覆流程，建立知識庫並完成測試，實現客服回覆自動化",
+        en: "Turned the analysis into 2 automated customer-service reply workflows, building a knowledge base and completing testing to automate customer service replies",
       },
     ],
   },
@@ -2857,12 +2857,12 @@ export const workExperience = [
     color: "#8B5CF6",
     points: [
       {
-        zh: "主導 13 位易用性測試與訪談，測試 2 項核心功能，依據任務完成時間與錯誤率分析結果，排定介面優化的優先順序。",
-        en: "Led usability testing and interviews with 13 users, testing 2 core features, and prioritized interface optimizations based on task completion time and error rate analysis.",
+        zh: "主導 13 位易用性測試與訪談，測試 2 項核心功能，依據任務完成時間與錯誤率分析結果，排定介面優化的優先順序",
+        en: "Led usability testing and interviews with 13 users, testing 2 core features, and prioritized interface optimizations based on task completion time and error rate analysis",
       },
       {
-        zh: "成功解決 2 項重要的介面問題，並維護與更新設計系統，確保使用體驗一致。",
-        en: "Successfully resolved 2 major interface issues, and maintained and updated the design system to ensure a consistent user experience.",
+        zh: "成功解決 2 項重要的介面問題，並維護與更新設計系統，確保使用體驗一致",
+        en: "Successfully resolved 2 major interface issues, and maintained and updated the design system to ensure a consistent user experience",
       },
     ],
   },

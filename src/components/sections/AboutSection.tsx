@@ -49,12 +49,12 @@ export function AboutSection() {
                             {entry.dates}
                           </span>
                           <div>
-                            <p className="text-base font-semibold text-ink">{entry.title[lang]}</p>
-                            <p className="text-sm text-muted">{entry.org[lang]}</p>
+                            <p className="text-lg font-semibold text-ink md:text-xl">{entry.title[lang]}</p>
+                            <p className="text-base text-muted">{entry.org[lang]}</p>
                             {entry.details && (
-                              <ul className="mt-2 flex flex-col gap-1">
+                              <ul className="mt-2 flex flex-col gap-2">
                                 {entry.details.map((detail) => (
-                                  <li key={detail.zh} className="flex gap-1.5 text-xs leading-relaxed text-muted-2">
+                                  <li key={detail.zh} className="flex gap-2 text-base leading-relaxed text-muted 2xl:whitespace-nowrap">
                                     <span className="shrink-0" aria-hidden="true">
                                       •
                                     </span>

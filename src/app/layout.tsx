@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { Fragment_Mono, Instrument_Serif } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import { SmoothScrollProvider } from "@/components/ui/SmoothScrollProvider";
 import { LanguageProvider } from "@/lib/i18n/LanguageProvider";
@@ -47,6 +48,7 @@ export default function RootLayout({
         <LanguageProvider>
           <SmoothScrollProvider>{children}</SmoothScrollProvider>
         </LanguageProvider>
+        <Analytics />
       </body>
     </html>
   );

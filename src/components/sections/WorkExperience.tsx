@@ -36,10 +36,19 @@ export function WorkExperience() {
                   <div className="max-w-2xl">
                     <p className="text-lg font-semibold text-white md:text-xl">{job.title[lang]}</p>
                     <p className="text-base text-white/60">{job.company[lang]}</p>
-                    <div className="mt-3 flex flex-col gap-2">
+                    {job.project && (
+                      <p className="mt-3 flex items-start gap-2 text-base text-white/85">
+                        <span className="mt-2.5 h-1 w-1 shrink-0 rounded-full bg-white/50" aria-hidden="true" />
+                        {job.project[lang]}
+                      </p>
+                    )}
+                    <div className={`flex flex-col gap-2 ${job.project ? "mt-2 pl-3.5" : "mt-3"}`}>
                       {job.points.map((point, pi) => (
                         <RevealOnScroll key={point.zh} delay={0.1 + pi * 0.1}>
-                          <p className="text-base leading-relaxed text-white/75">{point[lang]}</p>
+                          <p className="flex items-start gap-2 text-base leading-relaxed text-white/75">
+                            <span className="mt-2.5 h-1 w-1 shrink-0 rounded-full bg-white/25" aria-hidden="true" />
+                            {point[lang]}
+                          </p>
                         </RevealOnScroll>
                       ))}
                     </div>

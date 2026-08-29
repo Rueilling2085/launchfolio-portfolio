@@ -114,7 +114,9 @@ export type DesignIterationItem = {
   tag?: Localized;
   title: Localized;
   painPoint: Localized;
+  painPointSubtitle?: Localized;
   solution: Localized;
+  solutionSubtitle?: Localized;
   beforeImage?: string;
   afterImage?: string;
   workflowBefore?: Localized;
@@ -635,6 +637,7 @@ export type Project = {
   heroAspect?: string;
   description: Localized;
   descriptionLink?: { text: string; url: string };
+  descriptionBullets?: { text: Localized; link?: { text: string; url: string } }[];
   duration: Localized;
   team: Localized[];
   role: Localized[];
@@ -738,16 +741,42 @@ export const projects: Project[] = [
     image: "/images/projects/vision-detect/hero.png",
     deviceMockup: false,
     description: {
-      zh: "一套 AI 智慧監控平台，透過電腦視覺與生成式 AI 技術，補足職安巡檢間的監控盲區，提升工廠安全管理效率。\n針對研華智慧製造場域需求，設計跨產業 AI 影像分析系統，結合 VLM 視覺偵測與 LLM 對話技術，並透過結構化 Prompt 設計降低 AI 使用門檻，打造直覺化、易操作的監控介面。協助職安人員快速建立偵測條件，即時辨識現場安全風險、追蹤事件脈絡，並自動生成符合 ISO 45001 規範的稽核報告，將傳統被動式監控轉化為主動式智慧安全管理。",
+      zh: "一套 AI 智慧監控平台，透過電腦視覺與生成式 AI 技術，補足環安衛巡檢間的監控盲區，提升工廠安全管理效率。\n針對研華智慧製造場域需求，設計跨產業 AI 影像分析系統，結合 VLM 視覺偵測與 LLM 對話技術，並透過結構化 Prompt 設計降低 AI 使用門檻，打造直覺化、易操作的監控介面。協助環安衛人員快速建立偵測條件，即時辨識現場安全風險、追蹤事件脈絡，並自動生成符合 ISO 45001 規範的稽核報告，將傳統被動式監控轉化為主動式智慧安全管理。",
       en: "An AI monitoring platform that uses computer vision and generative AI to close the surveillance gap between manual safety patrols, raising factory safety-management efficiency.\nBuilt for Advantech's smart-manufacturing use case: a cross-industry AI image-analysis system combining VLM visual detection with LLM conversation, using structured prompt design to lower the barrier to using AI and produce an intuitive, easy-to-operate monitoring interface. It helps EHS staff quickly set up detection conditions, spot on-site safety risks in real time, trace incident context, and auto-generate ISO 45001-compliant audit reports, turning reactive monitoring into proactive, intelligent safety management.",
     },
+    descriptionBullets: [
+      {
+        text: {
+          zh: "建立 AI 智慧監控解決方案，結合視覺語言模型（VLM）與大型語言模型（LLM），補足人工巡檢間的安全監控盲區，提升工廠安全管理效率",
+          en: "Built an AI monitoring solution combining a vision-language model (VLM) and a large language model (LLM) to close the safety-monitoring gap between manual patrols, raising factory safety-management efficiency",
+        },
+      },
+      {
+        text: {
+          zh: "傳統工廠仰賴人工巡檢，難以掌握巡檢外的潛在風險，透過訪談環安衛人員，釐清工作流程與 AI 導入需求，從 0–1 定義 AI 監控流程與使用情境",
+          en: "Traditional factories rely on manual patrols, struggling to catch potential risks outside patrol rounds; through interviews with EHS staff, I clarified the workflow and AI-adoption needs, defining the AI monitoring flow and usage scenarios from 0 to 1",
+        },
+      },
+      {
+        text: {
+          zh: "針對監控部署的擴展性瓶頸，將逐台設定流程轉為「一次設定、多場域套用」，使測試時間降低 80%",
+          en: "To address the scalability bottleneck in monitoring deployment, I turned the camera-by-camera setup flow into a \"set once, apply to multiple sites\" model, cutting testing time by 80%",
+        },
+      },
+      {
+        text: {
+          zh: "將自然語言 Prompt 轉為模組化 Template，降低輸入學習成本，並將 AI 判讀準確率提升至 90%，最終打造直覺、易操作的 AI 智慧監控介面",
+          en: "Turned free-form natural-language prompts into a modular Template, lowering the learning curve for input, and raising AI detection accuracy to 90%, resulting in an intuitive, easy-to-use AI monitoring interface",
+        },
+      },
+    ],
     cardTags: ["0→1 Product", "B2B AI SaaS"],
     cardHeadline: {
-      zh: "建立 AI 監控平台操作流程，設計模組化 Prompt 互動機制",
-      en: "Built the AI monitoring platform's operating flow with a modular prompt interaction",
+      zh: "建立監控流程，以 Prompt Template 提升判讀準確度",
+      en: "Built the monitoring flow, using a Prompt Template to improve detection accuracy",
     },
     cardDescription: {
-      zh: "傳統工廠仰賴人工巡檢，難以及時掌握巡檢間的安全風險。透過訪談職安人員，釐清工作流程痛點與需求，設計模組化 Prompt 機制，以固定句型與變數替換降低自然語言輸入變異性，達到一次設定、全部套用，提升 AI 監控部署效率。",
+      zh: "傳統工廠仰賴人工巡檢，難以及時掌握巡檢間的安全風險。透過訪談環安衛人員，釐清工作流程痛點與需求，設計模組化 Prompt 機制，以固定句型與變數替換降低自然語言輸入變異性，達到一次設定、全部套用，提升 AI 監控部署效率。",
       en: "Traditional factories rely on manual patrols and can't catch risks between rounds. Through interviews with EHS staff, I clarified workflow pain points and needs, then designed a modular prompt mechanism that uses fixed sentence patterns with swappable variables to reduce natural-language input variability, so a single setup applies everywhere and AI monitoring deploys faster.",
     },
     color: "#1D4ED8",
@@ -761,9 +790,9 @@ export const projects: Project[] = [
     cardVideoBackdrop: "#DFDFDF",
     duration: { zh: "9 週", en: "9 weeks" },
     team: [
+      { zh: "我 - UI/UX 設計師 ×1", en: "Me - UI/UX Designer ×1" },
       { zh: "專案經理 ×2", en: "Project Manager ×2" },
       { zh: "軟體工程師 ×2", en: "Software Engineer ×2" },
-      { zh: "UI/UX 設計師 ×1 - 我", en: "UI/UX Designer ×1 - Me" },
     ],
     role: [
       { zh: "使用者訪談與分析", en: "User interviews & analysis" },
@@ -777,24 +806,24 @@ export const projects: Project[] = [
         "為研華打造的跨場域 AI 監控系統，結合 VLM 視覺偵測與 LLM 對話技術，補足醫療、零售、製造業在非巡檢時段的監控盲區。系統即時偵測現場隱形風險，並透過 Chatbot 快速釐清事件脈絡，自動生成符合 ISO 標準的稽核報告，實現全時段智慧化管理。",
       highlights: [
         {
-          value: { zh: "-97%", en: "-97%" },
-          label: { zh: "部署週期縮短", en: "Deployment cycle reduced" },
-          caption: { zh: "30 天 → 1 天", en: "30 days → 1 day" },
-        },
-        {
-          value: { zh: "3–5 位 → 1–2 位", en: "3–5 → 1–2" },
-          label: { zh: "工程人力需求", en: "Engineering headcount" },
-          caption: { zh: "工程師 → 非工程人員", en: "Engineers → non-engineers" },
-        },
-        {
-          value: { zh: "1 → N", en: "1 → N" },
-          label: { zh: "場域部署模式", en: "Site deployment model" },
-          caption: { zh: "一次設定 → 多場域套用", en: "Set once → apply everywhere" },
-        },
-        {
-          value: { zh: "2–3 次／天\n→ 24/7", en: "2–3×/day\n→ 24/7" },
+          value: { zh: "3 次／天\n→ 全天", en: "3×/day\n→ All day" },
           label: { zh: "巡檢頻率", en: "Patrol frequency" },
           caption: { zh: "人工巡檢 → 全天候監控", en: "Manual patrols → round-the-clock monitoring" },
+        },
+        {
+          value: { zh: "1 → N 個場域", en: "1 → N sites" },
+          label: { zh: "擴展性", en: "Scalability" },
+          caption: { zh: "一次設定、全部套用", en: "Set once, apply everywhere" },
+        },
+        {
+          value: { zh: "80%", en: "80%" },
+          label: { zh: "效率", en: "Efficiency" },
+          caption: { zh: "測試時間減少", en: "less testing time" },
+        },
+        {
+          value: { zh: "90%", en: "90%" },
+          label: { zh: "準確率", en: "Accuracy" },
+          caption: { zh: "AI 判讀準確率提升", en: "AI detection accuracy improved" },
         },
       ],
     },
@@ -822,7 +851,7 @@ export const projects: Project[] = [
       eyebrow: { zh: "使用者研究", en: "User Research" },
       title: { zh: "找出本次專案可驗證的 PoC 場域", en: "Finding a Testable PoC Setting for This Project" },
       description: {
-        zh: "透過盤點系統整合商與職環安人員的實際需求，依優先度與技術可行性\n建立評估矩陣，收斂出兩個場域，作為本次優先導入的 PoC",
+        zh: "透過盤點系統整合商與環安衛人員的實際需求，依優先度與技術可行性\n建立評估矩陣，收斂出兩個場域，作為本次優先導入的 PoC",
         en: "By mapping the real needs of the systems integrator and EHS staff,\nI built a priority/feasibility evaluation matrix\nand converged on two settings to prioritize as the first PoC.",
       },
     },
@@ -1019,14 +1048,16 @@ export const projects: Project[] = [
       items: [
         {
           tag: { zh: "優化一", en: "Fix 1" },
-          title: { zh: "設計影像設定流程，解決擴展性瓶頸", en: "Designed the Setup Flow to Fix the Scalability Bottleneck" },
+          title: { zh: "針對監控部署的擴展性瓶頸，優化影像設定流程", en: "Addressed the Scalability Bottleneck in Monitoring Deployment by Optimizing the Camera Setup Flow" },
+          painPointSubtitle: { zh: "設備未到齊，無法提前驗證", en: "Devices not all in place — no way to validate early" },
           painPoint: {
-            zh: "每支攝影機都需手動設定，部署時間隨規模線性增加。",
-            en: "Every camera needed manual setup, so deployment time scaled linearly with the number of cameras.",
+            zh: "工廠攝影機分階段安裝，原流程要求逐台設定與驗證 Prompt，已驗證的結果也無法沿用，造成等待與重複操作",
+            en: "Factory cameras are installed in phases, but the original flow required setting up and validating the prompt camera by camera, with no way to reuse an already-validated result — causing waiting and repeated work.",
           },
+          solutionSubtitle: { zh: "先驗證，再一鍵套用", en: "Validate first, then apply with one click" },
           solution: {
-            zh: "在 Test Zone 微調 1 支影像來源，一鍵套用到 10 個 Operational Zone，減少 80% 人工作業。",
-            en: "Tune one video source in a Test Zone, then apply it to 10 Operational Zones with one click, cutting manual work by 80%.",
+            zh: "區分為測試區與運行區，先以 1 支攝影機完成 Prompt 驗證，後續設備到位後即可一鍵套用，無需等待或重複驗證",
+            en: "Split into a Test Zone and an Operational Zone — validate the prompt with just one camera first, then apply it with one click as the rest arrive, with no waiting or re-validating.",
           },
           beforeImage: "/images/projects/vision-detect/ui-before.png",
           afterImage: "/images/projects/vision-detect/ui-after.png",
@@ -1035,14 +1066,14 @@ export const projects: Project[] = [
             {
               icon: "layers",
               label: { zh: "擴展性", en: "Scalability" },
-              valueHighlight: "1-to-N",
-              valueRest: { zh: "部署模式", en: "deployment model" },
+              valueHighlight: "1 → N",
+              valueRest: { zh: "一次設定、全部套用", en: "Set once, apply everywhere" },
             },
             {
               icon: "zap",
               label: { zh: "效率", en: "Efficiency" },
               valueHighlight: "80%",
-              valueRest: { zh: "設定時間減少", en: "less setup time" },
+              valueRest: { zh: "測試時間減少", en: "less testing time" },
             },
           ],
           workflowBefore: {
@@ -1056,7 +1087,7 @@ export const projects: Project[] = [
         },
         {
           tag: { zh: "優化二", en: "Fix 2" },
-          title: { zh: "設計 Prompt Template，提升模型判讀精準度", en: "Designed a Prompt Template to Improve Model Accuracy" },
+          title: { zh: "設計 Prompt Template，提升 AI 判讀準確率至 90%", en: "Designed a Prompt Template to Raise AI Detection Accuracy to 90%" },
           painPoint: {
             zh: "自然語言 Prompt，語意邊界模糊、任務意圖不明確，導致 VLM 輸出結果不穩定，這在工業安全場域中是不可接受的風險。",
             en: "Free-form natural-language prompts had ambiguous boundaries and unclear intent, making the VLM's output unstable, an unacceptable risk in an industrial safety setting.",
@@ -1074,8 +1105,8 @@ export const projects: Project[] = [
       eyebrow: { zh: "競品分析", en: "Competitor Analysis" },
       title: { zh: "分析現有產品如何設定 Prompt 變數", en: "How Existing Products Handle Prompt Variables" },
       description: {
-        zh: "在設計 Prompt 輸入介面時，鑑於工廠職安領域缺乏可直接參考的 UI 案例，我轉而分析間接競品的元件架構與互動邏輯，並評估其在職安情境下的適用性與可行性，作為介面開發的設計依據。",
-        en: "With no directly comparable UI in the factory-EHS space, I analyzed indirect competitors' component architecture and interaction logic, evaluating their fit and feasibility for an EHS context to ground the interface design.",
+        zh: "在設計 Prompt 輸入介面時，鑑於工廠職安領域缺乏可直接參考的 UI 案例\n因此分析間接競品的元件架構與互動邏輯，並評估其在職安情境下的適用性與可行性，作為介面開發的設計依據",
+        en: "In designing the prompt input interface, given the lack of directly comparable UI cases in the factory-EHS space,\nI analyzed indirect competitors' component architecture and interaction logic, evaluating their fit and feasibility for an EHS context to ground the interface design",
       },
       tools: [
         { name: "Microsoft AI Builder", logo: "/images/projects/vision-detect/competitor-analysis/logo-microsoft.png" },
@@ -1275,15 +1306,15 @@ export const projects: Project[] = [
       worked: [
         {
           icon: "users",
-          title: { zh: "3 場訪談，深入使用者痛點與情境需求", en: "3 interviews to surface pain points and context" },
+          title: { zh: "3 場外部訪談，深入使用者痛點與情境需求", en: "3 external interviews to surface pain points and context" },
           body: {
-            zh: "從系統整合商到職安人員，釐清實際工作流程與 AI 導入節點，找出人工巡檢的監控盲區，讓產品需求更貼近工廠現場。",
+            zh: "從系統整合商到環安衛人員，釐清實際工作流程與 AI 導入節點，找出人工巡檢的監控盲區，讓產品需求更貼近工廠現場。",
             en: "From systems integrators to EHS staff, I clarified the real workflow and where AI needed to fit in, surfacing the blind spots in manual patrols and grounding the product in what the factory floor actually needed.",
           },
         },
         {
           icon: "sliders",
-          title: { zh: "模組化 Prompt Template 機制", en: "A modular Prompt Template mechanism" },
+          title: { zh: "設計模組化 Prompt Template 機制", en: "Designed a modular Prompt Template mechanism" },
           body: {
             zh: "透過介面迭代，將原本模糊的自然語言輸入，收斂為固定句型與可替換變數的操作介面，降低 Prompt 輸入差異，提升 VLM 判讀穩定性。",
             en: "Through interface iteration, I converged vague natural-language input into a fixed-sentence, swappable-variable interface, cutting prompt variance and improving the VLM's reading stability.",
@@ -1332,13 +1363,27 @@ export const projects: Project[] = [
       zh: "Sports Note 是台灣跑步領域的媒體與社群平台，整合賽事資訊、跑步紀錄、線上報名與運動內容等服務。針對 Alpha 版本缺乏實際使用者驗證的問題，我執行 13 位跑者的易用性測試與訪談，將研究洞察轉化為實際介面優化產出結果。",
       en: "Sports Note is a Taiwanese running media and community platform bringing together race info, run tracking, online registration, and running content. To address the Alpha version's lack of real user validation, I ran usability tests and interviews with 13 runners, turning research insight into concrete interface optimizations.",
     },
+    descriptionBullets: [
+      {
+        text: {
+          zh: "本產品於 Alpha 階段，針對缺乏真實使用者操作驗證的問題，主導 13 位易用性測試與訪談，測試 2 項核心功能，依據任務完成時間與錯誤率分析結果，排定介面優化的優先順序",
+          en: "During the product's Alpha stage, to address the lack of real user validation, I led usability testing and interviews with 13 users, testing 2 core features, and prioritized interface optimizations based on task completion time and error rate analysis",
+        },
+      },
+      {
+        text: {
+          zh: "成功解決 2 項重要的介面問題，並維護與更新設計系統，確保使用體驗一致",
+          en: "Successfully resolved 2 major interface issues, and maintained and updated the design system to ensure a consistent user experience",
+        },
+      },
+    ],
     cardTags: ["UX Research", "Design System"],
     cardHeadline: {
       zh: "以使用者研究驅動跑步 App 的產品優化",
       en: "Drove a running app's product optimization with user research",
     },
     cardDescription: {
-      zh: "本專案於產品 Alpha 階段，針對缺乏真實使用者操作驗證的問題，透過 13 位易用性測試與跑者訪談，辨識操作流程中的痛點，並結合操作時間、錯誤頻率等數據進行分析，將研究洞察轉化為具體的介面優化方案。",
+      zh: "本產品於 Alpha 階段，針對缺乏真實使用者操作驗證的問題，透過 13 位易用性測試與跑者訪談，辨識操作流程中的痛點，並結合操作時間、錯誤頻率等數據進行分析，將研究洞察轉化為具體的介面優化方案。",
       en: "During the product's Alpha stage, to address the lack of real user validation, I ran usability testing and interviews with 13 runners to identify pain points in the flow, analyzing task time and error rates to turn research insight into concrete interface optimizations.",
     },
     color: "#045CC4",
@@ -1351,8 +1396,8 @@ export const projects: Project[] = [
     cardVideoFit: "cover",
     duration: { zh: "2022 年 7 月（2 個月）", en: "July 2022 (2 month)" },
     team: [
+      { zh: "我 - UI/UX 設計師 ×2", en: "Me - UI/UX Designer ×2" },
       { zh: "產品經理 ×1", en: "Product Manager ×1" },
-      { zh: "UI/UX 設計師 ×2 - 我", en: "UI/UX Designer ×2 - Me" },
       { zh: "軟體工程師 ×1", en: "Software Engineer ×1" },
     ],
     role: [
@@ -1369,16 +1414,19 @@ export const projects: Project[] = [
         "Sports Note 是台灣最大的跑步社群平台，提供馬拉松賽事資訊、跑步紀錄、線上報名與運動內容等服務。本次專案正值 App Alpha 階段，團隊希望透過使用者研究重新檢視產品定位，了解不同跑者的需求，並找出最優先改善的體驗問題。在這個專案中，我主要負責規劃研究流程、執行易用性測試、訪談與問卷調查，將研究結果轉化為產品策略與介面優化方向，以建立後續產品迭代的重要依據。",
       highlights: [
         {
-          value: { zh: "13 位跑者", en: "13 runners" },
-          label: { zh: "易用性測試", en: "Usability testing" },
+          value: { zh: "13 位", en: "13" },
+          label: { zh: "易用性測試+訪談", en: "Usability testing + interviews" },
+          caption: { zh: "跑者參與測試", en: "Runners tested" },
         },
         {
-          value: { zh: "4 項問題", en: "4 issues" },
-          label: { zh: "從 2 項功能收斂出高優先度問題", en: "Narrowed from 2 features to top issues" },
+          value: { zh: "4 項", en: "4" },
+          label: { zh: "問題收斂", en: "Issue prioritization" },
+          caption: { zh: "從 2 項功能收斂出高優先度問題", en: "Narrowed from 2 features to top issues" },
         },
         {
-          value: { zh: "2 項介面優化", en: "2 interface optimizations" },
-          label: { zh: "已落地驗證", en: "Shipped & validated" },
+          value: { zh: "2 項", en: "2" },
+          label: { zh: "介面優化", en: "Interface optimizations" },
+          caption: { zh: "已落地驗證", en: "Shipped & validated" },
         },
       ],
     },
@@ -2014,9 +2062,36 @@ export const projects: Project[] = [
       en: "Built an AI-native RAG conversation system on the National Palace Museum's special-exhibition knowledge base. To address the limited character count of exhibition labels and general-purpose LLMs' tendency to hallucinate in specialized domains, I connected authoritative databases for knowledge retrieval so every answer stays traceable, while generating context images to fill in missing artifacts and restore their historical context. A 30-person controlled study confirmed significant gains in users' knowledge-building and engagement.\nThe research was presented orally at IEEE ICASI 2026.",
     },
     descriptionLink: { text: "IEEE ICASI 2026", url: "https://2026.icasi-conf.net/" },
+    descriptionBullets: [
+      {
+        text: {
+          zh: "建構以國立故宮博物院特展知識庫為基礎，打造 AI-native RAG 對話系統，串聯權威資料庫進行知識檢索，讓 AI 回答具備可追溯的資料依據",
+          en: "Built an AI-native RAG conversation system on the National Palace Museum's special-exhibition knowledge base, connecting authoritative databases for knowledge retrieval so every AI answer stays traceable",
+        },
+      },
+      {
+        text: {
+          zh: "解決展覽資訊標籤字數有限與通用型 LLM 在特定領域容易產生幻覺的問題，並補足缺佚文物脈絡，透過 AI 生成情境圖像還原歷史情境",
+          en: "Addressed the limited character count of exhibition labels and general-purpose LLMs' tendency to hallucinate in specialized domains, while filling in missing artifacts by using AI to generate context images that restore historical context",
+        },
+      },
+      {
+        text: {
+          zh: "透過 30 人對照實驗驗證系統成效，結果顯示能有效提升使用者的知識建構與參與度",
+          en: "Validated the system's impact through a 30-person controlled experiment, which showed a significant improvement in users' knowledge-building and engagement",
+        },
+      },
+      {
+        text: {
+          zh: "研究成果已獲 IEEE ICASI 2026 口頭發表。",
+          en: "The research was accepted for oral presentation at IEEE ICASI 2026.",
+        },
+        link: { text: "IEEE ICASI 2026", url: "https://2026.icasi-conf.net/" },
+      },
+    ],
     duration: { zh: "2025 – 2026（碩士論文研究）", en: "2025 – 2026 (Master's Thesis Research)" },
     team: [
-      { zh: "研究者、設計師 & 開發者 ×1 - 我", en: "Researcher, Designer & Developer ×1 - Me" },
+      { zh: "我 - 研究者、設計師 & 開發者 ×1", en: "Me - Researcher, Designer & Developer ×1" },
       { zh: "指導教授 ×1", en: "Advisor ×1" },
     ],
     role: [
@@ -2122,8 +2197,8 @@ export const projects: Project[] = [
     },
     duration: { zh: "2025 年 9 月（5 個月）", en: "September 2025 (5 months)" },
     team: [
+      { zh: "我 - PM、UI/UX 設計師 ×1", en: "Me - PM, UI/UX Designer ×1" },
       { zh: "工業設計師 ×2", en: "Industrial Designer ×2" },
-      { zh: "PM、UI/UX 設計師 ×1 - 我", en: "PM, UI/UX Designer ×1 - Me" },
     ],
     role: [
       { zh: "使用者研究", en: "User Research" },
@@ -2636,9 +2711,20 @@ export const aboutContent = {
   ],
   education: [
     {
-      dates: "SEP 2022 – JUL 2026",
-      title: { zh: "工業設計系創新設計所", en: "M.Des in Innovation and Design" },
-      org: { zh: "國立臺北科技大學 (NTUT)，臺北 · GPA 4.0/4.3", en: "National Taipei University of Technology (NTUT), Taipei · GPA 4.0/4.3" },
+      dates: "SEP 2022 – AUG 2026",
+      title: { zh: "工業設計系創新設計研究所", en: "M.Des in Innovation and Design" },
+      org: { zh: "國立臺北科技大學 (NTUT)", en: "National Taipei University of Technology (NTUT)" },
+      details: [
+        { zh: "GPA：4.0 / 4.3", en: "GPA: 4.0 / 4.3" },
+        {
+          zh: "碩士論文：建置 RAG 對話式 AI 博物館導覽系統，並獲 IEEE ICASI 2026 Oral 發表",
+          en: "Thesis: Built a RAG-based conversational AI museum guide system, accepted for oral presentation at IEEE ICASI 2026",
+        },
+        {
+          zh: "相關課程：設計中的提示工程、文字與影像生成式 AI 實務、電腦視覺與深度學習實務",
+          en: "Relevant Coursework: Prompt Engineering in Design, Practical Text & Image Generative AI, Computer Vision & Deep Learning",
+        },
+      ],
     },
   ],
   photos: ["/images/hero/headshot-formal.jpg"],
@@ -2722,20 +2808,21 @@ export const workExperience = [
     dates: "JUN 2025 – AUG 2025",
     title: { zh: "UI/UX 實習生", en: "UI/UX Intern" },
     company: { zh: "研華股份有限公司", en: "Advantech Co., Ltd." },
+    project: { zh: "VisionDetect AI｜B2B SaaS 智慧監控平台", en: "VisionDetect AI｜B2B SaaS Intelligent Monitoring Platform" },
     initial: "A",
     color: "#045CC4",
     points: [
       {
-        zh: "主導 3 場訪談（系統整合商與兩家 EHS 人員），釐清使用情境痛點與需求，協助 PM 定義專案範圍與使用者需求。",
-        en: "Led 3 interviews (a systems integrator and two EHS teams) to clarify usage pain points and requirements, helping the PM define project scope and user needs.",
+        zh: "進行 3 場外部訪談，釐清工作流程痛點與 AI 導入需求，從 0–1 定義出監控流程。",
+        en: "Conducted 3 external interviews to clarify workflow pain points and AI-adoption needs, defining the monitoring flow from 0 to 1.",
       },
       {
-        zh: "主導跨部門工作坊（PM／RD／UIUX），運用 Storyboard 將抽象需求轉化為可驗證的使用情境，促進團隊需求共識，並推動 Prototype 製作與概念落地。",
-        en: "Led cross-functional workshops (PM/RD/UIUX), using storyboards to turn abstract requirements into testable usage scenarios, building team alignment and driving prototyping through to a working concept.",
+        zh: "優化影像設定流程，解決監控部署的擴展性瓶頸，使測試時間降低 80%。",
+        en: "Optimized the camera setup flow to address the scalability bottleneck in monitoring deployment, cutting testing time by 80%.",
       },
       {
-        zh: "設計直覺的 VLM（視覺語言模型）提示詞輸入方式，改善自然語言輸入造成的模型不穩定與輸出品質問題。",
-        en: "Designed an intuitive prompt-input pattern for a VLM (vision-language model), fixing the instability and inconsistent output quality caused by free-form natural-language input.",
+        zh: "將自然語言 Prompt 轉為模組化 Template，降低輸入學習成本，並將 AI 判讀準確率提升至 90%。",
+        en: "Turned free-form natural-language prompts into a modular Template, lowering the learning curve for input, and raising AI detection accuracy to 90%.",
       },
     ],
   },
@@ -2743,16 +2830,21 @@ export const workExperience = [
     dates: "JUN 2024 – DEC 2024",
     title: { zh: "UI/UX 實習生", en: "UI/UX Intern" },
     company: { zh: "易遊網旅行社股份有限公司", en: "EZTRAVEL Co., Ltd." },
+    project: { zh: "ezTravel App｜旅遊電商 App", en: "ezTravel App｜Travel E-commerce App" },
     initial: "E",
     color: "#21B30B",
     points: [
       {
-        zh: "分析競品電商的會員點數系統資訊架構、營運模式與流程，找出高效益的設計模式並優化介面，協助產品成功上線。",
-        en: "Analyzed competitors' e-commerce loyalty-points systems, information architecture, operating model, and flow, to identify high-impact design patterns, optimized the interface, and helped ship the product successfully.",
+        zh: "針對點數效期難以查詢的問題，透過分析競品的資訊架構與流程，將查詢層級由 4 層降至 2 層，完成介面優化並成功上線。",
+        en: "To address the difficulty of checking points expiration, I analyzed competitors' information architecture and flows, reducing the query depth from 4 levels to 2, completing the interface optimization and shipping it successfully.",
       },
       {
-        zh: "使用 Python 清洗與篩選客服資料，資料量減少 74%、處理速度提升 3.8 倍，並設計自動回覆流程提升營運效率與準確度。",
-        en: "Used Python to clean and filter customer-service data, cutting data volume by 74% and speeding up processing 3.8x, and designed an auto-reply flow that improved operational efficiency and accuracy.",
+        zh: "運用 Python 分析 22,734 則客服對話，透過關鍵字篩選、分詞與統計，收斂至 5,994 則機酒相關資料，降低 74% 無關資訊並辨識高頻客服問題。",
+        en: "Used Python to analyze 22,734 customer-service conversations, applying keyword filtering, tokenization, and statistical analysis to narrow them down to 5,994 flight-and-hotel-related records, cutting 74% of irrelevant data and identifying high-frequency service issues.",
+      },
+      {
+        zh: "將分析結果轉化為 2 套客服自動回覆流程，建立知識庫並完成測試，實現客服回覆自動化。",
+        en: "Turned the analysis into 2 automated customer-service reply workflows, building a knowledge base and completing testing to automate customer service replies.",
       },
     ],
   },
@@ -2760,16 +2852,17 @@ export const workExperience = [
     dates: "JUL 2022 – AUG 2022",
     title: { zh: "軟體開發實習生", en: "Software Development Intern" },
     company: { zh: "永悅健康股份有限公司", en: "H2U Corporation" },
+    project: { zh: "SportsNote App｜跑步社群 App", en: "SportsNote App｜Running Community App" },
     initial: "H",
     color: "#8B5CF6",
     points: [
       {
-        zh: "主導 13 場半結構式訪談與易用性測試，評估賽事列表與跑步功能，依任務完成時間與錯誤率排定介面優化優先序。",
-        en: "Led 13 semi-structured interviews and usability tests evaluating the race-list and running features, prioritizing interface fixes by task completion time and error rate.",
+        zh: "主導 13 位易用性測試與訪談，測試 2 項核心功能，依據任務完成時間與錯誤率分析結果，排定介面優化的優先順序。",
+        en: "Led usability testing and interviews with 13 users, testing 2 core features, and prioritized interface optimizations based on task completion time and error rate analysis.",
       },
       {
-        zh: "蒐集 118 份問卷，分析跑者運動行為與習慣，將 10 項功能需求收斂為 4 項核心功能，重新定義產品差異化方向。",
-        en: "Collected 118 survey responses analyzing runners' behavior and habits, narrowing 10 candidate features down to 4 core ones and redefining the product's point of differentiation.",
+        zh: "成功解決 2 項重要的介面問題，並維護與更新設計系統，確保使用體驗一致。",
+        en: "Successfully resolved 2 major interface issues, and maintained and updated the design system to ensure a consistent user experience.",
       },
     ],
   },

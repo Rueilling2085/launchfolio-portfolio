@@ -10,6 +10,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
+import { ImageLightbox } from "@/components/ui/ImageLightbox";
 import type {
   DesignIteration as DesignIterationData,
   DesignIterationImpact,
@@ -25,18 +26,18 @@ const WORKFLOW_COPY = {
   heading: { zh: "影像設定流程優化", en: "Camera Setup Flow, Optimized" },
   beforeLabel: { zh: "3 支攝影機，3 次重複設定", en: "3 cameras, 3 repeated setups" },
   afterLabel: { zh: "1 個測試區，套用到 N 個場域", en: "1 Test Zone, applied to N settings" },
-  cam1Title: { zh: "攝影機 1．測試與設定", en: "Camera 1 · Test & Setup" },
+  cam1Title: { zh: "影像來源 1．測試與設定", en: "Source 1 · Test & Setup" },
   cam1Desc: { zh: "從零撰寫並測試偵測 Prompt。", en: "Write and test the detection prompt from scratch." },
-  cam2Title: { zh: "攝影機 2．測試與設定", en: "Camera 2 · Test & Setup" },
+  cam2Title: { zh: "影像來源 2．測試與設定", en: "Source 2 · Test & Setup" },
   cam2Desc: { zh: "同樣的 Prompt，重新輸入並再次測試。", en: "The same prompt, re-entered and tested again." },
-  cam3Title: { zh: "攝影機 3．測試與設定", en: "Camera 3 · Test & Setup" },
+  cam3Title: { zh: "影像來源 3．測試與設定", en: "Source 3 · Test & Setup" },
   cam3Desc: {
-    zh: "……再重複一次，時間隨攝影機數量線性增加。",
-    en: "…and repeat again, as time scales linearly with camera count.",
+    zh: "再重複一次，過程中沒有先驗證的機制，在還沒確認結果之前，就已經分別套用到每支攝影機。",
+    en: "…and repeat again — with no way to validate first, it gets applied to each camera before the result is even confirmed.",
   },
   zoneTitle: { zh: "影像來源 1．測試區", en: "Source 1 · Test Zone" },
   zoneDesc: { zh: "在這裡微調一次偵測 Prompt 即可。", en: "Tune the detection prompt here, just once." },
-  applyTitle: { zh: "套用到營運區", en: "Applied to Operational Zone" },
+  applyTitle: { zh: "一鍵套用到運行區", en: "Applied to Operational Zone" },
   applyDesc: {
     zh: "一鍵將同一範本套用到其他所有攝影機。",
     en: "One click applies the same template to every other camera.",
@@ -129,16 +130,22 @@ function AnnotatedBeforeAfter({
   beforeImage,
   afterImage,
   painPoint,
+  painPointSubtitle,
   solution,
+  solutionSubtitle,
   impact,
 }: {
   title: string;
   beforeImage: string;
   afterImage: string;
   painPoint?: string;
+  painPointSubtitle?: string;
   solution?: string;
+  solutionSubtitle?: string;
   impact?: DesignIterationImpact[];
 }) {
+  const [zoomed, setZoomed] = useState<string | null>(null);
+
   return (
     <div className="relative left-1/2 mt-6 w-screen -translate-x-1/2 px-5 md:px-14">
       <div className="flex justify-center overflow-x-auto">
@@ -147,28 +154,48 @@ function AnnotatedBeforeAfter({
             <span className="inline-flex items-center rounded-full bg-red-50 px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-red-600">
               Before
             </span>
-            {painPoint && (
-              <p className="mt-2 mb-3 text-xs leading-relaxed text-muted">{painPoint}</p>
+            {painPointSubtitle && (
+              <p className="mt-2 text-sm font-semibold text-ink md:text-base">{painPointSubtitle}</p>
             )}
-            <img
-              src={beforeImage}
-              alt={`${title}, Before`}
-              className="w-full rounded-xl shadow-[0_20px_40px_-16px_rgba(0,0,0,0.35)]"
-            />
+            {painPoint && (
+              <p className="mt-1 mb-3 whitespace-pre-line text-xs leading-relaxed text-muted">{painPoint}</p>
+            )}
+            <button
+              type="button"
+              onClick={() => setZoomed(beforeImage)}
+              aria-label="Enlarge image"
+              className="block w-full cursor-zoom-in"
+            >
+              <img
+                src={beforeImage}
+                alt={`${title}, Before`}
+                className="w-full rounded-xl shadow-[0_20px_40px_-16px_rgba(0,0,0,0.35)]"
+              />
+            </button>
           </div>
 
           <div className="w-[280px] shrink-0 pt-10 sm:w-[340px] sm:pt-16">
             <span className="inline-flex items-center rounded-full bg-[#D8EEFD] px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-[#0B7DC9]">
               After
             </span>
-            {solution && (
-              <p className="mt-2 mb-3 text-xs leading-relaxed text-muted">{solution}</p>
+            {solutionSubtitle && (
+              <p className="mt-2 text-sm font-semibold text-ink md:text-base">{solutionSubtitle}</p>
             )}
-            <img
-              src={afterImage}
-              alt={`${title}, After`}
-              className="w-full rounded-xl shadow-[0_20px_40px_-16px_rgba(0,0,0,0.35)]"
-            />
+            {solution && (
+              <p className="mt-1 mb-3 whitespace-pre-line text-xs leading-relaxed text-muted">{solution}</p>
+            )}
+            <button
+              type="button"
+              onClick={() => setZoomed(afterImage)}
+              aria-label="Enlarge image"
+              className="block w-full cursor-zoom-in"
+            >
+              <img
+                src={afterImage}
+                alt={`${title}, After`}
+                className="w-full rounded-xl shadow-[0_20px_40px_-16px_rgba(0,0,0,0.35)]"
+              />
+            </button>
           </div>
 
           {impact && impact.length > 0 && (
@@ -186,6 +213,8 @@ function AnnotatedBeforeAfter({
           )}
         </div>
       </div>
+
+      <ImageLightbox src={zoomed} alt={title} onClose={() => setZoomed(null)} />
     </div>
   );
 }
@@ -230,6 +259,7 @@ function StepCard({
   imageAlt,
   hero,
   width,
+  onZoom,
 }: {
   step: string;
   title: string;
@@ -238,6 +268,7 @@ function StepCard({
   imageAlt: string;
   hero?: boolean;
   width?: number;
+  onZoom?: (src: string) => void;
 }) {
   return (
     <div
@@ -249,11 +280,18 @@ function StepCard({
       style={{ width: width ?? 375 }}
     >
       <div className="relative">
-        <img
-          src={image}
-          alt={imageAlt}
-          className={`aspect-[900/600] w-full object-cover ${hero ? "" : "border-b border-line"}`}
-        />
+        <button
+          type="button"
+          onClick={() => onZoom?.(image)}
+          aria-label="Enlarge image"
+          className={`block w-full ${onZoom ? "cursor-zoom-in" : ""}`}
+        >
+          <img
+            src={image}
+            alt={imageAlt}
+            className={`aspect-[900/600] w-full object-cover ${hero ? "" : "border-b border-line"}`}
+          />
+        </button>
         <span
           className={`absolute left-2.5 top-2.5 flex h-6 w-6 items-center justify-center rounded-md text-[11px] font-bold text-white ${
             hero ? "bg-white/20 backdrop-blur-sm" : "bg-black/55 backdrop-blur-sm"
@@ -341,6 +379,7 @@ function ImpactCard({
 function WorkflowOptimization() {
   const base = "/images/projects/vision-detect";
   const { lang } = useLanguage();
+  const [zoomed, setZoomed] = useState<string | null>(null);
 
   return (
     <>
@@ -362,6 +401,7 @@ function WorkflowOptimization() {
                   desc={WORKFLOW_COPY.cam1Desc[lang]}
                   image={`${base}/flow1-cam1-v2.jpg`}
                   imageAlt="Camera 1 setup screen"
+                  onZoom={setZoomed}
                 />
                 <LiquidConnector />
                 <StepCard
@@ -370,6 +410,7 @@ function WorkflowOptimization() {
                   desc={WORKFLOW_COPY.cam2Desc[lang]}
                   image={`${base}/flow1-cam2-v2.jpg`}
                   imageAlt="Camera 2 setup screen"
+                  onZoom={setZoomed}
                 />
                 <LiquidConnector />
                 <StepCard
@@ -378,6 +419,7 @@ function WorkflowOptimization() {
                   desc={WORKFLOW_COPY.cam3Desc[lang]}
                   image={`${base}/flow1-cam3-v2.jpg`}
                   imageAlt="Camera 3 setup screen"
+                  onZoom={setZoomed}
                 />
               </WorkflowRow>
 
@@ -392,6 +434,7 @@ function WorkflowOptimization() {
                   image={`${base}/flow2-testzone-v2.jpg`}
                   imageAlt="Test Zone screen"
                   width={405}
+                  onZoom={setZoomed}
                 />
                 <LiquidConnector />
                 <StepCard
@@ -401,12 +444,15 @@ function WorkflowOptimization() {
                   image={`${base}/flow2-operational-v2.jpg`}
                   imageAlt="Operational Zone screen with 6 auto-applied cameras"
                   width={510}
+                  onZoom={setZoomed}
                 />
               </WorkflowRow>
             </div>
           </div>
         </div>
       </div>
+
+      <ImageLightbox src={zoomed} onClose={() => setZoomed(null)} />
     </>
   );
 }
@@ -544,7 +590,7 @@ export function DesignIteration({ data }: { data: DesignIterationData }) {
           {data.items.map((item, i) => (
             <RevealOnScroll key={item.title.zh} delay={i * 0.08}>
               <div id={`opt-${i + 1}`} className="mb-2 scroll-mt-24">
-                <div className="mx-auto flex max-w-2xl flex-wrap items-center justify-center gap-x-2.5 gap-y-2 text-center">
+                <div className="mx-auto flex max-w-3xl flex-wrap items-center justify-center gap-x-2.5 gap-y-2 text-center">
                   {item.tag && (
                     <span className="inline-flex shrink-0 items-center rounded-full bg-ink-soft/10 px-2.5 py-1 text-[10px] font-semibold text-ink-soft">
                       {item.tag[lang]}
@@ -590,7 +636,9 @@ export function DesignIteration({ data }: { data: DesignIterationData }) {
                     beforeImage={item.beforeImage}
                     afterImage={item.afterImage}
                     painPoint={item.painPoint[lang]}
+                    painPointSubtitle={item.painPointSubtitle?.[lang]}
                     solution={item.solution[lang]}
+                    solutionSubtitle={item.solutionSubtitle?.[lang]}
                     impact={item.impact}
                   />
                 ) : (

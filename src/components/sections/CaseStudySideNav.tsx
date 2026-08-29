@@ -29,6 +29,7 @@ export function CaseStudySideNav({
 
   const [activeId, setActiveId] = useState(sections[0]?.id);
   const [visible, setVisible] = useState(false);
+  const [footerInView, setFooterInView] = useState(false);
   const [indicator, setIndicator] = useState({ top: 0, height: 0 });
   const itemRefs = useRef<Record<string, HTMLAnchorElement | null>>({});
   const listRef = useRef<HTMLDivElement>(null);
@@ -81,6 +82,21 @@ export function CaseStudySideNav({
     return () => observer.disconnect();
   }, [sections]);
 
+  // hide the nav once the footer scrolls into view — there's nothing left on
+  // the page for it to navigate to at that point
+  useEffect(() => {
+    const footerEl = document.getElementById("site-footer");
+    if (!footerEl) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setFooterInView(entry.isIntersecting),
+      { threshold: 0 }
+    );
+    observer.observe(footerEl);
+
+    return () => observer.disconnect();
+  }, []);
+
   const expandedId = sections.find(
     (s) => s.id === activeId || s.children?.some((c) => c.id === activeId)
   )?.id;
@@ -115,7 +131,7 @@ export function CaseStudySideNav({
   if (sections.length < 2) return null;
 
   const itemClass = (isActive: boolean, isChild: boolean) => {
-    const size = isChild ? "text-[11px]" : "text-xs";
+    const size = isChild ? "text-xs" : "text-sm";
     if (isActive) {
       return `${size} font-semibold ${dark ? "text-white" : "text-[#006AB7]"}`;
     }
@@ -129,7 +145,7 @@ export function CaseStudySideNav({
     <nav
       aria-label="Case study sections"
       className={`fixed top-1/2 z-30 hidden -translate-y-1/2 items-stretch gap-3 text-left transition-opacity duration-300 2xl:flex ${
-        visible ? "opacity-100" : "pointer-events-none opacity-0"
+        visible && !footerInView ? "opacity-100" : "pointer-events-none opacity-0"
       }`}
       style={{ right: "calc(50% + 580px)" }}
     >

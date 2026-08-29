@@ -27,21 +27,21 @@ const COPY = {
     en: "the role that knows factory safety compliance best:",
   },
   decisionEmphasis: {
-    zh: "職環安人員",
+    zh: "環安衛人員",
     en: "EHS staff",
   },
   heading: {
-    zh: "分析職環安人員工作流程，找出產品導入節點",
+    zh: "分析環安衛人員工作流程，找出產品導入節點",
     en: "Mapping EHS Workflows\nto Find Where the Product Fits In",
   },
   imageAlt: {
-    zh: "職環安人員於倉儲現場巡檢",
+    zh: "環安衛人員於倉儲現場巡檢",
     en: "EHS staff conducting a patrol at a warehouse site",
   },
 } as const;
 
 const META = [
-  { label: "Persona", value: { zh: "職環安人員（EHS）", en: "EHS staff" } },
+  { label: "Persona", value: { zh: "環安衛人員（EHS）", en: "EHS staff" } },
   { label: "Services", value: { zh: "精密機械加工廠與化學濾網廠", en: "Precision machining plants & chemical filter factories" } },
   { label: "Goal", value: { zh: "工區巡查與安全監督", en: "Site patrols & safety oversight" } },
 ] as const;

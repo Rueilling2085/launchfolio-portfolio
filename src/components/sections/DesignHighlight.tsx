@@ -37,7 +37,7 @@ function BranchCard({
       <span className="inline-flex items-center rounded-full bg-ink-soft/10 px-2.5 py-1 text-[10px] font-semibold text-ink-soft">
         {label}
       </span>
-      <p className="mt-3 pr-6 text-sm text-ink md:text-base">{title}</p>
+      <p className="mt-3 pr-6 text-sm font-semibold text-ink md:text-base">{title}</p>
       <p className="mt-1.5 text-xs leading-relaxed text-muted">{description}</p>
     </div>
   );
@@ -60,7 +60,7 @@ export function DesignHighlight({ data }: { data: DesignHighlightData }) {
             <span className="inline-flex items-center gap-1 rounded-full bg-[#006AB7] px-2.5 py-1 text-[10px] font-semibold text-white">
               {data.stepLabel[lang]}
             </span>
-            <p className="mt-3 text-sm text-ink">{data.stepTitle[lang]}</p>
+            <p className="mt-3 text-sm font-semibold text-ink">{data.stepTitle[lang]}</p>
             <p className="mt-1.5 text-xs leading-relaxed text-muted">{data.stepDescription[lang]}</p>
           </div>
 

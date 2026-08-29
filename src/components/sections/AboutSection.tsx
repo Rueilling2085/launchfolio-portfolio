@@ -51,6 +51,18 @@ export function AboutSection() {
                           <div>
                             <p className="text-base font-semibold text-ink">{entry.title[lang]}</p>
                             <p className="text-sm text-muted">{entry.org[lang]}</p>
+                            {entry.details && (
+                              <ul className="mt-2 flex flex-col gap-1">
+                                {entry.details.map((detail) => (
+                                  <li key={detail.zh} className="flex gap-1.5 text-xs leading-relaxed text-muted-2">
+                                    <span className="shrink-0" aria-hidden="true">
+                                      •
+                                    </span>
+                                    {detail[lang]}
+                                  </li>
+                                ))}
+                              </ul>
+                            )}
                           </div>
                         </div>
                       </RevealOnScroll>

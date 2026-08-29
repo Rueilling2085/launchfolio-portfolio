@@ -8,8 +8,8 @@ import { HeroTagline } from "@/components/sections/HeroTagline";
 import { Localized } from "@/lib/i18n/Localized";
 
 const SUBTITLE = {
-  zh: "把複雜的問題釐清、理解，並將它們轉化為有意義的體驗。",
-  en: "Making sense of complex problems and turning them into meaningful experiences.",
+  zh: "擅長把複雜的問題釐清、理解，並將它們轉化為有意義的體驗。",
+  en: "Skilled at making sense of complex problems and turning them into meaningful experiences.",
 } as const;
 
 export function Hero() {

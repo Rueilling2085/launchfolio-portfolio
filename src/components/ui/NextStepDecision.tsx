@@ -16,7 +16,7 @@ export function NextStepDecision({ children }: { children: ReactNode }) {
         <span className="mx-auto mb-2 mt-5 flex h-11 w-11 items-center justify-center rounded-2xl bg-[#D8EEFD] text-[#0B7DC9]">
           <Rocket size={20} />
         </span>
-        <p className="text-[11px] font-semibold text-ink-soft">
+        <p className="text-sm font-semibold text-ink-soft">
           <Localized value={{ zh: "下一步決策", en: "Next Step" }} />
         </p>
         <p className="mt-2.5 text-sm leading-relaxed text-muted md:text-base">{children}</p>

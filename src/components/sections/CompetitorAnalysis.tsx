@@ -71,7 +71,7 @@ export function CompetitorAnalysis({ data }: { data: CompetitorAnalysisData }) {
         <h3 className="mt-5 max-w-xl text-2xl font-semibold tracking-tight text-ink md:text-3xl">
           {data.title[lang]}
         </h3>
-        <p className="mx-auto mt-4 max-w-xl text-sm text-muted md:text-base">
+        <p className="mx-auto mt-4 max-w-xl whitespace-pre-line text-sm text-muted md:text-base">
           {data.description[lang]}
         </p>
       </RevealOnScroll>

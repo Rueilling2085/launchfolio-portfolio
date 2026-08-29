@@ -27,7 +27,7 @@ export function Footer() {
   }, []);
 
   return (
-    <footer className="mt-8 bg-ink text-white">
+    <footer id="site-footer" className="mt-8 bg-ink text-white">
       <TornDivider color="var(--ink)" backdropColor="var(--paper)" />
 
       <SectionContainer className="py-20 md:py-28">

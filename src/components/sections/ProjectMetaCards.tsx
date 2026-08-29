@@ -13,18 +13,18 @@ const COPY = {
   awards: { zh: "得獎紀錄", en: "Awards" },
 } as const;
 
-const ME_SUFFIX = { zh: " - 我", en: " - Me" } as const;
+const ME_PREFIX = { zh: "我 - ", en: "Me - " } as const;
 
 function TeamMember({ member, dark, lang }: { member: Localized; dark?: boolean; lang: "zh" | "en" }) {
   const text = member[lang];
-  const suffix = ME_SUFFIX[lang];
-  if (text.endsWith(suffix)) {
+  const prefix = ME_PREFIX[lang];
+  if (text.startsWith(prefix)) {
     return (
       <span className="block">
-        {text.slice(0, -suffix.length)}
         <strong className={dark ? "font-semibold text-white/70" : "font-semibold text-ink-soft"}>
-          {suffix}
+          {prefix}
         </strong>
+        {text.slice(prefix.length)}
       </span>
     );
   }

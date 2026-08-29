@@ -38,6 +38,7 @@ import { NextStepDecision } from "@/components/ui/NextStepDecision";
 import { LocalizedWithLink } from "@/components/ui/LocalizedWithLink";
 import { projects } from "@/lib/data";
 import { Localized } from "@/lib/i18n/Localized";
+import { LocalizedBold } from "@/lib/i18n/LocalizedBold";
 
 export function generateStaticParams() {
   return projects.map((project) => ({ slug: project.slug }));
@@ -210,19 +211,42 @@ export default async function ProjectCaseStudyPage({
             )}
 
             <div className="w-full">
-              {!project.presentationEmbedUrl && <ProjectMetaCards project={project} dark={dark} />}
               {project.overview?.highlights && (
                 <ProjectHighlights items={project.overview.highlights} color={project.color ?? "#1D4ED8"} dark={dark} />
               )}
+              {!project.presentationEmbedUrl && <ProjectMetaCards project={project} dark={dark} />}
             </div>
 
-            <p
-              className={`mt-8 w-full whitespace-pre-line text-sm leading-relaxed md:text-base ${
-                dark ? "text-white/60" : "text-muted"
-              }`}
-            >
-              <LocalizedWithLink value={project.description} link={project.descriptionLink} />
-            </p>
+            {project.descriptionBullets ? (
+              <ul
+                className={`mt-8 flex w-full flex-col gap-2 text-sm leading-relaxed md:text-base ${
+                  dark ? "text-white/60" : "text-muted"
+                }`}
+              >
+                {project.descriptionBullets.map((bullet) => (
+                  <li key={bullet.text.zh} className="flex gap-2 tracking-tight">
+                    <span className="shrink-0" aria-hidden="true">
+                      •
+                    </span>
+                    <span>
+                      {bullet.link ? (
+                        <LocalizedWithLink value={bullet.text} link={bullet.link} />
+                      ) : (
+                        <LocalizedBold value={bullet.text} className={dark ? "font-semibold text-white" : "font-semibold text-ink"} />
+                      )}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p
+                className={`mt-8 w-full whitespace-pre-line text-sm leading-relaxed md:text-base ${
+                  dark ? "text-white/60" : "text-muted"
+                }`}
+              >
+                <LocalizedWithLink value={project.description} link={project.descriptionLink} />
+              </p>
+            )}
           </div>
         </SectionContainer>
 

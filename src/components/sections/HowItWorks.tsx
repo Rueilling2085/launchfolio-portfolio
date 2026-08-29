@@ -12,7 +12,7 @@ const STEP_DURATION = 5;
 const COPY = {
   step: { zh: "步驟", en: "Step" },
   scenarioAlt: {
-    zh: "職環安人員於現場使用 VisionDetect AI 監控儀表板",
+    zh: "環安衛人員於現場使用 VisionDetect AI 監控儀表板",
     en: "EHS staff using the VisionDetect AI monitoring dashboard on-site",
   },
 } as const;

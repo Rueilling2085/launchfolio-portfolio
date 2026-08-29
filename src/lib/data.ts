@@ -752,7 +752,7 @@ export const projects: Project[] = [
     },
     color: "#1D4ED8",
     cardAccent: "#1FD9A6",
-    cardImage: "/images/projects/vision-detect/card-laptop-photo.png",
+    cardImage: "/images/projects/vision-detect/card-laptop-photo.jpg",
     cardImageWidth: 2000,
     cardImageHeight: 1500,
     cardImageFit: "contain",
@@ -2720,8 +2720,8 @@ export const beyondPixels = [
 export const workExperience = [
   {
     dates: "JUN 2025 – AUG 2025",
-    title: "UI/UX Intern, Early Design Campaign",
-    company: "Advantech Co., Ltd.",
+    title: { zh: "UI/UX 實習生", en: "UI/UX Intern" },
+    company: { zh: "研華股份有限公司", en: "Advantech Co., Ltd." },
     initial: "A",
     color: "#045CC4",
     points: [
@@ -2741,8 +2741,8 @@ export const workExperience = [
   },
   {
     dates: "JUN 2024 – DEC 2024",
-    title: "UI/UX Intern, Mobile Technology Department",
-    company: "EZTRAVEL Co., Ltd.",
+    title: { zh: "UI/UX 實習生", en: "UI/UX Intern" },
+    company: { zh: "易遊網旅行社股份有限公司", en: "EZTRAVEL Co., Ltd." },
     initial: "E",
     color: "#21B30B",
     points: [
@@ -2758,8 +2758,8 @@ export const workExperience = [
   },
   {
     dates: "JUL 2022 – AUG 2022",
-    title: "Software Development Intern, R&D Department",
-    company: "H2U Corporation",
+    title: { zh: "軟體開發實習生", en: "Software Development Intern" },
+    company: { zh: "永悅健康股份有限公司", en: "H2U Corporation" },
     initial: "H",
     color: "#8B5CF6",
     points: [

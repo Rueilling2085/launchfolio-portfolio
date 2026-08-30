@@ -5,6 +5,7 @@ import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import { SmoothScrollProvider } from "@/components/ui/SmoothScrollProvider";
 import { LanguageProvider } from "@/lib/i18n/LanguageProvider";
+import { ClarityInit } from "@/components/ui/ClarityInit";
 
 const generalSans = localFont({
   variable: "--font-inter",
@@ -49,6 +50,7 @@ export default function RootLayout({
           <SmoothScrollProvider>{children}</SmoothScrollProvider>
         </LanguageProvider>
         <Analytics />
+        <ClarityInit />
       </body>
     </html>
   );

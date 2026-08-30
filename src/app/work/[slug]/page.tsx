@@ -146,7 +146,9 @@ export default async function ProjectCaseStudyPage({
   return (
     <>
       <Nav />
-      <CaseStudySideNav sections={sideNavSections} dark={dark} />
+      {project.slug !== "museum-ai-guide" && (
+        <CaseStudySideNav sections={sideNavSections} dark={dark} />
+      )}
       <main className="flex flex-1 flex-col">
         <SectionContainer
           id="project-overview"

@@ -17,7 +17,7 @@ function LinkedinIcon({ size = 16 }: { size?: number }) {
   );
 }
 
-const sectionLinks = navLinks.filter((link) => link.href.startsWith("#"));
+const sectionLinks = navLinks.filter((link) => link.href.includes("#"));
 
 export function Nav() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -43,7 +43,7 @@ export function Nav() {
       const marker = window.innerHeight * 0.35;
       let current: string | null = null;
       for (const link of sectionLinks) {
-        const section = document.getElementById(link.href.slice(1));
+        const section = document.getElementById(link.href.split("#")[1]);
         if (!section) continue;
         const { top, bottom } = section.getBoundingClientRect();
         if (top <= marker && bottom > marker) current = link.href;

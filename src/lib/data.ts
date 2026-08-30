@@ -1,8 +1,8 @@
 import type { Localized } from "@/lib/i18n/resolve";
 
 export const navLinks = [
-  { label: "Work", href: "#work" },
-  { label: "About", href: "#about" },
+  { label: "Work", href: "/#work" },
+  { label: "About", href: "/#about" },
   { label: "Resume", href: "/files/resume.pdf" },
   {
     label: "LinkedIn",

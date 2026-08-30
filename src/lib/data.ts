@@ -3,7 +3,7 @@ import type { Localized } from "@/lib/i18n/resolve";
 export const navLinks = [
   { label: "Work", href: "/#work" },
   { label: "About", href: "/#about" },
-  { label: "Resume", href: "/files/resume.pdf" },
+  { label: "Resume", href: "https://drive.google.com/file/d/1EV28Kp0VJDYV87hJEAekp8jNEydulUwp/view?usp=sharing" },
   {
     label: "LinkedIn",
     href: "https://www.linkedin.com/in/juiling?utm_source=share_via&utm_content=profile&utm_medium=member_ios",
@@ -2835,16 +2835,16 @@ export const workExperience = [
     color: "#21B30B",
     points: [
       {
-        zh: "針對點數效期難以查詢的問題，透過分析競品的資訊架構與流程，將查詢層級由 4 層降至 2 層，完成介面優化並成功上線",
-        en: "To address the difficulty of checking points expiration, I analyzed competitors' information architecture and flows, reducing the query depth from 4 levels to 2, completing the interface optimization and shipping it successfully",
+        zh: "分析競品資訊架構與流程，將點數效期查詢層級由 4 層簡化至 2 層，優化使用者介面並成功上線",
+        en: "Analyzed competitors' information architecture and flows to simplify the points expiration query from 4 levels to 2, optimizing the interface and shipping it successfully",
       },
       {
-        zh: "運用 Python 分析 22,734 則客服對話，透過關鍵字篩選、分詞與統計，收斂至 5,994 則機酒相關資料，降低 74% 無關資訊並辨識高頻客服問題",
-        en: "Used Python to analyze 22,734 customer-service conversations, applying keyword filtering, tokenization, and statistical analysis to narrow them down to 5,994 flight-and-hotel-related records, cutting 74% of irrelevant data and identifying high-frequency service issues",
+        zh: "運用 Python 分析 22,734 則客服對話，透過關鍵字篩選及分詞統計，收斂至 5,994 則機加酒相關資料，有效過濾 74% 無關資訊並識別高頻客服問題",
+        en: "Used Python to analyze 22,734 customer-service conversations, applying keyword filtering and tokenization to narrow them down to 5,994 flight-and-hotel-package-related records, effectively filtering out 74% of irrelevant data and identifying high-frequency service issues",
       },
       {
-        zh: "將分析結果轉化為 2 套客服自動回覆流程，建立知識庫並完成測試，實現客服回覆自動化",
-        en: "Turned the analysis into 2 automated customer-service reply workflows, building a knowledge base and completing testing to automate customer service replies",
+        zh: "根據分析結果建立 2 套自動化客服回覆流程及知識庫，完成測試並提升客服回應效率",
+        en: "Built 2 automated customer-service reply workflows and a knowledge base based on the analysis, completing testing and improving customer-service response efficiency",
       },
     ],
   },

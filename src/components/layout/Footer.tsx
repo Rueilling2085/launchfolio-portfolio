@@ -12,8 +12,8 @@ const cycleWords = ["build", "create"];
 
 const socials = [
   { label: "LinkedIn", icon: LinkedInIcon, href: "https://www.linkedin.com/in/juiling" },
-  { label: "Gmail", icon: Mail, href: "mailto:2018gsb.linrl@gmail.com" },
-  { label: "Facebook", icon: FacebookIcon, href: "#" },
+  { label: "Gmail", icon: Mail, href: "mailto:juiling.lina@gmail.com" },
+  { label: "Facebook", icon: FacebookIcon, href: "https://www.facebook.com/share/1CgxT39npq/?mibextid=wwXIfr" },
 ];
 
 export function Footer() {
@@ -54,13 +54,13 @@ export function Footer() {
 
         <div className="mt-12 flex flex-col items-center justify-center gap-4 sm:flex-row">
           <a
-            href="mailto:2018gsb.linrl@gmail.com"
+            href="mailto:juiling.lina@gmail.com"
             className="inline-flex items-center justify-center rounded-full border border-white/20 px-6 py-3.5 text-sm font-medium transition-colors hover:bg-white/10"
           >
-            2018gsb.linrl@gmail.com
+            juiling.lina@gmail.com
           </a>
           <a
-            href="mailto:2018gsb.linrl@gmail.com"
+            href="mailto:juiling.lina@gmail.com"
             className="inline-flex items-center justify-center rounded-full bg-accent px-6 py-3.5 text-sm font-medium text-white transition-transform hover:scale-[1.02]"
           >
             Email me

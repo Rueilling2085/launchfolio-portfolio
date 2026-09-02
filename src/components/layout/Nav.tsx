@@ -132,7 +132,7 @@ export function Nav() {
               <LinkedinIcon size={17} />
             </a>
             <a
-              href="https://drive.google.com/file/d/1EV28Kp0VJDYV87hJEAekp8jNEydulUwp/view?usp=sharing"
+              href="https://drive.google.com/file/d/1uCh0yC3Sc1q5G_CqmXM9fm_HkHCaT7bY/view?usp=sharing"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Resume"

@@ -887,9 +887,9 @@ export const projects: Project[] = [
       dots: [
         { label: { zh: "無塵室服裝規範", en: "Cleanroom attire compliance" }, top: 48, left: 47, tier: 2 },
         { label: { zh: "承包商安全監控", en: "Contractor safety monitoring" }, top: 55, left: 47, tier: 2 },
-        { label: { zh: "管制區域控管", en: "Restricted-area control" }, top: 61, left: 33, tier: 2 },
-        { label: { zh: "人員作業區域", en: "Personnel work-zone tracking" }, top: 67, left: 33, tier: 2 },
-        { label: { zh: "無塵室門禁控管", en: "Cleanroom access control" }, top: 73, left: 33, tier: 2 },
+        { label: { zh: "管制區域控管", en: "Restricted-area control" }, top: 61, left: 25, tier: 2 },
+        { label: { zh: "人員作業區域", en: "Personnel work-zone tracking" }, top: 67, left: 25, tier: 2 },
+        { label: { zh: "無塵室門禁控管", en: "Cleanroom access control" }, top: 73, left: 25, tier: 2 },
       ],
       excluded: [
         { label: { zh: "設備周界警示", en: "Equipment perimeter alerts" }, top: 63, left: 15, size: 108 },

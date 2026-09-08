@@ -100,15 +100,23 @@ function AxisPill({ label, direction }: { label: string; direction: "up" | "down
 function CardImageCaption({
   title,
   description,
+  alwaysVisible = false,
 }: {
   title: MatrixSideCard["title"];
   description: MatrixSideCard["description"];
+  /** Touch devices have no real hover, so the mobile card keeps this on by
+   *  default instead of relying on a gesture people won't discover. */
+  alwaysVisible?: boolean;
 }) {
   const { lang } = useLanguage();
   return (
-    <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black/75 via-black/10 to-transparent p-3 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-      <p className="text-xs font-semibold text-white">{title[lang]}</p>
-      <p className="mt-1 text-[11px] leading-snug text-white/80">{description[lang]}</p>
+    <div
+      className={`absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black/75 via-black/10 to-transparent p-3 transition-opacity duration-300 ${
+        alwaysVisible ? "opacity-100" : "opacity-0 group-hover:opacity-100"
+      }`}
+    >
+      <p className="text-sm font-semibold text-white">{title[lang]}</p>
+      <p className="mt-1 text-xs leading-snug text-white/80">{description[lang]}</p>
     </div>
   );
 }
@@ -199,7 +207,7 @@ function SimpleImageCard({ card }: { card: MatrixSideCard }) {
         style={{ objectPosition: card.imagePosition }}
         className="object-cover transition-transform duration-500 group-hover:scale-105"
       />
-      <CardImageCaption title={card.title} description={card.description} />
+      <CardImageCaption title={card.title} description={card.description} alwaysVisible />
     </div>
   );
 }
@@ -225,17 +233,18 @@ export function PriorityMatrix({ data }: { data: PriorityMatrixData }) {
         <div className="flex-1">
             <div className="flex items-stretch gap-2.5">
               <div className={`flex w-16 shrink-0 flex-col items-center justify-between text-[11px] text-ink ${PLOT_HEIGHT}`}>
-                <AxisPill label={data.axis.top[lang]} direction="up" />
+                <span className="-translate-x-[2px]">
+                  <AxisPill label={data.axis.top[lang]} direction="up" />
+                </span>
                 <span className="flex flex-1 items-center justify-center">
                   <span className="-rotate-90 whitespace-nowrap font-medium">
                     {data.axis.yLabel[lang]} →
                   </span>
                 </span>
-                <AxisPill label={data.axis.bottom[lang]} direction="down" />
               </div>
 
               <div className="relative min-w-0 flex-1">
-                <div className={`relative w-full overflow-hidden border-b border-l border-line ${PLOT_HEIGHT}`}>
+                <div className={`relative w-full overflow-hidden border-b border-l border-ink ${PLOT_HEIGHT}`}>
                   <span className="absolute right-0 top-0 h-1/2 w-1/2 bg-[#EAF6FE]" />
                   <span className="absolute bottom-0 left-0 h-1/2 w-1/2 bg-[#F0F2F5]" />
                   <span className="absolute inset-x-0 top-1/2 border-t border-dashed border-[#B7BCC4]" />
@@ -251,12 +260,19 @@ export function PriorityMatrix({ data }: { data: PriorityMatrixData }) {
                     <Bubble key={bubble.label.zh} bubble={bubble} />
                   ))}
                 </div>
-
-                <div className="mt-2 flex items-center justify-end">
-                  <AxisPill label={data.axis.right[lang]} direction="right" />
-                </div>
-                <p className="mt-1 text-center text-[11px] font-medium text-ink">{data.axis.xLabel[lang]} →</p>
               </div>
+            </div>
+
+            {/* "Low priority", the "Technical feasibility →" axis label, and
+                "High feasibility" all sit in one shared row so their text
+                lands on the same baseline instead of stacking on separate
+                lines */}
+            <div className="mt-2 flex items-center justify-between">
+              <span className="-translate-x-[2px]">
+                <AxisPill label={data.axis.bottom[lang]} direction="down" />
+              </span>
+              <p className="text-center text-[11px] font-medium text-ink">{data.axis.xLabel[lang]} →</p>
+              <AxisPill label={data.axis.right[lang]} direction="right" />
             </div>
         </div>
 

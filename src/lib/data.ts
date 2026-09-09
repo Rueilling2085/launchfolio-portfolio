@@ -1453,7 +1453,7 @@ export const projects: Project[] = [
           title: { zh: "受測者招募", en: "Participant Recruitment" },
           items: [
             { zh: "受測者族群（13 人）", en: "13 total participants" },
-            { zh: "一般跑者（9 人）", en: "9 casual runners" },
+            { zh: "一般跑者（10 人）", en: "10 casual runners" },
             { zh: "專業跑者（3 人）", en: "3 experienced runners" },
           ],
         },
@@ -1929,18 +1929,18 @@ export const projects: Project[] = [
           solutions: [
             { zh: "改以「點擊」方式停止跑步，降低操作負擔，讓跑者能更快速完成操作。", en: "Switched to tapping to stop the run, lowering the operational burden so runners can complete the action faster." },
           ],
-          beforeImage: "/images/projects/h2u/swipe-hint/before-frame-v1.jpg",
+          beforeImage: "/images/projects/h2u/swipe-hint/before-frame-v2.png",
           beforeImageAlt: { zh: "優化前：以滑動手勢停止跑步紀錄", en: "Before: stopping a run recording with a swipe gesture" },
-          beforeImageWidth: 680,
-          beforeImageHeight: 1358,
+          beforeImageWidth: 1600,
+          beforeImageHeight: 2800,
           beforeSwipeHint: {
             hand: "/images/projects/h2u/swipe-hint/hand.png",
             arrow: "/images/projects/h2u/swipe-hint/arrow.png",
           },
-          afterImage: "/images/projects/h2u/swipe-hint/after-frame-v1.jpg",
+          afterImage: "/images/projects/h2u/swipe-hint/after-frame-v2.png",
           afterImageAlt: { zh: "優化後：改以點擊按鈕停止跑步紀錄", en: "After: stopping a run recording by tapping a button" },
-          afterImageWidth: 680,
-          afterImageHeight: 1358,
+          afterImageWidth: 1600,
+          afterImageHeight: 2800,
           afterTapHint: {
             hand: "/images/projects/h2u/swipe-hint/hand.png",
             left: "74.3%",

@@ -31,7 +31,7 @@ const instrumentSerif = Instrument_Serif({
 });
 
 export const metadata: Metadata = {
-  title: "Jui Ling ｜ Product Designer",
+  title: "Jui Ling ｜ UI/UX Designer",
   description: "Strategic design that drives growth, not just looks good.",
 };
 

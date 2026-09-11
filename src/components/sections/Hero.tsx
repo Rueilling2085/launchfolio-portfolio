@@ -26,7 +26,7 @@ export function Hero() {
 
           <h1 className="mx-auto mt-10 w-full max-w-[840px] font-bold tracking-tight">
             <EnterOnLoad delay={0.3}>
-              <FitText className="text-ink">Product Designer</FitText>
+              <FitText className="text-ink">UI/UX Designer</FitText>
             </EnterOnLoad>
 
             <EnterOnLoad delay={0.54} className="mt-2">

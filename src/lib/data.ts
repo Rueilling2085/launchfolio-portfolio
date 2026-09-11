@@ -2817,12 +2817,12 @@ export const workExperience = [
         en: "Conducted 3 external interviews to clarify workflow pain points and AI-adoption needs, defining the monitoring flow from 0 to 1.",
       },
       {
-        zh: "優化影像設定流程，解決監控部署的擴展性瓶頸，使測試時間降低 80%",
-        en: "Optimized the camera setup flow to address the scalability bottleneck in monitoring deployment, cutting testing time by 80%.",
+        zh: "設計並優化影像設定介面與操作流程，克服部署擴展性瓶頸，將測試時間縮短 80%",
+        en: "Designed and optimized the camera setup interface and workflow to overcome the deployment scalability bottleneck, shortening testing time by 80%",
       },
       {
-        zh: "將自然語言 Prompt 轉為模組化 Template，降低輸入學習成本，並將 AI 判讀準確率提升至 90%",
-        en: "Turned free-form natural-language prompts into a modular Template, lowering the learning curve for input, and raising AI detection accuracy to 90%",
+        zh: "將自然語言 Prompt 轉為模組化介面元件，降低用戶學習成本，並將 AI 判讀準確率提升至 90%",
+        en: "Turned free-form natural-language prompts into modular interface components, lowering the learning curve for users, and raising AI detection accuracy to 90%",
       },
     ],
   },

@@ -13,7 +13,7 @@ const LanguageContext = createContext<{
 } | null>(null);
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [lang, setLang] = useState<Lang>("en");
+  const [lang, setLang] = useState<Lang>("zh");
 
   // read the saved preference after mount only, so the server-rendered
   // markup and the first client paint always agree (avoids a hydration

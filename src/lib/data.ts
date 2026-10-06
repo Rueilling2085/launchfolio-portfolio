@@ -2055,7 +2055,7 @@ export const projects: Project[] = [
     cardImageFit: "contain",
     cardImageBackdrop: "#7A7871",
     cardImageScale: 1.55,
-    presentationEmbedUrl: "https://www.canva.com/design/DAHU-Q2feWE/fngUlOFdJ0ZsP1FvzIMGqg/view?embed",
+    presentationEmbedUrl: "https://www.canva.com/design/DAHU-Q2feWE/fngUlOFdJ0ZsP1FvzIMGqg/view?embed#11",
     repoUrl: "https://github.com/Rueilling2085/rag-museum-chatbot",
     description: {
       zh: "以國立故宮博物院特展知識庫建構 AI-native RAG 對話系統。針對展覽資訊標籤字數有限，以及通用型 LLM 在特定領域知識中容易產生幻覺的問題，串聯權威資料庫進行知識檢索，確保回答具備可追溯的資料依據；同時補足缺佚文物脈絡，生成情境圖像以還原歷史脈絡。經 30 人對照實驗驗證，顯著提升使用者的知識建構與參與度。\n研究成果已獲 IEEE ICASI 2026 口頭發表。",

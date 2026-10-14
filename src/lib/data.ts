@@ -790,7 +790,7 @@ export const projects: Project[] = [
     cardVideoBackdrop: "#DFDFDF",
     duration: { zh: "9 週", en: "9 weeks" },
     team: [
-      { zh: "我 - UI/UX 設計師 ×1", en: "Me - UI/UX Designer ×1" },
+      { zh: "我 - 產品設計師 ×1", en: "Me - Product Designer ×1" },
       { zh: "專案經理 ×2", en: "Project Manager ×2" },
       { zh: "軟體工程師 ×2", en: "Software Engineer ×2" },
     ],
@@ -1396,7 +1396,7 @@ export const projects: Project[] = [
     cardVideoFit: "cover",
     duration: { zh: "2022 年 7 月（2 個月）", en: "July 2022 (2 month)" },
     team: [
-      { zh: "我 - UI/UX 設計師 ×2", en: "Me - UI/UX Designer ×2" },
+      { zh: "我 - 軟體開發 PM ×1", en: "Me - Software Development PM ×1" },
       { zh: "產品經理 ×1", en: "Product Manager ×1" },
       { zh: "軟體工程師 ×1", en: "Software Engineer ×1" },
     ],

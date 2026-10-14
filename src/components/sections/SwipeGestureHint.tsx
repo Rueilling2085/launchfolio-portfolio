@@ -49,7 +49,9 @@ export function SwipeGestureHint({
         alt=""
         className="pointer-events-none absolute w-[28%]"
         style={{ top: ARROW_TOP, y: "-50%" }}
-        animate={{ left: ARROW_LEFT, opacity: FADE }}
+        initial={{ left: ARROW_LEFT[0], opacity: 0 }}
+        whileInView={{ left: ARROW_LEFT, opacity: FADE }}
+        viewport={{ once: false, amount: 0.4 }}
         transition={{ duration: 2.8, ease: "easeInOut", times: TIMES, repeat: Infinity, repeatDelay: 3.1 }}
       />
 
@@ -58,7 +60,9 @@ export function SwipeGestureHint({
         alt=""
         className="pointer-events-none absolute w-[9%]"
         style={{ top: HAND_TOP, y: "-50%" }}
-        animate={{ left: HAND_LEFT, opacity: FADE }}
+        initial={{ left: HAND_LEFT[0], opacity: 0 }}
+        whileInView={{ left: HAND_LEFT, opacity: FADE }}
+        viewport={{ once: false, amount: 0.4 }}
         transition={{
           duration: 2.8,
           ease: "easeInOut",

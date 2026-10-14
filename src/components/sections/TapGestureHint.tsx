@@ -40,7 +40,9 @@ export function TapGestureHint({
         alt=""
         className="pointer-events-none absolute w-[14%]"
         style={{ left: handLeft, top: handTop, x: "-50%", y: "-50%" }}
-        animate={{ opacity: OPACITY, scale: SCALE }}
+        initial={{ opacity: 1, scale: 1 }}
+        whileInView={{ opacity: OPACITY, scale: SCALE }}
+        viewport={{ once: false, amount: 0.4 }}
         transition={{
           duration: 1.3,
           ease: "easeInOut",

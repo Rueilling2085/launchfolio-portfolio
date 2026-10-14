@@ -2,7 +2,6 @@ import Image from "next/image";
 import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
 import { SectionContainer } from "@/components/ui/SectionContainer";
 import { Marquee } from "@/components/ui/Marquee";
-import { Localized } from "@/lib/i18n/Localized";
 import { beyondPixels } from "@/lib/data";
 
 const ROTATIONS = [-4, 3, -2, 5, -3, 2];
@@ -39,9 +38,6 @@ export function BeyondPixels() {
               <div className="relative aspect-square w-full overflow-hidden bg-paper-alt">
                 <Image src={photo.src} alt={photo.alt} fill sizes="220px" className="object-cover" />
               </div>
-              <p className="mt-3 text-center text-sm text-muted">
-                <Localized value={photo.caption} />
-              </p>
             </div>
           ))}
         </Marquee>

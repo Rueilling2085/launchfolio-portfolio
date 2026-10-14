@@ -3,7 +3,9 @@ import type { Localized } from "@/lib/i18n/resolve";
 export const navLinks = [
   { label: "Work", href: "/#work" },
   { label: "About", href: "/#about" },
-  { label: "Resume", href: "https://drive.google.com/file/d/1uCh0yC3Sc1q5G_CqmXM9fm_HkHCaT7bY/view?usp=sharing" },
+  // Resume link temporarily hidden (mobile menu + footer both read this array)
+  // while the résumé content is being revised. Restore once the new version is ready:
+  // { label: "Resume", href: "https://drive.google.com/file/d/1uCh0yC3Sc1q5G_CqmXM9fm_HkHCaT7bY/view?usp=sharing" },
   {
     label: "LinkedIn",
     href: "https://www.linkedin.com/in/juiling?utm_source=share_via&utm_content=profile&utm_medium=member_ios",

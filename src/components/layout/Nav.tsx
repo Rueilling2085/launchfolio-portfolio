@@ -3,7 +3,6 @@
 import Link from "next/link";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
-import { FileText } from "lucide-react";
 import { useEffect, useState } from "react";
 import { navLinks } from "@/lib/data";
 import { useLanguage } from "@/lib/i18n/LanguageProvider";
@@ -131,6 +130,9 @@ export function Nav() {
             >
               <LinkedinIcon size={17} />
             </a>
+            {/* Resume button temporarily hidden while the résumé content is being revised.
+                Restore by uncommenting once the new version is ready (and re-adding
+                `import { FileText } from "lucide-react";` at the top of this file):
             <a
               href="https://drive.google.com/file/d/1uCh0yC3Sc1q5G_CqmXM9fm_HkHCaT7bY/view?usp=sharing"
               target="_blank"
@@ -140,6 +142,7 @@ export function Nav() {
             >
               <FileText size={17} />
             </a>
+            */}
             <button
               type="button"
               aria-label="Toggle language"

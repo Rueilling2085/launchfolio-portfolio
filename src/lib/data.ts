@@ -2717,8 +2717,8 @@ export const aboutContent = {
       details: [
         { zh: "GPA：4.0 / 4.3", en: "GPA: 4.0 / 4.3" },
         {
-          zh: "碩士論文：建置 RAG 對話式 AI 博物館導覽系統，並獲 IEEE ICASI 2026 Oral 發表",
-          en: "Thesis: Built a RAG-based conversational AI museum guide system, accepted for oral presentation at IEEE ICASI 2026",
+          zh: "碩士論文：獨立開發 RAG 對話式 AI 博物館導覽系統，以 30 人對照實驗與 212 組真實對話驗證成效，獲 IEEE ICASI 2026 Oral 發表",
+          en: "Thesis: Independently built a RAG-based conversational AI museum guide system, validated with a 30-person controlled study and 212 real conversation sets, accepted for oral presentation at IEEE ICASI 2026",
         },
         {
           zh: "相關課程：設計中的提示工程、文字與影像生成式 AI 實務、電腦視覺與深度學習實務",
@@ -2805,64 +2805,64 @@ export const beyondPixels = [
 
 export const workExperience = [
   {
-    dates: "JUN 2025 – AUG 2025",
-    title: { zh: "UI/UX 實習生", en: "UI/UX Intern" },
+    dates: "JUL 2025 – AUG 2025",
+    title: { zh: "產品設計實習生", en: "Product Design Intern" },
     company: { zh: "研華股份有限公司", en: "Advantech Co., Ltd." },
     project: { zh: "VisionDetect AI｜B2B SaaS 智慧監控平台", en: "VisionDetect AI｜B2B SaaS Intelligent Monitoring Platform" },
     initial: "A",
     color: "#045CC4",
     points: [
       {
-        zh: "進行 3 場外部訪談，釐清工作流程痛點與 AI 導入需求，從 0–1 定義出監控流程",
-        en: "Conducted 3 external interviews to clarify workflow pain points and AI-adoption needs, defining the monitoring flow from 0 to 1.",
+        zh: "負責 3 場外部訪談，釐清工作流程痛點與 AI 導入需求，並以需求優先度與技術可行性矩陣將 10 項情境收斂為 2 項 PoC，從 0 到 1 定義出產品流程",
+        en: "Led 3 external interviews to clarify workflow pain points and AI-adoption needs, using a priority/feasibility matrix to narrow 10 scenarios down to 2 PoCs and defining the product flow from 0 to 1",
       },
       {
-        zh: "設計並優化影像設定介面與操作流程，克服部署擴展性瓶頸，將測試時間縮短 80%",
-        en: "Designed and optimized the camera setup interface and workflow to overcome the deployment scalability bottleneck, shortening testing time by 80%",
+        zh: "將自然語言 Prompt 轉為模組化 Template，降低輸入差異與使用門檻，使辨識設定時間由約 30 天縮短至 1 天，執行人力由 3 位工程師改為 1 位非工程人員",
+        en: "Turned free-form natural-language prompts into a modular Template, lowering input variance and the barrier to use, cutting setup time from about 30 days to 1 day and shifting execution from 3 engineers to 1 non-engineer",
       },
       {
-        zh: "將自然語言 Prompt 轉為模組化介面元件，降低用戶學習成本，並將 AI 判讀準確率提升至 90%",
-        en: "Turned free-form natural-language prompts into modular interface components, lowering the learning curve for users, and raising AI detection accuracy to 90%",
+        zh: "將影像設定流程由逐台設定改為單次設定、多場域套用，解決攝影機批次安裝的重複設定問題，並以 Figma 建立多狀態元件與原型，與工程團隊於 2 個月內完成 MVP 與客戶驗證",
+        en: "Changed the camera setup flow from one-by-one configuration to a single setup applied across multiple sites, solving the repeated-setup problem from batch camera installs, and built multi-state components and prototypes in Figma, completing the MVP and client validation with the engineering team within 2 months",
       },
     ],
   },
   {
     dates: "JUN 2024 – DEC 2024",
-    title: { zh: "UI/UX 實習生", en: "UI/UX Intern" },
-    company: { zh: "易遊網旅行社股份有限公司", en: "EZTRAVEL Co., Ltd." },
+    title: { zh: "UI/UX 設計實習生", en: "UI/UX Design Intern" },
+    company: { zh: "易遊網股份有限公司", en: "EZTRAVEL Co., Ltd." },
     project: { zh: "ezTravel App｜旅遊電商 App", en: "ezTravel App｜Travel E-commerce App" },
     initial: "E",
     color: "#21B30B",
     points: [
       {
-        zh: "分析競品資訊架構與流程，將點數效期查詢層級由 4 層簡化至 2 層，優化使用者介面並成功上線",
-        en: "Analyzed competitors' information architecture and flows to simplify the points expiration query from 4 levels to 2, optimizing the interface and shipping it successfully",
+        zh: "分析 6 家平台的資訊架構與操作流程，將點數效期查詢層級由 4 層簡化至 2 層，並於 iOS／Android 雙平台上線；同時定義會員折扣碼的元件狀態，完成切圖標註交付開發",
+        en: "Analyzed the information architecture and flows of 6 competing platforms, simplifying the points-expiration query from 4 levels to 2 and shipping it on both iOS and Android; also defined component states for member discount codes, delivering annotated assets to engineering",
       },
       {
-        zh: "運用 Python 分析 22,734 則客服對話，透過關鍵字篩選及分詞統計，收斂至 5,994 則機加酒相關資料，有效過濾 74% 無關資訊並識別高頻客服問題",
-        en: "Used Python to analyze 22,734 customer-service conversations, applying keyword filtering and tokenization to narrow them down to 5,994 flight-and-hotel-package-related records, effectively filtering out 74% of irrelevant data and identifying high-frequency service issues",
+        zh: "運用 Python 分析逾 2 萬則客服對話，透過關鍵字篩選、分詞與統計，降低 74% 無關資訊並識別高頻客服問題",
+        en: "Used Python to analyze over 20,000 customer-service conversations, applying keyword filtering, tokenization, and statistical analysis to filter out 74% of irrelevant data and identify high-frequency service issues",
       },
       {
-        zh: "根據分析結果建立 2 套自動化客服回覆流程及知識庫，完成測試並提升客服回應效率",
-        en: "Built 2 automated customer-service reply workflows and a knowledge base based on the analysis, completing testing and improving customer-service response efficiency",
+        zh: "根據分析結果建立 2 套自動化客服回覆流程及 4 類知識庫主題，預估每日節省約 1 人日客服作業",
+        en: "Built 2 automated customer-service reply workflows and 4 knowledge-base topics based on the analysis, projected to save about 1 person-day of customer-service work daily",
       },
     ],
   },
   {
     dates: "JUL 2022 – AUG 2022",
-    title: { zh: "軟體開發實習生", en: "Software Development Intern" },
+    title: { zh: "軟體開發 PM 實習生", en: "Software Development PM Intern" },
     company: { zh: "永悅健康股份有限公司", en: "H2U Corporation" },
     project: { zh: "SportsNote App｜跑步社群 App", en: "SportsNote App｜Running Community App" },
     initial: "H",
     color: "#8B5CF6",
     points: [
       {
-        zh: "主導 13 位易用性測試與訪談，測試 2 項核心功能，依據任務完成時間與錯誤率分析結果，排定介面優化的優先順序",
+        zh: "主導 13 位使用者的易用性測試與訪談，測試 2 項核心功能，依據任務完成時間與錯誤率分析結果，排定介面優化的優先順序",
         en: "Led usability testing and interviews with 13 users, testing 2 core features, and prioritized interface optimizations based on task completion time and error rate analysis",
       },
       {
-        zh: "成功解決 2 項重要的介面問題，並維護與更新設計系統，確保使用體驗一致",
-        en: "Successfully resolved 2 major interface issues, and maintained and updated the design system to ensure a consistent user experience",
+        zh: "收斂 4 項高優先問題並完成其中 2 項介面改善；以 Figma Component／Variant 維護設計系統，並依 WCAG 2.0 AA 調整主色對比度、設計深色模式",
+        en: "Narrowed findings down to 4 high-priority issues and shipped 2 of the interface improvements; maintained the design system with Figma Components/Variants, and adjusted primary-color contrast to meet WCAG 2.0 AA while designing a dark mode",
       },
     ],
   },

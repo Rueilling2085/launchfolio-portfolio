@@ -737,9 +737,9 @@ export const projects: Project[] = [
   {
     id: "5",
     slug: "vision-detect",
-    name: "VisionDetect AI B2B SaaS Platform",
+    name: "VisionDetect AI B2B Platform",
     client: "VisionDetect",
-    type: "AI B2B SaaS Platform",
+    type: "AI B2B Platform",
     image: "/images/projects/vision-detect/hero.png",
     deviceMockup: false,
     description: {
@@ -761,25 +761,25 @@ export const projects: Project[] = [
       },
       {
         text: {
-          zh: "針對監控部署的擴展性瓶頸，將逐台設定流程轉為「一次設定、多場域套用」，使測試時間降低 80%",
-          en: "To address the scalability bottleneck in monitoring deployment, I turned the camera-by-camera setup flow into a \"set once, apply to multiple sites\" model, cutting testing time by 80%",
+          zh: "針對監控部署的擴展性瓶頸，將逐台設定流程轉為「單台測試、多場域套用」；相較傳統標註與訓練需約 30 天、3–5 位工程師，使用者僅需 1 天、1–2 位非工程人員即可完成設定",
+          en: "To address the scalability bottleneck in monitoring deployment, I turned the camera-by-camera setup flow into a \"test on one camera, apply across sites\" model; where traditional labeling and training takes about 30 days and 3–5 engineers, users can now finish setup in 1 day with 1–2 non-engineers",
         },
       },
       {
         text: {
-          zh: "將自然語言 Prompt 轉為模組化 Template，降低輸入學習成本，並將 AI 判讀準確率提升至 90%，最終打造直覺、易操作的 AI 智慧監控介面",
-          en: "Turned free-form natural-language prompts into a modular Template, lowering the learning curve for input, and raising AI detection accuracy to 90%, resulting in an intuitive, easy-to-use AI monitoring interface",
+          zh: "將自然語言 Prompt 轉為模組化 Template，降低輸入學習成本與輸入差異對 AI 判讀的影響，最終打造直覺、易操作的 AI 智慧監控介面",
+          en: "Turned free-form natural-language prompts into a modular Template, lowering the learning curve for input and reducing the effect of input variation on AI detection, resulting in an intuitive, easy-to-use AI monitoring interface",
         },
       },
     ],
-    cardTags: ["0→1 Product", "B2B AI SaaS"],
+    cardTags: ["0→1 Product", "B2B AI Monitoring"],
     cardHeadline: {
-      zh: "建立監控流程，以 Prompt Template 提升判讀準確度",
-      en: "Built the monitoring flow, using a Prompt Template to improve detection accuracy",
+      zh: "以多層級管理架構與 Prompt Template，降低 AI 監控的設定門檻",
+      en: "Lowering the setup barrier for AI monitoring with a multi-level management structure and a Prompt Template",
     },
     cardDescription: {
-      zh: "傳統工廠仰賴人工巡檢，難以及時掌握巡檢間的安全風險。透過訪談環安衛人員，釐清工作流程痛點與需求，設計模組化 Prompt 機制，以固定句型與變數替換降低自然語言輸入變異性，達到一次設定、全部套用，提升 AI 監控部署效率。",
-      en: "Traditional factories rely on manual patrols and can't catch risks between rounds. Through interviews with EHS staff, I clarified workflow pain points and needs, then designed a modular prompt mechanism that uses fixed sentence patterns with swappable variables to reduce natural-language input variability, so a single setup applies everywhere and AI monitoring deploys faster.",
+      zh: "傳統工廠仰賴人工巡檢，難以及時掌握巡檢間的安全風險。透過訪談環安衛人員，釐清工作流程痛點與需求，設計模組化 Prompt 機制，以固定句型與變數替換降低自然語言輸入變異性，達到單台測試、多場域套用，提升 AI 監控部署效率。",
+      en: "Traditional factories rely on manual patrols and can't catch risks between rounds. Through interviews with EHS staff, I clarified workflow pain points and needs, then designed a modular prompt mechanism that uses fixed sentence patterns with swappable variables to reduce natural-language input variability, so a test on one camera applies across sites and AI monitoring deploys faster.",
     },
     color: "#1D4ED8",
     cardAccent: "#1FD9A6",
@@ -803,7 +803,7 @@ export const projects: Project[] = [
       { zh: "跨團隊工作坊", en: "Cross-team stakeholder workshops" },
     ],
     overview: {
-      niche: { zh: "B2B SaaS・電腦視覺(VLM)・工業安全(EHS)", en: "B2B SaaS · Computer Vision (VLM) · Industrial Safety (EHS)" },
+      niche: { zh: "B2B 企業平台・電腦視覺（VLM）・工業安全（EHS）", en: "B2B Enterprise Platform · Computer Vision (VLM) · Industrial Safety (EHS)" },
       projectIntro:
         "為研華打造的跨場域 AI 監控系統，結合 VLM 視覺偵測與 LLM 對話技術，補足醫療、零售、製造業在非巡檢時段的監控盲區。系統即時偵測現場隱形風險，並透過 Chatbot 快速釐清事件脈絡，自動生成符合 ISO 標準的稽核報告，實現全時段智慧化管理。",
       highlights: [
@@ -815,17 +815,17 @@ export const projects: Project[] = [
         {
           value: { zh: "1 → N 個場域", en: "1 → N sites" },
           label: { zh: "擴展性", en: "Scalability" },
-          caption: { zh: "一次設定、全部套用", en: "Set once, apply everywhere" },
+          caption: { zh: "單台測試、多場域套用", en: "Test on one camera, apply across sites" },
         },
         {
-          value: { zh: "80%", en: "80%" },
+          value: { zh: "30 天 → 1 天", en: "30 days → 1 day" },
           label: { zh: "效率", en: "Efficiency" },
-          caption: { zh: "測試時間減少", en: "less testing time" },
+          caption: { zh: "相較傳統標註與訓練", en: "vs. traditional labeling and training" },
         },
         {
-          value: { zh: "90%", en: "90%" },
-          label: { zh: "準確率", en: "Accuracy" },
-          caption: { zh: "AI 判讀準確率提升", en: "AI detection accuracy improved" },
+          value: { zh: "3–5 → 1–2 人", en: "3–5 → 1–2 people" },
+          label: { zh: "人力", en: "Staffing" },
+          caption: { zh: "工程師 → 非工程人員", en: "Engineers → non-engineers" },
         },
       ],
     },
@@ -1069,13 +1069,13 @@ export const projects: Project[] = [
               icon: "layers",
               label: { zh: "擴展性", en: "Scalability" },
               valueHighlight: "1 → N",
-              valueRest: { zh: "一次設定、全部套用", en: "Set once, apply everywhere" },
+              valueRest: { zh: "單台測試、多場域套用", en: "Test on one camera, apply across sites" },
             },
             {
               icon: "zap",
               label: { zh: "效率", en: "Efficiency" },
-              valueHighlight: "80%",
-              valueRest: { zh: "測試時間減少", en: "less testing time" },
+              valueHighlight: "30 → 1",
+              valueRest: { zh: "天（相較傳統標註與訓練）", en: "days, vs. traditional labeling and training" },
             },
           ],
           workflowBefore: {
@@ -1083,13 +1083,13 @@ export const projects: Project[] = [
             en: "Every added camera meant repeating the test. Setup time multiplied with camera count.",
           },
           workflowAfter: {
-            zh: "完成單一驗證後一鍵套用全場，節省 80% 重複操作時間。",
-            en: "Verify once, then apply site-wide with one click, saving 80% of the repeated work.",
+            zh: "完成單一驗證後一鍵套用全場；相較傳統標註與訓練，設定時間 30 天 → 1 天。",
+            en: "Verify once, then apply site-wide with one click; compared with traditional labeling and training, setup time goes from 30 days → 1 day.",
           },
         },
         {
           tag: { zh: "優化二", en: "Fix 2" },
-          title: { zh: "設計 Prompt Template，提升 AI 判讀準確率至 90%", en: "Designed a Prompt Template to Raise AI Detection Accuracy to 90%" },
+          title: { zh: "設計 Prompt Template，降低輸入差異對 AI 判讀的影響", en: "Designed a Prompt Template to Reduce the Effect of Input Variation on AI Detection" },
           painPoint: {
             zh: "自然語言 Prompt，語意邊界模糊、任務意圖不明確，導致 VLM 輸出結果不穩定，這在工業安全場域中是不可接受的風險。",
             en: "Free-form natural-language prompts had ambiguous boundaries and unclear intent, making the VLM's output unstable, an unacceptable risk in an industrial safety setting.",
@@ -2810,7 +2810,7 @@ export const workExperience = [
     dates: "JUL 2025 – AUG 2025",
     title: { zh: "產品設計實習生", en: "Product Design Intern" },
     company: { zh: "研華股份有限公司", en: "Advantech Co., Ltd." },
-    project: { zh: "VisionDetect AI｜B2B SaaS 智慧監控平台", en: "VisionDetect AI｜B2B SaaS Intelligent Monitoring Platform" },
+    project: { zh: "VisionDetect AI｜B2B 企業智慧監控平台", en: "VisionDetect AI｜B2B Intelligent Monitoring Platform" },
     initial: "A",
     color: "#045CC4",
     points: [
